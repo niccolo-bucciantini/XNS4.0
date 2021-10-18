@@ -561,11 +561,6 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
 
      DO IX=1,NTH
         DO IZ=1,NR
-!if(isnan(PSL(ix,iz))) then
-!print*, 'PSL NAN in', ix,iz
-!print*, 'XNSMAIN'
-!stop
-!endif
            PSL(IX,IZ)=1.+PSL(IX,IZ)
         END DO
      END DO
@@ -1174,8 +1169,8 @@ SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
   ! Initialize the lapse -1.
   DO IX=1,NTH
     DO IZ=1,NR
-       PSL(IX,IZ)=0.
-!      PSL(IX,IZ)=PSL(IX,IZ)-1.
+      ! PSL(IX,IZ)=0.
+      PSL(IX,IZ)=PSL(IX,IZ)-1.
     END DO
   END DO
 
@@ -1188,8 +1183,6 @@ SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
     END DO
   END DO
 
-!print*, 'OOOOOOKKKKK -- 3'
-
 !   write(6,*)'ciao'
 
   ! ...................
@@ -1200,15 +1193,11 @@ SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
   ! Compute the Gauss-quadrature points XGQ and weights WGQ
   CALL LEGZO(NGQ,XGQ,WGQ)
 
-!PRINT*, 'OOOOOOOOOOOOOOKKKKKKKKKK -- 4'
-
   ! Compute the matrix of Weighted Legendre Polyn in the quadrature points
   DO I=1,NGQ
     CALL LPN(MLS,XGQ(I),PN(0:MLS,I),PD(0:MLS,I))
     PN(0:MLS,I)=PN(0:MLS,I)*WGQ(I)
   END DO
-
-!PRINT*, 'OOOOOOOOOKKKKKK -- 5'
 
   DO IZ=1,NR
     ! Fill boundary values for rho in theta at fixed r
@@ -1217,29 +1206,12 @@ SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
       RHO(NTH+I,IZ)=RHO(NTH+1-I,IZ)
     END DO
 
-!PRINT*, 'OOOOOOOOOOOOKKKKKKKK -- 6'
-
     ! Interpolate the disctretized function on the quadrature points
     CALL POLINT(XX(-1:NTH+2),RHO(-1:NTH+2,IZ),NTH+4,XGQ,Y,NGQ)
-
-!PRINT*, 'OOOOOOOOOOOOOOOOKKKKKKKKKK -- 7'
 
     ! Evaluate the coefficient of the Legendre poly. expansion
     DO I=0,MLS
       COEF(I)=(2.*I+1.)/2.*DOT_PRODUCT(PN(I,1:NGQ),Y(1:NGQ))
-      !if(abs(dot_product(PN(I,1:NGQ),Y(1:NGQ)))>HUGE(dbl_prec_var)) then
-       !      print*, 'DOT PRODUCT'
-        !     do ix=1,NGQ
-         !    if(abs(y(ix))>HUGE(dbl_prec_var)) then
-          !           print*,'Y',Y(ix),ix,i
-          !   endif
-          !   enddo
-          !   stop
-     !endif
-      !if(isnan(coef(i))) then
-       !       print*,'COEFFFFF',I
-        !      stop
-      !endif
     END DO
 
     ! Compute the matrix of legendre coefficients
@@ -2420,20 +2392,12 @@ SUBROUTINE POLINT(XA,YA,N,X,Y,M)
     D2L=4*(YA(JJ(I)+1)+YA(JJ(I)-1)-2.*YA(JJ(I)))/(XA(JJ(I)+1)-XA(JJ(I)-1))**2.
     D2R=4*(YA(JJ(I)+2)+YA(JJ(I))-2.*YA(JJ(I)+1))/(XA(JJ(I)+2)-XA(JJ(I)))**2.
 
-!PRINT*, 'POLINT --3',II
-!PRINT*,D2L,D2R
-
     IF(D2L*D2R .GT. 0)THEN
-!            print*, 'POLINT -- 3A',II
       Y(I)=YA(JJ(I))+D1L*(X(I)-XA(JJ(I)))+0.5*D2L*(X(I)-XA(JJ(I)))**2.
-      !print*,'POLINT -- 4',II
       Y(I)=Y(I)+YA(JJ(I)+1)+D1R*(X(I)-XA(JJ(I)+1))+0.5*D2R*(X(I)-XA(JJ(I)+1))**2.
-      !PRINT*, 'POLINT -- 5',II
       Y(I)=0.5*Y(I)
     ELSE
- !           PRINT*, 'POLINT -- 3B',II
       Y(I)=YA(JJ(I))+D1C*(X(I)-XA(JJ(I)))
-      !PRINT*,'POLINT -- 6',II
     END IF
   END DO
 
