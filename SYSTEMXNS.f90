@@ -3,7 +3,7 @@ MODULE SYSTEMXNS
 !   Purpose : This module contains common block array definition
 !             and the physisc of the problem  - EoS
 !
-!   All parameters to be changed by user should be set here.
+  !   All parameters to be changed by user should be set here.
 !
 !   ============================================================
 !   ============================================================
@@ -514,108 +514,7 @@ SUBROUTINE FUNCD_EOS(X,Y,DY,RHOVAR)
 
 END SUBROUTINE FUNCD_EOS
 
-! ********************************************************
 
-SUBROUTINE FUNCD_STRETCHold(X,Y,DY,RHOVAR)
-!   ============================================================
-!   Purpose : Used by rtsafe to derive stretching factor
-!             for the grid
-!   ============================================================
-
-  REAL :: X,Y,YN,Z,ZN,W,WN,DY,RHOVAR
-  INTEGER :: NN
-
-  NN=(NR-NRREG)
-
-  Y=X*(1-X**NN)/(1-X)-NRREG*(RMAX-RREG)/(RREG-RMIN)
-  DY= (NN*X**(NN+1.) - (1+NN)*X**NN +1.)/(X-1.)**2.
-
-  RETURN
-
-END SUBROUTINE FUNCD_STRETCHOLD
-
-! ***********************************************************************
-! **************************** NR routines ******************************
-
-REAL FUNCTION RTSAFEGold2(X0,X1,X2,XACC,RHOVAR,FUNCD)
-
-  INTERFACE
-    SUBROUTINE FUNCD(a,b,c,d)
-      real :: a,b,c,d
-    END SUBROUTINE FUNCD
-  END INTERFACE
-  real :: X0,X1,X2,XACC,RHOVAR,FL,DF,DX,DXOLD,F,FH,XL,XH,TEMP,SWAP,XN
-  integer :: j
-
-
-  INTEGER,PARAMETER :: MAXIT=2000
-
- ! write(6,*)'rtsafeg',x1,fl,df,rhovar
-
-  CALL FUNCD(X1,FL,DF,RHOVAR)
-!   write(6,*)'rtsafeg'
-
-  IF(FL.EQ.0.) THEN
-     RTSAFEG=X1
-     RETURN
-  ENDIF
-  CALL FUNCD(X2,FH,DF,RHOVAR)
-
-  IF(FH.EQ.0.) THEN
-     RTSAFEG=X2
-     RETURN
-  ENDIF
-  IF(FL*FH.GT.0.)THEN
-     WRITE(6,*)'FL ',FL ,'FH ',FH
-     !STOP 'Root must be bracketed'
-     XACC=-1.
-     RETURN
-  ENDIF
-  IF(FL.LT.0.)THEN
-     XL=X1
-     XH=X2
-  ELSE
-     XH=X1
-     XL=X2
-     SWAP=FL
-     FL=FH
-     FH=SWAP
-  ENDIF
-  RTSAFEG=X0
-  DXOLD=ABS(X2-X1)
-  DX=DXOLD
-  CALL FUNCD(RTSAFEG,F,DF,RHOVAR)
-  DO 11 J=1,MAXIT
-     IF(((RTSAFEG-XH)*DF-F)*((RTSAFEG-XL)*DF-F).GE.0. &
-          .OR. ABS(2.*F).GT.ABS(DXOLD*DF) ) THEN
-        DXOLD=DX
-        DX=0.5*(XH-XL)
-        RTSAFEG=XL+DX
-        IF(XL.EQ.RTSAFEG)RETURN
-     ELSE
-        DXOLD=DX
-        DX=F/DF
-        TEMP=RTSAFEG
-        RTSAFEG=RTSAFEG-DX
-        IF(TEMP.EQ.RTSAFEG)RETURN
-     ENDIF
-     IF(ABS(DX).LT.XACC) RETURN
-     CALL FUNCD(RTSAFEG,F,DF,RHOVAR)
-     IF(F.LT.0.) THEN
-        XL=RTSAFEG
-        FL=F
-     ELSE
-        XH=RTSAFEG
-        FH=F
-     ENDIF
-11    CONTINUE
-     WRITE(6,*) 'RTSAFE exceeding maximum iterations'
-
-     XACC=+1
-     RETURN
-END FUNCTION RTSAFEGold2
-
-! **************************************************************************
 
 SUBROUTINE XNS2ECHO_OUT()
 
