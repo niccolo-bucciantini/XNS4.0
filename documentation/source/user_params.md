@@ -1,8 +1,6 @@
 # User parameters
 
-The input parameters that the user might want to change are all set in the module system inside the file SYSTEM.f90. There are other parameters in other parts of the code that deal with specific routines (root
-finding, convergence etc ...), but those should not need to be changed. Here is a list of the parameters of the
-model as they appear in the module system:
+The input parameters that the user might want to change are all set in the module system inside the file *SYSTEM.f90*. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc ...), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:
 
 ## Convergence
 
@@ -39,7 +37,7 @@ and the lapse $\alpha$ in XNSMAIN and for the 4-potential in HYDROEQ.
 <br><br>
 - **CONV2** - desired precision for the convergence of the scalar field in TOVINIMOD.
 <br><br>
-- **QFACTOR** - a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.f90.
+- **QFACTOR** - a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.
 At the end of each sub-loop of the convergence scheme, a new set of equilibrium fluid variables is
 computed. Setting QFACTOR=1 implies that these will be used, while setting QFACTOR=0 means that
 the old variables $V_\mathrm{old}$ will be used (the code will never converge in this case!). A value $0 < Q_\mathrm{f} < 1$

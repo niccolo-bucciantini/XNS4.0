@@ -1,6 +1,6 @@
 # Arrays
 
-The module system inside the file SYSTEMXNS.f90 also contains the definitions of some arrays that
+The module system inside the file *SYSTEMXNS.f90* also contains the definitions of some arrays that
 are used within the code and shared by many subroutines. We briefly describe some of them here so that the
 user can have some idea of what represents what. Other arrays that are specific only to certain subroutines
 are defined locally and are not discussed here. Notice that some arrays related to the poloidal components
@@ -60,4 +60,5 @@ the source terms, respectively $\hat E$, $\hat D$ , $\hat S _\phi$ , $\hat S _r$
 - **ECSRC**,**ELSRC**,**ES1RC**,**ES2RC**,**ES3RC** - 2D arrays containing the source terms (the right hand side of
 the equations) associated with the presence of matter in the elliptic PDEs. Respectively, the source
 for the equations for $\psi$, $\alpha \psi$, $X^{\phi}$, $X^{r}$, $X^{\theta}$, where $X^i=W^i$, or $X^i ≡ \beta ^i$.
+<br><br>
 - **TRACEM** - 2D array containing the trace of the energy-momentum tensor of matter, used for the source of the equation of the scalar field.

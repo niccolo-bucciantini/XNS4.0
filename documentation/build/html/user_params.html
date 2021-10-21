@@ -85,9 +85,7 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="user-parameters">
 <h1>User parameters<a class="headerlink" href="#user-parameters" title="Permalink to this headline"></a></h1>
-<p>The input parameters that the user might want to change are all set in the module system inside the file SYSTEM.f90. There are other parameters in other parts of the code that deal with specific routines (root
-finding, convergence etc …), but those should not need to be changed. Here is a list of the parameters of the
-model as they appear in the module system:</p>
+<p>The input parameters that the user might want to change are all set in the module system inside the file <em>SYSTEM.f90</em>. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc …), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:</p>
 <section id="convergence">
 <h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline"></a></h2>
 <ul class="simple">
@@ -124,7 +122,7 @@ and the lapse <span class="math notranslate nohighlight">\(\alpha\)</span> in XN
 <br><br></p></li>
 <li><p><strong>CONV2</strong> - desired precision for the convergence of the scalar field in TOVINIMOD.
 <br><br></p></li>
-<li><p><strong>QFACTOR</strong> - a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.f90.
+<li><p><strong>QFACTOR</strong> - a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.
 At the end of each sub-loop of the convergence scheme, a new set of equilibrium fluid variables is
 computed. Setting QFACTOR=1 implies that these will be used, while setting QFACTOR=0 means that
 the old variables <span class="math notranslate nohighlight">\(V_\mathrm{old}\)</span> will be used (the code will never converge in this case!). A value <span class="math notranslate nohighlight">\(0 &lt; Q_\mathrm{f} &lt; 1\)</span>
@@ -223,7 +221,23 @@ be set to 0.
 <br><br></p></li>
 <li><p><strong>DIFFERENTIAL</strong> - a logical flag that states whether the model is differentially rotating or not. Setting it
 to .FALSE. implies uniform rotation, with <span class="math notranslate nohighlight">\(\Omega = \)</span>OMG. Setting it to .TRUE. implies differential rotation.
-In this case, a value of A2VALUE must be specified.</p></li>
+In this case, a value of A2VALUE must be specified.
+<br><br></p></li>
+<li><p><strong>OMGSPACE</strong> -
+<br><br></p></li>
+<li><p><strong>JCONSTLAW</strong> -
+<br><br></p></li>
+<li><p><strong>JCMODLAW</strong> -
+<br><br></p></li>
+<li><p><strong>URYULAW3</strong> -
+<br><br></p></li>
+<li><p><strong>URYULAW4</strong> -
+<br><br></p></li>
+<li><p><strong>PROTDIFF</strong> -
+<br><br></p></li>
+<li><p><strong>OMGMAX</strong> -
+<br><br></p></li>
+<li><p><strong>RMVALUE</strong> -</p></li>
 </ul>
 </section>
 <section id="magnetic-field">

@@ -1,13 +1,11 @@
 # Files and outputs
 
 Here is a list of all the files and subroutines included int the XNS package, together with a brief
-description of what they do and how they operates. We start with the fortran90 files of the code (with
-extension .f90), then we describe the output files produced by a run (with extension .dat), and we conclude
-with the IDL (Interactive Data Language) files needed for visualization (with extension .pro). The code
-must run in double precision for convergence. The Makefile is provided for both the gfortran (GNU) and
-Ifort (Intel) compilers. Precompiler options are: serial (standard XNS run, with no overall convergence
-on a specific quantities, it generates the executable XNS-s ) and nwtrps (load the version of XNS with
-Newton- Rapshon scheme, generating the executable XNS-nr ).
+description of what they do and how they operates. We start with the Fortran 90 files of the code (with
+extension *.f90*), then we describe the output files produced by a run (with extension *.dat*), and we conclude
+with the Python 3 files needed for visualisation (with extension *.py* or *.ipynb*, for use in Jupyter). The code
+must run in double precision for convergence. The *makefile* is provided for the gfortran (GNU) compiler. For more
+info on the compilation of XNS, see section "Compiling XNS".
 
 ## Files
 
@@ -32,7 +30,7 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     - subroutine **POLINT** - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
 <br><br>
 - **SYSTEM.f90**
-    - module **SYSTEM** - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section *User parameters*).
+    - module **SYSTEM** - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section "User parameters").
     - subroutine **EOSTABLEREAD** - reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.
     - subroutine **RHO2EOS** - given $\rho$, it computes the pressure $p$, the internal energy $\varepsilon$ and the enthalpy $h$ according to the tabulated EoS.
     - subroutine **PRS2EOS** - given $p$, it computes the $\rho$ according to the tabulated EoS.
@@ -138,3 +136,10 @@ equation.
 - **Surf.dat** - contains the radius of the NS surface at all angles $\theta$.
 <br><br>
 - **LogFile.dat** - summary of the run (input and output quantities).
+
+## Visualisation
+
+- **starplot_polo.py** -
+- **starplot_polo.py** -
+- **profile_polo.py** -
+- **profile_toro.py** -
