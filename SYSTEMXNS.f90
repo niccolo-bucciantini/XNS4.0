@@ -63,8 +63,6 @@ MODULE SYSTEMXNS
   REAL,PARAMETER :: RHOINI = 1.28e-3!3.81e-4!2.6158e-3!1.28E-03!1.4090909090909089EE-03! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0!0.86 ! Ratio between tabulated reduced baryon mass and true baryon mass
   REAL :: RHOINISEQ   ! Initial central density for sequances
-  REAL,PARAMETER :: RHOCENTSTART = 5.0D-4 	! Initial central density used as starting point for the mass-rho diagram
-  REAL,PARAMETER :: RHOCENTEND = 8.0D-3  	! Final central density of the mass-rho diagram
   REAL,PARAMETER :: K1 = 110.00000000000000 !100.         ! Politropic coefficient
   REAL,PARAMETER :: GAMMA = 2.0000000000000000        ! Politropic exponent
 
@@ -84,9 +82,6 @@ MODULE SYSTEMXNS
   LOGICAL :: GR = .TRUE.	! False = scalar-tensor theory; true = general relativity. Must be false here
   LOGICAL,PARAMETER :: STRETCH = .False. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
   LOGICAL :: DEBUG = .FALSE. 		! Set to true to print things for debugging purposes
-  LOGICAL :: SINGLESURF = .TRUE.	! If true the MPSAMPLING.f90 program will build the sampling only for the RHOINI central density
-  LOGICAL :: COUNTDOWN = .TRUE.	        ! Set to true to print the remaining number of configurations during the sequence computation
-  LOGICAL :: LOGFILE = .TRUE.		! Set to true to save a log file
   LOGICAL :: ANALYTIC = .FALSE.		! Set to true if you want to solve for phi using the analytic equation D(D(phi))=...
   LOGICAL :: EOSJOR = .FALSE.		! Used to change the frame (Jor. or Ein.) in which the EoS is computed (LEAVE FALSE HERE)
   LOGICAL :: CONVHELP = .FALSE.         ! If true, it activates an option for RHOCENT in HYDROEQ.f90 to help achieve convergence
@@ -217,7 +212,6 @@ MODULE SYSTEMXNS
   REAL,DIMENSION(0:NR+1) :: CHITV,NU,MU,DCHITV,DDCHITV
   INTEGER,PARAMETER :: RELIT = 100								 ! Number of iterations used in the RELAXLOOP and in the PHILOOP
   REAL,PARAMETER :: CONV2 = 1.0D-6								 ! Convergence parameter for the relaxation loop
-  INTEGER,PARAMETER :: MAXITM0 = 30       	! Maximum number of iterations for the GR shooting
   INTEGER,PARAMETER :: MAXSTEP = 90     	! Maximum number of iterations for the STT shooting
   REAL,PARAMETER :: CONV = 1.0D-5			! Convergence parameter for the GR shooting
   REAL,PARAMETER :: DELTMU0 = 0.0001		! Delta mu0 used in the main shooting
@@ -244,7 +238,7 @@ MODULE SYSTEMXNS
   REAL :: CHIS
   REAL :: USR,SYSR,SY2SR,DSR,DENSC,PRESSC,VELOCC,BMAG,B2YSR
   REAL :: USRX,SYSRX,SY2SRX
-  REAL,DIMENSION(-1:NTH+2,0:NR+1) :: CHIIN,CHIOUT
+  REAL,DIMENSION(-1:NTH+2,0:NR+1) :: CHIIN
 
 ! ====================================================================================
 ! Parameters for the magnetic vector potential
@@ -295,23 +289,6 @@ MODULE SYSTEMXNS
   CHARACTER(10) :: TIME
   CHARACTER(5)  :: ZONE
   INTEGER,DIMENSION(8) :: VALUES
-
-! ====================================================================================
-! Used in the sampling VAR_SAMPL.f90
-! ====================================================================================
-
-  INTEGER,PARAMETER :: JRHOMAX = 9     		! Number of configurations of the MPSAMPLING sampling
-  INTEGER,PARAMETER :: NUMCYCLES = 100  	! Number of samples of CHI0 and mu0 in MPSAMPLING
-  INTEGER,PARAMETER :: ABCYCLES = 30  		! Number of samples of alpha0 and beta0 in ABSAMPLING
-  REAL :: CHI0START = 0.2               	! Ranges of the sampling of the CHI0-mu0 space in MPSAMPLING
-  REAL :: CHI0END = -0.2
-  REAL,PARAMETER :: MU0START = 2
-  REAL,PARAMETER :: MU0END = 0.
-  REAL,PARAMETER :: BETA0START = -2.			! Ranges of the sampling of the alpha0-beta0 space in ABSAMPLING
-  REAL,PARAMETER :: BETA0END = -6.
-  REAL,PARAMETER :: ALPHA0START = -0.001
-  REAL,PARAMETER :: ALPHA0END = -0.01
-
 
 CONTAINS
 

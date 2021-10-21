@@ -54,9 +54,7 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     - subroutine **COVTERM** - computes the local terms of the metric tensor
     - subroutine **CONS_TO_PRIM** - computes the inversion from conserved to primitive variables.
     - subroutine **CONS_TO_PRIM_POL** - computes the inversion from conserved to primitive variables for the specific case of poloidal field.
-    - subroutine **OMEGAVALUE** - derives the function $\Omega = \Omega (r,\theta)$ for the differential rotation.
     - subroutine **QUANTITIES** - computes several quantities (e.g. mass, energy, angular momentum, scalar charge, magnetic deformation) at the end of the convergence loop, according to standard definitions. See also SDB20 for some definitions in the case of STTs.
-    - subroutine **VECPOTPHI** - solve the Grad-Shafranov Equation for the $\phi$-component of the vector potential
     - subroutine **SOURCEPOT** - compute source terms (currents and metric) for the Grad-Shafranov
     Equation or Maxwell equations depending if the rotational rate OMG is set to zero or not.
     - subroutine **VECPOTPHI** - called by the subroutine hydrovar_pol when OMG.EQ.0, it solves
@@ -66,10 +64,20 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     the non-homogeneus Maxwell equations, does not satisfy the perfect conducting relation inside
     the star, but differs from the MHD solution solution $\Phi _\mathrm{MHD} = -\Omega \Psi + C$ by an harmonic function
     $\Phi _\mathrm{a}$ so that $\Phi = \Phi _\mathrm{MHD} + \Phi _\mathrm{a}$ with $\Delta \Phi _\mathrm{a} = 0$. The harmonic function is obtained evoking the laplace subroutine.
+    - subroutine **SOLVEAPHI** and subroutine **SOLVEATIME** - solve respectively for the Maxwell-Ampere and Maxwell-Gauss equations.
     - subroutine **LAPLACE** - solves the equations $\Phi _\mathrm{a} \big |_{S _\mathrm{NS}} = \Sigma _l Y(\theta) (a_l r^l) |_{S _\mathrm{NS}}$ (inside the star) and $\Phi _\mathrm{a} \big |_{S _\mathrm{NS}} = \Sigma _l Y(\theta) (b_l r^{-(l+1)}) |_{S _\mathrm{NS}}$ (outside the star), where $S _\mathrm{NS}$ is stellar surface and $\Phi _\mathrm{a} \big |_{S _\mathrm{NS}} = (\Phi + \Omega \Psi + C) |_{S _\mathrm{NS}}$. Each system of equations is solved with a LU decomposition and a subsequent backward substitution adopting the routines provided in the Numerical Recipes (ludcmp and
     lubksb). Notice that, in order to avoid spurious effects, the surface terms are evaluated on top
     of the super-ellipsoid that best fit the numerical surface.
-    - subroutine **SOLVEAPHI** and subroutine **SOLVEATIME** - solve respectively for the Maxwell-Ampere and Maxwell-Gauss equations.
+<br><br>
+- **ROTATION.f90**
+    - subroutine **CHECKROTDIFF** -
+    - subroutine **OMEGAVALUE** - derives the function $\Omega = \Omega (r,\theta)$ for the differential rotation.
+    - subroutine **OMEGA3LVALUE** -
+    - subroutine **FODFO_OS** -
+    - subroutine **A3L_OS** -
+    - subroutine **PARS_VALUE_JS** -
+    - subroutine **FODFO_JS** -
+    - subroutine **A3L_JS** -
 <br><br>
 - **TOVINIMOD.f90**
     - subroutine **TOVINIMOD** - solves the 1D TOV (either in GR or in STTs) equations in isotropic coordinates to provide the initial guess. It uses a relaxation method to achieve convergence.

@@ -134,6 +134,22 @@ be set to 0.
 - **DIFFERENTIAL** - a logical flag that states whether the model is differentially rotating or not. Setting it
 to .FALSE. implies uniform rotation, with $\Omega = $OMG. Setting it to .TRUE. implies differential rotation.
 In this case, a value of A2VALUE must be specified.
+<br><br>
+- **OMGSPACE** -
+<br><br>
+- **JCONSTLAW** -
+<br><br>
+- **JCMODLAW** -
+<br><br>
+- **URYULAW3** -
+<br><br>
+- **URYULAW4** -
+<br><br>
+- **PROTDIFF** -
+<br><br>
+- **OMGMAX** -
+<br><br>
+- **RMVALUE** -
 
 ## Magnetic field
 
