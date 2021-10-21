@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arrays &mdash; XNS 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Files and outputs" href="files_outputs.html" />
+    <link rel="prev" title="User parameters" href="user_params.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> XNS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Welcome to the XNS 4.0 documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makefile.html">Compiling XNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_params.html">User parameters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#grid">Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric">Metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mhd">MHD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scalar-field">Scalar field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-terms">Source terms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="files_outputs.html">Files and outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">XNS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Arrays</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/arrays.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="arrays">
+<h1>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline"></a></h1>
+<p>The module system inside the file SYSTEMXNS.f90 also contains the definitions of some arrays that
+are used within the code and shared by many subroutines. We briefly describe some of them here so that the
+user can have some idea of what represents what. Other arrays that are specific only to certain subroutines
+are defined locally and are not discussed here. Notice that some arrays related to the poloidal components
+of the velocity, shift vector, or auxiliary vectors are always zero but still defined in XNS, though related
+routines are never called. This is because XNS shares the same metric solver as the full X-ECHO code.</p>
+<section id="grid">
+<h2>Grid<a class="headerlink" href="#grid" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>R</strong>,<strong>DR</strong> - 1D arrays that store the location of the radial points, and the radial increments.
+<br><br></p></li>
+<li><p><strong>DRM</strong>,<strong>DRP</strong> - additional 1D arrays that store the backward and forward radial increments.
+<br><br></p></li>
+<li><p><strong>TH</strong>,<strong>DTH</strong>,<strong>XX</strong> - 1D arrays that store the location of the angular points, the angular increments, and the
+cosine of the angle.</p></li>
+</ul>
+</section>
+<section id="metric">
+<h2>Metric<a class="headerlink" href="#metric" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>PSI</strong>,<strong>PSL</strong>,<strong>PSS</strong>,<strong>PSSR</strong>,<strong>PSST</strong> - 2D arrays of metric terms, respectively <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha \psi\)</span>, <span class="math notranslate nohighlight">\(X^{\phi}\)</span>, <span class="math notranslate nohighlight">\(X^{r}\)</span>, <span class="math notranslate nohighlight">\(X^{\theta}\)</span>. We have either <span class="math notranslate nohighlight">\(X^i=W^i\)</span>, or <span class="math notranslate nohighlight">\(X^i ≡ \beta ^i\)</span>, depending on the step of the metric solver.
+<br><br></p></li>
+<li><p><strong>CURVC</strong>,<strong>CURVR</strong>,<strong>CURVT</strong>,<strong>CURVP</strong> - 2D arrays containing the source terms associated with the curvature
+of the metric, respectively for the two scalar Poisson equations (for <span class="math notranslate nohighlight">\(\psi\)</span> and <span class="math notranslate nohighlight">\(\alpha\)</span>) and for the three
+components of the second vector Poisson equation (that for <span class="math notranslate nohighlight">\(\beta ^i\)</span>).
+<br><br></p></li>
+<li><p><strong>MU</strong>,<strong>NU</strong> - 1D arrays containing the metric terms of the radial TOV solution. The metric employed is
+that for isotropic coordinates, namely <span class="math notranslate nohighlight">\(ds^2 = -e^\nu dt^2 + e^\mu (dr^2 + r^2 d\theta ^2 + r^2 \sin ^2 \theta d\phi ^2)\)</span>.</p></li>
+</ul>
+</section>
+<section id="mhd">
+<h2>MHD<a class="headerlink" href="#mhd" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>RHOSRC</strong>,<strong>ESRC</strong>,<strong>PSRC</strong>,<strong>VPHI</strong>,<strong>VR</strong>,<strong>VTH</strong>,<strong>BPHI</strong>,<strong>SSS</strong> - 2D arrays, respectively <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(\rho h = \rho (1 + \varepsilon) + p\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(v^\phi\)</span>, <span class="math notranslate nohighlight">\(v^r\)</span>, <span class="math notranslate nohighlight">\(v^\theta\)</span>, <span class="math notranslate nohighlight">\(B^\phi\)</span>, <span class="math notranslate nohighlight">\(S\)</span>, needed for the source terms.
+<br><br></p></li>
+<li><p><strong>RHOTV</strong>,<strong>PRTV</strong>,<strong>ETV</strong> - 1D arrays containing the fluid variables of the radial TOV solution, respectively
+<span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\rho \varepsilon\)</span>.
+<br><br></p></li>
+<li><p><strong>RHONEW</strong>,<strong>PNEW</strong>,<strong>ENEW</strong>,<strong>V3NEW</strong>,<strong>B3NEW</strong>,<strong>E3NEW</strong> - 2D arrays, respectively <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\rho \varepsilon\)</span>, <span class="math notranslate nohighlight">\(v^\phi\)</span>, <span class="math notranslate nohighlight">\(B^\phi\)</span>, <span class="math notranslate nohighlight">\(E_\phi\)</span> computed for an equilibrium configuration on the metric at the end of each step of the convergence loop.
+<br><br></p></li>
+<li><p><strong>BPOLR</strong>,<strong>BPOLT</strong>,<strong>EPOLR</strong>,<strong>EPOLT</strong>,<strong>APHI</strong>,<strong>ATIM</strong> - 2D arrays, respectively, <span class="math notranslate nohighlight">\(B^r\)</span>, <span class="math notranslate nohighlight">\(B^\theta\)</span>, <span class="math notranslate nohighlight">\(E_r\)</span>, <span class="math notranslate nohighlight">\(E_\theta\)</span>, <span class="math notranslate nohighlight">\(\tilde A ^\phi = \Phi\)</span>, <span class="math notranslate nohighlight">\(A^t = \Psi\)</span> for the magnetic configuration with poloidal field components.
+<br><br></p></li>
+<li><p><strong>RHOTVJOR</strong>,<strong>PRTVJOR</strong>,<strong>ETVJOR</strong> - 1D arrays, respectively <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\rho \varepsilon\)</span> of the TOV solution computed in the Jordan frame. Note that, in GR, these are equal to RHOTV, PRTV, ETV respectively.</p></li>
+</ul>
+</section>
+<section id="scalar-field">
+<h2>Scalar field<a class="headerlink" href="#scalar-field" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>CHITV</strong>,<strong>DCHITV</strong>,<strong>DDCHITV</strong> - 1D arrays, respectively <span class="math notranslate nohighlight">\(\chi\)</span>, <span class="math notranslate nohighlight">\(\partial _r \chi\)</span>, <span class="math notranslate nohighlight">\(\partial ^2 _r \chi\)</span> of the TOV solution.
+<br><br></p></li>
+<li><p><strong>CHI</strong> - 2D array containing the scalar field <span class="math notranslate nohighlight">\(\chi\)</span>.
+<br><br></p></li>
+<li><p><strong>PSCAL</strong>,<strong>QSCALTIM</strong>,<strong>QSCALR</strong>,<strong>QSCALT</strong>,<strong>QSCALP</strong>,<strong>QSCAL2</strong> - 2D arrays, containing the 3+1 decomposition of the scalar field derivative. These are respectively <span class="math notranslate nohighlight">\(P\)</span>, <span class="math notranslate nohighlight">\(Q^\mu\)</span> and <span class="math notranslate nohighlight">\(Q_\mu Q^\mu\)</span> of Eq. 26 in SBD20.
+<br><br></p></li>
+<li><p><strong>ASCAL</strong> - 2D array, containing the scalar coupling function <span class="math notranslate nohighlight">\(\mathcal{A}(\chi)\)</span>.</p></li>
+</ul>
+</section>
+<section id="source-terms">
+<h2>Source terms<a class="headerlink" href="#source-terms" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>USRC</strong>,<strong>DSRC</strong>,<strong>S3SRC</strong>,<strong>S1SRC</strong>,<strong>S2SRC</strong> - 2D arrays containing the U conservative variables needed for
+the source terms, respectively <span class="math notranslate nohighlight">\(\hat E\)</span>, <span class="math notranslate nohighlight">\(\hat D\)</span> , <span class="math notranslate nohighlight">\(\hat S _\phi\)</span> , <span class="math notranslate nohighlight">\(\hat S _r\)</span>, <span class="math notranslate nohighlight">\(\hat S _\theta\)</span>, all multiplied by <span class="math notranslate nohighlight">\(f ^{1/2} = r^2 \sin \theta\)</span>.
+<br><br></p></li>
+<li><p><strong>USRCX</strong>,<strong>S3SRCX</strong>,<strong>S1SRCX</strong>,<strong>S2SRCX</strong> - 2D arrays containing the U conservative variables associated to the scalar field, needed for the source terms, respectively <span class="math notranslate nohighlight">\(\hat E\)</span>, <span class="math notranslate nohighlight">\(\hat D\)</span> , <span class="math notranslate nohighlight">\(\hat S _\phi\)</span> , <span class="math notranslate nohighlight">\(\hat S _r\)</span>, <span class="math notranslate nohighlight">\(\hat S _\theta\)</span>, all multiplied by <span class="math notranslate nohighlight">\(f ^{1/2} = r^2 \sin \theta\)</span>.
+<br><br></p></li>
+<li><p><strong>ECSRC</strong>,<strong>ELSRC</strong>,<strong>ES1RC</strong>,<strong>ES2RC</strong>,<strong>ES3RC</strong> - 2D arrays containing the source terms (the right hand side of
+the equations) associated with the presence of matter in the elliptic PDEs. Respectively, the source
+for the equations for <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha \psi\)</span>, <span class="math notranslate nohighlight">\(X^{\phi}\)</span>, <span class="math notranslate nohighlight">\(X^{r}\)</span>, <span class="math notranslate nohighlight">\(X^{\theta}\)</span>, where <span class="math notranslate nohighlight">\(X^i=W^i\)</span>, or <span class="math notranslate nohighlight">\(X^i ≡ \beta ^i\)</span>.</p></li>
+<li><p><strong>TRACEM</strong> - 2D array containing the trace of the energy-momentum tensor of matter, used for the source of the equation of the scalar field.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_params.html" class="btn btn-neutral float-left" title="User parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="files_outputs.html" class="btn btn-neutral float-right" title="Files and outputs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Jacopo Soldateschi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

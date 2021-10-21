@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Files and outputs &mdash; XNS 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Arrays" href="arrays.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> XNS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Welcome to the XNS 4.0 documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makefile.html">Compiling XNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_params.html">User parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Files and outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">XNS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Files and outputs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/files_outputs.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="files-and-outputs">
+<h1>Files and outputs<a class="headerlink" href="#files-and-outputs" title="Permalink to this headline"></a></h1>
+<p>Here is a list of all the files and subroutines included int the XNS package, together with a brief
+description of what they do and how they operates. We start with the fortran90 files of the code (with
+extension .f90), then we describe the output files produced by a run (with extension .dat), and we conclude
+with the IDL (Interactive Data Language) files needed for visualization (with extension .pro). The code
+must run in double precision for convergence. The Makefile is provided for both the gfortran (GNU) and
+Ifort (Intel) compilers. Precompiler options are: serial (standard XNS run, with no overall convergence
+on a specific quantities, it generates the executable XNS-s ) and nwtrps (load the version of XNS with
+Newton- Rapshon scheme, generating the executable XNS-nr ).</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>XNS.f90</strong> - main program. Makes some consistency checks, and invokes XNSMAIN. Depending on
+the pre-compiling option it simply calls XNSMAIN (if make serial is used to compile the code), or it
+performs a Newton-Raphson search for an equilibrium model with a given value for a desired quantity
+of interest, i.e. a certain value of the central density or gravitational mass (if make nwtrps is used). Moreover, it can compute many models in parallel with different initial conditions (if make parspace is used).
+<br><br></p></li>
+<li><p><strong>XNSMAIN.f90</strong></p>
+<ul>
+<li><p>subroutine <strong>XNSMAIN</strong> - the main kernel of the code: it defines the grid, builds a 2D initial guess based on the 1D TOV output of TOVINIMOD.f90, performs the convergence loop calling all the various metric solvers and procedures in the appropriate order. When the loop is over, it writes all the outputs.</p></li>
+<li><p>subroutine <strong>CONFORMAL</strong> - solves for the scalar Poisson-like equation for <span class="math notranslate nohighlight">\(\psi\)</span>.</p></li>
+<li><p>subroutine <strong>LAPSE</strong> - solves for the scalar Poisson-like equation for <span class="math notranslate nohighlight">\(\alpha \psi\)</span>.</p></li>
+<li><p>subroutine <strong>SHIFTPHI</strong> - solves the <span class="math notranslate nohighlight">\(\phi\)</span> component of the two vector Poisson equations for <span class="math notranslate nohighlight">\(W^i\)</span> and <span class="math notranslate nohighlight">\(\beta ^i\)</span>, given the corresponding source terms.</p></li>
+<li><p>subroutine <strong>CURV1</strong> - computes the curvature source term in the routines for <span class="math notranslate nohighlight">\(\psi\)</span> and <span class="math notranslate nohighlight">\(\alpha \psi\)</span>.</p></li>
+<li><p>subroutine <strong>CURV2</strong> - computes the curvature source term in the routine for <span class="math notranslate nohighlight">\(\beta ^\phi\)</span>.</p></li>
+<li><p>subroutine <strong>SOURCECHI</strong> - computes the metric terms and derivatives used in the source terms of the equation for <span class="math notranslate nohighlight">\(\chi\)</span>.</p></li>
+<li><p>subroutine <strong>SOLVECHI</strong> - solves for the scalar field equation for <span class="math notranslate nohighlight">\(\chi\)</span>, given the source term. Note that since <span class="math notranslate nohighlight">\(\chi\)</span> also appears in the source term, a single call of SOLVECHI won’t yield a true solution.</p></li>
+<li><p>subroutine <strong>CHISOL</strong> - wrapper that calls SOURCECHI and CHISOL in a relaxation loop, until it converges to the true solution.</p></li>
+<li><p>subroutine <strong>LEGZO</strong> - computes the zeros of Legendre polynomials and the corresponding
+weights for Gaussian quadrature integration.</p></li>
+<li><p>subroutine <strong>LPN</strong> - computes the Legendre polynomials and their derivatives.</p></li>
+<li><p>subroutine <strong>POLINT</strong> - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
+<br><br></p></li>
+</ul>
+</li>
+<li><p><strong>SYSTEM.f90</strong></p>
+<ul>
+<li><p>module <strong>SYSTEM</strong> - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section <em>User parameters</em>).</p></li>
+<li><p>subroutine <strong>EOSTABLEREAD</strong> - reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.</p></li>
+<li><p>subroutine <strong>RHO2EOS</strong> - given <span class="math notranslate nohighlight">\(\rho\)</span>, it computes the pressure <span class="math notranslate nohighlight">\(p\)</span>, the internal energy <span class="math notranslate nohighlight">\(\varepsilon\)</span> and the enthalpy <span class="math notranslate nohighlight">\(h\)</span> according to the tabulated EoS.</p></li>
+<li><p>subroutine <strong>PRS2EOS</strong> - given <span class="math notranslate nohighlight">\(p\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
+<li><p>subroutine <strong>ENT2EOS</strong> - given <span class="math notranslate nohighlight">\(h\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
+<li><p>subroutine <strong>EOS</strong> - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.</p></li>
+<li><p>subroutine <strong>FUNCD_EOS</strong> - used by the root-finding subroutine to derive the central pressure given
+the central density.</p></li>
+<li><p>subroutine <strong>FUNCD_STRETCH</strong> - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.</p></li>
+<li><p>function <strong>RTSAFEG</strong> - the root-finding subroutine, based on bisection and Newton’s methods
+(modified from the Numerical Recipes), to derive the central pressure.
+<br><br></p></li>
+</ul>
+</li>
+<li><p><strong>HYDROEQ.f90</strong></p>
+<ul>
+<li><p>subroutine <strong>HYDROEQ</strong> - given the CFC metric and a value of <span class="math notranslate nohighlight">\(\rho _\mathrm{c}\)</span> it computes the equilibrium
+configuration for the corresponding Bernoulli integral. It finally calls
+hydrovar_<x> depending on the physical parameter set in SYSTEMXNS.f90 to compute local
+equilibrium quantities.</p></li>
+<li><p>subroutine <strong>HYDROVAR</strong>, <strong>HYDROVAR_TOR</strong>, <strong>HYDROVAR_POL</strong> - they compute local equilibrium
+quantities such as <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(v^\phi\)</span>, <span class="math notranslate nohighlight">\(B^i\)</span> and <span class="math notranslate nohighlight">\(E_i\)</span> depending on the specific choice for the magnetization (respectively unmagnetized case, purely toroidal magnetic field and poloidal magnetic field).</p></li>
+<li><p>subroutine <strong>COVTERM</strong> - computes the local terms of the metric tensor</p></li>
+<li><p>subroutine <strong>CONS_TO_PRIM</strong> - computes the inversion from conserved to primitive variables.</p></li>
+<li><p>subroutine <strong>CONS_TO_PRIM_POL</strong> - computes the inversion from conserved to primitive variables for the specific case of poloidal field.</p></li>
+<li><p>subroutine <strong>OMEGAVALUE</strong> - derives the function <span class="math notranslate nohighlight">\(\Omega = \Omega (r,\theta)\)</span> for the differential rotation.</p></li>
+<li><p>subroutine <strong>QUANTITIES</strong> - computes several quantities (e.g. mass, energy, angular momentum, scalar charge, magnetic deformation) at the end of the convergence loop, according to standard definitions. See also SDB20 for some definitions in the case of STTs.</p></li>
+<li><p>subroutine <strong>VECPOTPHI</strong> - solve the Grad-Shafranov Equation for the <span class="math notranslate nohighlight">\(\phi\)</span>-component of the vector potential</p></li>
+<li><p>subroutine <strong>SOURCEPOT</strong> - compute source terms (currents and metric) for the Grad-Shafranov
+Equation or Maxwell equations depending if the rotational rate OMG is set to zero or not.</p></li>
+<li><p>subroutine <strong>VECPOTPHI</strong> - called by the subroutine hydrovar_pol when OMG.EQ.0, it solves
+the Grad-Shafranov Equation.</p></li>
+<li><p>subroutine <strong>MXWLSOL</strong> - called by subroutine hydrovar_pol when OMG.NE.0, it solves iteratively the Maxwell-Ampere and the Maxwell-Gauss equation. It finally corrects the solution for the electric potential <span class="math notranslate nohighlight">\(\Phi\)</span> in order to guarantee that the MHD condition <span class="math notranslate nohighlight">\(\Phi = -\Omega \Psi + C\)</span> is valid
+inside the star. Indeed, as explained in Pili et al. (2017), the solution for <span class="math notranslate nohighlight">\(\Phi\)</span> obtained by solving
+the non-homogeneus Maxwell equations, does not satisfy the perfect conducting relation inside
+the star, but differs from the MHD solution solution <span class="math notranslate nohighlight">\(\Phi _\mathrm{MHD} = -\Omega \Psi + C\)</span> by an harmonic function
+<span class="math notranslate nohighlight">\(\Phi _\mathrm{a}\)</span> so that <span class="math notranslate nohighlight">\(\Phi = \Phi _\mathrm{MHD} + \Phi _\mathrm{a}\)</span> with <span class="math notranslate nohighlight">\(\Delta \Phi _\mathrm{a} = 0\)</span>. The harmonic function is obtained evoking the laplace subroutine.</p></li>
+<li><p>subroutine <strong>LAPLACE</strong> - solves the equations <span class="math notranslate nohighlight">\(\Phi _\mathrm{a} \big |_{S _\mathrm{NS}} = \Sigma _l Y(\theta) (a_l r^l) |_{S _\mathrm{NS}}\)</span> (inside the star) and <span class="math notranslate nohighlight">\(\Phi _\mathrm{a} \big |_{S _\mathrm{NS}} = \Sigma _l Y(\theta) (b_l r^{-(l+1)}) |_{S _\mathrm{NS}}\)</span> (outside the star), where <span class="math notranslate nohighlight">\(S _\mathrm{NS}\)</span> is stellar surface and <span class="math notranslate nohighlight">\(\Phi _\mathrm{a} \big |_{S _\mathrm{NS}} = (\Phi + \Omega \Psi + C) |_{S _\mathrm{NS}}\)</span>. Each system of equations is solved with a LU decomposition and a subsequent backward substitution adopting the routines provided in the Numerical Recipes (ludcmp and
+lubksb). Notice that, in order to avoid spurious effects, the surface terms are evaluated on top
+of the super-ellipsoid that best fit the numerical surface.</p></li>
+<li><p>subroutine <strong>SOLVEAPHI</strong> and subroutine <strong>SOLVEATIME</strong> - solve respectively for the Maxwell-Ampere and Maxwell-Gauss equations.
+<br><br></p></li>
+</ul>
+</li>
+<li><p><strong>TOVINIMOD.f90</strong></p>
+<ul>
+<li><p>subroutine <strong>TOVINIMOD</strong> - solves the 1D TOV (either in GR or in STTs) equations in isotropic coordinates to provide the initial guess. It uses a relaxation method to achieve convergence.
+<br><br></p></li>
+<li><p><strong>FUNCTIONS.f90</strong></p>
+<ul>
+<li><p>subroutine <strong>EXPANSION</strong> - a Taylor expansion of the TOV equations at small initial radii (they are
+singular for <span class="math notranslate nohighlight">\(r \rightarrow 0\)</span>).</p></li>
+<li><p>subroutine <strong>TOVEQS</strong> - provides the derivatives needed to integrate the TOV equations via the
+RK4 method.</p></li>
+<li><p>subroutine <strong>RK4</strong> - the 4th order RK integrator (modified from the Numerical Recipes).</p></li>
+<li><p>subroutine <strong>MASSFIND</strong> - computes the ADM mass of the scalarised TOV solution at a given radius (either at the middle of the grid or at its outer edge) by knowing the scalar charge and the value of <span class="math notranslate nohighlight">\(\mu\)</span> at that point. It is used in order to achieve convergence, as explained in SBD20 Appendix B.</p></li>
+<li><p>subroutine <strong>CHIDERIVS</strong> - computes the derivatives of the scalar field (<span class="math notranslate nohighlight">\(Q^\mu\)</span>) and the scalar coupling function <span class="math notranslate nohighlight">\(\mathcal{A}(\chi)\)</span>.</p></li>
+<li><p>subroutine <strong>GRIDBUILD</strong> - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.</p></li>
+<li><p>subroutine <strong>DGTSV</strong> - solves the linear system <span class="math notranslate nohighlight">\(AX = B\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is a tridiagonal matrix, by
+Gaussian elimination with partial pivoting (taken from the LAPACK routines).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="outputs">
+<h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Grid.dat</strong> - contains the grid mesh points.
+<br><br></p></li>
+<li><p><strong>TOVINIMOD_PROFILES.dat</strong> - contains the 1D TOV solution <span class="math notranslate nohighlight">\((r,\mu,\rho,\nu,p,\rho\varepsilon,\chi)\)</span>.
+<br><br></p></li>
+<li><p><strong>Source.dat</strong> - contains 2D source term for the metric solver <span class="math notranslate nohighlight">\((\rho,p,\rho\varepsilon)\)</span>.
+<br><br></p></li>
+<li><p><strong>XShiftphi.dat</strong> - contains the <span class="math notranslate nohighlight">\(W^\phi\)</span> component and the related source term of its vector Poisson
+equation.
+<br><br></p></li>
+<li><p><strong>Conformal.dat</strong> - contains <span class="math notranslate nohighlight">\(\psi\)</span> and the two (matter and curvature) source terms of its scalar Poisson
+equation.
+<br><br></p></li>
+<li><p><strong>Primitive.dat</strong> - contains the primitive variables <span class="math notranslate nohighlight">\((\rho,p,\rho\varepsilon,v^\phi,B^\phi)\)</span> recovered self-consistently from
+the metric and the conserved variables.
+<br><br></p></li>
+<li><p><strong>Primitive_mag.dat</strong> - contains the magnetic primitive variables <span class="math notranslate nohighlight">\((B^\phi,B^r,B^\theta)\)</span> recovered self-consistently
+from the metric and the conserved variables.
+<br><br></p></li>
+<li><p><strong>Lapse.dat</strong> - contains <span class="math notranslate nohighlight">\(\alpha\)</span> and the two (matter and curvature) source terms of the related scalar Poisson
+equation.
+<br><br></p></li>
+<li><p><strong>Shiftphi.dat</strong> - <span class="math notranslate nohighlight">\(\beta ^\phi\)</span> vector and the related source term of the vector Poisson equation.
+<br><br></p></li>
+<li><p><strong>Chi.dat</strong> - <span class="math notranslate nohighlight">\(\chi\)</span> and the related source term of the scalar field equation.
+<br><br></p></li>
+<li><p><strong>Hydroeq.dat</strong> - contains the new equilibrium configuration <span class="math notranslate nohighlight">\((\rho,p,\psi,v^\phi,\alpha,\beta^\phi,\chi,Q^r,Q^t)\)</span>.
+<br><br></p></li>
+<li><p><strong>Hydroeq_mag.dat</strong> - contains the new equilibrium configuration for magnetic field <span class="math notranslate nohighlight">\((B^\phi,B^r,B^\theta,\tilde A ^\phi,E_\phi,E_r,E_\theta,A^t,J^\phi,J^r,J^\theta)\)</span>.
+<br><br></p></li>
+<li><p><strong>Mxwll_test.dat</strong> - cointains data related to the source term of both Maxwell-Ampere and Maxwell-Gauss equation <span class="math notranslate nohighlight">\((\rho _\mathrm{e},J^\phi,\Phi _\mathrm{int},\Phi _\mathrm{ext},\Phi _\mathrm{a},\omega,\Gamma)\)</span>.
+<br><br></p></li>
+<li><p><strong>Apconv.dat</strong> - maximum value of <span class="math notranslate nohighlight">\(\Psi\)</span> at each step of the XNSMAIN subroutine.
+<br><br></p></li>
+<li><p><strong>Atconv.dat</strong> - maximum value of <span class="math notranslate nohighlight">\(\Phi\)</span> at each step of the XNSMAIN subroutine.
+<br><br></p></li>
+<li><p><strong>Chiconv.dat</strong> - maximum value of <span class="math notranslate nohighlight">\(\chi\)</span> at each step of the XNSMAIN subroutine.
+<br><br></p></li>
+<li><p><strong>Rhovec.dat</strong> - central density and other quantities at each step of the XNSMAIN subroutine. It is used to check convergence.
+<br><br></p></li>
+<li><p><strong>Surf.dat</strong> - contains the radius of the NS surface at all angles <span class="math notranslate nohighlight">\(\theta\)</span>.
+<br><br></p></li>
+<li><p><strong>LogFile.dat</strong> - summary of the run (input and output quantities).</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="arrays.html" class="btn btn-neutral float-left" title="Arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Jacopo Soldateschi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
