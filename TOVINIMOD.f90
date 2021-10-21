@@ -21,7 +21,7 @@ SUBROUTINE TOVINIMOD(RHOVAR)
   !
   ! Output files:
   ! PROFILES.dat -> contains the radial profiles of some quantities
-  ! DEBUG.dat (if DEBUG flag is true) -> contains data for debugging purposes
+  ! DEBUG.dat (if DEBUG flag is true) -> contains data for debugging purposes (set by user if needed)
   !
   ! Grid: Radial, with NR = number of radial gridpoints, and either uniform or logarithmically stretched
   ! R = radial grid points (+ boundaries)
@@ -48,8 +48,8 @@ SUBROUTINE TOVINIMOD(RHOVAR)
   ! RHOSURFTOV, PSURF = threshold values to set the NS surface 
   !
   ! Output files:
-  ! PROFILES.dat -> contains the radial profiles of some quantities
-  ! DEBUG.dat (if DEBUG flag is true) -> contains data for debugging purposes
+  ! TOVINIMOD_PROFILES.dat -> contains the radial profiles of some quantities
+  ! TOVINIMOD_DEBUG.dat (if DEBUG flag is true) -> contains data for debugging purposes
   ! ==============================================================
 
   USE SYSTEMXNS
@@ -470,6 +470,12 @@ SUBROUTINE TOVINIMOD(RHOVAR)
   ! Overwrite with original mu0 value for the log file
   MU0=MUIN
 
+  IF(DEBUG)THEN
+     OPEN(14,FILE='TOVINIMOD_DEBUG.dat')
+     WRITE(6,*)'Here go the infos for debug'
+     CLOSE(14)
+  END IF
+  
   ! Write STT-TOV solution to file
   OPEN(13,FILE='TOVINIMOD_PROFILES.dat')
   DO IZ=1,NR
