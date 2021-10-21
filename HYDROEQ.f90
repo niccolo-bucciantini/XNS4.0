@@ -18,6 +18,8 @@ SUBROUTINE HYDROEQ(RHOVAR,ILOOP)
   !  ============================================================
 
   USE SYSTEMXNS
+  USE PHYSICS
+  USE FUNCTIONS
   IMPLICIT NONE
 
   REAL    :: RHOVAR
@@ -124,6 +126,7 @@ SUBROUTINE HYDROVAR(BCENT,PCENT)
   !---------------------------------------------------------
 
   USE SYSTEMXNS
+  USE PHYSICS
   USE FUNCTIONS
   USE ROTATION, ONLY: OMEGA3LVALUE
   IMPLICIT NONE
@@ -2166,6 +2169,7 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
 !  =============================================================
 
   USE SYSTEMXNS
+  USE FUNCTIONS
   IMPLICIT NONE
 
   REAL, DIMENSION(-1:NTH+2,0:NR+1) :: PHI, PHIIN, PHIOUT

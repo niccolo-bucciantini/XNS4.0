@@ -1,6 +1,4 @@
 MODULE SYSTEMXNS
-
-
 !   ============================================================
 !   Purpose : This module contains common block array definition
 !             and the physisc of the problem  - EoS
@@ -24,15 +22,15 @@ MODULE SYSTEMXNS
 ! Grid parameters
 ! ====================================================================================
 
-  INTEGER,PARAMETER :: NR    = 250 ! Radial mesh points
+  INTEGER,PARAMETER :: NR    = 900 ! Radial mesh points
   INTEGER,PARAMETER :: NTH   = 100 ! Angular mesh points (1 = 1D TOV solution)
   INTEGER :: IX,IZ
   REAL,DIMENSION(0:NR+1)   :: R,DR,DRM,DRP
   REAL :: DOM
   REAL,DIMENSION(-1:NTH+2) :: XX,TH,DTH
   REAL,PARAMETER :: RMIN = 0.         ! Center
-  REAL,PARAMETER :: RMAX = 20.        ! Outer radius for the regular grid if stretch=.FALSE.
-  REAL :: REQMAX = 12.!15.!12.!6.9000000000000000     ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL,PARAMETER :: RMAX = 100.        ! Outer radius for the regular grid if stretch=.FALSE.
+  REAL :: REQMAX = 11.5      ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
   REAL,PARAMETER :: RINI = 1.0000000000000001E-005		  	! Radius used for the expansion of the TOV equations
 
@@ -60,12 +58,12 @@ MODULE SYSTEMXNS
 ! EoS/fluid parameters
 ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 1.28e-3!3.81e-4!2.6158e-3!1.28E-03!1.4090909090909089EE-03! Central density in the Jordan frame (beware scheme converges to QUCONV)
-  REAL,PARAMETER :: MBARYONFC = 1.0!0.86 ! Ratio between tabulated reduced baryon mass and true baryon mass
+  REAL,PARAMETER :: RHOINI = 1.4e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
   REAL :: RHOINISEQ   ! Initial central density for sequances
   REAL,PARAMETER :: RHOCENTSTART = 5.0D-4 	! Initial central density used as starting point for the mass-rho diagram
   REAL,PARAMETER :: RHOCENTEND = 8.0D-3  	! Final central density of the mass-rho diagram
-  REAL,PARAMETER :: K1 = 110.00000000000000 !100.         ! Politropic coefficient
+  REAL,PARAMETER :: K1 = 110.00000000000000           ! Politropic coefficient
   REAL,PARAMETER :: GAMMA = 2.0000000000000000        ! Politropic exponent
 
   LOGICAL :: EOSINT = .FALSE. ! If true use an interpolated/tabulated EoS
@@ -81,13 +79,13 @@ MODULE SYSTEMXNS
 ! Logical variables
 ! ====================================================================================
 
-  LOGICAL :: GR = .TRUE.	! False = scalar-tensor theory; true = general relativity. Must be false here
-  LOGICAL,PARAMETER :: STRETCH = .False. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
+  LOGICAL :: GR = .TRUE.	        ! False = scalar-tensor theory; true = general relativity. Must be false here
+  LOGICAL,PARAMETER :: STRETCH = .TRUE. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
   LOGICAL :: DEBUG = .FALSE. 		! Set to true to print things for debugging purposes
   LOGICAL :: SINGLESURF = .TRUE.	! If true the MPSAMPLING.f90 program will build the sampling only for the RHOINI central density
   LOGICAL :: COUNTDOWN = .TRUE.	        ! Set to true to print the remaining number of configurations during the sequence computation
   LOGICAL :: LOGFILE = .TRUE.		! Set to true to save a log file
-  LOGICAL :: ANALYTIC = .FALSE.		! Set to true if you want to solve for phi using the analytic equation D(D(phi))=...
+  LOGICAL :: ANALYTIC = .TRUE.		! Set to true if you want to solve for phi using the analytic equation D(D(phi))=...
   LOGICAL :: EOSJOR = .FALSE.		! Used to change the frame (Jor. or Ein.) in which the EoS is computed (LEAVE FALSE HERE)
   LOGICAL :: CONVHELP = .FALSE.         ! If true, it activates an option for RHOCENT in HYDROEQ.f90 to help achieve convergence
   					! WARNING: if true, the final central density will be slightly different than the chosen RHOINI
@@ -100,7 +98,7 @@ MODULE SYSTEMXNS
   LOGICAL :: WRT = .TRUE.      ! Write all files
   LOGICAL :: WRTF = .FALSE.     ! Write only final files
   LOGICAL :: VERBOSE = .FALSE.  ! Print all infos
-  LOGICAL :: CHUP = .TRUE.     ! Write all files (including the metric test)
+  LOGICAL :: CHUP = .FALSE.     ! Write all files (including the metric test)
   LOGICAL :: WGRID = .TRUE.     ! Write the grid file
   LOGICAL :: WCONVA = .FALSE.    ! Write file to check convergence of Aphi and Atim
   LOGICAL :: WCONVC = .FALSE.    ! Write file to check convergence of chi
@@ -122,15 +120,15 @@ MODULE SYSTEMXNS
 ! Physics parameters - Rotation
 ! ====================================================================================
 
-  REAL,PARAMETER :: OMG = 2.22e-2!2.633e-2!1.97549e-2!2.633e-2!2.22E-2!5.0E-3       ! Central Rotation rate
-  LOGICAL        :: DIFFERENTIAL = .TRUE.       ! Differential rotation option
+  REAL,PARAMETER :: OMG = 0.0 !2.22e-2!2.633e-2!1.97549e-2!2.633e-2!2.22E-2!5.0E-3       ! Central Rotation rate
+  LOGICAL        :: DIFFERENTIAL = .FALSE.       ! Differential rotation option
   LOGICAL        :: OMGSPACE = .FALSE.           ! If .true. j(Omega), else Omega(j)
   LOGICAL        :: JCONSTLAW = .FALSE.           ! Rotation law: j constant A^2*(omega_c-omega)
   LOGICAL        :: JCMODLAW = .FALSE.           ! Rotation law: modified j constant A^2*omega*[(omega_c/omega)^p-1]
   LOGICAL        :: URYULAW3 = .FALSE.           ! Rotation law: Uryu with 3 Parameters
   LOGICAL        :: URYULAW4 = .TRUE.           ! Rotation law: Uryu with 4 Parameters
   REAL,PARAMETER :: PROTDIFF = 3./2.           ! Rotation index if URYULAW3=.true.
-  REAL,PARAMETER :: A2VALUE = 70.0000000000000000           ! Differential rotation coeff
+  REAL,PARAMETER :: A2VALUE = 0.0000000000000000           ! Differential rotation coeff
   REAL,PARAMETER :: OMGMAX = 2.*OMG           !Omega_max/Omega_c
   REAL,PARAMETER :: RMVALUE = 2.5!6.54           !R_max (Omega=Omega_max)
 
@@ -175,11 +173,11 @@ MODULE SYSTEMXNS
 ! ====================================================================================
 
   REAL,PARAMETER    :: CONVF =  1.d-4     ! Convergence of the newton scheme in XNS
-  REAL    :: QFACTOR = 0.7!0.5!0.85       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL    :: QFACTORMETRIC = 0.5!0.35 ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
+  REAL    :: QFACTOR = 0.85!0.5!0.85       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
+  REAL    :: QFACTORMETRIC = 0.35!0.35 ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
   REAL    :: QFACTORCONF = 0.5    ! Damping factor for psi for the external convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
   REAL    :: QFACTORCHI = 0.45    ! Damping factor for chi for the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL,PARAMETER    :: QAPHI = 1.!0.5         ! Damping factor for the convergence of the vector potential
+  REAL,PARAMETER    :: QAPHI = 0.5!0.5         ! Damping factor for the convergence of the vector potential
   REAL,PARAMETER    :: EPS = 9.9999999999999995E-008
 
 ! ====================================================================================
@@ -223,7 +221,7 @@ MODULE SYSTEMXNS
   REAL,PARAMETER :: DELTMU0 = 0.0001		! Delta mu0 used in the main shooting
   REAL :: MMID = 1.9			! Initial guess on the masses at MIDGRID and NR
   REAL :: M = 1.9
-  REAL :: MUIN = 0.802!1.0e-2!0.802!1.0000000000000000E-002	        ! Initial guess on the central mu
+  REAL :: MUIN = 1.0e-2!0.802!1.0000000000000000E-002	        ! Initial guess on the central mu
   REAL,PARAMETER :: QRELAX = 0.29999999999999999								 ! Used in the filter to force convergence of CHI
 
 ! ====================================================================================
@@ -518,7 +516,7 @@ END SUBROUTINE FUNCD_EOS
 
 ! ********************************************************
 
-SUBROUTINE FUNCD_STRETCH(X,Y,DY,RHOVAR)
+SUBROUTINE FUNCD_STRETCHold(X,Y,DY,RHOVAR)
 !   ============================================================
 !   Purpose : Used by rtsafe to derive stretching factor
 !             for the grid
@@ -534,12 +532,12 @@ SUBROUTINE FUNCD_STRETCH(X,Y,DY,RHOVAR)
 
   RETURN
 
-END SUBROUTINE FUNCD_STRETCH
+END SUBROUTINE FUNCD_STRETCHOLD
 
 ! ***********************************************************************
 ! **************************** NR routines ******************************
 
-REAL FUNCTION RTSAFEG(X0,X1,X2,XACC,RHOVAR,FUNCD)
+REAL FUNCTION RTSAFEGold2(X0,X1,X2,XACC,RHOVAR,FUNCD)
 
   INTERFACE
     SUBROUTINE FUNCD(a,b,c,d)
@@ -615,7 +613,7 @@ REAL FUNCTION RTSAFEG(X0,X1,X2,XACC,RHOVAR,FUNCD)
 
      XACC=+1
      RETURN
-END FUNCTION RTSAFEG
+END FUNCTION RTSAFEGold2
 
 ! **************************************************************************
 

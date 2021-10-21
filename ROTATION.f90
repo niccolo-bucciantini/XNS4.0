@@ -54,14 +54,14 @@ SUBROUTINE CHECKROTDIFF()
   IF(OMGSPACE .AND. TOT_JS.NE.0) THEN
     WRITE(6,*)''
     WRITE(6,*)'Logical parameters for the rotational profile are conflicting.'
-    VAR=STR_JS(FINDLOC(MASK_JS,.true.))
+    !VAR=STR_JS(FINDLOC(MASK_JS,.true.))
     WRITE(6,*)'If -OMEGASPACE- is .true., -',TRIM(VAR(1)),'- cannot be .true.'
     STOP
   ENDIF
   IF(.NOT.OMGSPACE .AND. TOT_OS.NE.0) THEN
     WRITE(6,*)''
     WRITE(6,*)'Logical parameters for the rotational profile are conflicting.'
-    VAR=STR_OS(FINDLOC(MASK_OS,.true.))
+    !VAR=STR_OS(FINDLOC(MASK_OS,.true.))
     WRITE(6,*)'If -OMEGASPACE- is .true., -',TRIM(VAR(1)),'- cannot be .true.'
     STOP
   ENDIF
@@ -91,7 +91,7 @@ SUBROUTINE CHECKROTDIFF()
       WRITE(6,*)'and -RMVALUE- cannot be less than or equal to zero.'
       STOP
     ENDIF
-    MVAL=OMGMAX/OMG
+    MVAL=OMGMAX/(OMG + 1.D-10)
     CHECK_LIMIT=4.*PROTDIFF/(PROTDIFF+1.)**2
     IF(URYULAW3 .AND. (PROTDIFF.LT.1 .OR. MVAL.LE.CHECK_LIMIT)) THEN
       WRITE(6,*)''
@@ -254,7 +254,7 @@ SUBROUTINE PARS_VALUE_JS()
   JMAX=RSMAX*(OMGMAX+BETAMAX)/(1.-RSMAX*(OMGMAX+BETAMAX)**2)
 
   !Value of MVAL
-  MVAL=OMGMAX/OMG
+  MVAL=OMGMAX/(OMG+1.D-10)
 
   !Value of XVAL and YVAL
   IF(URYULAW3) THEN

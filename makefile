@@ -1,5 +1,5 @@
 #fortran compilers
-FC    = gfortran  
+FC    = gfortran-mp-7  
 #FC = ifort
 MPIFC = mpif90
 #MPIFC = /usr/lib64/mpich/bin/mpif90
@@ -32,7 +32,7 @@ EXEMPI    = XNS-mpi
 
 #files to be compiled
 
-SOURCES= SYSTEMXNS.f90 FUNCTIONS.f90 XNS.f90 XNSMAIN.f90 TOVINIMOD.f90 HYDROEQ.f90 
+SOURCES= SYSTEMXNS.f90 PHYSICS.f90 ROTATION.f90 FUNCTIONS.f90 XNS.f90 XNSMAIN.f90 TOVINIMOD.f90 HYDROEQ.f90 
 
 #object files
 

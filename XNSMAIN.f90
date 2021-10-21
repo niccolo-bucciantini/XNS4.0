@@ -41,6 +41,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
 
 
   USE SYSTEMXNS
+  USE PHYSICS
   USE FUNCTIONS
   USE ROTATION, ONLY: OMEGAVALUE
   IMPLICIT NONE
@@ -1957,6 +1958,7 @@ SUBROUTINE CHISOL(TRACEMM) !!! QUI
 !  =============================================================
 
   USE SYSTEMXNS
+  USE PHYSICS
   USE FUNCTIONS
   IMPLICIT NONE
 
@@ -2087,320 +2089,54 @@ SUBROUTINE CHISOL(TRACEMM) !!! QUI
 
 END SUBROUTINE CHISOL
 
-! ********************************************************
-! ********************************************************
+! **************************************************************
+! **************************************************************
+  
+SUBROUTINE CHIDERIVS
+  !  ============================================================
+  !  Purpose : computes the derivatives of the scalar field and Ascal
+  !  QSCALR, QSCALT = dchi/dr, dchi/dtheta
+  !  ============================================================
 
-SUBROUTINE LEGZO(N,X,W)
+  USE SYSTEMXNS
+  IMPLICIT NONE
+  REAL :: A1,A2,A3,B1,B2,B3
 
-! =========================================================
-! Purpose : Compute the zeros of Legendre polynomial Pn(x)
-!           in the interval [1,-1], and the corresponding
-!           weighting coefficients for Gauss-Legendre
-!           integration
-! Input :   n    --- Order of the Legendre polynomial
-! Output:   X(n) --- Zeros of the Legendre polynomial
-!           W(n) --- Corresponding weighting coefficients
-! =========================================================
-
-  INTEGER :: N,NR,N0,I,K,J
-  REAL :: PI,Z,Z0,P,F0,F1,PF,PD,FD,Q,WP,GD
-  REAL,DIMENSION(N):: X,W
-
-
-  X(1)=0.
-  W(1)=2.
-  IF (N .GT. 1)THEN
-  X=0.
-  W=0.
-  N0=(N+1)/2
-  DO  NR=1,N0
-    PI=ACOS(-1.D0)
-    Z=COS(PI*(NR-0.25D0)/N)
-
-    DO WHILE(ABS(Z-Z0) .GT. ABS(Z)*1.D-14)
-      Z0=Z
-      P=1.0D0
-      DO  I=1,NR-1
-        P=P*(Z-X(I))
-      END DO
-      F0=1.0D0
-      IF ((NR.EQ.N0).AND.(N.NE.2*INT(N/2))) Z=0.0D0
-      F1=Z
-      DO  K=2,N
-        PF=(2.0D0-1.0D0/K)*Z*F1-(1.0D0-1.0D0/K)*F0
-        PD=K*(F1-Z*PF)/(1.0D0-Z*Z)
-        F0=F1
-        F1=PF
-      END DO
-
-      IF (Z.NE.0.0) THEN
-        FD=PF/P
-        Q=0.0D0
-        DO  I=1,NR
-          WP=1.0D0
-          DO  J=1,NR
-            IF (J.NE.I) WP=WP*(Z-X(J))
-          END DO
-          Q=Q+WP
-        END DO
-        GD=(PD-Q*FD)/P
-        Z=Z-FD/GD
-      END IF
-
-      IF (Z.EQ.0.0)EXIT
-    END DO
-
-    X(NR)=Z
-    X(N+1-NR)=-Z
-    W(NR)=2.0D0/((1.0D0-Z*Z)*PD*PD)
-    W(N+1-NR)=W(NR)
-
+  ! Set the BC in THETA
+  DO IZ=1,NR
+     CHI(0,IZ)     =  CHI(1,IZ)
+     CHI(NTH+1,IZ) =  CHI(NTH,IZ)
   END DO
-  END IF
-
-  RETURN
-
-END SUBROUTINE LEGZO
-
-! ***************************************************************************
-! ***************************************************************************
-
-SUBROUTINE LPN(N,X,PN,PD)
-
-!  ===============================================
-!  Purpose: Compute Legendre polynomials Pn(x)
-!           and their derivatives Pn'(x)
-!  Input :  x --- Argument of Pn(x)
-!           n --- Degree of Pn(x) ( n = 0,1,...)
-!  Output:  PN(n) --- Pn(x)
-!           PD(n) --- Pn'(x)
-!  ===============================================
-
-  INTEGER :: K,N
-  REAL :: P0,P1,PF,X
-  REAL,DIMENSION(0:N):: PN,PD
-
-  PN(0)=1.0D0
-  PN(1)=X
-  PD(0)=0.0D0
-  PD(1)=1.0D0
-  P0=1.0D0
-  P1=X
-  DO  K=2,N
-   PF=(2.0D0*K-1.0D0)/K*X*P1-(K-1.0D0)/K*P0					! Bonnet's recursion formula
-   PN(K)=PF
-   IF (ABS(X).EQ.1.0D0) THEN
-     PD(K)=0.5D0*X**(K+1)*K*(K+1.0D0)
-   ELSE
-     PD(K)=K*(P1-X*PF)/(1.0D0-X*X)
-   ENDIF
-   P0=P1
-   P1=PF
+  ! Set the BC in R
+  ! Assume parity at center and smoothness at the outer boundary
+  DO IX=1,NTH
+     CHI(IX,0) =  CHI(IX,1)
+     CHI(IX,NR+1) =  CHI(IX,NR)*R(NR)/R(NR+1)
+  END DO
+  
+  !Evaluate dchi/dr, dchi/dtheta and ascal
+  DO IX=1,NTH
+     DO IZ=1,NR
+        A1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
+        A2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
+        A3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
+        B1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
+        B2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
+        B3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
+        
+        QSCALR(IX,IZ) = A1*CHI(IX,IZ-1)+A3*CHI(IX,IZ+1)+A2*CHI(IX,IZ)
+        QSCALT(IX,IZ) = B1*CHI(IX-1,IZ)+B3*CHI(IX+1,IZ)+B2*CHI(IX,IZ)
+        ASCAL(IX,IZ) = EXP(ALPHA0*(CHI(IX,IZ)-CHIINF)+0.5*BETA0*(CHI(IX,IZ)-CHIINF)**2)
+     END DO
   END DO
 
   RETURN
-END SUBROUTINE LPN
+END SUBROUTINE CHIDERIVS
 
-! ***************************************************************************
-! ***************************************************************************
+! **************************************************************
+! **************************************************************
 
-! SUBROUTINE DGTSV(N,DL,D,DU,B,LDB,INFO)
-!
-! !  ============================================================
-! !  -- LAPACK routine (version 3.2) --
-! !  -- LAPACK is a software package provided by Univ. of Tennessee,    --
-! !  -- Univ. of California Berkeley, Univ. of Colorado Denver and NAG Ltd..--
-! !     November 2006
-! !  ============================================================
-! !  Purpose : solves the equation  A*X = B,
-! !            where A is an n by n tridiagonal matrix, by
-! !            Gaussian elimination with partial pivoting.
-! !
-! !            Note that the equation  A'*X = B  may be solved by
-! !            interchanging the order of the arguments DU and DL.
-! !
-! !  Arguments
-! !  =========
-! !
-! !  N       (input) INTEGER
-! !          The order of the matrix A.  N >= 0.
-! !
-! !
-! !  DL      (input/output) DOUBLE PRECISION array, dimension (N-1)
-! !          On entry, DL must contain the (n-1) sub-diagonal elements of
-! !          A.
-! !
-! !          On exit, DL is overwritten by the (n-2) elements of the
-! !          second super-diagonal of the upper triangular matrix U from
-! !          the LU factorization of A, in DL(1), ..., DL(n-2).
-! !
-! !  D       (input/output) DOUBLE PRECISION array, dimension (N)
-! !          On entry, D must contain the diagonal elements of A.
-! !
-! !          On exit, D is overwritten by the n diagonal elements of U.
-! !
-! !  DU      (input/output) DOUBLE PRECISION array, dimension (N-1)
-! !          On entry, DU must contain the (n-1) super-diagonal elements
-! !          of A.
-! !
-! !          On exit, DU is overwritten by the (n-1) elements of the first
-! !          super-diagonal of U.
-! !
-! !  B       (input/output) DOUBLE PRECISION array, dimension (LDB,NRHS)
-! !          On entry, the N  matrix of right hand side matrix B.
-! !          On exit, if INFO = 0, the N  solution matrix X.
-! !
-! !  LDB     (input) INTEGER
-! !          The leading dimension of the array B.  LDB >= max(1,N).
-! !
-! !  INFO    (output) INTEGER
-! !          = 0: successful exit
-! !          < 0: if INFO = -i, the i-th argument had an illegal value
-! !          > 0: if INFO = i, U(i,i) is exactly zero, and the solution
-! !               has not been computed.  The factorization has not been
-! !               completed unless i = N.
-! !
-! !  =====================================================================
-!
-!   INTEGER :: INFO,LDB,N,I
-!   REAL ::   B(LDB), D(N), DL(N-1), DU(N-1)
-!   REAL,PARAMETER :: ZERO = 0.0D0
-!   REAL :: FACT,TEMP
-!
-!   INFO = 0
-!
-!   IF(N.LE.0)THEN
-!     INFO = -1
-!     WRITE(6,*)' N <= 0 IN DGTSV'
-!     STOP
-!   ELSE IF(NRHS.LT.0)THEN
-!     INFO = -2
-!     WRITE(6,*)' RHSN < 0 IN DGTSV'
-!     STOP
-!   ELSE IF(LDB .LT. MAX(1,N))THEN
-!     INFO = -7
-!     WRITE(6,*)' LBD < MAX(1,N) IN DGTSV'
-!     STOP
-!   END IF
-!
-!   DO I = 1, N - 2
-!     IF( ABS( D( I ) ).GE.ABS( DL( I ) ) ) THEN
-!       ! No row interchange required
-!       IF( D( I ).NE.ZERO ) THEN
-!         FACT = DL( I ) / D( I )
-!         D( I+1 ) = D( I+1 ) - FACT*DU( I )
-!         B( I+1 ) = B( I+1 ) - FACT*B( I )
-!       ELSE
-!         INFO = I
-!         RETURN
-!       END IF
-!       DL( I ) = ZERO
-!     ELSE  ! Interchange rows I and I+1
-!       FACT = D( I ) / DL( I )
-!       D( I ) = DL( I )
-!       TEMP = D( I+1 )
-!       D( I+1 ) = DU( I ) - FACT*TEMP
-!       DL( I ) = DU( I+1 )
-!       DU( I+1 ) = -FACT*DL( I )
-!       DU( I ) = TEMP
-!       TEMP = B( I )
-!       B( I ) = B( I+1 )
-!       B( I+1 ) = TEMP - FACT*B( I+1 )
-!     END IF
-!   END DO
-!
-!   IF( N.GT.1 ) THEN
-!     I = N - 1
-!     IF( ABS( D( I ) ).GE.ABS( DL( I ) ) ) THEN
-!       IF( D( I ).NE.ZERO ) THEN
-!         FACT = DL( I ) / D( I )
-!         D( I+1 ) = D( I+1 ) - FACT*DU( I )
-!         B( I+1 ) = B( I+1 ) - FACT*B( I )
-!       ELSE
-!         INFO = I
-!         RETURN
-!       END IF
-!     ELSE
-!       FACT = D( I ) / DL( I )
-!       D( I ) = DL( I )
-!       TEMP = D( I+1 )
-!       D( I+1 ) = DU( I ) - FACT*TEMP
-!       DU( I ) = TEMP
-!       TEMP = B( I )
-!       B( I ) = B( I+1 )
-!       B( I+1 ) = TEMP - FACT*B( I+1 )
-!     END IF
-!   END IF
-!   IF( D( N ).EQ.ZERO ) THEN
-!     INFO = N
-!     RETURN
-!   END IF
-!
-!   ! Back solve with the matrix U from the factorization.
-!   B( N ) = B( N ) / D( N )
-!   IF( N.GT.1 )THEN
-!     B( N-1 ) = ( B( N-1 )-DU( N-1 )*B( N ) ) / D( N-1 )
-!   END IF
-!   DO I = N - 2, 1, -1
-!     B( I ) = ( B( I )-DU( I )*B( I+1 )-DL( I )* &
-!              B( I+2 ) ) / D( I )
-!   END DO
-!
-!   RETURN
-!
-! END SUBROUTINE DGTSV
 
-! ***************************************************************************
-! ***************************************************************************
 
-SUBROUTINE POLINT(XA,YA,N,X,Y,M)
 
-!  ===============================================
-!  Purpose:    Polynomial 2nd order Interpolation
-!  Input  :    XA --- Table of abcissas  (N)
-!              YA --- Table of ordinates (N)
-!              N  --- Number of points
-!              X  --- Interpolating abscissa value    (M)
-!  Output :    Y  --- Returned estimation of function for X  (M)
-!
-!  ===============================================
 
-  INTEGER,PARAMETER :: NMAX=10
-  REAL,DIMENSION(N) :: XA,YA
-  REAL,DIMENSION(M) :: X,Y
-  INTEGER,DIMENSION(M) :: JJ
-  REAL :: D1C,D1R,D1L,D2R,D2L
-  INTEGER :: N,I,M,JIN,II ,J
-
-  JIN=1
-  DO II=1,M
-    I=II
-    J=JIN
-    DO WHILE((X(I)-XA(J))*(X(I)-XA(J+1)) .GT. 0)
-      J=J+1
-    END DO
-    JJ(I)=J
-    JIN=J
-  END DO
-
-  DO II=1,M
-    I=II
-    D1C=(YA(JJ(I)+1)-YA(JJ(I)))/(XA(JJ(I)+1)-XA(JJ(I)))
-    D1R=(YA(JJ(I)+2)-YA(JJ(I)))/(XA(JJ(I)+2)-XA(JJ(I)))
-    D1L=(YA(JJ(I)+1)-YA(JJ(I)-1))/(XA(JJ(I)+1)-XA(JJ(I)-1))
-
-    D2L=4*(YA(JJ(I)+1)+YA(JJ(I)-1)-2.*YA(JJ(I)))/(XA(JJ(I)+1)-XA(JJ(I)-1))**2.
-    D2R=4*(YA(JJ(I)+2)+YA(JJ(I))-2.*YA(JJ(I)+1))/(XA(JJ(I)+2)-XA(JJ(I)))**2.
-
-    IF(D2L*D2R .GT. 0)THEN
-      Y(I)=YA(JJ(I))+D1L*(X(I)-XA(JJ(I)))+0.5*D2L*(X(I)-XA(JJ(I)))**2.
-      Y(I)=Y(I)+YA(JJ(I)+1)+D1R*(X(I)-XA(JJ(I)+1))+0.5*D2R*(X(I)-XA(JJ(I)+1))**2.
-      Y(I)=0.5*Y(I)
-    ELSE
-      Y(I)=YA(JJ(I))+D1C*(X(I)-XA(JJ(I)))
-    END IF
-  END DO
-
-  RETURN
-
-END SUBROUTINE POLINT

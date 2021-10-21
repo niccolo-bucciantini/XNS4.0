@@ -6,9 +6,10 @@ PROGRAM XNS
   ! desired property is serched for.
 
   
- USE SYSTEMXNS
- USE ROTATION, ONLY: CHECKROTDIFF
- IMPLICIT NONE
+  USE SYSTEMXNS
+  USE PHYSICS
+  USE ROTATION, ONLY: CHECKROTDIFF
+  IMPLICIT NONE
 
 ! Precompiled for parspace - computation of sequences using multiple CPUs 
 #ifdef MPIV
