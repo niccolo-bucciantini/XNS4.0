@@ -104,10 +104,7 @@ of interest, i.e. a certain value of the central density or gravitational mass (
 <li><p>subroutine <strong>SOURCECHI</strong> - computes the metric terms and derivatives used in the source terms of the equation for <span class="math notranslate nohighlight">\(\chi\)</span>.</p></li>
 <li><p>subroutine <strong>SOLVECHI</strong> - solves for the scalar field equation for <span class="math notranslate nohighlight">\(\chi\)</span>, given the source term. Note that since <span class="math notranslate nohighlight">\(\chi\)</span> also appears in the source term, a single call of SOLVECHI won’t yield a true solution.</p></li>
 <li><p>subroutine <strong>CHISOL</strong> - wrapper that calls SOURCECHI and CHISOL in a relaxation loop, until it converges to the true solution.</p></li>
-<li><p>subroutine <strong>LEGZO</strong> - computes the zeros of Legendre polynomials and the corresponding
-weights for Gaussian quadrature integration.</p></li>
-<li><p>subroutine <strong>LPN</strong> - computes the Legendre polynomials and their derivatives.</p></li>
-<li><p>subroutine <strong>POLINT</strong> - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
+<li><p>subroutine <strong>CHIDERIVS</strong> - computes the derivatives of the scalar field (<span class="math notranslate nohighlight">\(Q^\mu\)</span>) and the scalar coupling function <span class="math notranslate nohighlight">\(\mathcal{A}(\chi)\)</span>.
 <br><br></p></li>
 </ul>
 </li>
@@ -120,10 +117,7 @@ weights for Gaussian quadrature integration.</p></li>
 <li><p>subroutine <strong>ENT2EOS</strong> - given <span class="math notranslate nohighlight">\(h\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
 <li><p>subroutine <strong>EOS</strong> - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.</p></li>
 <li><p>subroutine <strong>FUNCD_EOS</strong> - used by the root-finding subroutine to derive the central pressure given
-the central density.</p></li>
-<li><p>subroutine <strong>FUNCD_STRETCH</strong> - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.</p></li>
-<li><p>function <strong>RTSAFEG</strong> - the root-finding subroutine, based on bisection and Newton’s methods
-(modified from the Numerical Recipes), to derive the central pressure.
+the central density.
 <br><br></p></li>
 </ul>
 </li>
@@ -157,33 +151,49 @@ of the super-ellipsoid that best fit the numerical surface.
 </li>
 <li><p><strong>ROTATION.f90</strong></p>
 <ul>
-<li><p>subroutine <strong>CHECKROTDIFF</strong> -</p></li>
+<li><p>subroutine <strong>CHECKROTDIFF</strong> - ?</p></li>
 <li><p>subroutine <strong>OMEGAVALUE</strong> - derives the function <span class="math notranslate nohighlight">\(\Omega = \Omega (r,\theta)\)</span> for the differential rotation.</p></li>
-<li><p>subroutine <strong>OMEGA3LVALUE</strong> -</p></li>
-<li><p>subroutine <strong>FODFO_OS</strong> -</p></li>
-<li><p>subroutine <strong>A3L_OS</strong> -</p></li>
-<li><p>subroutine <strong>PARS_VALUE_JS</strong> -</p></li>
-<li><p>subroutine <strong>FODFO_JS</strong> -</p></li>
-<li><p>subroutine <strong>A3L_JS</strong> -
+<li><p>subroutine <strong>OMEGA3LVALUE</strong> - ?</p></li>
+<li><p>subroutine <strong>FODFO_OS</strong> - ?</p></li>
+<li><p>subroutine <strong>A3L_OS</strong> - ?</p></li>
+<li><p>subroutine <strong>PARS_VALUE_JS</strong> - ?</p></li>
+<li><p>subroutine <strong>FODFO_JS</strong> - ?</p></li>
+<li><p>subroutine <strong>A3L_JS</strong> - ?
 <br><br></p></li>
 </ul>
 </li>
 <li><p><strong>TOVINIMOD.f90</strong></p>
 <ul>
-<li><p>subroutine <strong>TOVINIMOD</strong> - solves the 1D TOV (either in GR or in STTs) equations in isotropic coordinates to provide the initial guess. It uses a relaxation method to achieve convergence.
-<br><br></p></li>
-<li><p><strong>FUNCTIONS.f90</strong></p>
-<ul>
+<li><p>subroutine <strong>TOVINIMOD</strong> - solves the 1D TOV (either in GR or in STTs) equations in isotropic coordinates to provide the initial guess. It uses a relaxation method to achieve convergence.</p></li>
 <li><p>subroutine <strong>EXPANSION</strong> - a Taylor expansion of the TOV equations at small initial radii (they are
 singular for <span class="math notranslate nohighlight">\(r \rightarrow 0\)</span>).</p></li>
 <li><p>subroutine <strong>TOVEQS</strong> - provides the derivatives needed to integrate the TOV equations via the
 RK4 method.</p></li>
 <li><p>subroutine <strong>RK4</strong> - the 4th order RK integrator (modified from the Numerical Recipes).</p></li>
-<li><p>subroutine <strong>MASSFIND</strong> - computes the ADM mass of the scalarised TOV solution at a given radius (either at the middle of the grid or at its outer edge) by knowing the scalar charge and the value of <span class="math notranslate nohighlight">\(\mu\)</span> at that point. It is used in order to achieve convergence, as explained in SBD20 Appendix B.</p></li>
-<li><p>subroutine <strong>CHIDERIVS</strong> - computes the derivatives of the scalar field (<span class="math notranslate nohighlight">\(Q^\mu\)</span>) and the scalar coupling function <span class="math notranslate nohighlight">\(\mathcal{A}(\chi)\)</span>.</p></li>
+<li><p>subroutine <strong>MASSFIND</strong> - computes the ADM mass of the scalarised TOV solution at a given radius (either at the middle of the grid or at its outer edge) by knowing the scalar charge and the value of <span class="math notranslate nohighlight">\(\mu\)</span> at that point. It is used in order to achieve convergence, as explained in SBD20 Appendix B.
+<br><br></p></li>
+</ul>
+</li>
+<li><p><strong>PHYSICS.f90</strong></p>
+<ul>
 <li><p>subroutine <strong>GRIDBUILD</strong> - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.</p></li>
+<li><p>subroutine <strong>FUNCD_STRETCH</strong> - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
+<br><br></p></li>
+<li><p><strong>FUNCTIONS.f90</strong></p>
+<ul>
 <li><p>subroutine <strong>DGTSV</strong> - solves the linear system <span class="math notranslate nohighlight">\(AX = B\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is a tridiagonal matrix, by
 Gaussian elimination with partial pivoting (taken from the LAPACK routines).</p></li>
+<li><p>subroutine <strong>LUSOLVER</strong> - solves the linear system <span class="math notranslate nohighlight">\(AX = B\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(N \times N\)</span> matrix and <span class="math notranslate nohighlight">\(B\)</span> is a vector of length <span class="math notranslate nohighlight">\(N\)</span>, with an LU decomposition.</p></li>
+<li><p>subroutine <strong>MYSWAP</strong> - ?</p></li>
+<li><p>function <strong>MYISAMAX</strong> - ?</p></li>
+<li><p>subroutine <strong>SGER</strong> - ?</p></li>
+<li><p>subroutine <strong>SLASWP</strong> - ?</p></li>
+<li><p>subroutine <strong>LAGRANGEINT</strong> - ?</p></li>
+<li><p>subroutine <strong>LAGRANGEINT2D</strong> - ?</p></li>
+<li><p>subroutine <strong>LEGZO</strong> - computes the zeros of Legendre polynomials and the corresponding
+weights for Gaussian quadrature integration.</p></li>
+<li><p>subroutine <strong>LPN</strong> - computes the Legendre polynomials and their derivatives.</p></li>
+<li><p>subroutine <strong>POLINT</strong> - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).</p></li>
 </ul>
 </li>
 </ul>
@@ -240,10 +250,12 @@ equation.
 <section id="visualisation">
 <h2>Visualisation<a class="headerlink" href="#visualisation" title="Permalink to this headline"></a></h2>
 <ul class="simple">
-<li><p><strong>starplot_polo.py</strong> -</p></li>
-<li><p><strong>starplot_polo.py</strong> -</p></li>
-<li><p><strong>profile_polo.py</strong> -</p></li>
-<li><p><strong>profile_toro.py</strong> -</p></li>
+<li><p><strong>starplot_polo.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the poloidal magnetic field (with or without the field lines), the scalar field or the density.</p></li>
+<li><p><strong>starplot_toro.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the toroidal magnetic field, the scalar field or the density.</p></li>
+<li><p><strong>starplot_unmag.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the scalar field or the density.</p></li>
+<li><p><strong>profile_polo.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>, <span class="math notranslate nohighlight">\(B_\mathrm{pol}\)</span>.</p></li>
+<li><p><strong>profile_toro.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>, <span class="math notranslate nohighlight">\(B_\mathrm{tor}\)</span>.</p></li>
+<li><p><strong>profile_unmag.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>.</p></li>
 </ul>
 </section>
 </section>

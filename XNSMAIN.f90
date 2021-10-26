@@ -2091,7 +2091,7 @@ END SUBROUTINE CHISOL
 
 ! **************************************************************
 ! **************************************************************
-  
+
 SUBROUTINE CHIDERIVS
   !  ============================================================
   !  Purpose : computes the derivatives of the scalar field and Ascal
@@ -2113,7 +2113,7 @@ SUBROUTINE CHIDERIVS
      CHI(IX,0) =  CHI(IX,1)
      CHI(IX,NR+1) =  CHI(IX,NR)*R(NR)/R(NR+1)
   END DO
-  
+
   !Evaluate dchi/dr, dchi/dtheta and ascal
   DO IX=1,NTH
      DO IZ=1,NR
@@ -2123,7 +2123,7 @@ SUBROUTINE CHIDERIVS
         B1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
         B2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
         B3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
-        
+
         QSCALR(IX,IZ) = A1*CHI(IX,IZ-1)+A3*CHI(IX,IZ+1)+A2*CHI(IX,IZ)
         QSCALT(IX,IZ) = B1*CHI(IX-1,IZ)+B3*CHI(IX+1,IZ)+B2*CHI(IX,IZ)
         ASCAL(IX,IZ) = EXP(ALPHA0*(CHI(IX,IZ)-CHIINF)+0.5*BETA0*(CHI(IX,IZ)-CHIINF)**2)
@@ -2135,8 +2135,3 @@ END SUBROUTINE CHIDERIVS
 
 ! **************************************************************
 ! **************************************************************
-
-
-
-
-

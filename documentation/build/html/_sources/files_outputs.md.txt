@@ -24,10 +24,7 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     - subroutine **SOURCECHI** - computes the metric terms and derivatives used in the source terms of the equation for $\chi$.
     - subroutine **SOLVECHI** - solves for the scalar field equation for $\chi$, given the source term. Note that since $\chi$ also appears in the source term, a single call of SOLVECHI won't yield a true solution.
     - subroutine **CHISOL** - wrapper that calls SOURCECHI and CHISOL in a relaxation loop, until it converges to the true solution.
-    - subroutine **LEGZO** - computes the zeros of Legendre polynomials and the corresponding
-    weights for Gaussian quadrature integration.
-    - subroutine **LPN** - computes the Legendre polynomials and their derivatives.
-    - subroutine **POLINT** - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
+    - subroutine **CHIDERIVS** - computes the derivatives of the scalar field ($Q^\mu$) and the scalar coupling function $\mathcal{A}(\chi)$.
 <br><br>
 - **SYSTEM.f90**
     - module **SYSTEM** - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section "User parameters").
@@ -38,9 +35,6 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     - subroutine **EOS** - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.
     - subroutine **FUNCD_EOS** - used by the root-finding subroutine to derive the central pressure given
     the central density.
-    - subroutine **FUNCD_STRETCH** - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
-    - function **RTSAFEG** - the root-finding subroutine, based on bisection and Newton’s methods
-    (modified from the Numerical Recipes), to derive the central pressure.
 <br><br>
 - **HYDROEQ.f90**
     - subroutine **HYDROEQ** - given the CFC metric and a value of $\rho _\mathrm{c}$ it computes the equilibrium
@@ -68,29 +62,42 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     of the super-ellipsoid that best fit the numerical surface.
 <br><br>
 - **ROTATION.f90**
-    - subroutine **CHECKROTDIFF** -
+    - subroutine **CHECKROTDIFF** - ?
     - subroutine **OMEGAVALUE** - derives the function $\Omega = \Omega (r,\theta)$ for the differential rotation.
-    - subroutine **OMEGA3LVALUE** -
-    - subroutine **FODFO_OS** -
-    - subroutine **A3L_OS** -
-    - subroutine **PARS_VALUE_JS** -
-    - subroutine **FODFO_JS** -
-    - subroutine **A3L_JS** -
+    - subroutine **OMEGA3LVALUE** - ?
+    - subroutine **FODFO_OS** - ?
+    - subroutine **A3L_OS** - ?
+    - subroutine **PARS_VALUE_JS** - ?
+    - subroutine **FODFO_JS** - ?
+    - subroutine **A3L_JS** - ?
 <br><br>
 - **TOVINIMOD.f90**
     - subroutine **TOVINIMOD** - solves the 1D TOV (either in GR or in STTs) equations in isotropic coordinates to provide the initial guess. It uses a relaxation method to achieve convergence.
-<br><br>
-  - **FUNCTIONS.f90**
     - subroutine **EXPANSION** - a Taylor expansion of the TOV equations at small initial radii (they are
     singular for $r \rightarrow 0$).
     - subroutine **TOVEQS** - provides the derivatives needed to integrate the TOV equations via the
     RK4 method.
     - subroutine **RK4** - the 4th order RK integrator (modified from the Numerical Recipes).
     - subroutine **MASSFIND** - computes the ADM mass of the scalarised TOV solution at a given radius (either at the middle of the grid or at its outer edge) by knowing the scalar charge and the value of $\mu$ at that point. It is used in order to achieve convergence, as explained in SBD20 Appendix B.
-    - subroutine **CHIDERIVS** - computes the derivatives of the scalar field ($Q^\mu$) and the scalar coupling function $\mathcal{A}(\chi)$.
+<br><br>
+- **PHYSICS.f90**
     - subroutine **GRIDBUILD** - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.
+    - subroutine **FUNCD_STRETCH** - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
+<br><br>
+  - **FUNCTIONS.f90**
     - subroutine **DGTSV** - solves the linear system $AX = B$, where $A$ is a tridiagonal matrix, by
     Gaussian elimination with partial pivoting (taken from the LAPACK routines).
+    - subroutine **LUSOLVER** - solves the linear system $AX = B$, where $A$ is an $N \times N$ matrix and $B$ is a vector of length $N$, with an LU decomposition.
+    - subroutine **MYSWAP** - ?
+    - function **MYISAMAX** - ?
+    - subroutine **SGER** - ?
+    - subroutine **SLASWP** - ?
+    - subroutine **LAGRANGEINT** - ?
+    - subroutine **LAGRANGEINT2D** - ?
+    - subroutine **LEGZO** - computes the zeros of Legendre polynomials and the corresponding
+    weights for Gaussian quadrature integration.
+    - subroutine **LPN** - computes the Legendre polynomials and their derivatives.
+    - subroutine **POLINT** - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
 
 ## Outputs
 
@@ -139,7 +146,9 @@ equation.
 
 ## Visualisation
 
-- **starplot_polo.py** -
-- **starplot_polo.py** -
-- **profile_polo.py** -
-- **profile_toro.py** -
+- **starplot_polo.py** - plots a section of the star in the $x-z$ plane along with the contours of either the poloidal magnetic field (with or without the field lines), the scalar field or the density.
+- **starplot_toro.py** - plots a section of the star in the $x-z$ plane along with the contours of either the toroidal magnetic field, the scalar field or the density.
+- **starplot_unmag.py** - plots a section of the star in the $x-z$ plane along with the contours of either the scalar field or the density.
+- **profile_polo.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{pol}$.
+- **profile_toro.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{tor}$.
+- **profile_unmag.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$.
