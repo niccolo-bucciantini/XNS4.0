@@ -7,7 +7,7 @@
 
 # ### Import files and define variables
 
-# In[5]:
+# In[6]:
 
 
 import os
@@ -16,7 +16,7 @@ from decimal import Decimal
 import matplotlib.pyplot as plt
 from scipy.interpolate import splprep, splev
 
-cwd = os.path.join(os.getcwd(),'stt','b-6_unmag')
+cwd = os.path.join(os.getcwd(),'stt','b-6_unmag_pol2')
 hydropath = os.path.join(cwd,'Hydroeq.dat')
 surfpath = os.path.join(cwd,'Surf.dat')
 
@@ -85,7 +85,7 @@ DENSITY = 150
 
 # ### Grid, Main and Read functions
 
-# In[6]:
+# In[8]:
 
 
 # =============================================================================
@@ -325,10 +325,4 @@ def covterm(psi,R,TH,ascal2):
 # =============================================================================
 if __name__ == "__main__":
     main()
-
-
-# In[ ]:
-
-
-
 

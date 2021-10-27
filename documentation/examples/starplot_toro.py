@@ -7,7 +7,7 @@
 
 # ### Import files and define variables
 
-# In[3]:
+# In[9]:
 
 
 import os
@@ -16,7 +16,7 @@ from decimal import Decimal
 import matplotlib.pyplot as plt
 from scipy.interpolate import splprep, splev
 
-cwd = os.path.join(os.getcwd(),'stt','b-6_toro')
+cwd = os.path.join(os.getcwd(),'stt','b-6_toro_pol2')
 hydropath = os.path.join(cwd,'Hydroeq.dat')
 hydromagpath = os.path.join(cwd,'Hydroeq_mag.dat')
 surfpath = os.path.join(cwd,'Surf.dat')
@@ -39,10 +39,10 @@ xsize=12
 ysize=12
 
 #xlim and ylim
-Xmin=-20
-Xmax=20
-Ymin=-20
-Ymax=20
+Xmin=-30
+Xmax=30
+Ymin=-30
+Ymax=30
 
 #Label x-axis (or both axes if contour plot)
 XAxisStr = 'x-axis'
@@ -86,7 +86,7 @@ DENSITY = 150
 
 # ### Grid, Main and Read functions
 
-# In[7]:
+# In[13]:
 
 
 # =============================================================================

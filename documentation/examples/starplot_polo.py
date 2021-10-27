@@ -7,7 +7,7 @@
 
 # ### Import files and define variables
 
-# In[3]:
+# In[5]:
 
 
 import os
@@ -16,7 +16,7 @@ from decimal import Decimal
 import matplotlib.pyplot as plt
 from scipy.interpolate import splprep, splev
 
-cwd = os.path.join(os.getcwd(),'stt','b-6_polo')
+cwd = os.path.join(os.getcwd(),'stt','b-6_polo_pol2')
 hydropath = os.path.join(cwd,'Hydroeq.dat')
 hydromagpath = os.path.join(cwd,'Hydroeq_mag.dat')
 surfpath = os.path.join(cwd,'Surf.dat')
@@ -86,7 +86,7 @@ DENSITY = 150
 
 # ### Grid, Main and Read functions
 
-# In[7]:
+# In[8]:
 
 
 # =============================================================================

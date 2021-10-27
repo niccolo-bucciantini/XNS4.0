@@ -5,14 +5,14 @@
 # 
 # In this notebook we plot the radial profile of the main outputs of the XNSmod code.
 
-# In[2]:
+# In[1]:
 
 
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-cwd = os.path.join(os.getcwd(),'stt','b-6_toro')
+cwd = os.path.join(os.getcwd(),'stt','b-6_toro_pol2')
 hydropath = os.path.join(cwd,'Hydroeq.dat')
 hydromagpath = os.path.join(cwd,'Hydroeq_mag.dat')
 
@@ -21,7 +21,7 @@ bunit = 8.3758e19
 runit = 1.47459
 
 
-# In[4]:
+# In[2]:
 
 
 f = np.fromfile(os.path.join(cwd,'Grid.dat'),count=7,sep=' ')
@@ -68,48 +68,48 @@ B = np.sqrt(B2)#/4.244674e-20 #Gauss unit
 BTOR = np.sqrt(B2TOR)#/4.244674e-20
 
 
-# In[5]:
+# In[17]:
 
 
-fig=plt.figure(figsize=(10,10))
+fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,rho[1,:]/rho.max(),label='$\\rho / \\rho _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,rho[0,:]/rho.max(),label='$\\rho / \\rho _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,rho[int(NTH/2),:]/rho.max(),label='$\\rho / \\rho _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
 plt.ylabel('$\\rho / \\rho _\mathrm{max}$', fontsize=15)
 plt.tick_params(labelsize=15)
-plt.xlim(0,15)
+plt.xlim(0,25)
 plt.legend(fontsize=15)
-filename = os.path.join(cwd,'rho_b-6_polo.png')
+filename = os.path.join(cwd,'rho_b-6_toro.png')
 fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[6]:
+# In[16]:
 
 
-fig=plt.figure(figsize=(10,10))
+fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,p[1,:]/p.max(),label='$p / p _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,p[0,:]/p.max(),label='$p / p _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,p[int(NTH/2),:]/p.max(),label='$p / p _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
 plt.ylabel('$p / p _\mathrm{max}$', fontsize=15)
 plt.tick_params(labelsize=15)
-plt.xlim(0,15)
+plt.xlim(0,25)
 plt.legend(fontsize=15)
-filename = os.path.join(cwd,'p_b-6_polo.png')
+filename = os.path.join(cwd,'p_b-6_toro.png')
 fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[7]:
+# In[15]:
 
 
-fig=plt.figure(figsize=(10,10))
+fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,psi[1,:]/psi.max(),label='$\\psi / \\psi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,psi[0,:]/psi.max(),label='$\\psi / \\psi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,psi[int(NTH/2),:]/psi.max(),label='$\\psi / \\psi _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -117,17 +117,17 @@ plt.ylabel('$\\psi / \\psi _\mathrm{max}$', fontsize=15)
 plt.tick_params(labelsize=15)
 # plt.xlim(0,100)
 plt.legend(fontsize=15)
-filename = os.path.join(cwd,'psi_b-6_polo.png')
+filename = os.path.join(cwd,'psi_b-6_toro.png')
 fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[8]:
+# In[14]:
 
 
-fig=plt.figure(figsize=(10,10))
+fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,alpha[1,:]/alpha.max(),label='$\\alpha / \\alpha _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,alpha[0,:]/alpha.max(),label='$\\alpha / \\alpha _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,alpha[int(NTH/2),:]/alpha.max(),label='$\\alpha / \\alpha _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -135,17 +135,17 @@ plt.ylabel('$\\alpha / \\alpha _\mathrm{max}$', fontsize=15)
 plt.tick_params(labelsize=15)
 # plt.xlim(0,100)
 plt.legend(fontsize=15)
-filename = os.path.join(cwd,'alpha_b-6_polo.png')
+filename = os.path.join(cwd,'alpha_b-6_toro.png')
 fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[9]:
+# In[13]:
 
 
-fig=plt.figure(figsize=(10,10))
+fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,chi[1,:]/chi.max(),label='$\\chi / \\chi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,chi[0,:]/chi.max(),label='$\\chi / \\chi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,chi[int(NTH/2),:]/chi.max(),label='$\\chi / \\chi _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -153,25 +153,25 @@ plt.ylabel('$\\chi / \\chi _\mathrm{max}$', fontsize=15)
 plt.tick_params(labelsize=15)
 # plt.xlim(0,100)
 plt.legend(fontsize=15)
-filename = os.path.join(cwd,'chi_b-6_polo.png')
+filename = os.path.join(cwd,'chi_b-6_toro.png')
 fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[21]:
+# In[12]:
 
 
-fig=plt.figure(figsize=(10,10))
+fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,BTOR[1,:]/BTOR.max(),label='$B_\mathrm{tor} / B_\mathrm{tor\;max} (\\theta = 0)$',color='blue',linewidth=2)
-plt.plot(R*runit,BTOR[int(NTH/2),:]/BTOR.max(),label='$B_\mathrm{tor} / B_\mathrm{tor\;max}(\\theta = \\pi /2)$',color='red',linewidth=2)
+plt.plot(R*runit,B2[0,:]/B2.max(),label='$B_\mathrm{tor} / B_\mathrm{tor\;max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,B2[int(NTH/2),:]/B2.max(),label='$B_\mathrm{tor} / B_\mathrm{tor\;max}(\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
 plt.ylabel('$B_\mathrm{tor} / B_\mathrm{tor\;max}$', fontsize=15)
 plt.tick_params(labelsize=15)
-plt.xlim(0,40)
+plt.xlim(0,25)
 plt.legend(fontsize=15)
-filename = os.path.join(cwd,'bpol_b-6_toro.png')
+filename = os.path.join(cwd,'btor_b-6_toro.png')
 fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 

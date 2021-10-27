@@ -11,7 +11,8 @@
    user_params.md
    arrays.md
    files_outputs.md
-   examples.md
+   examples_gr.md
+   examples_stt.md
 
 Indices and tables
 ==================

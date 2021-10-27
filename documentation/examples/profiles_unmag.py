@@ -2,29 +2,29 @@
 # coding: utf-8
 
 # # <center>Profiles of the main quantities of the XNS 4.0 code</center>
-#
+# 
 # In this notebook we plot the radial profile of the main outputs of the XNSmod code.
 
-# In[1]:
+# In[8]:
 
 
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-cwd = os.path.join(os.getcwd(),'stt','b-6_unmag')
+cwd = os.path.join(os.getcwd(),'stt','b-6_unmag_pol2')
 hydropath = os.path.join(cwd,'Hydroeq.dat')
 
-rhounit = 6.2031e17
+rhounit = 6.2031e17 
 bunit = 8.3758e19
 runit = 1.47459
 
 
-# In[2]:
+# In[9]:
 
 
 f = np.fromfile(os.path.join(cwd,'Grid.dat'),count=7,sep=' ')
-
+    
 NTH = int(f[0])
 NR = int(f[1])
 
@@ -59,12 +59,12 @@ chi = np.genfromtxt(hydropath, skip_header=1, usecols=6, unpack=True).reshape(NT
 # BPOL = np.sqrt(B2POL)#/4.244674e-20
 
 
-# In[3]:
+# In[19]:
 
 
 fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,rho[1,:]/rho.max(),label='$\\rho / \\rho _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,rho[0,:]/rho.max(),label='$\\rho / \\rho _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,rho[int(NTH/2),:]/rho.max(),label='$\\rho / \\rho _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -77,12 +77,12 @@ fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[4]:
+# In[18]:
 
 
 fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,p[1,:]/p.max(),label='$p / p _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,p[0,:]/p.max(),label='$p / p _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,p[int(NTH/2),:]/p.max(),label='$p / p _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -95,12 +95,12 @@ fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[5]:
+# In[17]:
 
 
 fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,psi[1,:]/psi.max(),label='$\\psi / \\psi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,psi[0,:]/psi.max(),label='$\\psi / \\psi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,psi[int(NTH/2),:]/psi.max(),label='$\\psi / \\psi _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -113,12 +113,12 @@ fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[6]:
+# In[16]:
 
 
 fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,alpha[1,:]/alpha.max(),label='$\\alpha / \\alpha _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,alpha[0,:]/alpha.max(),label='$\\alpha / \\alpha _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,alpha[int(NTH/2),:]/alpha.max(),label='$\\alpha / \\alpha _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -131,12 +131,12 @@ fig.savefig(filename, format='png', dpi=100, bbox_inches='tight')
 plt.show()
 
 
-# In[7]:
+# In[15]:
 
 
 fig=plt.figure(figsize=(5,5))
 
-plt.plot(R*runit,chi[1,:]/chi.max(),label='$\\chi / \\chi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
+plt.plot(R*runit,chi[0,:]/chi.max(),label='$\\chi / \\chi _\mathrm{max} (\\theta = 0)$',color='blue',linewidth=2)
 plt.plot(R*runit,chi[int(NTH/2),:]/chi.max(),label='$\\chi / \\chi _\mathrm{max} (\\theta = \\pi /2)$',color='red',linewidth=2)
 
 plt.xlabel('r $[$km$]$', fontsize=15)
@@ -150,3 +150,7 @@ plt.show()
 
 
 # In[ ]:
+
+
+
+
