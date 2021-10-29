@@ -1,0 +1,33 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Compiling XNS}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}User parameters}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Convergence}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Grid}{6}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Printing outputs and files}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Rotation}{7}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Magnetic field}{8}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Initial conditions}{8}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Equation of state}{9}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Scalar field}{9}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Other}{9}{section.2.9}%
+\contentsline {chapter}{\numberline {3}Arrays}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Grid}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Metric}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}MHD}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Scalar field}{12}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Source terms}{12}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Files and outputs}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Files}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Outputs}{16}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Visualisation}{17}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Examples in GR}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Rotating, unmagnetised NS in GR with the ??? EoS}{19}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Rotating, magnetised NS in GR with the ??? EoS}{19}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Examples in STTs}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Non\sphinxhyphen {}rotating, unmagnetised NS in STT with the APR EoS}{21}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Non\sphinxhyphen {}rotating NS in STT with the APR EoS and a purely poloidal magnetic field}{28}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Non\sphinxhyphen {}rotating NS in STT with the APR EoS and a purely toroidal magnetic field}{37}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Non\sphinxhyphen {}rotating, unmagnetised NS in STT with the POL2 EoS}{46}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Non\sphinxhyphen {}rotating NS in STT with the POL2 EoS and a purely poloidal magnetic field}{53}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Non\sphinxhyphen {}rotating NS in STT with the POL2 EoS and a purely toroidal magnetic field}{62}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Indices and tables}{73}{chapter.7}%

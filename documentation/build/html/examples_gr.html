@@ -15,6 +15,8 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,6 +46,8 @@
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files_outputs.html">Files and outputs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples in GR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field">Non-rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field">Non-rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rotating-unmagnetised-ns-in-gr-with-the-eos">Rotating, unmagnetised NS in GR with the ??? EoS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rotating-magnetised-ns-in-gr-with-the-eos">Rotating, magnetised NS in GR with the ??? EoS</a></li>
 </ul>
@@ -79,6 +83,170 @@
 <h1>Examples in GR<a class="headerlink" href="#examples-in-gr" title="Permalink to this headline"></a></h1>
 <p>Here we present a few examples to show how to work with the code and the related performances. All
 cases have been run on a simple laptop</p>
+<section id="non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field">
+<h2>Non-rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field" title="Permalink to this headline"></a></h2>
+<p>This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely poloidal field. It has a J-frame central density <span class="math notranslate nohighlight">\(\rho _\mathrm{c}=8.3\times 10^{-4}\)</span> in code units (corresponding to <span class="math notranslate nohighlight">\(5.15\times 10^{14}\)</span> gcm<span class="math notranslate nohighlight">\(^{-3}\)</span>) and a Komar mass in the E-frame of <span class="math notranslate nohighlight">\(1.442\)</span> M<span class="math notranslate nohighlight">\( _\odot\)</span>. The circumferential radius is <span class="math notranslate nohighlight">\(16.559\)</span> km.</p>
+<p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NR</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> <span class="n">NTH</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NRREG</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">MLS</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">NGQ</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">RREG</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">RMAXSTR</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="n">RMAX</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">REQMAX</span> <span class="o">=</span> <span class="mf">13.50</span><span class="p">,</span> <span class="n">RHOINI</span> <span class="o">=</span> <span class="mf">8.30E-4</span><span class="p">,</span> <span class="n">ALPHA0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0E-4</span><span class="p">,</span> <span class="n">BETA0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="n">GR</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span>
+<span class="n">STRETCH</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">ANALYTIC</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">CONVHELP</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span> <span class="n">QFACTOR</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">QFACTORCHI</span> <span class="o">=</span> <span class="mf">0.45</span><span class="p">,</span>
+<span class="n">QFACTORMETRIC</span> <span class="o">=</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">QRELAX</span> <span class="o">=</span> <span class="mf">0.30</span><span class="p">,</span> <span class="n">QAPHI</span> <span class="o">=</span> <span class="mf">0.50</span><span class="p">,</span> <span class="n">EOSINT</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span> <span class="n">K1</span> <span class="o">=</span> <span class="mf">110.0</span><span class="p">,</span> <span class="n">GAMMA</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="n">IMAG</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">IPOL</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">KBPOL</span> <span class="o">=</span> <span class="mf">0.34135</span><span class="p">,</span> <span class="n">NPOL</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">CSI</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_rho_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the density.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_b_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the poloidal magnetic field strength and its field lines.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/rho_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS density at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/p_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS pressure at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/alpha_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the lapse function at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/psi_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the conformal factor at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/bpol_gr_polo.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the poloidal magnetic field strength at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field">
+<h2>Non-rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field" title="Permalink to this headline"></a></h2>
+<p>This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density <span class="math notranslate nohighlight">\(\rho _\mathrm{c}=1.366\times 10^{-3}\)</span> in code units (corresponding to <span class="math notranslate nohighlight">\(8.473\times 10^{14}\)</span> gcm<span class="math notranslate nohighlight">\(^{-3}\)</span>) and a Komar mass of <span class="math notranslate nohighlight">\(1.597\)</span> M<span class="math notranslate nohighlight">\( _\odot\)</span>. The circumferential radius is <span class="math notranslate nohighlight">\(20.264\)</span> km.</p>
+<p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NR</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> <span class="n">NTH</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NRREG</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">MLS</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">NGQ</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">RREG</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">RMAXSTR</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="n">RMAX</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">REQMAX</span> <span class="o">=</span> <span class="mf">15.50</span><span class="p">,</span> <span class="n">RHOINI</span> <span class="o">=</span> <span class="mf">1.366E-3</span><span class="p">,</span> <span class="n">ALPHA0</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">BETA0</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">GR</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span>
+<span class="n">STRETCH</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">ANALYTIC</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">CONVHELP</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span> <span class="n">QFACTOR</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">QFACTORCHI</span> <span class="o">=</span> <span class="mf">0.45</span><span class="p">,</span>
+<span class="n">QFACTORMETRIC</span> <span class="o">=</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">QRELAX</span> <span class="o">=</span> <span class="mf">0.30</span><span class="p">,</span> <span class="n">QAPHI</span> <span class="o">=</span> <span class="mf">0.50</span><span class="p">,</span> <span class="n">EOSINT</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span> <span class="n">K1</span> <span class="o">=</span> <span class="mf">110.0</span><span class="p">,</span> <span class="n">GAMMA</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="n">IMAG</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">ITOR</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">BCOEF</span> <span class="o">=</span> <span class="mf">3.746</span><span class="p">,</span> <span class="n">NPOL</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">CSI</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_rho_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the density.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_b_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the toroidal magnetic field strength.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/rho_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS density at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/p_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS pressure at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/alpha_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the lapse function at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/psi_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the conformal factor at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/btor_gr_toro.png" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the toroidal magnetic field strength at the pole and at the equator.</em></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="rotating-unmagnetised-ns-in-gr-with-the-eos">
 <h2>Rotating, unmagnetised NS in GR with the ??? EoS<a class="headerlink" href="#rotating-unmagnetised-ns-in-gr-with-the-eos" title="Permalink to this headline"></a></h2>
 <p>Description.</p>

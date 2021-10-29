@@ -105,7 +105,7 @@ NR = 900, NTH = 100, NRREG = 600, MLS = 20, NGQ = 50, RREG = 10, RMAXSTR = 100,
 RMAX = 100, REQMAX = 11.50, RHOINI = 1.40E-3, ALPHA0 = -2.0E-4, BETA0 = -6, GR = .FALSE.,
 STRETCH = .TRUE., ANALYTIC = .TRUE., CONVHELP = .FALSE., QFACTOR = 0.85, QFACTORCHI = 0.45,
 QFACTORMETRIC = 0.35, QRELAX = 0.30, QAPHI = 0.50, EOSINT = .TRUE., FILEEOS = 'APR_resampled.dat',
-IMAG = .TRUE., ITOR = .TRUE., KBPOL = 0.7, NPOL = 0.0, CSI = 0.0
+IMAG = .TRUE., ITOR = .TRUE., BCOEF = 0.7, NPOL = 0.0, CSI = 0.0
 ```
 
 | ![alt-text-1](./images/stt/apr/starplot_rho_b-6_toro.png) |
@@ -143,48 +143,6 @@ IMAG = .TRUE., ITOR = .TRUE., KBPOL = 0.7, NPOL = 0.0, CSI = 0.0
 | ![alt-text-1](./images/stt/apr/btor_b-6_toro.png) |
 |:--:|
 | *Radial profile of the toroidal magnetic field strength at the pole and at the equator.* |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Non-rotating, unmagnetised NS in STT with the POL2 EoS
 
