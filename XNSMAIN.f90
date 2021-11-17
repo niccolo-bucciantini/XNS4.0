@@ -1,76 +1,77 @@
 SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
-!   ============================================================
-!   Purpose : This program solve the axisymmetric eq. for XCFC
-!             in spherical coordinates, by Legendre Poly in Theta
-!             direct solution in R. Uses XCFC.
-!             This programs compute the stable equlibrium for
-!             rotating and non-rotating NS, in XCFC.
-!   ============================================================
-!
-! Input parameters
-! RHOVAR = the desired central density
-!
-! Output parameter
-! QUCNV = computed quantity of interest
-!
-
-! Parameters for the grid - set in module system
-! R = radial grid points (+ boundaries) ; DR = increments
-! TH = angular grid points (+ boundaries); DTH = increments
-! XX = angular cos(th) points (+ boundaries)
-!
-! Initial TOV solution - set in module system - computed by tovini
-! rhotv,prtv,etv   = density, pressure and energy density of the 1D-TOV solution
-!
-! RHOSRC,PSRC,ESRC = density, pressure and energy density of TOV on the 2D grid
-! 				NB: during the initialization, ESRC does not contain the pressure, while it does contain the pressure
-! 				    during the iterative process (ie, it beacomes the total energy rho*h)
-! VPHI,VR,VTH      = azimuthal, radial, and theta component of the velocity (contrav)
-! USRC,DSRC        = matter/em fields conserved variables (energy and density) corresponding to the initial condition
-! USRCX            = scalar field conserved variable (energy) corresponding to the initial condition
-! S1SRC,S2SRC,S3SRC= azimuthal, radial, and theta component of momentum of matter/em fields
-! S1SRCX,S2SRCX,S3SRCX= azimuthal, radial, and theta component of momentum of the scalar field
-!
-! Computed quantities
-! PSI = conformal factor - set in module system
-! PSL = lapse - set in module system
-! PSS = shift-phi - set in module system
-!
-!  Program by N. Bucciantini 2009 -  All rights reserved.
-!   ============================================================
-
-
+  !   ============================================================
+  !   Purpose : This program solve the axisymmetric eq. for XCFC
+  !             in spherical coordinates, by Legendre Poly in Theta
+  !             direct solution in R. Uses XCFC.
+  !             This programs compute the stable equlibrium for
+  !             rotating and non-rotating NS, in XCFC.
+  !   ============================================================
+  !
+  ! Input parameters
+  ! RHOVAR = the desired central density
+  !
+  ! Output parameter
+  ! QUCNV = computed quantity of interest
+  !
+  
+  ! Parameters for the grid - set in module system
+  ! R = radial grid points (+ boundaries) ; DR = increments
+  ! TH = angular grid points (+ boundaries); DTH = increments
+  ! XX = angular cos(th) points (+ boundaries)
+  !
+  ! Initial TOV solution - set in module system - computed by tovini
+  ! rhotv,prtv,etv   = density, pressure and energy density of the 1D-TOV solution
+  !
+  ! RHOSRC,PSRC,ESRC = density, pressure and energy density of TOV on the 2D grid
+  ! 				NB: during the initialization, ESRC does not contain the pressure, while it does contain the pressure
+  ! 				    during the iterative process (ie, it beacomes the total energy rho*h)
+  ! VPHI,VR,VTH      = azimuthal, radial, and theta component of the velocity (contrav)
+  ! USRC,DSRC        = matter/em fields conserved variables (energy and density) corresponding to the initial condition
+  ! USRCX            = scalar field conserved variable (energy) corresponding to the initial condition
+  ! S1SRC,S2SRC,S3SRC= azimuthal, radial, and theta component of momentum of matter/em fields
+  ! S1SRCX,S2SRCX,S3SRCX= azimuthal, radial, and theta component of momentum of the scalar field
+  !
+  ! Computed quantities
+  ! PSI = conformal factor - set in module system
+  ! PSL = lapse - set in module system
+  ! PSS = shift-phi - set in module system
+  !
+  !  Program by N. Bucciantini 2009 -  All rights reserved.
+  !   ============================================================
+  
+  
   USE SYSTEMXNS
   USE PHYSICS
   USE FUNCTIONS
   USE ROTATION, ONLY: OMEGAVALUE
   IMPLICIT NONE
-
+  
   REAL :: QUCNV, RHOVAR
-
+  
   REAL, DIMENSION(:), ALLOCATABLE :: RHOCVEC
-  REAL, DIMENSION(:), ALLOCATABLE :: RHOCVECTEMP
-
+  REAL, DIMENSION(:), ALLOCATABLE :: CONVVEC
+  
   REAL :: B2,E2,BETALOC,RSTARLOC
   REAL :: OMEGALOC,OMGN,ALPH2GPP,MM,M0
   REAL :: B3S3,BRSR,BTSR,BYSR,EL2,EPHISR,EPOLROLD,EPOLRSR,EPOLTOLD,EPOLTSR,ERSR,ETSR,EYSR,GLF2
-  REAL :: RHOCMAX,RHOCMIN,RNEWT,SSSC,V2
+  REAL :: CONVCMAX,CONVCMIN,RNEWT
+  REAL :: SSSC,V2
   INTEGER :: I,NCONV=0
-
+  
   INTEGER, DIMENSION(1:NTH,1:NR) :: RHONINT, PNINT, PSIINT, V3NINT, ALPHAINT,B3NINT, PSSINT,LOGRINT
-
+  
   INTEGER :: ILOOP
   LOGICAL :: EXT
-
+  
   CHARACTER(len=200) :: delcommand
-
+  
   ! Set initial density for the sequential model
-   RHOINISEQ = RHOVAR
-   RHOVAR = RHOVAR*MBARYONFC
+  RHOINISEQ = RHOVAR
+  RHOVAR = RHOVAR*MBARYONFC
   ! ............
   ! Check consistency
   ! ............
-
+  
   IF(NTH .EQ.1)THEN
      IF(MLS .GT. 0)THEN
         WRITE(6,*)'ERROR: MLS > 0 IN 1D'
@@ -94,10 +95,14 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
      STOP
   END IF
   IF(EOSINT .AND. CTP)THEN
-  	 WRITE(6,*)'ERROR: CTP can only be used with analytic polytropic EoS'
-  	 STOP
+     WRITE(6,*)'ERROR: CTP can only be used with analytic polytropic EoS'
+     STOP
   END IF
-
+  IF(CONVRHO .AND. (.NOT.CTP))THEN
+     WRITE(6,*)'ERROR: CONVRHO should not be used is central density is held fixed (CTP = .FALSE.)'
+     STOP
+  END IF
+  
   ! ............
   ! Define grid
   ! ............
@@ -146,20 +151,17 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
 	WRITE(6,*)'POWER-LAW EXTRAPOLATION IS BEING USED'
 	WRITE(6,*)''
   ENDIF
-! ..........................
+  ! ..........................
   ! Define initial conditions
   ! ..........................
-
-  RHOCMAX=1. ;  RHOCMIN=0. !Used to check convergence on the central density
+  NCONV = 0
+  CONVCMAX = 10. ;  CONVCMIN = 0. !Used to check convergence on the central density
 
   ! Use TOV solution as inital data
-  !   IF(VERBOSE) WRITE(6,*)'Computing TOV'
+     IF(VERBOSE) WRITE(6,*)'Computing TOV'
 
   CALL TOVINIMOD(RHOVAR)
-!  DO I=1,NR
-!     DR(I)=R(I)-R(I-1)
-!  END DO
-!  DR(NR+1)=DR(NR) !!! QUI
+
   ! Initialize the primitive variables in the domain + Atmosph.
   DO IX=1,nth
   	 WSURF(IX)=ISUR
@@ -167,7 +169,6 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
         ! (Jordan) energy, density and pressure of the fluid
         RHOSRC(IX,IZ)= MAX(RHOTV(IZ),1.e-15)
         PSRC(IX,IZ)  = MAX(PRTV(IZ),1.e-18)
-        ! ESRC(IX,IZ)  = RHOSRC(IX,IZ)+MAX(ETV(IZ),PSRC(IX,IZ))+PSRC(IX,IZ)
         ESRC(IX,IZ)  = RHOSRC(IX,IZ)+ETV(IZ)+PSRC(IX,IZ)
         ! (Jordan) contravariant velocities v^i (just a trial setup)
         VPHI(IX,IZ)  = 0.
@@ -189,7 +190,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
         PSS(IX,IZ)  = 0.
         PSSR(IX,IZ) = 0.
         PSST(IX,IZ) = 0.
-        ! (Einstein) scalar field chi and its derivatives	P,Q_mu
+        ! (Einstein) scalar field chi and its derivatives P,Q_mu
         CHI(IX,IZ) = CHITV(IZ)
         PSCAL(IX,IZ) = 0.
         QSCALR(IX,IZ) = DCHITV(IZ)
@@ -209,15 +210,13 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            ALPH2GPP    = (R(IZ)*SIN(TH(IX))*EXP(MU(IZ)/2.+NU(IZ)/2.))**2
            IF(IMAG.AND.ITOR)THEN
               ! BPHI(IX,IZ)  = BCOEF*((RHOSRC(IX,IZ)+GAMMA/(GAMMA-1)*PSRC(IX,IZ))*ASCAL(IX,IZ)**4*ALPH2GPP)**MAGIND &
-!                    / ALPH2GPP * EXP(NU(IZ)/2.)/ASCAL(IX,IZ)**3
-				BPHI(IX,IZ)  = BCOEF*((ESRC(IX,IZ))*ASCAL(IX,IZ)**4*ALPH2GPP)**MAGIND &
+              !             / ALPH2GPP * EXP(NU(IZ)/2.)/ASCAL(IX,IZ)**3
+              BPHI(IX,IZ)  = BCOEF*((ESRC(IX,IZ))*ASCAL(IX,IZ)**4*ALPH2GPP)**MAGIND &
                    / ALPH2GPP * EXP(NU(IZ)/2.)/ASCAL(IX,IZ)**3
            END IF
         END IF
      END DO
   END DO
-
-
 
   ! Write the source mass and energy term (used for comparing with TOV)
   IF(CHUP.AND.WRT) THEN
@@ -232,7 +231,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
   END IF
 
   ! Initialize the (Jordan) conserved variables in the domain: sqrt(gamma)*(E,D,S_j)=sqrt(f)*(hat(E),hat(D),hat(S_j))
-  ! Assume that the (Einstein) metric is the one given by the STT TOV (correct only for 0 velocity)									!!!STT!!!
+  ! Assume that the (Einstein) metric is the one given by the STT TOV (correct only for 0 velocity)									!!
   DO IX=1,NTH
     DO IZ=1,NR
       B2=ASCAL(IX,IZ)**2*PSI(IX,IZ)**4*(BPHI(IX,IZ)*BPHI(IX,IZ)*R(IZ)**2*SIN(TH(IX))**2 + &
@@ -260,9 +259,9 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            EPOLT(IX,IZ)*BPOLR(IX,IZ)*PSI(IX,IZ)**4)/(ASCAL(IX,IZ)*PSI(IX,IZ)**6*R(IZ)**2*SIN(TH(IX)))) &
            *PSI(IX,IZ)**6*R(IZ)**2*SIN(TH(IX))*R(IZ)**2*SIN(TH(IX))**2*PSI(IX,IZ)**4
     END DO
-  END DO
-!   WRITE(6,*)'PRIMA',RHOSRC(30,40),DSRC(30,40),ASCAL(30,40),PSI(30,40)**6.
-  ! Initialize the (Einstein) conserved variables for the scalar field																!
+ END DO
+ 
+  ! Initialize the (Einstein) conserved variables for the scalar field	
   DO IX=1,NTH
      DO IZ=1,NR
         ! Computes the (Einstein) derivatives of the scalar field chi
@@ -288,9 +287,9 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
   EXT=.FALSE.
   ILOOP=1
 
-  ALLOCATE(RHOCVEC(MAXLOOP))
+  ALLOCATE(CONVVEC(MAXLOOP))
 
-  DO !ILOOP=1,MAXLOOP
+  DO ! for ILOOP=1,MAXLOOP
      IF(.NOT. MPICODE)THEN
         WRITE(6,*)''
         WRITE(6,*)'Loop number',ILOOP,'out of',MAXLOOP
@@ -298,25 +297,29 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
      IF((ILOOP .EQ. MAXLOOP) .AND. (WRTF.AND.IDAT))THEN
         WRT=.TRUE.
      END IF
-     ! write(6,*)rhonew(1,1)
+     
      ! ------------------------------------------------------------------------------
      ! ------- X-vector Equation Solver ---------------------------------------------
      ! ------------------------------------------------------------------------------
-
+     
      ! Solve for the x-vector in phi
-
-     ! Initialize the (Einstein) phi-xshift coefficient in the domain - 8*Pi*f^phiphi*(hat(S)_phi+hat(Ss)_phi) 						!!!STT!!!
+     
+     ! Initialize the (Einstein) phi-xshift coefficient in the domain - 8*Pi*f^phiphi*(hat(S)_phi+hat(Ss)_phi) 	
      DO IX=1,NTH
         DO IZ=1,NR
            ES3SRC(IX,IZ)=8.*PI*(S3SRC(IX,IZ)+S3SRCX(IX,IZ))/ &
                 (R(IZ)**2*SIN(TH(IX)))/(R(IZ)**2*SIN(TH(IX))**2)
+           IF((IZ .GT. WSURF(IX)+10) .AND. VACUUM)THEN
+              ES3SRC(IX,IZ)=8.*PI*(S3SRCX(IX,IZ))/ &
+                   (R(IZ)**2*SIN(TH(IX)))/(R(IZ)**2*SIN(TH(IX))**2)
+           END IF
         END DO
      END DO
-
+     
      ! Solve phi-component of vector poisson
      CALL SHIFTPHI(ES3SRC)
      IF(VERBOSE) WRITE(6,*)'X-Shift phi .... done'
-
+     
      ! Write the XShift-phi component and its source (for test)
      IF(CHUP.AND.WRT)THEN
         OPEN(12,FILE=trim(adjustl(subdirpath))//'XShiftphi.dat') !FOLDER
@@ -356,7 +359,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            ES2SRC(IX,IZ)=PSST(IX,IZ)/R(IZ)
         END DO
      END DO
-
+     
      ! Initialize the (Einstein) conserved variables for the scalar field
      DO IX=1,NTH
         DO IZ=1,NR
@@ -370,31 +373,30 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            S3SRCX(IX,IZ)=1./(4.*PI)*PSCAL(IX,IZ)*QSCALP(IX,IZ)*PSI(IX,IZ)**6*R(IZ)**2*SIN(TH(IX))
         END DO
      END DO
-
+     
      ! ------------------------------------------------------------------------------
      ! ------- Conformal factor Psi Equation Solver ---------------------------------
      ! ------------------------------------------------------------------------------
-
-     ! Initialize the (Einstein) conformal energy source the domain - -2*Pi*(hat(E)+hat(Es))											!!!STT!!!
+     
+     ! Initialize the (Einstein) conformal energy source the domain - -2*Pi*(hat(E)+hat(Es))										
      DO IX=1,NTH
         DO IZ=1,NR
            ECSRC(IX,IZ)=-2.*PI*(ASCAL(IX,IZ)*USRC(IX,IZ)+USRCX(IX,IZ))/(R(IZ)**2*SIN(TH(IX)))
         END DO
+        IF((IZ .GT. WSURF(IX)+10) .AND. VACUUM)THEN
+           ECSRC(IX,IZ)=-2.*PI*(USRCX(IX,IZ))/(R(IZ)**2*SIN(TH(IX)))
+        END IF
      END DO
-
+     
      ! Initialize the (Einstein) conformal curvature source the domain A^ij*A_ij / 8
      CALL CURV1
-
+     
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'before PSI: ',PSI(1,1)**4.,EXP(MU(1))
-!      WRITE(6,*)'before PSI: ',PSI(1,1),EXP(MU(1)/4.)
-!      WRITE(6,*)'source PSI: ',ASCAL(1,1),USRC(1,1),USRCX(1,1)
      ! Solve poisson equation by recursion
      PSI0=PSI
-     WRITE(6,*)'CONF CHECK 1: ',(PSI(NTH/2,NR-2)-1)*R(NR-2)*2
      CALL CONFORMAL(ECSRC,CURVC)
 
      ! Conformal factor Psi
-     WRITE(6,*)'CONF CHECK 2: ',PSI(NTH/2,NR-2)*R(NR-2)*2
      DO IX=1,NTH
         DO IZ=1,NR
            PSI(IX,IZ)=1.+PSI(IX,IZ)
@@ -402,7 +404,6 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
      END DO
      PSI = QFACTORCONF*PSI + (1.-QFACTORCONF)*PSI0
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'after PSI:  ',PSI(1,1)**4.,EXP(MU(1))
-!      WRITE(6,*)'after PSI:  ',PSI(1,1),EXP(MU(1)/4.)
 
      ! Write the conformal factor and its sources
      IF(CHUP.AND.WRT)THEN
@@ -415,8 +416,6 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
         END DO
         CLOSE(12)
      END IF
-
-! 	WRITE(6,*)'For eos check (conformal)',PSI(30,40)**6.,EXP(3.*MU(40)/2.),RHOSRC(30,40)
 
      ! ------------------------------------------------------------------------------
      ! ------- Derivation of primitive variables ------------------------------------
@@ -437,39 +436,26 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
               SYSR=S3SRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)    ! S_phi
               SY2SR=SYSR**2/(R(IZ)**2*SIN(TH(IX))**2)/(ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)     ! S_phi*S^phi
               B2YSR=BPHI(IX,IZ)**2*R(IZ)**2*SIN(TH(IX))**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4  ! B^2=B_phi*B^phi
-              B3S3=BPHI(IX,IZ)*S3SRC(IX,IZ)                            		    ! B^phi*sqrt(f)*hat(S_phi)
-
+              B3S3=BPHI(IX,IZ)*S3SRC(IX,IZ)                            		          ! B^phi*sqrt(f)*hat(S_phi)
+              
               ! (Einstein) scalar field variables
               USRX=USRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/PSI(IX,IZ)**6                      ! Es
               SYSRX=S3SRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/PSI(IX,IZ)**6                    ! Ss_phi
-              SY2SRX=SYSRX**2/(R(IZ)**2*SIN(TH(IX))**2)/PSI(IX,IZ)**4			    ! Ss_phi*Ss^phi
+              SY2SRX=SYSRX**2/(R(IZ)**2*SIN(TH(IX))**2)/PSI(IX,IZ)**4			  ! Ss_phi*Ss^phi
 
-              ! IF(IX==30 .AND. IZ==40)THEN
-! 				WRITE(6,*)'before CTP',BPHI(IX,IZ),RHOSRC(IX,IZ),PSRC(IX,IZ),SSS(IX,IZ)
-! 			  ENDIF
-
-			  IF(CTP)THEN
-! 			  	  IF(IX==10 .AND. IZ==40)WRITE(6,*)'BEFORE CTP',USR,DSR
-				  CALL CONS_TO_PRIM(USR,SY2SR,DSR,B2YSR,DENSC,PRESSC,VELOCC,BMAG,SSSC)
-! 				  IF(IX==10 .AND. IZ==76)WRITE(6,*)'AFTER CTP',USR,DSR,SSSC
-! 				  IF(IX==10 .AND. IZ==76)STOP
-! 				  ESRC(IX,IZ)   = USRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)	! E
-				  RHOSRC(IX,IZ) = DENSC                							! rho=D/GammaL
-				  PSRC(IX,IZ)   = PRESSC
-				  VPHI(IX,IZ)   = VELOCC/(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2)
-				  BPHI(IX,IZ)   = BMAG/(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2)
-				  SSS(IX,IZ)    = SSSC	! S=tr(S^munu) if purely toroidal
-			  ELSE
-				  V2=(VPHI(IX,IZ)*(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2))**2
-				  B2=(BPHI(IX,IZ)*(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2))**2
-				  SSS(IX,IZ)=(ESRC(IX,IZ))*V2/(1.-V2)-B2+3*(PSRC(IX,IZ)+0.5*B2)
-			  ENDIF
-! 			IF(IX==30 .AND. IZ==40)THEN
-! 				WRITE(6,*)'SSSC',IX,IZ,RHOSRC(IX,IZ),DENSC
-! 			ENDIF
-			! IF(IX==30 .AND. IZ==40)THEN
-! 				WRITE(6,*)'after CTP',BPHI(IX,IZ),RHOSRC(IX,IZ),PSRC(IX,IZ),SSS(IX,IZ)
-! 			ENDIF
+              IF(CTP)THEN
+                
+                 CALL CONS_TO_PRIM(USR,SY2SR,DSR,B2YSR,DENSC,PRESSC,VELOCC,BMAG,SSSC)
+                 RHOSRC(IX,IZ) = DENSC        	! rho=D/GammaL
+                 PSRC(IX,IZ)   = PRESSC
+                 VPHI(IX,IZ)   = VELOCC/(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2)
+                 BPHI(IX,IZ)   = BMAG/(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2)
+                 SSS(IX,IZ)    = SSSC	! S=tr(S^munu) if purely toroidal
+              ELSE
+                 V2=(VPHI(IX,IZ)*(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2))**2
+                 B2=(BPHI(IX,IZ)*(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2))**2
+                 SSS(IX,IZ)=(ESRC(IX,IZ))*V2/(1.-V2)-B2+3*(PSRC(IX,IZ)+0.5*B2)
+              ENDIF
            END DO
         END DO
      END IF
@@ -479,35 +465,35 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
         DO IX=1,NTH
            DO IZ=1,NR
               ! (Jordan) fluid/em variables
-              USR=USRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)		 ! E
-              DSR=DSRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)		 ! D
+              USR=USRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)	  ! E
+              DSR=DSRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)	  ! D
               SYSR=S3SRC(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/(ASCAL(IX,IZ)**3*PSI(IX,IZ)**6)    ! S_phi
               SY2SR=SYSR**2/(R(IZ)**2*SIN(TH(IX))**2)/(ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)     ! S_phi*S^phi
               BYSR=BPHI(IX,IZ)  ! B^phi
               BRSR=BPOLR(IX,IZ) ! B^r
               BTSR=BPOLT(IX,IZ)	! B^th
               EPHISR=EPHI(IX,IZ)		 ! E_phi
-              EPOLRSR=EPOLR(IX,IZ)			 ! E_r
+              EPOLRSR=EPOLR(IX,IZ)		 ! E_r
               EPOLTSR=EPOLT(IX,IZ)					 ! E_th
-              EPOLROLD=EPOLRSR/(ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)            ! E_phi
-              EPOLTOLD=EPOLTSR/R(IZ)**2/(ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)	! E_th
+              EPOLROLD=EPOLRSR/(ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)           ! E_phi
+              EPOLTOLD=EPOLTSR/R(IZ)**2/(ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)	 ! E_th
 
               ! (Einstein) scalar field variables
-              USRX=USRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/PSI(IX,IZ)**6						 ! Es
-              SYSRX=S3SRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/PSI(IX,IZ)**6					 ! Ss_phi
-              SY2SRX=SYSRX**2/(R(IZ)**2*SIN(TH(IX))**2)/PSI(IX,IZ)**4			     	 ! Ss_phi*Ss^phi
+              USRX=USRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/PSI(IX,IZ)**6		! Es
+              SYSRX=S3SRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))/PSI(IX,IZ)**6		! Ss_phi
+              SY2SRX=SYSRX**2/(R(IZ)**2*SIN(TH(IX))**2)/PSI(IX,IZ)**4		! Ss_phi*Ss^phi
 
               CALL COVTERM(IX,IZ)     	! Computes the covariant terms of the metric tensor in the E-frame
               IF(CTP) THEN			! if FALSE the code doesn't use CONS_TO_PRIM
-!               	 IF((IZ .EQ. 10) .AND. (IX .EQ. 100))WRITE(6,*)'CTP1',USR,DSR
-                 CALL CONS_TO_PRIM_POL(USR,SYSR,DSR,BYSR,BRSR,BTSR,EPHISR,EPOLRSR,EPOLTSR,DENSC,PRESSC,VELOCC,SSSC,IX,IZ)  	!!!STT!!!
-! 	 			 IF((IZ .EQ. 10) .AND. (IX .EQ. 100))WRITE(6,*)'CTP2',DENSC,PRESSC,USR,DSR,RHOSRC(IX,IZ),DSRC(IX,IZ),VELOCC
-	 			 RHOSRC(IX,IZ)=DENSC
+                 
+                 CALL CONS_TO_PRIM_POL(USR,SYSR,DSR,BYSR,BRSR,BTSR,EPHISR,EPOLRSR,EPOLTSR,DENSC,PRESSC,VELOCC,SSSC,IX,IZ)  
+                 
+                 RHOSRC(IX,IZ)=DENSC
                  PSRC(IX,IZ)=PRESSC
                  VPHI(IX,IZ)=VELOCC/(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2)
                  SSS(IX,IZ)=SSSC
               ELSE
-                 V2=(VPHI(IX,IZ)*(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2))**2.	     ! v^2=v^phi*v_phi								!!!STT!!!
+                 V2=(VPHI(IX,IZ)*(R(IZ)*SIN(TH(IX))*ASCAL(IX,IZ)*PSI(IX,IZ)**2))**2.	   ! v^2=v^phi*v_phi	
                  B2=ASCAL(IX,IZ)**2*(BYSR*BYSR*GCOVP+BRSR*BRSR*GCOVR+BTSR*BTSR*GCOVT)      ! B^2=B^i*B_i
                  EL2=ASCAL(IX,IZ)**(-2)*(EYSR*EYSR/GCOVP+ERSR*ERSR/GCOVR+ETSR*ETSR/GCOVT)  ! E^2=E^i*E_i
                  SSS(IX,IZ)=(ESRC(IX,IZ))*V2/(1.-V2)-B2-EL2+3*(PSRC(IX,IZ)+0.5*B2+0.5*EL2) ! S=tr(S^munu)	if poloidal or twt
@@ -515,7 +501,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            END DO
         END DO
      END IF
-
+     
      ! Write the primitive variables - to compared with TOV
      IF(CHUP.AND.WRT)THEN
         OPEN(12,FILE=trim(adjustl(subdirpath))//'Primitive.dat') !FOLDER
@@ -537,27 +523,28 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            CLOSE(12)
         END IF
      END IF
-
+     
      ! ------------------------------------------------------------------------------
      ! ------- Lapse equation Equation Solver ---------------------------------
      ! ------------------------------------------------------------------------------
-
+     
      ! Solve for the lapse*Psi -1.
-
-     ! Initialize the (Einstein) lapse energy source the domain - 2*Pi*(hat(E)+hat(Es)+2*hat(S)+2*hat(Ss))/PSI^2						!!!STT!!!
+     
+     ! Initialize the (Einstein) lapse energy source the domain - 2*Pi*(hat(E)+hat(Es)+2*hat(S)+2*hat(Ss))/PSI^2
      DO IX=1,NTH
         DO IZ=1,NR
            ELSRC(IX,IZ)=2.*PI*((ASCAL(IX,IZ)*USRC(IX,IZ)+USRCX(IX,IZ))/(R(IZ)**2*SIN(TH(IX)))+ &
-                2*(ASCAL(IX,IZ)**4*SSS(IX,IZ)*PSI(IX,IZ)**6-USRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))))/PSI(IX,IZ)**2						! scrivere generalizzato
+                2*(ASCAL(IX,IZ)**4*SSS(IX,IZ)*PSI(IX,IZ)**6-USRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))))/PSI(IX,IZ)**2
+           IF((IZ .GT. WSURF(IX)+10) .AND. VACUUM)THEN
+              ELSRC(IX,IZ)=2.*PI*((USRCX(IX,IZ))/(R(IZ)**2*SIN(TH(IX)))+ &
+                   2*(-USRCX(IX,IZ)/(R(IZ)**2*SIN(TH(IX)))))/PSI(IX,IZ)**2
+           END IF
         END DO
      END DO
 
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'before PSL: ',PSL(1,1),EXP(MU(1)/4.)*EXP(NU(1)/2.),CURVC(1,1),ELSRC(1,1)
-     WRITE(6,*)'before PSL: ',PSL(1,1),EXP(MU(1)/4.)*EXP(NU(1)/2.),ELSRC(1,1),CURVC(1,1)
-!     WRITE(6,*)'source PSL: ',ELSRC(1,1),ELSRC(1,50),ELSRC(1,100),CURVC(1,1),CURVC(1,50),CURVC(1,100)
-! 	WRITE(6,*)'source PSL: ',ASCAL(1,1),USRC(1,1),USRCX(1,1),SSS(1,1),PSI(1,1)
-     ! Solve poisson equation by recursion
 
+     ! Solve poisson equation by recursion
      CALL LAPSE(ELSRC,CURVC)
 
      DO IX=1,NTH
@@ -567,7 +554,6 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
      END DO
 
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'after PSL:   ',PSL(1,1),EXP(MU(1)/4.)*EXP(NU(1)/2.)
-     WRITE(6,*)'after PSL:   ',PSL(1,1),EXP(MU(1)/4.)*EXP(NU(1)/2.),PSI(1,1),EXP(MU(1)/4.)
 
      ! Write the lapse*Psi and its energy-source
      IF(CHUP.AND.WRT)THEN
@@ -633,20 +619,14 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
         END DO
      END DO
 
-     !WRITE(6,*)'TRACEM',PSRC(100,50),TRACEM(100,50),ESRC(100,50),RHOSRC(100,50)
-
-!      WRITE(6,*)'TRACEM',TRACEM(100,1),PSRC(100,1),ESRC(100,1),RHOSRC(100,1)
-!      TRACEM(100,50),TRACEM(100,100)
 
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'before CHI:  ',chi(1,1),chitv(1)
-    ! WRITE(6,*)'before CHI:  ',chi(1,1),chitv(1)
      CALL CHISOL(TRACEM)
-    ! WRITE(6,*)'after CHI:   ',chi(1,1),chitv(1)
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'after CHI:   ',chi(1,1),chitv(1)
 
      ! Write the scalar field
      IF(CHUP.AND.WRT)THEN
-        OPEN(12,FILE=trim(adjustl(subdirpath))//'Chi.dat') !FOLDER
+        OPEN(12,FILE=trim(adjustl(subdirpath))//'Chi.dat') ! Folder
         WRITE(12,*)NTH,NR
         DO IX=1,NTH
            DO IZ=1,NR
@@ -667,7 +647,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
   	GOTO 200
      ENDIF
 
-     IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'RHONEW:     ',RHONEW(1,1),rhotv(1)
+     IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'RHONEW:     ',RHONEW(1,1),RHOTV(1)
 
      IF(XNSERR.NE.0) RETURN
      IF(VERBOSE) WRITE(6,*)'Hydro equilib. ... done'
@@ -677,7 +657,6 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
 
      IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'before B2:  ',BPHI(1,1)*BPHI(1,1)*R(1)**2*SIN(TH(1))**2*ASCAL(1,1)**2*PSI(1,1)**4
 
-!      WRITE(6,*)'BEFORE B',BPHI(30,40)
      IF(.NOT.(IPOL.OR.ITWT))THEN
         DO IX=1,NTH
            DO IZ=1,NR
@@ -704,180 +683,179 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
            END DO
         END DO
      END IF
-!      WRITE(6,*)'AFTER B',BPHI(30,40)
+
      IF(IPOL.OR.ITWT)THEN
         DO IX=1,NTH
            DO IZ=1,NR
-				ESRC(IX,IZ)=RHONEW(IX,IZ)+ENEW(IX,IZ)+PNEW(IX,IZ)																			!!!STT!!!
-				RHOSRC(IX,IZ)=RHONEW(IX,IZ)
-				PSRC(IX,IZ)=PNEW(IX,IZ)
-				VPHI(IX,IZ)=V3NEW(IX,IZ)
-				BPHI(IX,IZ)=B3NEW(IX,IZ)
-				EPHI(IX,IZ)=E3NEW(IX,IZ)
-				B2=ASCAL(IX,IZ)**2*(BPHI(IX,IZ)*BPHI(IX,IZ)*R(IZ)**2.*SIN(TH(IX))**2.*PSI(IX,IZ)**4. + &
-				   BPOLR(IX,IZ)*BPOLR(IX,IZ)*PSI(IX,IZ)**4. + &
-				   BPOLT(IX,IZ)*BPOLT(IX,IZ)*R(IZ)**2*PSI(IX,IZ)**4.)
-				E2=ASCAL(IX,IZ)**(-2)*(EPHI(IX,IZ)*EPHI(IX,IZ)/R(IZ)**2./SIN(TH(IX))**2./PSI(IX,IZ)**4. + &
-				   EPOLR(IX,IZ)*EPOLR(IX,IZ)/PSI(IX,IZ)**4. + &
-				   EPOLT(IX,IZ)*EPOLT(IX,IZ)/R(IZ)**2./PSI(IX,IZ)**4.)
-				GLF2=1./(1.-VPHI(IX,IZ)*VPHI(IX,IZ)*R(IZ)**2.*SIN(TH(IX))**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)
-				USRC(IX,IZ) =(ESRC(IX,IZ)*GLF2-PNEW(IX,IZ)+B2/2.+E2/2.)*ASCAL(IX,IZ)**3*PSI(IX,IZ)**6.*R(IZ)**2.*SIN(TH(IX))
-				DSRC(IX,IZ) =RHOSRC(IX,IZ)*SQRT(GLF2)*ASCAL(IX,IZ)**3*PSI(IX,IZ)**6.*R(IZ)**2.*SIN(TH(IX))
-				! Covariant conserved momentum (sqrt(gamma)*S_j = sqrt(gamma) gamma_ji S^i)
-				! - use TOV metric as first approx
-				S1SRC(IX,IZ)=ASCAL(IX,IZ)**5*(ESRC(IX,IZ))*VR(IX,IZ)*GLF2 &
-					 *PSI(IX,IZ)**6*R(IZ)**2.*SIN(TH(IX))*PSI(IX,IZ)**4
-				S2SRC(IX,IZ)=ASCAL(IX,IZ)**5*(ESRC(IX,IZ))*VTH(IX,IZ)*GLF2 &
-					 *PSI(IX,IZ)**6*R(IZ)**2.*SIN(TH(IX))*R(IZ)**2*PSI(IX,IZ)**4
-				S3SRC(IX,IZ)=ASCAL(IX,IZ)**5*(ESRC(IX,IZ)*VPHI(IX,IZ)*GLF2 + &
-					 (EPOLR(IX,IZ)*BPOLT(IX,IZ)*PSI(IX,IZ)**4.*R(IZ)**2.- &
-					 EPOLT(IX,IZ)*BPOLR(IX,IZ)*PSI(IX,IZ)**4.)/(ASCAL(IX,IZ)*PSI(IX,IZ)**6.*R(IZ)**2.*SIN(TH(IX)))) &
-					 *PSI(IX,IZ)**6*R(IZ)**2*SIN(TH(IX)) &
-					 *R(IZ)**2*SIN(TH(IX))**2*PSI(IX,IZ)**4
-      END DO
-    END DO
-  END IF
-
-  IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'after B2:   ',BPHI(1,1)*BPHI(1,1)*R(1)**2*SIN(TH(1))**2*ASCAL(1,1)**2*PSI(1,1)**4
-
-  ! Write the  mass and pressure term (used for comparing Hydrost equil with TOV)
-
-  IF(WRT)THEN
-    OPEN(12,FILE=trim(adjustl(subdirpath))//'Hydroeq.dat')
-    WRITE(12,*)NTH,NR,OMG
-    DO IX=1,NTH
-      DO IZ=1,NR
-        WRITE(12,*)RHONEW(IX,IZ)/MBARYONFC,PNEW(IX,IZ),PSI(IX,IZ),V3NEW(IX,IZ),&
-             PSL(IX,IZ)/PSI(IX,IZ),PSS(IX,IZ),CHI(IX,IZ),QSCALR(IX,IZ),QSCALT(IX,IZ)
-      END DO
-    END DO
-    CLOSE(12)
-
-    IF(IMAG)THEN
-      OPEN(12,FILE=trim(adjustl(subdirpath))//'Hydroeq_mag.dat')
-      WRITE(12,*)NTH,NR
-      DO IX=1,NTH
-        DO IZ=1,NR
-        WRITE(12,*) B3NEW(IX,IZ),BPOLR(IX,IZ),BPOLT(IX,IZ),APHI(IX,IZ), &
-             E3NEW(IX,IZ),EPOLR(IX,IZ),EPOLT(IX,IZ),ATIM(IX,IZ),&
-             JPHI(IX,IZ),JRR(IX,IZ),JTH(IX,IZ)
+              ESRC(IX,IZ)=RHONEW(IX,IZ)+ENEW(IX,IZ)+PNEW(IX,IZ)											
+              RHOSRC(IX,IZ)=RHONEW(IX,IZ)
+              PSRC(IX,IZ)=PNEW(IX,IZ)
+              VPHI(IX,IZ)=V3NEW(IX,IZ)
+              BPHI(IX,IZ)=B3NEW(IX,IZ)
+              EPHI(IX,IZ)=E3NEW(IX,IZ)
+              B2=ASCAL(IX,IZ)**2*(BPHI(IX,IZ)*BPHI(IX,IZ)*R(IZ)**2.*SIN(TH(IX))**2.*PSI(IX,IZ)**4. + &
+                   BPOLR(IX,IZ)*BPOLR(IX,IZ)*PSI(IX,IZ)**4. + &
+                   BPOLT(IX,IZ)*BPOLT(IX,IZ)*R(IZ)**2*PSI(IX,IZ)**4.)
+              E2=ASCAL(IX,IZ)**(-2)*(EPHI(IX,IZ)*EPHI(IX,IZ)/R(IZ)**2./SIN(TH(IX))**2./PSI(IX,IZ)**4. + &
+                   EPOLR(IX,IZ)*EPOLR(IX,IZ)/PSI(IX,IZ)**4. + &
+                   EPOLT(IX,IZ)*EPOLT(IX,IZ)/R(IZ)**2./PSI(IX,IZ)**4.)
+              GLF2=1./(1.-VPHI(IX,IZ)*VPHI(IX,IZ)*R(IZ)**2.*SIN(TH(IX))**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4)
+              USRC(IX,IZ) =(ESRC(IX,IZ)*GLF2-PNEW(IX,IZ)+B2/2.+E2/2.)*ASCAL(IX,IZ)**3*PSI(IX,IZ)**6.*R(IZ)**2.*SIN(TH(IX))
+              DSRC(IX,IZ) =RHOSRC(IX,IZ)*SQRT(GLF2)*ASCAL(IX,IZ)**3*PSI(IX,IZ)**6.*R(IZ)**2.*SIN(TH(IX))
+              ! Covariant conserved momentum (sqrt(gamma)*S_j = sqrt(gamma) gamma_ji S^i)
+              ! - use TOV metric as first approx
+              S1SRC(IX,IZ)=ASCAL(IX,IZ)**5*(ESRC(IX,IZ))*VR(IX,IZ)*GLF2 &
+                   *PSI(IX,IZ)**6*R(IZ)**2.*SIN(TH(IX))*PSI(IX,IZ)**4
+              S2SRC(IX,IZ)=ASCAL(IX,IZ)**5*(ESRC(IX,IZ))*VTH(IX,IZ)*GLF2 &
+                   *PSI(IX,IZ)**6*R(IZ)**2.*SIN(TH(IX))*R(IZ)**2*PSI(IX,IZ)**4
+              S3SRC(IX,IZ)=ASCAL(IX,IZ)**5*(ESRC(IX,IZ)*VPHI(IX,IZ)*GLF2 + &
+                   (EPOLR(IX,IZ)*BPOLT(IX,IZ)*PSI(IX,IZ)**4.*R(IZ)**2.- &
+                   EPOLT(IX,IZ)*BPOLR(IX,IZ)*PSI(IX,IZ)**4.)/(ASCAL(IX,IZ)*PSI(IX,IZ)**6.*R(IZ)**2.*SIN(TH(IX)))) &
+                   *PSI(IX,IZ)**6*R(IZ)**2*SIN(TH(IX)) &
+                   *R(IZ)**2*SIN(TH(IX))**2*PSI(IX,IZ)**4
+           END DO
         END DO
-      END DO
-      CLOSE(12)
-    END IF
-
-    IF(IMAG.AND.WRTF.AND.(OMG.NE.0.))THEN
-      OPEN(12,FILE=trim(adjustl(subdirpath))//'Mxwll_test.dat')
-      WRITE(12,*) NTH,NR,KBPOL
-      DO IX=1,NTH
-        DO IZ=1,NR
-        WRITE(12,*) RHOEMXL(IX,IZ),JPHIMXL(IX,IZ),ATIMIN(IX,IZ),ATIMOUT(IX,IZ),ATIMARM(IX,IZ),&
-              OMGMET(IX,IZ),GAMLOC(IX,IZ),DRGAML(IX,IZ),DTGAML(IX,IZ)
+     END IF
+     
+     IF(DEBUG .AND. (.NOT. MPICODE))WRITE(6,*)'after B2:   ',BPHI(1,1)*BPHI(1,1)*R(1)**2*SIN(TH(1))**2*ASCAL(1,1)**2*PSI(1,1)**4
+     
+     ! Write the  mass and pressure term (used for comparing Hydrost equil with TOV)
+     
+     IF(WRT)THEN
+        OPEN(12,FILE=trim(adjustl(subdirpath))//'Hydroeq.dat')
+        WRITE(12,*)NTH,NR,OMG
+        DO IX=1,NTH
+           DO IZ=1,NR
+              WRITE(12,*)RHONEW(IX,IZ)/MBARYONFC,PNEW(IX,IZ),PSI(IX,IZ),V3NEW(IX,IZ),&
+                   PSL(IX,IZ)/PSI(IX,IZ),PSS(IX,IZ),CHI(IX,IZ),QSCALR(IX,IZ),QSCALT(IX,IZ)
+           END DO
         END DO
-      END DO
-      CLOSE(12)
-    ENDIF
-  END IF
-
-  ! Write the central density (this is used to check the convergence)
-  RNEWT=(RHONEW(1,1)*R(2)**2-RHONEW(1,2)*R(1)**2)/(R(2)**2-R(1)**2)
-  IF(VERBOSE .AND. (.NOT. MPICODE)) WRITE(6,'(A10,I3,A20,E12.7)')'Step = ',ILOOP,' Central density = ',RNEWT !real(rhonew(1,1))
-
-  !-------------------------------------------
-  !----------Check convergence ---------------
-  !-------------------------------------------
-  IF(.NOT. MPICODE)THEN
-	  WRITE(6,*)'RHO CENTRAL',RNEWT
-  ENDIF
-  RHOCVEC(ILOOP)=RNEWT
-  IF(EXT)THEN
-    IF(WRTF.AND.IDAT) WRT=.FALSE.
-    EXIT
-  END IF
-
-  OPEN(12,FILE=trim(adjustl(subdirpath))//'Rhovec.dat',access='append')
-        WRITE(12,*) ILOOP,RNEWT,PSI(1,1),PSL(1,1)/PSI(1,1),CHI(1,1),&
-           &ASCAL(1,1)**2*(BPHI(1,1)*BPHI(1,1)*R(IZ)**2.*SIN(TH(IX))**2.*PSI(1,1)**4. + &
-           &BPOLR(1,1)*BPOLR(1,1)*PSI(1,1)**4.+BPOLT(1,1)*BPOLT(1,1)*R(IZ)**2*PSI(1,1)**4.)
-  CLOSE(12)
-
-  IF(.NOT. MPICODE)THEN
-	  WRITE(6,*)'METRIC CONVERGENCE',PSL(50,1),PSI(50,1)
-  ENDIF
-  ! The convergence is oscillatory so one needs to find its bounds
-  ! Check convergence on the central density
-  !WARNING: in some cases of damped relaxation (i.e. QAPHI.NE.1 and QFACTOR.NE.1)
-  !        the solution may require additional interative steps with QAPHI and QFACTOR
-  !        manually set to 1. In this case, increase the number in the following IF statement.
-  IF(ILOOP .GT. 5)THEN
-!     IF((RHOCVEC(ILOOP-1)-RHOCVEC(ILOOP-2))*(RHOCVEC(ILOOP)-RHOCVEC(ILOOP-1)) .LT. 0)THEN 			! if the solution is oscillating
-!       IF(RHOCVEC(ILOOP-1) .GT. RHOCVEC(ILOOP)) RHOCMAX= RHOCVEC(ILOOP-1)
-!       IF(RHOCVEC(ILOOP-1) .LT. RHOCVEC(ILOOP)) RHOCMIN= RHOCVEC(ILOOP-1)
-!       IF((.NOT. MPICODE))WRITE(6,*)'Oscillatory convergence check: reached',ABS(RHOCVEC(ILOOP)-RHOCVEC(ILOOP-1)),',needed',OSCCONV
-!    	IF((.NOT. MPICODE))WRITE(6,*)'METRIC CONVERGENCE',PSL(1,1),PSI(1,1)
-!     ELSE  ! if the solution is not oscillating
-!       IF((.NOT. MPICODE))WRITE(6,*)'Monotonous convergence check: reached',ABS(RHOCVEC(ILOOP)-RHOCVEC(ILOOP-1)),&
-!       	&',needed',MONCONV
-		!IF((.NOT. MPICODE))WRITE(6,*)'METRIC CONVERGENCE',PSL(50,1),PSI(50,1)
-!     END IF
-
-!     IF(ABS(RHOCMAX-RHOCMIN).LT. OSCCONV) THEN 					 ! convergence if the solution is oscillating
-!       IF(WRTF.AND.IDAT) WRT=.TRUE.
-!       EXT=.TRUE.
-!     END IF
-! 	WRITE(6,*)'CONV: ',ABS(PSI(50,1)-PSI0(50,1))/PSI0(50,1)
-    IF(ABS(PSI(50,1)-PSI0(50,1))/PSI0(50,1) .LT. MONCONV) THEN     ! convergence if the solution is not oscillating
-    	NCONV=NCONV+1
-    ELSE
-    	NCONV=0
-    ENDIF
-    IF(NCONV==5)THEN ! Checks how many consecutive times the solution hasn't changed
-      IF(WRTF.AND.IDAT) WRT=.TRUE.
-      EXT=.TRUE.
-    END IF
-  ENDIF
-  IF(ILOOP .EQ. MAXLOOP)THEN
+        CLOSE(12)
+        
+        IF(IMAG)THEN
+           OPEN(12,FILE=trim(adjustl(subdirpath))//'Hydroeq_mag.dat')
+           WRITE(12,*)NTH,NR
+           DO IX=1,NTH
+              DO IZ=1,NR
+                 WRITE(12,*) B3NEW(IX,IZ),BPOLR(IX,IZ),BPOLT(IX,IZ),APHI(IX,IZ), &
+                      E3NEW(IX,IZ),EPOLR(IX,IZ),EPOLT(IX,IZ),ATIM(IX,IZ),&
+                      JPHI(IX,IZ),JRR(IX,IZ),JTH(IX,IZ)
+              END DO
+           END DO
+           CLOSE(12)
+        END IF
+        
+        IF(IMAG.AND.WRTF.AND.(OMG.NE.0.))THEN
+           OPEN(12,FILE=trim(adjustl(subdirpath))//'Mxwll_test.dat')
+           WRITE(12,*) NTH,NR,KBPOL
+           DO IX=1,NTH
+              DO IZ=1,NR
+                 WRITE(12,*) RHOEMXL(IX,IZ),JPHIMXL(IX,IZ),ATIMIN(IX,IZ),ATIMOUT(IX,IZ),ATIMARM(IX,IZ),&
+                      OMGMET(IX,IZ),GAMLOC(IX,IZ),DRGAML(IX,IZ),DTGAML(IX,IZ)
+              END DO
+           END DO
+           CLOSE(12)
+        ENDIF
+     END IF
+     
+     !-------------------------------------------
+     !----------Check convergence ---------------
+     !-------------------------------------------
+     ! Write the central density (this is used to check the convergence)
+     RNEWT = (RHONEW(1,1)*R(2)**2-RHONEW(1,2)*R(1)**2)/(R(2)**2-R(1)**2)
+     ! Write convergence vector with central density or lapse, and check it
+     IF(CONVRHO)THEN
+        CONVVEC(ILOOP) = RNEWT
+        IF(.NOT. MPICODE) WRITE(6,'(A10,I3,A20,E12.7)')'Step = ',ILOOP,' Central density = ', CONVVEC(ILOOP)
+     ELSE
+        CONVVEC(ILOOP) = (PSL(1,1)/PSI(1,1)*R(2)**2-PSL(1,2)/PSI(1,2)*R(1)**2)/(R(2)**2-R(1)**2)
+        IF(.NOT. MPICODE) WRITE(6,'(A10,I3,A20,F12.9)')'Step = ',ILOOP,' Central lapse = ', CONVVEC(ILOOP)
+     END IF
+     
+     IF(EXT)THEN
+        IF(WRTF.AND.IDAT) WRT=.FALSE.
+        EXIT
+     END IF
+     
+     OPEN(12,FILE=trim(adjustl(subdirpath))//'Rhovec.dat',access='append')
+     WRITE(12,*) ILOOP,RNEWT,PSI(1,1),PSL(1,1)/PSI(1,1),CHI(1,1),&
+          &ASCAL(1,1)**2*(BPHI(1,1)*BPHI(1,1)*R(IZ)**2.*SIN(TH(IX))**2.*PSI(1,1)**4. + &
+          &BPOLR(1,1)*BPOLR(1,1)*PSI(1,1)**4.+BPOLT(1,1)*BPOLT(1,1)*R(IZ)**2*PSI(1,1)**4.)
+     CLOSE(12)
+     
+     ! ==================================================
+     ! The convergence is checked in different ways depending if one held fixed the central density or geometrized density
+     ! Conserved Geometrized density is used by setting CTP = .TRUE. and convergence can be checked on RNEWT = RHOCVEC
+     ! With CTP = .FALSE. the central density is fixed and convergence should be checked on metric PSL/PSI
+     
+     !WARNING: in some cases of damped relaxation (i.e. QAPHI.NE.1 and QFACTOR.NE.1)
+     !        the solution may require additional interative steps with QAPHI and QFACTOR
+     !        manually set to 1. In this case, increase the number in the following IF statement.
+     IF(ILOOP .GT. 5)THEN
+        ! Check if oscillation or not
+        IF((CONVVEC(ILOOP-1)-CONVVEC(ILOOP-2))*(CONVVEC(ILOOP)-CONVVEC(ILOOP-1)) .LT. 0)THEN ! if the solution is oscillating
+           IF(CONVVEC(ILOOP-1) .GT. CONVVEC(ILOOP)) CONVCMAX = CONVVEC(ILOOP-1)
+           IF(CONVVEC(ILOOP-1) .LT. CONVVEC(ILOOP)) CONVCMIN = CONVVEC(ILOOP-1)
+           IF((.NOT. MPICODE))WRITE(6,*)'  Oscillatory convergence check: reached',ABS(CONVVEC(ILOOP)-CONVVEC(ILOOP-1)),&
+                ', needed',OSCCONV
+        ELSE  ! If the solution is not oscillating
+           IF((.NOT. MPICODE))WRITE(6,*)'  Monotonous convergence check: reached',ABS(CONVVEC(ILOOP)-CONVVEC(ILOOP-1)),&
+                ', needed',MONCONV
+        END IF
+        
+        ! Convergence if the solution is oscillating
+        IF(ABS(CONVCMAX-CONVCMIN) .LT. OSCCONV) THEN 					
+           IF(WRTF.AND.IDAT) WRT=.TRUE.
+           !WRITE(6,*)'Oscillatory Convergence Reached ',ABS(CONVCMAX-CONVCMIN)
+           EXT=.TRUE.
+        END IF
+        ! Convergence if the solution is not oscillating
+        IF(ABS(CONVVEC(ILOOP)-CONVVEC(ILOOP-1)) .LT. MONCONV) THEN
+           NCONV=NCONV+1
+           IF(NCONV .EQ. 5)THEN ! Checks how many consecutive times the solution hasn't changed
+              !WRITE(6,*)'Non-Oscillatory Convergence Reached ',ABS(CONVVEC(ILOOP)-CONVVEC(ILOOP-1))
+              IF(WRTF.AND.IDAT) WRT=.TRUE.
+              EXT=.TRUE.
+           END IF
+        END IF
+     ENDIF
+     
+     
+     IF(ILOOP .EQ. MAXLOOP)THEN
   	WRITE(6,*)'WARNING: convergence to desired level has not been obtained.'
-  ENDIF
+     ENDIF
 
-  ! IF(ILOOP .EQ. MAXLOOP)THEN
-!   	ALLOCATE(RHOCVECTEMP(3*MAXLOOP))
-!   	RHOCVECTEMP(1:MAXLOOP)=RHOCVEC
-!     DEALLOCATE(RHOCVEC)
-!     CALL MOVE_ALLOC(RHOCVECTEMP,RHOCVEC)
-!   ENDIF
-
-
-  IF(ILOOP .EQ. MAXLOOP)EXIT
-  ILOOP=ILOOP+1
-  !End convergence loop
-END DO
+     IF(ILOOP .EQ. MAXLOOP)EXIT
+     ILOOP=ILOOP+1
+     !End convergence loop
+  END DO
 
   ! ------------------------------------------------------------------------------
   ! ------- CALCULATE STELLAR QUANTITIES  ----------------------------------------
   ! ------------------------------------------------------------------------------
-
+  
   OPEN(13,FILE=trim(adjustl(subdirpath))//'Surf.dat')
   DO IX=1,NTH
-  	WRITE(13,*) R(WSURF(IX)+1)
+     WRITE(13,*) R(WSURF(IX)+1)
   END DO
   CLOSE(13)
-
+  
   CALL QUANTITIES (RNEWT,RHOVAR, MM, M0, ILOOP)
-
+  
 #ifdef NWTRPS
   IF(QUOC .EQ. 0) QUCNV=RNEWT
   IF(QUOC .EQ. 1) QUCNV=MM
   IF(QUOC .EQ. 2) QUCNV=M0
 #endif
-
+  
 200 END SUBROUTINE XNSMAIN
-
+  
+  
 
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE CONFORMAL(RHOS,RHOC) !!! QUI
+ SUBROUTINE CONFORMAL(RHOS,RHOC)
 !   ============================================================
 !   Purpose : This subroutine solve the axisymmetric eq. for Conformal
 !             factor in spherical coorinates, by Legendre Poly in Theta
@@ -1071,12 +1049,9 @@ SUBROUTINE CONFORMAL(RHOS,RHOC) !!! QUI
     CALL DGTSV(NR,DL1,DC1,DU1,SS1,NR,INFO)
 
     PHI(1:NR,IL)=SS1(1:NR)
-    !IF(IL==0)THEN
-    !  WRITE(6,*)'INTERNAL :',PHI(NR,IL)*2*R(NR)
-    !  WRITE(6,*)'INTERNAL :',R(NR-2:NR),DR(NR-1:NR+1)
-    !ENDIF
+    
   END DO
-!STOP
+
   ! Compute the matrix of Legendre Polyn in the grid points
   DO IX=1,NTH
     CALL LPN(MLS,XX(IX),PNX(0:MLS),PDX(0:MLS))
@@ -1089,7 +1064,7 @@ SUBROUTINE CONFORMAL(RHOS,RHOC) !!! QUI
   END DO
 
   ERROR=MAXVAL(ABS(PSIOLD(1:NTH,1:NR)-PSI(1:NTH,1:NR)))
-!   write(6,*)psi(1,1)
+
   IF(VERBOSE .AND. (.NOT. MPICODE)) WRITE(6,*)'Max err Conf = ',error
   IF(ERROR .LT. TOLCONV) EXIT
   END DO
@@ -1100,7 +1075,7 @@ END SUBROUTINE  CONFORMAL
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
+SUBROUTINE LAPSE(RHOS,RHOC)
 
 !   ============================================================
 !   Purpose : This subroutine solve the axisymmetric eq. for Lapse
@@ -1183,8 +1158,6 @@ SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
       RHO(IX,IZ) = RHOS(IX,IZ)*(1.+PSL(IX,IZ)) - 7.*RHOC(IX,IZ)*(1.+PSL(IX,IZ))/PSI(IX,IZ)**8
     END DO
   END DO
-
-!   write(6,*)'ciao'
 
   ! ...................
   ! Solve the problem in theta with series expansion in legendre polynomials
@@ -1310,7 +1283,7 @@ SUBROUTINE LAPSE(RHOS,RHOC) !!! QUI
       if(isnan(phi(ix,iz))) stop 'PHIIII'
     END DO
   END DO
-!   WRITE(6,*)'LAPSE ',1.+PSIOLD(1,1),1.+PSL(1,1),RHOS(1,1),RHOC(1,1)
+
   ERROR=MAXVAL(ABS(PSIOLD(1:NTH,1:NR)-PSL(1:NTH,1:NR)))
   IF(VERBOSE .AND. (.NOT. MPICODE)) WRITE(6,*)'Max err Lapse= ',error
   IF(ERROR .LT. TOLCONV)EXIT
@@ -1321,7 +1294,7 @@ END SUBROUTINE LAPSE
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE SHIFTPHI(RHOS)!!! QUI
+SUBROUTINE SHIFTPHI(RHOS)
 
 !   ============================================================
 !   Purpose : This subroutine solve the axisymmetric eq. for the
@@ -1523,7 +1496,7 @@ END SUBROUTINE  SHIFTPHI
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE CURV1 !!! QUI
+SUBROUTINE CURV1 
 
 !   ============================================================
 !   Purpose : This subroutine computes the term A^ij * A_ij that
@@ -1621,7 +1594,7 @@ END SUBROUTINE CURV1
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE CURV2 !!! QUI
+SUBROUTINE CURV2
 
 !   ============================================================
 !   Purpose : This subroutine computes the term A^ij * A_ij that
@@ -1737,7 +1710,7 @@ END SUBROUTINE CURV2
 ! ***************************************************************************
 ! ***************************************************************************
 
-SUBROUTINE SOURCECHI(DRMETTERM1,DTMETTERM1) !!! QUI
+SUBROUTINE SOURCECHI(DRMETTERM1,DTMETTERM1) 
 !---------------------------------------------------------
 ! Compute the metric terms and metric derivatives used in
 ! the source terms of the scalar field equation
@@ -1787,14 +1760,13 @@ SUBROUTINE SOURCECHI(DRMETTERM1,DTMETTERM1) !!! QUI
 
     END DO
   END DO
-! write(6,*)'metterm ',drmetterm1(2,50),drmetterm1(199,50)
 
 END SUBROUTINE SOURCECHI
 
 ! ***************************************************************************
 ! ***************************************************************************
 
-SUBROUTINE SOLVECHI(RHO) !!! QUI
+SUBROUTINE SOLVECHI(RHO) 
   !  ============================================================
   !  Purpose : this subroutine solves for the scalar field
   !     equation. The procedure and notation are similar to the
@@ -1809,7 +1781,6 @@ SUBROUTINE SOLVECHI(RHO) !!! QUI
   IMPLICIT NONE
 
   REAL, DIMENSION(-1:NTH+2,0:NR+1) :: RHO
-!   REAL, DIMENSION(0:NTH,0:NR) :: METERM1,DRMETTERM1,DTMETTERM1
 
   INTEGER :: I, INFO
   ! Array for the Legendre expansion
@@ -1930,7 +1901,7 @@ SUBROUTINE SOLVECHI(RHO) !!! QUI
   ! Compute the matrix of Legendre Polyn in the grid points
   DO IX=1,NTH
 
-    CALL LPN(MLS,XX(IX),PNX(0:MLS),PDX(0:MLS))		! P_l(cos theta) functions in eq. 73 BD 2011
+    CALL LPN(MLS,XX(IX),PNX(0:MLS),PDX(0:MLS))	! P_l(cos theta) functions in eq. 73 BD 2011
 
     ! Compute the scalar field on the grid
     DO IZ=1,NR
@@ -1944,7 +1915,7 @@ END SUBROUTINE SOLVECHI
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE CHISOL(TRACEMM) !!! QUI
+SUBROUTINE CHISOL(TRACEMM)
 
 !  =============================================================
 !  Purpose: this subroutine solves the scalar field equation.
@@ -1964,7 +1935,7 @@ SUBROUTINE CHISOL(TRACEMM) !!! QUI
 
   INTEGER, PARAMETER :: MAXIT = 100 !1500
   INTEGER :: I, INFO,ILOOP
-	REAL, DIMENSION(-1:NTH+2,0:NR+1) :: DCHIDR,DCHIDT!,DRMETTERM2,DTMETTERM2
+  REAL, DIMENSION(-1:NTH+2,0:NR+1) :: DCHIDR,DCHIDT!,DRMETTERM2,DTMETTERM2
   REAL, DIMENSION(0:NTH+1,0:NR+1) :: DRMETTERM2,DTMETTERM2
   REAL, DIMENSION(-1:NTH+2,0:NR+1) :: RHO,CHIOLD,RHOSCAL,CHIOLD2
   REAL, DIMENSION(1:NTH,1:NR) :: TRACEMM
@@ -2031,9 +2002,8 @@ SUBROUTINE CHISOL(TRACEMM) !!! QUI
 
            ASCAL(IX,IZ) = EXP(ALPHA0*(CHI(IX,IZ)-CHIINF)+0.5*BETA0*(CHI(IX,IZ)-CHIINF)**2)
            TERM1=-4.*PI*ASCAL(IX,IZ)**4*TRACEMM(IX,IZ)
-           TERM2=ALPHA0+BETA0*(CHI(IX,IZ)-CHIINF)																! GENERALIZZARE
+           TERM2=ALPHA0+BETA0*(CHI(IX,IZ)-CHIINF)															
            RHOSCAL(IX,IZ)=TERM1*TERM2
-
            ! Impose vacuum outside the star
            ! IF(IZ .GT. WSURF(IX)) RHOSCAL(IX,IZ)=0.
 
@@ -2052,7 +2022,6 @@ SUBROUTINE CHISOL(TRACEMM) !!! QUI
            TERM2b=1./R(IZ)**2*DTMETTERM2(IX,IZ)*DCHIDT(IX,IZ)
            TERM2 = -(TERM2a + TERM2b)
 
-           ! IF(IZ .GT. WSURF(IX)) TERM1=0. !Redundant
            RHO(IX,IZ)= TERM1 + TERM2
 
         END DO

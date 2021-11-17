@@ -2,24 +2,24 @@ MODULE ROTATION
   !   ============================================================
   !   Purpose : This module contains subroutines for a differential rotator
   !   ============================================================
-
- USE SYSTEMXNS, ONLY: DIFFERENTIAL,OMGSPACE
- USE SYSTEMXNS, ONLY: JCONSTLAW,JCMODLAW,URYULAW3,URYULAW4
- USE SYSTEMXNS, ONLY: PROTDIFF,A2VALUE,RMVALUE
- USE SYSTEMXNS, ONLY: OMG,OMGMAX,NR,NTH
- USE SYSTEMXNS, ONLY: PSI,PSL,PSS,R,TH
- IMPLICIT NONE
-
- PRIVATE
- PUBLIC :: CHECKROTDIFF,OMEGAVALUE,OMEGA3LVALUE
-
- REAL :: JMAX,XVAL,YVAL
-
+  
+  USE SYSTEMXNS, ONLY: DIFFERENTIAL,OMGSPACE
+  USE SYSTEMXNS, ONLY: JCONSTLAW,JCMODLAW,URYULAW3,URYULAW4
+  USE SYSTEMXNS, ONLY: PROTDIFF,A2VALUE,RMVALUE
+  USE SYSTEMXNS, ONLY: OMG,OMGMAX,NR,NTH
+  USE SYSTEMXNS, ONLY: PSI,PSL,PSS,R,TH
+  IMPLICIT NONE
+  
+  PRIVATE
+  PUBLIC :: CHECKROTDIFF,OMEGAVALUE,OMEGA3LVALUE
+  
+  REAL :: JMAX,XVAL,YVAL
+  
 CONTAINS
-
+  
 ! ********************************************************
-! PUBLIC ROUTINES
 ! ********************************************************
+  
 SUBROUTINE CHECKROTDIFF()
   !  ============================================================
   !  Purpose : check for consistency
@@ -30,14 +30,14 @@ SUBROUTINE CHECKROTDIFF()
   INTEGER,PARAMETER :: N_JS=2
   INTEGER :: TOT_OS,TOT_JS,TOT
   REAL :: CHECK_LIMIT,MVAL
-
+  
   !=== Check for logical parameters ===
   ALLOCATE(MASK_OS(N_OS),MASK_JS(N_JS))
   ALLOCATE(STR_OS(N_OS),STR_JS(N_JS),VAR(1))
-
+  
   MASK_OS = (/JCONSTLAW,JCMODLAW/)
   STR_OS = [CHARACTER(len=2000) :: 'JCONSTLAW','JCMODLAW']
-
+  
   MASK_JS = (/URYULAW3,URYULAW4/)
   STR_JS = [CHARACTER(len=2000) :: 'URYULAW3','URYULAW4']
 
@@ -103,6 +103,9 @@ SUBROUTINE CHECKROTDIFF()
 
 END SUBROUTINE CHECKROTDIFF
 
+! ********************************************************
+! ********************************************************
+
 SUBROUTINE OMEGAVALUE(BETALOC,RSTARLOC,OMEGALOC)
   !   ============================================================
   !   Purpose : evaluate OMEGALOC
@@ -142,6 +145,9 @@ SUBROUTINE OMEGAVALUE(BETALOC,RSTARLOC,OMEGALOC)
 
 END SUBROUTINE OMEGAVALUE
 
+! ********************************************************
+! ********************************************************
+
 SUBROUTINE OMEGA3LVALUE(BETALOC,RSTARLOC,OMEGALOC,A3L)
   !   ============================================================
   !   Purpose : evaluate OMEGALOC and A3L
@@ -164,7 +170,6 @@ SUBROUTINE OMEGA3LVALUE(BETALOC,RSTARLOC,OMEGALOC,A3L)
   ENDIF
 
 END SUBROUTINE OMEGA3LVALUE
-
 
 ! ********************************************************
 ! ********************************************************
@@ -208,6 +213,9 @@ SUBROUTINE FODFO_OS(BETALOC,RSTARLOC,OMEGALOC,FO,DFO)
   ENDIF
 
 END SUBROUTINE FODFO_OS
+
+! ********************************************************
+! ********************************************************
 
 SUBROUTINE A3L_OS(OMEGALOC,A3L)
   !   ============================================================
@@ -272,6 +280,9 @@ SUBROUTINE PARS_VALUE_JS()
 
 END SUBROUTINE PARS_VALUE_JS
 
+! ********************************************************
+! ********************************************************
+
 SUBROUTINE FODFO_JS(BETALOC,RSTARLOC,OMEGALOC,FO,DFO)
   !   ============================================================
   !   Purpose : evaluate FO and DFO in the J-space for a differential rotator
@@ -313,6 +324,9 @@ SUBROUTINE FODFO_JS(BETALOC,RSTARLOC,OMEGALOC,FO,DFO)
 
 END SUBROUTINE FODFO_JS
 
+! ********************************************************
+! ********************************************************
+
 SUBROUTINE A3L_JS(BETALOC,RSTARLOC,OMEGALOC,A3L)
   !   ============================================================
   !   Purpose : evaluate A3L in the Omega-space for a differential rotator
@@ -353,5 +367,5 @@ SUBROUTINE A3L_JS(BETALOC,RSTARLOC,OMEGALOC,A3L)
 END SUBROUTINE A3L_JS
 
 ! ********************************************************
-
+! ********************************************************
 END MODULE ROTATION

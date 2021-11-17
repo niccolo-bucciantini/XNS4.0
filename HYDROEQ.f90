@@ -1,5 +1,4 @@
 SUBROUTINE HYDROEQ(RHOVAR,ILOOP)
-  ! ciao
   !  ============================================================
   !  Purpose : This program solve for hydrostatic equlibrium in
   !            a given CFC metric -
@@ -28,7 +27,7 @@ SUBROUTINE HYDROEQ(RHOVAR,ILOOP)
   REAL :: BCENT,PCENT,ENTCENT
   REAL :: TOL,X0,X1,X2
   REAL :: RHOCENT,ECENT,HCENT,RHOTMP
-  REAL :: ALF1,ALF2,LPS1,LPS2,ASCAL1,ASCAL2,ALF0,LPS0,ASCAL0,NU0,NUC																!!!STT!!!
+  REAL :: ALF1,ALF2,LPS1,LPS2,ASCAL1,ASCAL2,ALF0,LPS0,ASCAL0,NU0,NUC		
   REAL :: BPOT
 
 
@@ -49,7 +48,7 @@ SUBROUTINE HYDROEQ(RHOVAR,ILOOP)
   ASCAL2=ASCAL(ICENT,2)
   ALF0=(ALF1*R(2)**2-ALF2*R(1)**2)/(R(2)**2-R(1)**2)
   LPS0=(LPS1*R(2)**2-LPS2*R(1)**2)/(R(2)**2-R(1)**2)
-  NU0=LOG(LPS0/ALF0)		! nu0=log(alpha) -> diverso da nu=log(alpha^2)
+  NU0=LOG(LPS0/ALF0)		! nu0 = log(alpha) -> diverso da nu = log(alpha^2)
   ASCAL0=(ASCAL1*R(2)**2-ASCAL2*R(1)**2)/(R(2)**2-R(1)**2)
   NUC=(NU(1)*R(2)**2-NU(2)*R(1)**2)/(R(2)**2-R(1)**2)	! Computed on TOVINI
 
@@ -70,31 +69,25 @@ SUBROUTINE HYDROEQ(RHOVAR,ILOOP)
   ! Beware: not associated with RHOCENT or RHOVAR for ease of convergence
   IF(EOSINT)THEN
      ! Different choices depending on stability. First one preferred.
-     ! WRITE(6,*)'RHO CENTRAL 1',RHOCENT,RHOVAR
      RHOTMP=2*RHOVAR-RHOCENT
      CALL RHO2EOS(RHOTMP,PCENT,ECENT,ENTCENT)
-     ! CALL RHO2EOS(RHOCENT,PCENT,ECENT,ENTCENT)
 
      BCENT=ENTCENT+NU0+LOG(ASCAL0)
-     ! WRITE(6,*)'BCENT T',ENTCENT
   ELSE
      ! Different choices depending on stability. First one preferred.
      PCENT=K1*RHOVAR**GAMMA
-     ! 	PCENT=K1*RHOCENT**GAMMA
-
+   
      ! Derive central energy density
      ECENT=RHOCENT+PCENT/(GAMMA-1.)
 
      !Computing the bernoulli integral for equlibrium
      HCENT=1.+GAMMA/(GAMMA-1.)*PCENT/RHOCENT
      BCENT=LOG(HCENT)+NU0+LOG(ASCAL0)
-     ! WRITE(6,*)'BCENT F',LOG(HCENT)
   ENDIF
 
   ! Different choices depending on stability. First one preferred.
-  ! 	PCENT = RTSAFEG(X0,X1,X2,TOL,RHOVAR,FUNCD_EOS)
-  !   PCENT = RTSAFEG(X0,X1,X2,TOL,RHOCENT,FUNCD_EOS)
-  !   WRITE(6,*)'PCENT',PCENT,K1*RHOVAR**GAMMA
+  ! PCENT = RTSAFEG(X0,X1,X2,TOL,RHOVAR,FUNCD_EOS)
+  ! PCENT = RTSAFEG(X0,X1,X2,TOL,RHOCENT,FUNCD_EOS)
 
   IF(tol .EQ. -1.) THEN
      WRITE(6,*)"ERROR: from HYDROEQ, RTSAFEG failure, root must be bracketed",RHOCENT,NUC,NU0
@@ -120,16 +113,17 @@ SUBROUTINE HYDROEQ(RHOVAR,ILOOP)
   !*********************************************************
 
 SUBROUTINE HYDROVAR(BCENT,PCENT)
-  !---------------------------------------------------------
-  ! Computation of hydrodynamic quantities (RHONEW,PNEW,ENEW
-  ! V3NEW) for unmagnetized models
-  !---------------------------------------------------------
+  !  ============================================================
+  !  Purpose :  Computation of hydrodynamic quantities (RHONEW,PNEW,ENEW
+  !  V3NEW) for unmagnetized models
+  !  ============================================================
 
   USE SYSTEMXNS
   USE PHYSICS
   USE FUNCTIONS
   USE ROTATION, ONLY: OMEGA3LVALUE
   IMPLICIT NONE
+  
   REAL, INTENT(IN) :: BCENT, PCENT
   REAL :: P, RHO, EN, POLD, PNEWLOC
   REAL :: NULOC, POR, HENT, ENT
@@ -137,7 +131,7 @@ SUBROUTINE HYDROVAR(BCENT,PCENT)
   REAL :: RSTARLOC,V3LOC,V3L,A3L
 
   LOGICAL :: SURF
-!   write(6,*)'before',rhonew(1,1)
+
   DO IX=1,NTH
      SURF=.TRUE.
      DO IZ=1,NR
@@ -155,40 +149,31 @@ SUBROUTINE HYDROVAR(BCENT,PCENT)
            CALL ENT2EOS(LOG(HENT),RHO)
            CALL RHO2EOS(RHO,P,EN,ENT)
            POR=P/RHO
-        ELSE
-        								! p
-!         PNEW(IX,IZ)=MAX(QFACTOR*P+(1.-QFACTOR)*PSRC(IX,IZ),1.E-15)		! p modified with damping factor Q
+        ELSE								! p
+!         PNEW(IX,IZ)=MAX(QFACTOR*P+(1.-QFACTOR)*PSRC(IX,IZ),1.E-15)	! p modified with damping factor Q
 !         P=MIN(PNEW(IX,IZ),PCENT)
-
            POR=(HENT-1.)*(GAMMA-1.)/GAMMA		! p/rho
            P=((POR**GAMMA)/K1)**(1./(GAMMA-1.))
            CALL EOS(P,RHO,EN)
         ENDIF
         !Compute the local equilibrium  v^phi and B^phi
-        V3NEW(IX,IZ)=MAX(QFACTOR*(OMGN+PSS(IX,IZ))/(ASCAL(IX,IZ)*EXP(NULOC)) +(1.-QFACTOR)*VPHI(IX,IZ),0.)! v^phi modified with damping factor Q !!!STT!!!
+        V3NEW(IX,IZ)=MAX(QFACTOR*(OMGN+PSS(IX,IZ))/(ASCAL(IX,IZ)*EXP(NULOC)) +(1.-QFACTOR)*VPHI(IX,IZ),0.)! v^phi modified with damping factor Q 
         B3NEW(IX,IZ)=0.
-        ! IF(IX==NTH/2 .AND. IZ .LE. 230)THEN
-        !    WRITE(6,*)'NEW 1',IZ,HENT,RHO,P
-        ! ENDIF
+    
         !Maximum radius for the stability of the convergence scheme (to be changes id needed)
         IF((R(iz) .GT. REQMAX) .OR. (RHO .LE. 1.0E-12))THEN
            POR=0.
-!            if(ix==1 .and. iz==1)write(6,*)'ciao',rho
         END IF
 
         !Compute local equilibrium pressure, density and energy density (reset velocity outside star)
         IF(POR .GT. 0 .AND. SURF)THEN
            IF(EOSINT)THEN
-              ! PNEWLOC=MAX(QFACTOR*P+(1.-QFACTOR)*PSRC(IX,IZ),1.E-18)
               PNEWLOC=MAX(EXP(QFACTOR*LOG(P)+(1.-QFACTOR)*LOG(PSRC(IX,IZ))),1.E-18)
               CALL PRS2EOS(PNEWLOC,RHO)
               CALL RHO2EOS(RHO,P,EN,ENT)
               RHONEW(IX,IZ)=MAX(RHO,1.E-15)
               ENEW(IX,IZ)=MAX(EN,1.E-18)
               PNEW(IX,IZ)=MAX(P,1.E-18)
-              ! IF(IX==NTH/2 .AND. IZ .LE. 230)THEN
-              ! WRITE(6,*)'NEW 2',IZ,RHONEW(IX,IZ),PNEW(IX,IZ)
-              ! ENDIF
            ELSE
               P=((POR**GAMMA)/K1)**(1./(GAMMA-1.))				! p
               PNEW(IX,IZ)=MAX(QFACTOR*P+(1.-QFACTOR)*PSRC(IX,IZ),1.E-15)	! p modified with damping factor Q
@@ -225,21 +210,22 @@ SUBROUTINE HYDROVAR(BCENT,PCENT)
         END IF
      END DO
   END DO
-! write(6,*)'after',rhonew(1,1)
+
 END SUBROUTINE HYDROVAR
 
 !*********************************************************
 !*********************************************************
 
 SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
-  !---------------------------------------------------------
-  !  Computation of hydrodynamic quantities (RHONEW,PNEW,ENEW
+  !  ============================================================
+  !  Purpose : Computation of hydrodynamic quantities (RHONEW,PNEW,ENEW
   !  V3NEW,B3NEW) for models with purely toroidal magnetic
   !  field.
-  !---------------------------------------------------------
+  !  ============================================================
 
   USE SYSTEMXNS
   USE FUNCTIONS
+  USE PHYSICS
   USE ROTATION, ONLY: OMEGA3LVALUE
   IMPLICIT NONE
   REAL, INTENT(IN) :: BCENT, PCENT
@@ -258,8 +244,8 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
 
   LOGICAL :: SURF
 
-  REQMAXOLD=REQMAX  ! METTERE FUORI DAL LOOP
-  ! WRITE(6,*)'BCENT',BCENT,PCENT
+  REQMAXOLD = REQMAX  
+
   DO IX=1,NTH
      SURF=.TRUE.
      DO IZ=1,NR
@@ -275,7 +261,7 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
         HENTMAG=BCENT-LOG(ASCAL(IX,IZ))-NULOC-V3L+A3L
 
         !Compute local equilibrium pressure, density and energy density (reset velocity outside star)
-        PGUESS=MAX(PSRC(IX,IZ),1.E-18) !!!!!!!! PROVARE A LEVARE IL MAX
+        PGUESS=MAX(PSRC(IX,IZ),1.E-18) 
 
         ALPH2GPP=(PSL(IX,IZ)*PSI(IX,IZ)*R(IZ)*SIN(TH(IX)))**2	! alpha^2*g_phiphi
 
@@ -283,11 +269,9 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
            IF(EOSINT)THEN
               CALL PRS2EOS(PGUESS,RHOGUESS)
               CALL RHO2EOS(RHOGUESS,PGUESS,EGUESS,LOGHGUESS)
-              ! IF((IZ .EQ. 75) .AND. (IX .EQ. 100))WRITE(6,*)'1 EOSINT T',PGUESS,RHOGUESS,LOGHGUESS,BCENT,NULOC,PSI(IX,IZ),PSL(IX,IZ)
            ELSE
               CALL EOS(PGUESS,RHOGUESS,EGUESS)
               LOGHGUESS=LOG(1+GAMMA/(GAMMA-1)*PGUESS/RHOGUESS)
-              ! IF((IZ .EQ. 75) .AND. (IX .EQ. 100))WRITE(6,*)'1 EOSINT F',PGUESS,RHOGUESS,LOGHGUESS,BCENT,NULOC,PSI(IX,IZ),PSL(IX,IZ)
            ENDIF
            ALPH2GPP=(PSL(IX,IZ)*PSI(IX,IZ)*R(IZ)*SIN(TH(IX)))**2	! alpha^2*g_phiphi
            FF=LOGHGUESS+BCOEF**2*(MAGIND/(2*MAGIND-1))*(RHOGUESS*(EXP(LOGHGUESS))*ASCAL(IX,IZ)**4*ALPH2GPP)**(2*MAGIND-1)-HENTMAG
@@ -305,12 +289,10 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
            DER=(DFF-FF)/(DPGUESS-PGUESS)
 
            DPN=-FF/DER
-           ! IF((IZ .EQ. 1) .AND. (IX .EQ. 50))WRITE(6,*)'PGUESS2',IX,IZ,PGUESS,RHOGUESS,LOGHGUESS
-           ! IF((IZ .EQ. 1) .AND. (IX .EQ. 50))WRITE(6,*)'DPGUESS',IX,IZ,DPGUESS,DRHOGUESS,DLOGHGUESS,PGUESS+DPN
+        
            IF (ABS(DPN)<TOLL*PGUESS) EXIT
-           ! PGUESS=MAX(PGUESS+DPN,1.E-14)
            PGUESS=PGUESS+DPN
-           B3=BCOEF*(EXP(LOGHGUESS)*RHOGUESS*ASCAL(IX,IZ)**4*ALPH2GPP)**MAGIND / ALPH2GPP *(PSL(IX,IZ)/PSI(IX,IZ))/ASCAL(IX,IZ)**3     ! B^phi !!!STT!!!
+           B3=BCOEF*(EXP(LOGHGUESS)*RHOGUESS*ASCAL(IX,IZ)**4*ALPH2GPP)**MAGIND / ALPH2GPP *(PSL(IX,IZ)/PSI(IX,IZ))/ASCAL(IX,IZ)**3     ! B^phi
 
         END DO
 
@@ -319,19 +301,17 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
         V3NEW(IX,IZ)=MAX(QFACTOR*(OMGN+PSS(IX,IZ))/(ASCAL(IX,IZ)*EXP(NULOC)) +(1.-QFACTOR)*VPHI(IX,IZ),0.)
         ! Maximum radius for the stability of the convergence scheme (to be changes id needed)
         POR=PGUESS/RHOGUESS
-        ! IF((IZ .EQ. 75) .AND. (IX .EQ. 100))WRITE(6,*)'RHOGUESS',RHOGUESS,IX,IZ,PGUESS
-        IF((R(iz) .GT. REQMAX) .AND. (REQMAX .LT. RMAXSTR/1.2))THEN
+      
+        IF((R(IZ) .GT. REQMAX) .AND. (REQMAX .LT. RMAXSTR/1.2))THEN
            IF(RHOGUESS .LT. 1.0E-8)THEN
               POR=0.
            ELSE
-              WRITE(6,*)'ERROR: star extends beyond REQMAX'
-              STOP
-!               REQMAX = REQMAX*1.
+              !WRITE(6,*)'ERROR: star extends beyond REQMAX'
+              POR=0.
            END IF
         END IF
 
         ! Compute local equilibrium pressure, density and energy density (reset velocity outside star)
-        !IF(RHOGUESS .GT. 1.0E-8 .AND. SURF)THEN
         IF(POR .GT. 0 .AND. SURF)THEN
            IF(EOSINT)THEN
               P=PGUESS
@@ -350,7 +330,6 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
               RHONEW(IX,IZ)=MAX(RHO,1.E-12)
               ENEW(IX,IZ)=MAX(EN,1.E-12)
            ENDIF
-           ! POLD=PSRC(IX,IZ)
            B3NEW(IX,IZ)=QFACTOR*B3+(1.-QFACTOR)*BPHI(IX,IZ)
            IF(P .LT. 1.E-12)THEN
               V3NEW(IX,IZ)=0.
@@ -378,7 +357,7 @@ SUBROUTINE HYDROVAR_TOR(BCENT,PCENT)
            V3NEW(IX,IZ)=0.
            B3NEW(IX,IZ)=0.
         END IF
-        ! WRITE(6,*)'RHONEW ENEW',RHONEW(1,1),ENEW(1,1)
+
      END DO
   END DO
 
@@ -389,15 +368,16 @@ END SUBROUTINE HYDROVAR_TOR
 !*********************************************************
 !*********************************************************
 
-SUBROUTINE HYDROVAR_POL(BCENT,PCENT,ILOOP)		 !!! QUI
-!---------------------------------------------------------
-!  Computation of hydrodynamic quantities (RHONEW,PNEW,ENEW
-!  V3NEW,B3NEW,BPOLR,BPOLT,E3NEW,EPOLR,EPOLT) for models with
-!  poloidal magnetic field.
-!---------------------------------------------------------
+SUBROUTINE HYDROVAR_POL(BCENT,PCENT,ILOOP)	
+  !  ============================================================
+  !  Purpose : Computation of hydrodynamic quantities (RHONEW,PNEW,ENEW
+  !  V3NEW,B3NEW,BPOLR,BPOLT,E3NEW,EPOLR,EPOLT) for models with
+  !  poloidal magnetic field.
+  !  ============================================================
 
   USE SYSTEMXNS
   USE FUNCTIONS
+  USE PHYSICS
   USE ROTATION, ONLY: OMEGA3LVALUE
   IMPLICIT NONE
   REAL, INTENT(IN) :: BCENT,PCENT
@@ -538,7 +518,7 @@ SUBROUTINE HYDROVAR_POL(BCENT,PCENT,ILOOP)		 !!! QUI
         OMGN=OMEGALOC
 
         NULOC=LOG(PSL(IX,IZ)/PSI(IX,IZ))
-        V3LOC =MIN((OMGN+PSS(IX,IZ))*R(IZ)*SIN(TH(IX))/EXP(NULOC)*PSI(IX,IZ)**2/ASCAL(IX,IZ),0.9999999)								!!!STT!!!
+        V3LOC =MIN((OMGN+PSS(IX,IZ))*R(IZ)*SIN(TH(IX))/EXP(NULOC)*PSI(IX,IZ)**2/ASCAL(IX,IZ),0.9999999)	
         V3L=0.5*LOG(1.-V3LOC**2)
 
         !Compute the magnetization function BPOT=-M(A_phi)
@@ -583,7 +563,7 @@ SUBROUTINE HYDROVAR_POL(BCENT,PCENT,ILOOP)		 !!! QUI
               ENEW(IX,IZ)=MAX(EN,1.E-18)
               PNEW(IX,IZ)=MAX(P,1.E-18)
            ELSE
-              P=((POR**GAMMA)/K1)**(1./(GAMMA-1.))				! p
+              P=((POR**GAMMA)/K1)**(1./(GAMMA-1.))			! p
               PNEW(IX,IZ)=MAX(QFACTOR*P+(1.-QFACTOR)*PSRC(IX,IZ),1.E-15)! p modified with damping factor Q
               P = PNEW(IX,IZ)
               CALL EOS(P,RHO,EN)
@@ -623,7 +603,10 @@ END SUBROUTINE HYDROVAR_POL
 ! ********************************************************
 
 SUBROUTINE COVTERM(IXX,IZZ)
-
+  !  ============================================================
+  !  Purpose : Compute the metric terms
+  !  ============================================================
+  
   USE SYSTEMXNS
   IMPLICIT NONE
 
@@ -642,7 +625,9 @@ END SUBROUTINE COVTERM
 ! ********************************************************
 
 SUBROUTINE CONS_TO_PRIM(U,SY2,D,BY2,DENS,PRESS,VELOC,BMG,SSC)
-
+  !  ============================================================
+  !  Purpose : Compute primitive from conserved
+  !  ============================================================
   USE SYSTEMXNS
   IMPLICIT NONE
 
@@ -663,7 +648,7 @@ SUBROUTINE CONS_TO_PRIM(U,SY2,D,BY2,DENS,PRESS,VELOC,BMG,SSC)
   ! Non magnetic case!
   IF(.NOT. IMAG)THEN
      ! Initial guess
-     W=(SQRT(2.*(ET)+MAX(4.*(ET)**2-3.*(S2),0.)))/3.    ! COS'È W???
+     W=(SQRT(2.*(ET)+MAX(4.*(ET)**2-3.*(S2),0.)))/3.  
      DO ITER=1,ITER_MAX
         V2=(S2)/(W**2)
         RH=D*SQRT(MAX(EPS1,1.-V2))
@@ -744,7 +729,6 @@ SUBROUTINE CONS_TO_PRIM(U,SY2,D,BY2,DENS,PRESS,VELOC,BMG,SSC)
 
  ! In the limit of purely toroidal magnetic field and velocity
  SSC=(DENS+GAMMA/(GAMMA-1)*PRESS)*V2/(1.-V2)-B2+3*(PRESS+0.5*B2)
- !   WRITE(6,*)'CTP UNMAG',V2,DENS,PRESS,W,ET,U,S2,D
 
 END SUBROUTINE CONS_TO_PRIM
 
@@ -752,9 +736,13 @@ END SUBROUTINE CONS_TO_PRIM
 ! ********************************************************
 
 SUBROUTINE CONS_TO_PRIM_POL(U,SY,D,BY,BR,BT,EY,ER,ET,DENS,PRESS,VELOC,SSC,IXT,IZT)
-
+  !  ============================================================
+  !  Purpose : Compute primitive from conserved - poloidal
+  !  ============================================================
+  
   USE SYSTEMXNS
   USE FUNCTIONS
+  USE PHYSICS
   IMPLICIT NONE
 
   REAL :: U,SY,D,BY,BR,BT,EY,ER,ET,DENS,PRESS,VELOC,SSC
@@ -766,9 +754,9 @@ SUBROUTINE CONS_TO_PRIM_POL(U,SY,D,BY,BR,BT,EY,ER,ET,DENS,PRESS,VELOC,SSC,IXT,IZ
 
   GAM=(GAMMA-1.)/GAMMA
 
-  S2=SY*SY/GCOVP/ASCAL(IX,IZ)**2	         				 !Ok (poloidal altrimenti manca il termine -B(v scalar B))				!!!STT!!!
-  B2=ASCAL(IX,IZ)**2*(BY*BY*GCOVP+BR*BR*GCOVR+BT*BT*GCOVT)	 !OK
-  SB2=(SY*BY)**2.      						 				 ! ok, ma nel mio caso e' nullo
+  S2=SY*SY/GCOVP/ASCAL(IX,IZ)**2
+  B2=ASCAL(IX,IZ)**2*(BY*BY*GCOVP+BR*BR*GCOVR+BT*BT*GCOVT)
+  SB2=(SY*BY)**2.      		
 
 
   !IF(ABS(SY).LE.TOL1)THEN
@@ -776,11 +764,10 @@ SUBROUTINE CONS_TO_PRIM_POL(U,SY,D,BY,BR,BT,EY,ER,ET,DENS,PRESS,VELOC,SSC,IXT,IZ
     VELOC = 0.
     V2=0.
     VYCOV=0.
-    EL2=(EY*EY/GCOVP+ER*ER/GCOVR+ET*ET/GCOVT)/ASCAL(IX,IZ)**2																		!!!STT!!!
+    EL2=(EY*EY/GCOVP+ER*ER/GCOVR+ET*ET/GCOVT)/ASCAL(IX,IZ)**2																	
     PRESS = EPS1 !(U-0.5*B2-D)*(GAMMA-1.)
     CALL EOS(PRESS,DENS,ENT)
-!     WRITE(6,*)'INSIDE CTP2',D,RHO,V2
-    !DENS  = D
+
   END IF
 
   !IF(ABS(SY).GT.TOL1)THEN
@@ -818,14 +805,14 @@ SUBROUTINE CONS_TO_PRIM_POL(U,SY,D,BY,BR,BT,EY,ER,ET,DENS,PRESS,VELOC,SSC,IXT,IZ
     DENS=D*SQRT(MAX(EPS1,1.-V2))
     VELOC=SQRT(V2)
 
-    VYCOV = VELOC*SQRT(GCOVP)*ASCAL(IX,IZ)																							!!!STT!!!
+    VYCOV = VELOC*SQRT(GCOVP)*ASCAL(IX,IZ)																						
     ET = -GM*(VYCOV*BR*GCOVR)/ASCAL(IX,IZ)
     ER =  GM*(VYCOV*BT*GCOVT)/ASCAL(IX,IZ)
     EL2 = ASCAL(IX,IZ)**2*(ET**2*GCOVT +ER**2*GCOVR)
-!   	WRITE(6,*)'INSIDE CTP1',D,RHO,V2
+
   END IF
 
-  SY=W*VYCOV+ASCAL(IX,IZ)**3*GP*(ER*BT-ET*BR) 																						!!!STT!!!
+  SY=W*VYCOV+ASCAL(IX,IZ)**3*GP*(ER*BT-ET*BR) 																					
   D=RHO/SQRT(1-V2)
 
   ! Compute the source term for lapse equation
@@ -837,8 +824,12 @@ END SUBROUTINE CONS_TO_PRIM_POL
 ! ********************************************************
 
 SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
+  !  ============================================================
+  !  Purpose : Compute quantities of interest
+  !  ============================================================
 
   USE SYSTEMXNS
+  USE PHYSICS
   USE ROTATION, ONLY: OMEGAVALUE
   IMPLICIT NONE
 
@@ -858,6 +849,7 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
   REAL :: EPOLO,ECHRG,ECHRGIN,E2,EEBB
   REAL :: JMPHI,JMPHIIN,JMPHIEXT,DIPM
   REAL :: HH,HHTOR,HHTOREXT,HHTORIN,HHPOL,FLUX,HHE
+  REAL :: TMPCOS,Q00FIN,Q00MID,QUADGR
 
   REAL,DIMENSION(1:NTH,1:NR) :: B2VEC,DCHIDR,DCHIDT
 
@@ -873,6 +865,7 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
   SCHARGE=0.; TQUAD=0.; TMONO=0.;
   SQUAD=0; IXXM=0.; IZZM=0.;
   IXXS=0.; IZZS=0.;IXX=0.; IZZ=0.;
+  TMPCOS=0.; Q00FIN=0.; Q00MID=0.; QUADGR=0.; 
 
   ! initialise the boundary conditions for chi
   CHI(1:NTH,0)=CHI(1:NTH,1)
@@ -880,223 +873,237 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
   CHI(0,0:NR+1)=CHI(1,0:NR+1)
   CHI(NTH+1,0:NR+1)=CHI(NTH,0:NR+1)
 
-	WRITE(6,*)'WSURF',WSURF(1),WSURF(NTH/2)
+  WRITE(6,*)'WSURF',WSURF(1),WSURF(NTH/2)
 
-  IF(.NOT.(IPOL.OR.ITWT))THEN
-  DO IX=1,NTH
-    SINIX=SIN(TH(IX))
-    DTT=DTH(IX)
-    IF(NTH .EQ. 1)THEN
-      SINIX=2.
-      DTT=1.
-    END IF
-
-    DO IZ=1,WSURF(IX)
-       V2=V3NEW(IX,IZ)*V3NEW(IX,IZ)*R(IZ)**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4*SINIX**2
-       GLF=1./SQRT(1.-V2)
-       B2=B3NEW(IX,IZ)*B3NEW(IX,IZ)*R(IZ)**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4*SINIX**2
-       B2MAX=MAX(B2,B2MAX)
-       !IF(IX .eq. 1 .and. IZ .eq. 1) BCENT = sqrt(B2)
-       !IF(IX .eq. 1 .AND. IZ .eq. WSURF(1) ) BPOLO = sqrt(B2)
-
-       BETALOC=PSS(IX,IZ)
-       RSTARLOC=(R(IZ)*SINIX*PSI(IX,IZ)**3/PSL(IX,IZ))**2
-       CALL OMEGAVALUE(BETALOC,RSTARLOC,OMEGALOC)
-       OMGN=OMEGALOC
-       IF(IX .EQ. NTH/2+1 .AND. PNEW(IX,IZ) .GT. 1.E-15) THEN
-          OMGEQ=OMGN
+ IF(.NOT.(IPOL.OR.ITWT))THEN
+    DO IX=1,NTH
+       SINIX=SIN(TH(IX))
+       DTT=DTH(IX)
+       IF(NTH .EQ. 1)THEN
+          SINIX=2.
+          DTT=1.
        END IF
-       !!! QUI
-       DET=PSI(IX,IZ)**6*R(IZ)**2*SINIX*DR(IZ)*DTT
-       MM = MM+2*PI*ASCAL(IX,IZ)**4*(2.*PNEW(IX,IZ)+(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2* &	! gravitational (Komar) mass M in the E frame
-            &(1+V2-2*PSI(IX,IZ)**3/PSL(IX,IZ)*R(IZ)*SINIX*SQRT(V2)*PSS(IX,IZ))+B2)*DET*PSL(IX,IZ)/PSI(IX,IZ)
-       ! Baryonic mass M0
-       M0 = M0+2*PI*ASCAL(IX,IZ)**3*RHONEW(IX,IZ)/MBARYONFC*GLF*DET
-       MP = MP+2*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET	! proper mass Mp in the E frame
-       MPJ = MPJ+2*PI*ASCAL(IX,IZ)**3*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET ! proper mass Mp in the J frame
-!       IF(IX .LE. 2 .and. IZ .LE. 85)WRITE(6,*)'MM',IX,IZ,MM
-       TT=TT+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2*SQRT(V2)*OMGN*R(IZ)*SINIX*DET*PSI(IX,IZ)**2 ! rotational kinetic energy in the E frame
-       IF(OMG .NE. 0)  JJ=JJ+2*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+PNEW(IX,IZ)+&	! Komar angular momentum in the E frame
-            &RHONEW(IX,IZ))*GLF**2*SQRT(V2)*R(IZ)*SINIX*DET*PSI(IX,IZ)**2
-
-       HH = HH + PI*ASCAL(IX,IZ)**3*B2*DET  ! Magnetic energy H in the J frame
-       HHE = HHE + PI*ASCAL(IX,IZ)**4*B2*DET  ! Magnetic energy H in the E frame
-       FLUX = FLUX+ASCAL(IX,IZ)**2*SQRT(B2)*PSI(IX,IZ)**4.*R(IZ)*DR(IZ)*DTT      	! flux of B^phi through meridional plane
-
-       IXXM=IXXM+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT 	! fluid's inertia moment I_xx in the E frame
-       IZZM=IZZM+2.*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX**3.*DR(IZ)*DTT          	! fluid's inertia moment I_zz in the E frame
-
-       SCHARGE=SCHARGE+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
-            &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*DET 																					! Scalar charge Q_chi in the E frame
-
-       TQUAD=TQUAD+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&			! quadrupole of the trace in the E frame (Newtonian)
-            &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*R(IZ)**4*SINIX*DR(IZ)*DTT
-       TMONO=TMONO+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&		! normalization factor for TQUAD
-            &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*R(IZ)**2*SINIX*DR(IZ)*DTT
-       ! Quadrupole of the trace in the E frame (Newtonian)
-       SQUAD=SQUAD+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
-            &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*PSI(IX,IZ)**6*R(IZ)**4*SINIX*DR(IZ)*DTT
-
+       
+       DO IZ=1,WSURF(IX)
+          V2=V3NEW(IX,IZ)*V3NEW(IX,IZ)*R(IZ)**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4*SINIX**2
+          GLF=1./SQRT(1.-V2)
+          B2=B3NEW(IX,IZ)*B3NEW(IX,IZ)*R(IZ)**2*ASCAL(IX,IZ)**2*PSI(IX,IZ)**4*SINIX**2
+          B2MAX=MAX(B2,B2MAX)
+          !IF(IX .eq. 1 .and. IZ .eq. 1) BCENT = sqrt(B2)
+          !IF(IX .eq. 1 .AND. IZ .eq. WSURF(1) ) BPOLO = sqrt(B2)
+          
+          BETALOC=PSS(IX,IZ)
+          RSTARLOC=(R(IZ)*SINIX*PSI(IX,IZ)**3/PSL(IX,IZ))**2
+          CALL OMEGAVALUE(BETALOC,RSTARLOC,OMEGALOC)
+          OMGN=OMEGALOC
+          IF(IX .EQ. NTH/2+1 .AND. PNEW(IX,IZ) .GT. 1.E-15) THEN
+             OMGEQ=OMGN
+          END IF
+          
+          DET=PSI(IX,IZ)**6*R(IZ)**2*SINIX*DR(IZ)*DTT
+          ! Gravitational (Komar) mass M in the E frame
+          MM = MM+2*PI*ASCAL(IX,IZ)**4*(2.*PNEW(IX,IZ)+(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2* &	
+               &(1+V2-2*PSI(IX,IZ)**3/PSL(IX,IZ)*R(IZ)*SINIX*SQRT(V2)*PSS(IX,IZ))+B2)*DET*PSL(IX,IZ)/PSI(IX,IZ)
+          ! Baryonic mass M0
+          M0 = M0+2*PI*ASCAL(IX,IZ)**3*RHONEW(IX,IZ)/MBARYONFC*GLF*DET
+          ! Proper mass Mp in the E frame
+          MP = MP+2*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET
+          ! Proper mass Mp in the J frame
+          MPJ = MPJ+2*PI*ASCAL(IX,IZ)**3*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET ! proper mass Mp in the J frame
+          ! Rotational kinetic energy in the E frame
+          TT=TT+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2*SQRT(V2)*OMGN*R(IZ)*SINIX*DET*PSI(IX,IZ)**2
+          ! Komar angular momentum in the E frame
+          IF(OMG .NE. 0)  JJ=JJ+2*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+PNEW(IX,IZ) + &	
+               &RHONEW(IX,IZ))*GLF**2*SQRT(V2)*R(IZ)*SINIX*DET*PSI(IX,IZ)**2
+          ! Magnetic energy H in the J frame
+          HH = HH + PI*ASCAL(IX,IZ)**3*B2*DET
+          ! Magnetic energy H in the E frame
+          HHE = HHE + PI*ASCAL(IX,IZ)**4*B2*DET
+          ! Flux of B^phi through meridional plane
+          FLUX = FLUX+ASCAL(IX,IZ)**2*SQRT(B2)*PSI(IX,IZ)**4.*R(IZ)*DR(IZ)*DTT     
+          ! Fluid's inertia moment I_xx in the E frame
+          IXXM=IXXM+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
+          ! Fluid's inertia moment I_zz in the E frame
+          IZZM=IZZM+2.*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX**3.*DR(IZ)*DTT 
+          ! Scalar charge Q_chi in the E frame
+          SCHARGE=SCHARGE+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4* &
+               &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*DET 
+          ! Quadrupole of the trace in the E frame (Newtonian)
+          TQUAD=TQUAD+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&	
+               &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*R(IZ)**4*SINIX*DR(IZ)*DTT
+          ! Normalization factor for TQUAD
+          TMONO=TMONO+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&		
+               &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*R(IZ)**2*SINIX*DR(IZ)*DTT
+          ! Quadrupole of the trace in the E frame (Newtonian)
+          SQUAD=SQUAD+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
+               &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*PSI(IX,IZ)**6*R(IZ)**4*SINIX*DR(IZ)*DTT
+       END DO
+       
+       DO IZ=1,NR
+          AA1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
+          AA2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
+          AA3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
+          BB1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
+          BB2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
+          BB3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
+          DCHIDR(IX,IZ) = AA1*CHI(IX,IZ-1)+AA3*CHI(IX,IZ+1)+AA2*CHI(IX,IZ)
+          DCHIDT(IX,IZ) = BB1*CHI(IX-1,IZ)+BB3*CHI(IX+1,IZ)+BB2*CHI(IX,IZ)
+          ! Scalar field's inertia moment I_xx in the E frame
+          IXXS=IXXS-1./8.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
+          ! Scalar field's inertia moment I_zz in the E frame
+          IZZS=IZZS-1./4.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX**3*DR(IZ)*DTT
+       END DO
     END DO
-    DO IZ=1,NR
-      AA1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
-      AA2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
-      AA3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
-      BB1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
-      BB2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
-      BB3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
-      DCHIDR(IX,IZ) = AA1*CHI(IX,IZ-1)+AA3*CHI(IX,IZ+1)+AA2*CHI(IX,IZ)
-      DCHIDT(IX,IZ) = BB1*CHI(IX-1,IZ)+BB3*CHI(IX+1,IZ)+BB2*CHI(IX,IZ)
-	  IXXS=IXXS-1./8.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT 		! scalar field's inertia moment I_xx in the E frame
- 	  IZZS=IZZS-1./4.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX**3*DR(IZ)*DTT         			! scalar field's inertia moment I_zz in the E frame
-    END DO
-  END DO
-  IXX=IXXM+IXXS																															! total inertia moments in the E frame
-  IZZ=IZZM+IZZS
-
-  HHTOR=HH
-  B2MAXTOR=B2MAx
-
-  END IF
-
-
-  IF(IPOL.OR.ITWT)THEN
-
+    ! Total inertia moments in the E frame
+    IXX=IXXM+IXXS	
+    IZZ=IZZM+IZZS
+    
+    HHTOR=HH
+    B2MAXTOR=B2MAx
+    
+ END IF
+ 
+ 
+ IF(IPOL.OR.ITWT)THEN
+    
     IF(IPOL .OR. (CUT .LT. 1.)) CUTSURF=WSURF
     DO IX=1,NTH
-      SINIX=SIN(TH(IX))
-      DTT=DTH(IX)
-      IF(NTH .EQ. 1)THEN
-        SINIX=2.
-        DTT=1.
-      END IF
-
-      DO IZ=1,NR
-        CALL COVTERM(IX,IZ)
-        V2=V3NEW(IX,IZ)**2*ASCAL(IX,IZ)**2*GCOVP
-        GLF=1./SQRT(1.-V2)
-
-        VYCOV = V3NEW(IX,IZ)*ASCAL(IX,IZ)**2*GCOVP
-
-        E2 = (EPHI(IX,IZ)**2./GCOVP + EPOLR(IX,IZ)**2./GCOVR + EPOLT(IX,IZ)**2./GCOVT)/ASCAL(IX,IZ)**2
-        B2 = ASCAL(IX,IZ)**2*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)
-        B2VEC(IX,IZ)= ASCAL(IX,IZ)**2*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)
-        B2POL = ASCAL(IX,IZ)**2*(BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)
-        B2TOR = BPHI(IX,IZ)**2*ASCAL(IX,IZ)**2*GCOVP
-        B2MAX = MAX(B2,B2MAX)
-        B2MAXPOL = MAX(B2POL,B2MAXPOL)
-        B2MAXTOR = MAX(B2TOR,B2MAXTOR)
-        IF(IX .EQ. 1 .AND. IZ .EQ. 1) BCENT = SQRT(B2)
-        IF(IX .EQ. 1 .AND. IZ .EQ. WSURF(1)+1 ) BPOLO = SQRT(B2)
-        IF(IX .EQ. 1 .AND. IZ .EQ. WSURF(1)+1 ) EPOLO = SQRT(E2)
-
-        EEBB = ASCAL(IX,IZ)*GP*(EPOLR(IX,IZ)/GCOVR*BPOLT(IX,IZ)-EPOLT(IX,IZ)/GCOVT*BPOLR(IX,IZ))*PSS(IX,IZ)
-
-        BETALOC=PSS(IX,IZ)
-        RSTARLOC=(R(IZ)*SINIX*PSI(IX,IZ)**3/PSL(IX,IZ))**2
-        CALL OMEGAVALUE(BETALOC,RSTARLOC,OMEGALOC)
-        OMGN=OMEGALOC
-        IF(IX .EQ. NTH/2+1 .AND. PNEW(IX,IZ) .GT. 1.E-15) THEN
-           OMGEQ=OMGN
-        END IF
-
-
-
-        DET=PSI(IX,IZ)**6*R(IZ)**2*SINIX*DR(IZ)*DTT !!! QUI
-
-        IF(IZ .LE. CUTSURF(IX)) THEN
-          MM=MM+2.*PI*ASCAL(IX,IZ)**4*(2.*PNEW(IX,IZ)+(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2* &
-               (1+V2-2*PSI(IX,IZ)**3/PSL(IX,IZ)*R(IZ)*SINIX*SQRT(V2)*PSS(IX,IZ))+B2+E2 &
-               -2*PSI(IX,IZ)/PSL(IX,IZ)*EEBB/ASCAL(IX,IZ)**3)*DET*PSL(IX,IZ)/PSI(IX,IZ)
-          M0=M0+2*PI*ASCAL(IX,IZ)**3*RHONEW(IX,IZ)/MBARYONFC*GLF*DET
-          MP=MP+2*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET
-          MPJ=MPJ+2*PI*ASCAL(IX,IZ)**3*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET
-
-          TT=TT+  PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2*SQRT(V2)*OMGN*R(IZ)*SINIX*DET*PSI(IX,IZ)**2
-          IF(OMG .NE. 0) JJ=JJ+2*PI*ASCAL(IX,IZ)**4*((ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*&
-          	   &GLF**2*SQRT(V2)*PSI(IX,IZ)**2*R(IZ)*SINIX + EEBB/PSS(IX,IZ)/ASCAL(IX,IZ)**3)*DET
-
-          FLUX=FLUX+ASCAL(IX,IZ)**2*SQRT(B2)*PSI(IX,IZ)**4.*R(IZ)*DR(IZ)*DTT
-
-          IXXM=IXXM+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
-      	  IZZM=IZZM+2.*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX**3.*DR(IZ)*DTT
-
-         AA1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
-         AA2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
-         AA3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
-         BB1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
-         BB2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
-         BB3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
-         DCHIDR(IX,IZ) = AA1*CHI(IX,IZ-1)+AA3*CHI(IX,IZ+1)+AA2*CHI(IX,IZ)
-         DCHIDT(IX,IZ) = BB1*CHI(IX-1,IZ)+BB3*CHI(IX+1,IZ)+BB2*CHI(IX,IZ)
-         IXXS=IXXS-1./8.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
-         IZZS=IZZS-1./4.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX**3*DR(IZ)*DTT
-
-         SCHARGE=SCHARGE+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
-              &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*DET
-         ! quadrupole of the trace in the E frame (Newtonian)
-         TQUAD=TQUAD+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
-              &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*R(IZ)**4*SINIX*DR(IZ)*DTT
-         TMONO=TMONO+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
-              &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*R(IZ)**2*SINIX*DR(IZ)*DTT
-         ! quadrupole of the trace in the E frame (Newtonian * alpha * psi**6)
-         SQUAD=SQUAD+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
-              &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*PSI(IX,IZ)**6*R(IZ)**4*SINIX*DR(IZ)*DTT
-
-      ELSE
-         MM=MM+2.*PI*ASCAL(IX,IZ)**4*(B2+E2-2*PSI(IX,IZ)/PSL(IX,IZ)*EEBB/ASCAL(IX,IZ)**3)*DET*PSL(IX,IZ)/PSI(IX,IZ)
-
-         AA1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
-         AA2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
-         AA3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
-         BB1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
-         BB2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
-         BB3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
-         DCHIDR(IX,IZ) = AA1*CHI(IX,IZ-1)+AA3*CHI(IX,IZ+1)+AA2*CHI(IX,IZ)
-         DCHIDT(IX,IZ) = BB1*CHI(IX-1,IZ)+BB3*CHI(IX+1,IZ)+BB2*CHI(IX,IZ)
-         IXXS=IXXS-1./8.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
-         IZZS=IZZS-1./4.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX**3*DR(IZ)*DTT
-
-      END IF
-      IXX = IXXM + IXXS
-      IZZ = IZZM + IZZS
-
-      IF(IZ .EQ. NR-100 ) ECHRG=ECHRG+ 2.*PI*EPOLR(IX,IZ)*PSI(IX,IZ)**2.*R(IZ)**2.*SINIX*DTT
-      JMPHI = JMPHI +2*PI*SQRT(JPHI(IX,IZ)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
-      !!!!!! Energy in the J-frame
-      HHTOR = HHTOR + PI*ASCAL(IX,IZ)**5*BPHI(IX,IZ)**2*GCOVP*DET + PI*ASCAL(IX,IZ)*EPHI(IX,IZ)**2/GCOVP*DET
-      HHPOL = HHPOL + PI*ASCAL(IX,IZ)**5*(BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)*DET + &
-           PI*ASCAL(IX,IZ)*(EPOLR(IX,IZ)**2/GCOVR + EPOLT(IX,IZ)**2/GCOVT)*DET
-      HH = HH + PI*ASCAL(IX,IZ)**5*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)*DET + &
-           PI*ASCAL(IX,IZ)*(EPHI(IX,IZ)**2/GCOVP + EPOLR(IX,IZ)**2/GCOVR + EPOLT(IX,IZ)**2/GCOVT)*DET
-      HHE = HHE + PI*ASCAL(IX,IZ)**6*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)*DET + &
-           PI*ASCAL(IX,IZ)**2*(EPHI(IX,IZ)**2/GCOVP + EPOLR(IX,IZ)**2/GCOVR + EPOLT(IX,IZ)**2/GCOVT)*DET
-
-      IF(IZ .LE. WSURF(IX)) THEN
-         HHTORIN= HHTORIN + PI*BPHI(IX,IZ)**2*GCOVP*DET*ASCAL(IX,IZ)**5 + PI*EPHI(IX,IZ)**2/GCOVP*DET*ASCAL(IX,IZ)
-         JMPHIIN=JMPHIIN +2*PI*SQRT(JPHI(IX,IZ)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
-        ENDIF
-
-        IF(IZ .GT. WSURF(IX)) THEN
-          HHTOREXT= HHTOREXT + PI*BPHI(IX,IZ)**2*GCOVP*DET*ASCAL(IX,IZ)**5 + PI*EPHI(IX,IZ)**2/GCOVP*DET*ASCAL(IX,IZ)
-          JMPHIEXT=JMPHIEXT +2*PI*SQRT((JPHI(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ))*KBTT)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
-        ENDIF
-      END DO
+       SINIX=SIN(TH(IX))
+       DTT=DTH(IX)
+       IF(NTH .EQ. 1)THEN
+          SINIX=2.
+          DTT=1.
+       END IF
+       
+       DO IZ=1,NR
+          CALL COVTERM(IX,IZ)
+          V2=V3NEW(IX,IZ)**2*ASCAL(IX,IZ)**2*GCOVP
+          GLF=1./SQRT(1.-V2)
+          
+          VYCOV = V3NEW(IX,IZ)*ASCAL(IX,IZ)**2*GCOVP
+          
+          E2 = (EPHI(IX,IZ)**2./GCOVP + EPOLR(IX,IZ)**2./GCOVR + EPOLT(IX,IZ)**2./GCOVT)/ASCAL(IX,IZ)**2
+          B2 = ASCAL(IX,IZ)**2*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)
+          B2VEC(IX,IZ)= ASCAL(IX,IZ)**2*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)
+          B2POL = ASCAL(IX,IZ)**2*(BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)
+          B2TOR = BPHI(IX,IZ)**2*ASCAL(IX,IZ)**2*GCOVP
+          B2MAX = MAX(B2,B2MAX)
+          B2MAXPOL = MAX(B2POL,B2MAXPOL)
+          B2MAXTOR = MAX(B2TOR,B2MAXTOR)
+          IF(IX .EQ. 1 .AND. IZ .EQ. 1) BCENT = SQRT(B2)
+          IF(IX .EQ. 1 .AND. IZ .EQ. WSURF(1)+1 ) BPOLO = SQRT(B2)
+          IF(IX .EQ. 1 .AND. IZ .EQ. WSURF(1)+1 ) EPOLO = SQRT(E2)
+          
+          EEBB = ASCAL(IX,IZ)*GP*(EPOLR(IX,IZ)/GCOVR*BPOLT(IX,IZ)-EPOLT(IX,IZ)/GCOVT*BPOLR(IX,IZ))*PSS(IX,IZ)
+          
+          BETALOC=PSS(IX,IZ)
+          RSTARLOC=(R(IZ)*SINIX*PSI(IX,IZ)**3/PSL(IX,IZ))**2
+          CALL OMEGAVALUE(BETALOC,RSTARLOC,OMEGALOC)
+          OMGN=OMEGALOC
+          IF(IX .EQ. NTH/2+1 .AND. PNEW(IX,IZ) .GT. 1.E-15) THEN
+             OMGEQ=OMGN
+          END IF
+          
+          DET=PSI(IX,IZ)**6*R(IZ)**2*SINIX*DR(IZ)*DTT 
+          
+          IF(IZ .LE. CUTSURF(IX)) THEN
+             MM=MM+2.*PI*ASCAL(IX,IZ)**4*(2.*PNEW(IX,IZ)+(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2* &
+                  (1+V2-2*PSI(IX,IZ)**3/PSL(IX,IZ)*R(IZ)*SINIX*SQRT(V2)*PSS(IX,IZ))+B2+E2 &
+                  -2*PSI(IX,IZ)/PSL(IX,IZ)*EEBB/ASCAL(IX,IZ)**3)*DET*PSL(IX,IZ)/PSI(IX,IZ)
+             M0=M0+2*PI*ASCAL(IX,IZ)**3*RHONEW(IX,IZ)/MBARYONFC*GLF*DET
+             MP=MP+2*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET
+             MPJ=MPJ+2*PI*ASCAL(IX,IZ)**3*(ENEW(IX,IZ)+RHONEW(IX,IZ))*GLF*DET
+             
+             TT=TT+  PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*GLF**2*SQRT(V2)*OMGN*R(IZ)*&
+                  SINIX*DET*PSI(IX,IZ)**2
+             IF(OMG .NE. 0) JJ=JJ+2*PI*ASCAL(IX,IZ)**4*((ENEW(IX,IZ)+PNEW(IX,IZ)+RHONEW(IX,IZ))*&
+                  &GLF**2*SQRT(V2)*PSI(IX,IZ)**2*R(IZ)*SINIX + EEBB/PSS(IX,IZ)/ASCAL(IX,IZ)**3)*DET
+             
+             FLUX=FLUX+ASCAL(IX,IZ)**2*SQRT(B2)*PSI(IX,IZ)**4.*R(IZ)*DR(IZ)*DTT
+             
+             IXXM=IXXM+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
+             IZZM=IZZM+2.*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX**3.*DR(IZ)*DTT
+             
+             AA1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
+             AA2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
+             AA3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
+             BB1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
+             BB2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
+             BB3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
+             DCHIDR(IX,IZ) = AA1*CHI(IX,IZ-1)+AA3*CHI(IX,IZ+1)+AA2*CHI(IX,IZ)
+             DCHIDT(IX,IZ) = BB1*CHI(IX-1,IZ)+BB3*CHI(IX+1,IZ)+BB2*CHI(IX,IZ)
+             IXXS=IXXS-1./8.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
+             IZZS=IZZS-1./4.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX**3*DR(IZ)*DTT
+             
+             SCHARGE=SCHARGE+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
+                  &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*DET
+             ! Quadrupole of the trace in the E frame (Newtonian)
+             TQUAD=TQUAD+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
+                  &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*R(IZ)**4*SINIX*DR(IZ)*DTT
+             TMONO=TMONO+2.*PI*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
+                  &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*R(IZ)**2*SINIX*DR(IZ)*DTT
+             ! Quadrupole of the trace in the E frame (Newtonian * alpha * psi**6)
+             SQUAD=SQUAD+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4*&
+                  &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*(2.-3.*SINIX**2)*PSI(IX,IZ)**6*R(IZ)**4*SINIX*DR(IZ)*DTT
+             
+          ELSE
+             MM=MM+2.*PI*ASCAL(IX,IZ)**4*(B2+E2-2*PSI(IX,IZ)/PSL(IX,IZ)*EEBB/ASCAL(IX,IZ)**3)*DET*PSL(IX,IZ)/PSI(IX,IZ)
+             
+             AA1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
+             AA2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
+             AA3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
+             BB1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
+             BB2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
+             BB3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
+             DCHIDR(IX,IZ) = AA1*CHI(IX,IZ-1)+AA3*CHI(IX,IZ+1)+AA2*CHI(IX,IZ)
+             DCHIDT(IX,IZ) = BB1*CHI(IX-1,IZ)+BB3*CHI(IX+1,IZ)+BB2*CHI(IX,IZ)
+             IXXS=IXXS-1./8.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
+             IZZS=IZZS-1./4.*(DCHIDR(IX,IZ)**2+DCHIDT(IX,IZ)**2/R(IZ)**2)*R(IZ)**4.*SINIX**3*DR(IZ)*DTT
+             
+          END IF
+          IXX = IXXM + IXXS
+          IZZ = IZZM + IZZS
+          
+          IF(IZ .EQ. NR-100 ) ECHRG=ECHRG+ 2.*PI*EPOLR(IX,IZ)*PSI(IX,IZ)**2.*R(IZ)**2.*SINIX*DTT
+          JMPHI = JMPHI +2*PI*SQRT(JPHI(IX,IZ)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
+          
+          HHTOR = HHTOR + PI*ASCAL(IX,IZ)**5*BPHI(IX,IZ)**2*GCOVP*DET + PI*ASCAL(IX,IZ)*EPHI(IX,IZ)**2/GCOVP*DET
+          HHPOL = HHPOL + PI*ASCAL(IX,IZ)**5*(BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)*DET + &
+               PI*ASCAL(IX,IZ)*(EPOLR(IX,IZ)**2/GCOVR + EPOLT(IX,IZ)**2/GCOVT)*DET
+          HH = HH + PI*ASCAL(IX,IZ)**5*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)*DET + &
+               PI*ASCAL(IX,IZ)*(EPHI(IX,IZ)**2/GCOVP + EPOLR(IX,IZ)**2/GCOVR + EPOLT(IX,IZ)**2/GCOVT)*DET
+          HHE = HHE + PI*ASCAL(IX,IZ)**6*(BPHI(IX,IZ)**2*GCOVP + BPOLR(IX,IZ)**2*GCOVR + BPOLT(IX,IZ)**2*GCOVT)*DET + &
+               PI*ASCAL(IX,IZ)**2*(EPHI(IX,IZ)**2/GCOVP + EPOLR(IX,IZ)**2/GCOVR + EPOLT(IX,IZ)**2/GCOVT)*DET
+          
+          IF(IZ .LE. WSURF(IX)) THEN
+             HHTORIN= HHTORIN + PI*BPHI(IX,IZ)**2*GCOVP*DET*ASCAL(IX,IZ)**5 + PI*EPHI(IX,IZ)**2/GCOVP*DET*ASCAL(IX,IZ)
+             JMPHIIN=JMPHIIN +2*PI*SQRT(JPHI(IX,IZ)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
+          ENDIF
+          
+          IF(IZ .GT. WSURF(IX)) THEN
+             HHTOREXT= HHTOREXT + PI*BPHI(IX,IZ)**2*GCOVP*DET*ASCAL(IX,IZ)**5 + PI*EPHI(IX,IZ)**2/GCOVP*DET*ASCAL(IX,IZ)
+             JMPHIEXT=JMPHIEXT +2*PI*SQRT((JPHI(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ))*KBTT)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
+          ENDIF
+       END DO
     END DO
-   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    DIPM = MAXVAL(APHI(:,NR-10))*4.*R(NR-10)**3./(4.*R(NR-10)+MM)
+ END IF
 
-    DIPM = MAXVAL(Aphi(:,NR-10))*4.*R(NR-10)**3./(4.*R(NR-10)+MM)
-  END IF
+ RPOL=R(WSURF(1))
+ REQ=R(WSURF(NTH/2+1))
+ REQCHECK=R(WSURF(NTH/2+1)+1)
 
-  RPOL=R(WSURF(1))
-  REQ=R(WSURF(NTH/2+1))
-  REQCHECK=R(WSURF(NTH/2+1)+1)
-
-  IF(IDAT .AND. (.NOT. MPICODE))THEN
+ TMPCOS = 1./(COS(TH(1))**2-COS(TH(NTH/2-1))**2)
+ Q00FIN = 2./3.*(LOG(PSL(1,NR-1)/PSI(1,NR-1))-LOG(PSL(NTH/2-1,NR-1)/PSI(NTH/2-1,NR-1)))*R(NR-1)**3*TMPCOS 
+ Q00MID = 2./3.*(LOG(PSL(1,MIDGRID)/PSI(1,MIDGRID))-LOG(PSL(NTH/2-1,MIDGRID)/PSI(NTH/2-1,MIDGRID)))*R(MIDGRID)**3*TMPCOS
+ QUADGR = (Q00FIN*R(NR-1)**2 - Q00MID*R(MIDGRID)**2)/(R(NR-1)**2 - R(MIDGRID)**2)
+ 
+ IF(IDAT .AND. (.NOT. MPICODE))THEN
     WRITE(6,*)''
-	WRITE(6,*)'===================== STELLAR QUANTITIES ====================='
-	WRITE(6,*)''
-	WRITE(6,*)'Central density (J)','  ',RHOCENT/MBARYONFC  ! Computed on grid = RNEWT (not to be confused with RHOCENT in HYDROEQ)
+    WRITE(6,*)'===================== STELLAR QUANTITIES ====================='
+    WRITE(6,*)''
+    WRITE(6,*)'Central density (J)','  ',RHOCENT/MBARYONFC  ! Computed on grid = RNEWT (not to be confused with RHOCENT in HYDROEQ)
     WRITE(6,*)'Gravit. mass (E)   ','  ',MM
     WRITE(6,*)'Rest    mass       ','  ',M0
     WRITE(6,*)'Proper  mass (E)   ','  ',MP
@@ -1131,11 +1138,12 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
     WRITE(6,*)'Fluid intertia moment (E)','  ',IZZM
     WRITE(6,*)'Sc. field quadrupole (E) ','  ',IZZS-IXXS
 	WRITE(6,*)'Sc. field inertia moment (E) ','  ',IZZS
-    WRITE(6,*)'Trace quadrupole (E)     ','  ',TQUAD/(TMONO*REQ**2)
+    WRITE(6,*)'Trace quadrupole (E)     ','  ',TQUAD/(TMONO*REQ**2  + 1.E-20)
     WRITE(6,*)'Trace monopole (E)       ','  ',TMONO
     WRITE(6,*)'Total quadrupole (E)     ','  ',IZZM+IZZS-IXXM-IXXS
+    WRITE(6,*)'Metric quadrupole (E)    ','  ',QUADGR
     WRITE(6,*)'Fluid def.rate (E)       ','  ',(IZZM-IXXM)/IZZM
-    WRITE(6,*)'Sc. field def. rate (E)  ','  ',(IZZS-IXXS)/IZZS
+    WRITE(6,*)'Sc. field def. rate (E)  ','  ',(IZZS-IXXS)/(IZZS + 1.E-20)
     WRITE(6,*)'Total def. rate (E)      ','  ',(IZZ-IXX)/IZZM
     WRITE(6,*)' '
     WRITE(6,*)'Poloidal En (J)          ','  ',HHPOL
@@ -1149,206 +1157,248 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
 
   ! Write Log file with Run Parameters
   IF(IDAT)THEN
-  	CALL DATE_AND_TIME(DATE,TIME,ZONE,VALUES)
-    OPEN(12,FILE=trim(adjustl(subdirpath))//'LogFile.dat')
-
-	WRITE(12,*)'Log file for the XNS.f90 program'
-	WRITE(12,*)'Ran on date-time-zone: ',DATE,'-',TIME,'-',ZONE
-	WRITE(12,*)' '
-	IF(STRETCH)THEN
+     CALL DATE_AND_TIME(DATE,TIME,ZONE,VALUES)
+     OPEN(12,FILE=trim(adjustl(subdirpath))//'LogFile.dat')
+     
+     WRITE(12,*)'Log file for the XNS.f90 program'
+     WRITE(12,*)'Ran on date-time-zone: ',DATE,'-',TIME,'-',ZONE
+     WRITE(12,*)' '
+     IF(STRETCH)THEN
     	WRITE(12,*)'STRETCHED GRID'
-    ELSE
-    	WRITE(12,*)'UNSTRETCHED GRID'
-    END IF
-    IF(OMG .GT. 1.E-8)THEN
-    	WRITE(12,*)'ROTATING STAR'
-		IF(DIFFERENTIAL)THEN
-			WRITE(12,*)'DIFFERENTIAL ROTATION'
-		ELSE
-			WRITE(12,*)'UNIFORM ROTATION'
-		END IF
-	ELSE
-		WRITE(12,*)'NON-ROTATING STAR'
-	END IF
-	IF(IMAG)THEN
-    	WRITE(12,*)'MAGNETIZED STAR'
-    	IF(ITOR)WRITE(12,*)'PURELY TOROIDAL MAGNETIC FIELD'
-    	IF(IPOL)WRITE(12,*)'PURELY POLOIDAL MAGNETIC FIELD'
-    	IF(ITWT)WRITE(12,*)'TWISTED TORUS MAGNETIC FIELD'
-    ELSE
-    	WRITE(12,*)'UNMAGNETIZED STAR'
-    END IF
-    IF(GR)THEN
-    	WRITE(12,*)'GENERAL RELATIVITY'
-    ELSE
-    	WRITE(12,*)'SCALAR TENSOR THEORY'
-	ENDIF
-
-	WRITE(12,*)'=========================================INPUT========================================================'
-	WRITE(12,*)' '
-    WRITE(12,*)'>>>>>> GRID SETTINGS : '
-    WRITE(12,*)' '
-    WRITE(12,*)' NR  = ', NR
-    WRITE(12,*)' NTH = ', NTH
-    WRITE(12,*) 'NRREG = ', NRREG
-    WRITE(12,*) 'STR = ', STRR
-    WRITE(12,*)' MLS = ', MLS
-    WRITE(12,*)' NGQ = ', NGQ
-    WRITE(12,*)' MAXLOOP = ', MAXLOOP
-    WRITE(12,*)' MAXSTEP = ', MAXSTEP
-    WRITE(12,*)' RELIT = ', RELIT
-    WRITE(12,*)' RMIN = ', RMIN
-    WRITE(12,*) 'RREG = ', RREG
-    WRITE(12,*) 'RMAXSTR = ', RMAXSTR
-    WRITE(12,*)' RMAX = ', RMAX
-    WRITE(12,*)' RINI = ', RINI
-    WRITE(12,*)' '
-    WRITE(12,*)'>>>>>> MODEL SETTINGS : '
-    WRITE(12,*)' '
-    WRITE(12,*)' RHOINI = ', RHOINI
-    WRITE(12,*)' RHOINISEQ = ', RHOINISEQ
-    WRITE(12,*)' MBARYONFC = ', MBARYONFC
-    WRITE(12,*)' GAMMA  = ', GAMMA
-    WRITE(12,*)' K1     = ', K1
-    WRITE(12,*)' EOSINT     = ', EOSINT
-    IF(EOSINT .AND. (RHOCENT .GT. 10**RHOTABMAX))THEN
-    	WRITE(12,*)'WARNING: CHOSEN CENTRAL DENSITY'
-    	WRITE(12,*)'IS BEYOND THE MAXIMUM TABULATED VALUE OF ',10**RHOTABMAX
-    	WRITE(12,*)'POWER-LAW EXTRAPOLATION IS BEING USED'
-    ENDIF
-    WRITE(12,*)' FILEEOS     = ', FILEEOS
-    WRITE(12,*)' ALPHA0    = ', ALPHA0
-    WRITE(12,*)' BETA0    = ', BETA0
-    WRITE(12,*)' CHIINF    = ', CHIINF
-    WRITE(12,*)' OMG = ', OMG
-    WRITE(12,*)' PROTDIFF = ', PROTDIFF
-    WRITE(12,*)' A2VALUE = ', A2VALUE
-    WRITE(12,*)' OMGMAX = ', OMGMAX
-    WRITE(12,*)' RMVALUE = ', RMVALUE
-    WRITE(12,*)' BCOEF  = ', BCOEF
-    WRITE(12,*)' MAGIND = ', MAGIND
-	WRITE(12,*)' MLSL = ', MLSL
-    WRITE(12,*)' KBPOL = ', KBPOL
-    WRITE(12,*)' NPOL = ', NPOL
-    WRITE(12,*)' CSI    = ', CSI
-	WRITE(12,*)' QNULL = ', QNULL
-	WRITE(12,*)' CTP   = ', CTP
-    WRITE(12,*)' KBTT = ', KBTT
-    WRITE(12,*)' ATWT = ', ATWT
-    WRITE(12,*)' ZETA = ', ZETA
-    WRITE(12,*)' CUT  = ', CUT
-    WRITE(12,*)' '
-    WRITE(12,*)'>>>>>> LOGICAL PARAMETERS : '
-    WRITE(12,*)' '
-    WRITE(12,*)' GR = ', GR
-    WRITE(12,*)' STRETCH = ', STRETCH
-    WRITE(12,*)' ANALYTIC = ', ANALYTIC
-    WRITE(12,*)' MPICODE = ', MPICODE
-    WRITE(12,*)' CONVHELP = ', CONVHELP
-    WRITE(12,*)' OMGSPACE = ', OMGSPACE
-    WRITE(12,*)' JCONSTLAW = ', JCONSTLAW
-    WRITE(12,*)' JCMODLAW = ', JCMODLAW
-    WRITE(12,*)' URYULAW3 = ', URYULAW3
-    WRITE(12,*)' URYULAW4 = ', URYULAW4
-    WRITE(12,*)' IMAG = ', IMAG
-    WRITE(12,*)' ITOR = ', ITOR
-    WRITE(12,*)' IPOL = ', IPOL
-    WRITE(12,*)' ITWT = ', ITWT
-    WRITE(12,*)' CTP = ', CTP
-    WRITE(12,*)' EOSINT = ', EOSINT
-    WRITE(12,*)' '
-    WRITE(12,*)'>>>>>> RELAXATION/SHOOTING SETTINGS : '
-    WRITE(12,*)' '
-    WRITE(12,*)' REQMAX =  ',REQMAX
-    WRITE(12,*)' QFACTOR = ',QFACTOR
-    WRITE(12,*)' QFACTORCHI = ',QFACTORCHI
-    WRITE(12,*)' QFACTORMETRIC = ',QFACTORMETRIC
-    WRITE(12,*)' QRELAX = ',QRELAX
-    WRITE(12,*)' QAPHI =',QAPHI
-    WRITE(12,*)' EPS =     ',EPS
-    WRITE(12,*)' TOLCONV = ',TOLCONV
-	WRITE(12,*)' TOLCHI = ',TOLCHI
-	WRITE(12,*)' CONV = ',CONV
-    WRITE(12,*)' CONV2 = ',CONV2
-    WRITE(12,*)' MMID = ',MMID
-    WRITE(12,*)' M = ',M
-    WRITE(12,*)' MUIN = ',MUIN
-    WRITE(12,*)' '
-	WRITE(12,*)'=========================================OUTPUT======================================================='
-    WRITE(12,*)' '
-    WRITE(12,*)' KOMAR MASS (E) = ', MM
-    WRITE(12,*)' REST    MASS = ', M0
-    WRITE(12,*)' PROPER  MASS (E) = ', MP
-    WRITE(12,*)' PROPER  MASS (J) = ', MPJ
-    WRITE(12,*)' SCALAR CHARGE (E) = ', SCHARGE
-    WRITE(12,*)' ROTAT.  ENERGY (E)  = ', TT
-    WRITE(12,*)' ANGUL.  MOMENT. (E) = ', JJ
-    WRITE(12,*)' MAGNET. ENERGY (J)  = ', HH
-    WRITE(12,*)' MAGNET. E-ENERGY (E)  = ', HHE
-    WRITE(12,*)' MENERGY  RATIO (J/E) = ', HH/(MP-MM+TT+HHE)
-    WRITE(12,*)' MENERGY  RATIO (E) = ', HHE/(MP-MM+TT+HHE)
-    WRITE(12,*)' KENERGY  RATIO (E) = ', TT/(MP-MM+TT+HHE)
-    WRITE(12,*)' '
-    WRITE(12,*)'CENTRAL DENSITY (J) = ', RHOCENT/MBARYONFC
-    WRITE(12,*)'EQUATORIAL RADIUS (E) = ', REQ,REQ/0.6772030,'KM'
-    WRITE(12,*)'RADIUS RATIO (E) = ', RPOL/REQ
-    IF(IPOL .AND. OMG .NE. 0) WRITE(12,*) 'NSPE (SUPERELL.) =', NSPE
-    WRITE(12,*)'CIRC RADIUS (E) = ', REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2.,REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2./0.6772030,'KM'
-    WRITE(12,*)'CIRC RADIUS (J) = ', ASCAL(NTH/2+1,WSURF(NTH/2+1))*REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2.,&
-    								&ASCAL(NTH/2+1,WSURF(NTH/2+1))*REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2./0.6772030,'KM'
-    WRITE(12,*)'CENTRAL OMG = ', OMG
-    WRITE(12,*)'OMGEQ = ', OMGEQ
-    WRITE(12,*)'MAG. FLUX = ', FLUX, SQRT(4.*pi)*FLUX/1.946269d-22,'Wb'
-    WRITE(12,*)'MAG. DIPOLE DIPM (J) = ', DipM
-    WRITE(12,*)'B@POLE BPOLO (J) = ', BPOLO, BPOLO*SQRT(4.*pi)/4.244674d-20,'G'
-    WRITE(12,*)'BMAX (J)  = ', SQRT(B2MAX),SQRT(B2MAX*4.*pi)/4.244674d-20,'G'
-    WRITE(12,'(A12,A22,ES23.16,A6,ES23.16,A4)')' Bmax_s (J) ','    ',SQRT(B2MAX),'  =   ',SQRT(B2MAX*4.*pi)/4.244674d-20,'  G'
-    WRITE(12,*)'BMAX(POL) (J)  = ', SQRT(B2MAXPOL),SQRT(B2MAXPOL*4.*pi)/4.244674d-20,'G'
-    WRITE(12,*)'BMAX(TOR) (J)  = ', SQRT(B2MAXTOR),SQRT(B2MAXTOR*4.*pi)/4.244674d-20,'G'
-    WRITE(12,*)'BCENT (J)  = ', BCENT, BCENT*SQRT(4.*pi)/4.244674d-20,'G'
-    WRITE(12,*)'E@POLE EPOLO (J)   = ', EPOLO
-    WRITE(12,*)'ELEC. CHARGE ECHRG (J) = ', ECHRG, 'VS',ECHRGIN
-    WRITE(12,*)'FLUID QUADRUPOLE (E) =      ','  ',IZZM-IXXM
-    WRITE(12,*)'FLUID INTERTIA MOMENT (E) = ','  ',IZZM
-    WRITE(12,*)'SC. FIELD QUADRUPOLE (E) = ','  ',IZZS-IXXS
-	WRITE(12,*)'SC. FIELD INERTIA MOMENT (E) = ','  ',IZZS
-	IF(.NOT. GR)WRITE(12,*)'TRACE MONOPOLE (E) =    ','  ', TMONO
-    IF(.NOT. GR)WRITE(12,*)'TRACE QUADRUPOLE (E) =    ','  ',TQUAD/(TMONO*REQ**2)
-    IF(.NOT. GR)WRITE(12,*)'GRTRACE QUADRUPOLE (E) =    ','  ',SQUAD
-    WRITE(12,*)'TOTAL QUADRUPOLE (E) =     ','  ',IZZM+IZZS-IXXM-IXXS
-    WRITE(12,*)'FLUID DEF. RATE (E)	=    ','        ',(IZZM-IXXM)/IZZM
-    IF(.NOT. GR)WRITE(12,*)'SCL. FIELD DEF. RATE (E) = ','        ',(IZZS-IXXS)/IZZS
-    WRITE(12,*)'TOTAL DEF. RATE (E) =    ','        ',(IZZ-IXX)/IZZM
-    WRITE(12,*)'HHPOL (J) = ', HHpol
-    WRITE(12,*)'HHTOR (J) = ',HHtor
-    IF(IMAG) WRITE(12,*)'HHTOR/HH (J) = ',HHtor/HH
-    WRITE(12,*)' '
-	WRITE(12,*)'======================================================================================================'
-    WRITE(12,*)' '
-    WRITE(12,*)'NUMBER OF LOOPS DONE = ',ILOOP,'OUT OF ',MAXLOOP
-
-    CLOSE(12)
+  ELSE
+     WRITE(12,*)'UNSTRETCHED GRID'
   END IF
+  IF(OMG .GT. 1.E-8)THEN
+     WRITE(12,*)'ROTATING STAR'
+     IF(DIFFERENTIAL)THEN
+        WRITE(12,*)'DIFFERENTIAL ROTATION'
+     ELSE
+        WRITE(12,*)'UNIFORM ROTATION'
+     END IF
+  ELSE
+     WRITE(12,*)'NON-ROTATING STAR'
+  END IF
+  IF(IMAG)THEN
+     WRITE(12,*)'MAGNETIZED STAR'
+     IF(ITOR)WRITE(12,*)'PURELY TOROIDAL MAGNETIC FIELD'
+     IF(IPOL)WRITE(12,*)'PURELY POLOIDAL MAGNETIC FIELD'
+     IF(ITWT)WRITE(12,*)'TWISTED TORUS MAGNETIC FIELD'
+  ELSE
+     WRITE(12,*)'UNMAGNETIZED STAR'
+  END IF
+  IF(GR)THEN
+     WRITE(12,*)'GENERAL RELATIVITY'
+  ELSE
+     WRITE(12,*)'SCALAR TENSOR THEORY'
+  ENDIF
+  
+  
+  WRITE(12,*)'=========================================INPUT========================================================'
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Parameters for convergence of the Newton-Raphson scheme of XNS : '
+  WRITE(12,*)' '
+  WRITE(12,*)' NVALUE  =   ', NVALUE
+  WRITE(12,*)' CONVF   =   ', CONVF
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Parameters for convergence of XNSMAIN over a model : '
+  WRITE(12,*)' '
+  WRITE(12,*)' MAXLOOP = ', MAXLOOP
+  WRITE(12,*)' CONVRHO = ', CONVRHO
+  WRITE(12,*)' MONCONV = ', MONCONV     
+  WRITE(12,*)' OSCCONV = ', OSCCONV
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Grid parameters : '
+  WRITE(12,*)' '
+  WRITE(12,*)' STRETCH =   ', STRETCH
+  WRITE(12,*)' NR    =     ', NR
+  WRITE(12,*)' NTH   =     ', NTH
+  WRITE(12,*)' NRREG =     ', NRREG
+  WRITE(12,*)' RMIN  =     ', RMIN
+  WRITE(12,*)' RMAX  =     ', RMAX
+  WRITE(12,*)' RMAXSTR =   ', RMAXSTR
+  WRITE(12,*)' RREG   =    ', RREG
+  WRITE(12,*)' REQMAX =    ', REQMAX
+  WRITE(12,*)' MINRESREG = ', MINRESREG
+  WRITE(12,*)' MINRESSTR = ', MINRESSTR
+  WRITE(12,*)' RINI  =     ', RINI
+  WRITE(12,*)' RHOSURF   = ', RHOSURF
+  WRITE(12,*)' STR =       ', STRR
+  WRITE(12,*)' DOM =       ', DOM
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Parameters for the Legendre expansion & elliptic solvers : '
+  WRITE(12,*)' '
+  WRITE(12,*)' MLS =     ', MLS
+  WRITE(12,*)' NGQ =     ', NGQ
+  WRITE(12,*)' MLSL =    ', MLSL
+  WRITE(12,*)' TOLCONV = ', TOLCONV
+  WRITE(12,*)' TOLCHI  = ', TOLCHI
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Gravitational Theory  parameters : '
+  WRITE(12,*)' '
+  WRITE(12,*)' GR        = ', GR
+  WRITE(12,*)' ALPHA0    = ', ALPHA0
+  WRITE(12,*)' BETA0     = ', BETA0
+  WRITE(12,*)' CHIINF    = ', CHIINF
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>>  EoS/fluid parameters : '
+  WRITE(12,*)' '
+  WRITE(12,*)' RHOINI    = ', RHOINI
+  WRITE(12,*)' MBARYONFC = ', MBARYONFC
+  WRITE(12,*)' VACUUM    = ', VACUUM
+  WRITE(12,*)' K1        = ', K1
+  WRITE(12,*)' GAMMA     = ', GAMMA
+  WRITE(12,*)' RHOINISEQ    = ', RHOINISEQ
+  WRITE(12,*)' RHOCENTSTART = ', RHOCENTSTART
+  WRITE(12,*)' RHOCENTEND   = ', RHOCENTEND
+  WRITE(12,*)' CTP        = ', CTP
+  WRITE(12,*)' EOSINT     = ', EOSINT
+  IF(EOSINT .AND. (RHOCENT .GT. 10**RHOTABMAX))THEN
+     WRITE(12,*)' WARNING: CHOSEN CENTRAL DENSITY'
+     WRITE(12,*)' IS BEYOND THE MAXIMUM TABULATED VALUE OF ',10**RHOTABMAX
+     WRITE(12,*)' POWER-LAW EXTRAPOLATION IS BEING USED'
+  ENDIF
+  WRITE(12,*)' FILEEOS     = ', FILEEOS
+  WRITE(12,*)' NPTRHO      = ', FILEEOS
+  WRITE(12,*)' EOSJOR      = ', EOSJOR
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>>  Physics parameters - Rotation : '
+  WRITE(12,*)' '
+  WRITE(12,*)' DIFFERENTIAL = ', DIFFERENTIAL
+  WRITE(12,*)' OMGSPACE     = ', OMGSPACE
+  WRITE(12,*)' JCONSTLAW    = ', JCONSTLAW
+  WRITE(12,*)' JCMODLAW     = ', JCMODLAW
+  WRITE(12,*)' URYULAW3     = ', URYULAW3
+  WRITE(12,*)' URYULAW4     = ', URYULAW4
+  WRITE(12,*)' OMG      = ', OMG
+  WRITE(12,*)' PROTDIFF = ', PROTDIFF
+  WRITE(12,*)' A2VALUE  = ', A2VALUE
+  WRITE(12,*)' OMGMAX   = ', OMGMAX
+  WRITE(12,*)' RMVALUE  = ', RMVALUE
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>>  Physics - Magnetic Fields : '
+  WRITE(12,*)' '
+  WRITE(12,*)' IMAG   = ', IMAG
+  WRITE(12,*)' ITOR   = ', ITOR
+  WRITE(12,*)' IPOL   = ', IPOL
+  WRITE(12,*)' ITWT   = ', ITWT
+  WRITE(12,*)' BCOEF  = ', BCOEF
+  WRITE(12,*)' MAGIND = ', MAGIND
+  WRITE(12,*)' KBPOL  = ', KBPOL
+  WRITE(12,*)' NPOL   = ', NPOL
+  WRITE(12,*)' CSI    = ', CSI
+  WRITE(12,*)' QNULL  = ', QNULL
+  WRITE(12,*)' CTP    = ', CTP
+  WRITE(12,*)' KBTT   = ', KBTT
+  WRITE(12,*)' ATWT   = ', ATWT
+  WRITE(12,*)' ZETA   = ', ZETA
+  WRITE(12,*)' CUT    = ', CUT
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> For the initial TOV solution : '
+  WRITE(12,*)' '
+  WRITE(12,*)' RELIT    = ', RELIT
+  WRITE(12,*)' CONV2    = ', CONV2
+  WRITE(12,*)' MAXITM0  = ', MAXITM0   
+  WRITE(12,*)' MAXSTEP  = ', MAXSTEP   
+  WRITE(12,*)' CONV     = ', CONV
+  WRITE(12,*)' DELTMU0  = ', DELTMU0
+  WRITE(12,*)' MMID     = ', MMID
+  WRITE(12,*)' M        = ', M
+  WRITE(12,*)' MUIN     = ', MUIN
+  WRITE(12,*)' QRELAX   = ', QRELAX
+  WRITE(12,*)' ANALYTIC = ', ANALYTIC
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Logical variables & Others : '
+  WRITE(12,*)' '
+  WRITE(12,*)' DEBUG      = ', DEBUG 		
+  WRITE(12,*)' SINGLESURF = ', SINGLESURF	
+  WRITE(12,*)' COUNTDOWN  = ', COUNTDOWN			
+  WRITE(12,*)' CONVHELP   = ', CONVHELP 
+  WRITE(12,*)' MPICODE    = ', MPICODE
+  WRITE(12,*)' '
+  WRITE(12,*)'>>>>>> Parameters to help or stabilize convergence : '
+  WRITE(12,*)' '
+  WRITE(12,*)' QFACTOR       = ', QFACTOR
+  WRITE(12,*)' QFACTORMETRIC = ', QFACTORMETRIC
+  WRITE(12,*)' QFACTORCONF   = ', QFACTORCONF
+  WRITE(12,*)' QFACTORCHI    = ', QFACTORCHI
+  WRITE(12,*)' QAPHI         = ', QAPHI
+  WRITE(12,*)' EPS      =      ', EPS
+  WRITE(12,*)' '
+  WRITE(12,*)'=========================================OUTPUT======================================================='
+  WRITE(12,*)' '
+  WRITE(12,*)' KOMAR   MASS (E)      = ', MM
+  WRITE(12,*)' REST    MASS          = ', M0
+  WRITE(12,*)' PROPER  MASS (E)      = ', MP
+  WRITE(12,*)' PROPER  MASS (J)      = ', MPJ
+  WRITE(12,*)' SCALAR  CHARGE (E)    = ', SCHARGE
+  WRITE(12,*)' ROTAT.  ENERGY (E)    = ', TT
+  WRITE(12,*)' ANGUL.  MOMENT. (E)   = ', JJ
+  WRITE(12,*)' MAGNET. ENERGY (J)    = ', HH
+  WRITE(12,*)' MAGNET. E-ENERGY (E)  = ', HHE
+  WRITE(12,*)' MENERGY  RATIO (J/E)  = ', HH/(MP-MM+TT+HHE)
+  WRITE(12,*)' MENERGY  RATIO (E)    = ', HHE/(MP-MM+TT+HHE)
+  WRITE(12,*)' KENERGY  RATIO (E)    = ', TT/(MP-MM+TT+HHE)
+  WRITE(12,*)' '
+  WRITE(12,*)' CENTRAL DENSITY (J)   = ', RHOCENT/MBARYONFC
+  WRITE(12,*)' EQUATORIAL RADIUS (E) = ', REQ,REQ/0.6772030,'KM'
+  WRITE(12,*)' RADIUS RATIO (E)      = ', RPOL/REQ
+  IF(IPOL .AND. OMG .NE. 0) WRITE(12,*) ' NSPE (SUPERELL.) = ', NSPE
+  WRITE(12,*)' CIRC RADIUS (E)       = ', REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2.,REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2./0.6772030,'KM'
+  WRITE(12,*)' CIRC RADIUS (J)       = ', ASCAL(NTH/2+1,WSURF(NTH/2+1))*REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2.,&
+       &ASCAL(NTH/2+1,WSURF(NTH/2+1))*REQ*PSI(NTH/2+1,WSURF(NTH/2+1))**2./0.6772030,'KM'
+  WRITE(12,*)' CENTRAL OMG          = ', OMG
+  WRITE(12,*)' OMGEQ                = ', OMGEQ
+  WRITE(12,*)' MAG. FLUX            = ', FLUX, SQRT(4.*pi)*FLUX/1.946269d-22,'Wb'
+  WRITE(12,*)' MAG. DIPOLE DIPM (J) = ', DipM
+  WRITE(12,*)' B@POLE BPOLO (J)     = ', BPOLO, BPOLO*SQRT(4.*pi)/4.244674d-20,'G'
+  WRITE(12,*)' BMAX (J)             = ', SQRT(B2MAX),SQRT(B2MAX*4.*pi)/4.244674d-20,'G'
+  !WRITE(12,'(A12,A22,ES23.16,A6,ES23.16,A4)')' Bmax_s (J) ','    ',SQRT(B2MAX),'  =   ',SQRT(B2MAX*4.*pi)/4.244674d-20,'  G'
+  WRITE(12,*)' BMAX(POL) (J)        = ', SQRT(B2MAXPOL),SQRT(B2MAXPOL*4.*pi)/4.244674d-20,'G'
+  WRITE(12,*)' BMAX(TOR) (J)        = ', SQRT(B2MAXTOR),SQRT(B2MAXTOR*4.*pi)/4.244674d-20,'G'
+  WRITE(12,*)' BCENT (J)            = ', BCENT, BCENT*SQRT(4.*pi)/4.244674d-20,'G'
+  WRITE(12,*)' E@POLE EPOLO (J)       = ', EPOLO
+  WRITE(12,*)' ELEC. CHARGE ECHRG (J) = ', ECHRG, 'VS',ECHRGIN
+  WRITE(12,*)' FLUID QUADRUPOLE (E)      = ','  ', IZZM-IXXM
+  WRITE(12,*)' FLUID INTERTIA MOMENT (E) = ','  ', IZZM
+  IF(.NOT. GR)WRITE(12,*)' SC. FIELD QUADRUPOLE (E)       = ', IZZS-IXXS
+  IF(.NOT. GR)WRITE(12,*)' SC. FIELD INERTIA MOMENT (E)   = ', IZZS
+  IF(.NOT. GR)WRITE(12,*)' TRACE MONOPOLE (E)          =    ', TMONO
+  IF(.NOT. GR)WRITE(12,*)' TRACE QUADRUPOLE (E)        =    ', TQUAD/(TMONO*REQ**2)
+  IF(.NOT. GR)WRITE(12,*)' GRTRACE QUADRUPOLE (E)      =    ', SQUAD
+  WRITE(12,*)' TOTAL QUADRUPOLE (E)     =    ', IZZM+IZZS-IXXM-IXXS
+  WRITE(12,*)' METRIC QUADRUPOLE (E)    =    ', QUADGR
+  WRITE(12,*)' FLUID DEF. RATE (E)	=    ', (IZZM-IXXM)/IZZM
+  !WRITE(12,*)' SCL. FIELD DEF. RATE (E) =    ',  (IZZS-IXXS)/(IZZS+1.E-20)
+  IF(.NOT. GR)WRITE(12,*)' SCL. FIELD DEF. RATE (E) =    ', (IZZS-IXXS)/IZZS
+  WRITE(12,*)' TOTAL DEF. RATE (E)      =    ', (IZZ-IXX)/IZZM
+  WRITE(12,*)' HHPOL (J) = ', HHpol
+  WRITE(12,*)' HHTOR (J) = ', HHtor
+  IF(IMAG) WRITE(12,*)' HHTOR/HH (J) = ', HHtor/HH
+  WRITE(12,*)' '
+  WRITE(12,*)'======================================================================================================'
+  WRITE(12,*)' '
+  WRITE(12,*)'NUMBER OF LOOPS DONE = ',ILOOP,'OUT OF ',MAXLOOP
+  
+  CLOSE(12)
+END IF
 
 END SUBROUTINE QUANTITIES
 
-
-
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE SOURCEPOT !!! QUI
-!---------------------------------------------------------
-! Compute the metric terms and metric derivatives used in
-! the source terms of the Maxwell equations/Grad-Shafranov
-! equations.
-! METERM(:,:)  = Log(Alpha/Psi^2)
-! OMTERM(:,:)  = Psi^4*r^2*Sin(th)^2/Alpha^2
-! RHOTERM(:,:) = Rho*Enthalpy*Psi^8*A(chi)^4
-! VMETTERM(:,:)= Alpha*v^2/(Omega-omega)
-! DRMETTERM, DTMETTERM -> derivatives of METERM
-! DROMGM, DTOMGM - derivative of the frame-dragging pot.
-!--------------------------------------------------------
+SUBROUTINE SOURCEPOT 
+  !  ============================================================
+  !  Purpose : Compute the metric terms and metric derivatives used in
+  !  the source terms of the Maxwell equations/Grad-Shafranov
+  !  equations.
+  !  METERM  = Log(Alpha/Psi^2)
+  !  OMTERM  = Psi^4*r^2*Sin(th)^2/Alpha^2
+  !  RHOTERM = Rho*Enthalpy*Psi^8*A(chi)^4
+  !  VMETTERM = Alpha*v^2/(Omega-omega)
+  !  DRMETTERM, DTMETTERM -> derivatives of METERM
+  !  DROMGM, DTOMGM - derivative of the frame-dragging pot.
+  !  ============================================================
 
   USE SYSTEMXNS
   IMPLICIT NONE
@@ -1356,103 +1406,97 @@ SUBROUTINE SOURCEPOT !!! QUI
   REAL :: A1,A2,A3,B1,B2,B3
 
   DO IX=1,NTH
-    DO IZ=1,NR
-      OMGMET(IX,IZ)= -PSS(IX,IZ)
-      VLOC(IX,IZ)=MIN((OMG-OMGMET(IX,IZ))*R(IZ)*SIN(TH(IX))/PSL(IX,IZ)*PSI(IX,IZ)**3.,0.9999999)
-      GAMLOC(IX,IZ)=1./SQRT(1.-VLOC(IX,IZ)**2.)
-      METERM(IX,IZ) = LOG(PSL(IX,IZ)/PSI(IX,IZ)**3)
-      OMTERM(IX,IZ) = PSI(IX,IZ)**6.*SIN(TH(IX))**2.*R(IZ)**2/PSL(IX,IZ)**2.
-      RHOTERM(IX,IZ) = (RHOSRC(IX,IZ)+GAMMA*PSRC(IX,IZ)/(GAMMA-1.))*PSI(IX,IZ)**8*ASCAL(IX,IZ)**4
-! 	  IF((IZ .EQ. 10) .AND. (IX .EQ. 100))WRITE(6,*)'RPOT1',RHOTERM(IX,IZ),RHOSRC(IX,IZ),PSRC(IX,IZ)
-	  RHOTERM(IX,IZ) = (ESRC(IX,IZ))*PSI(IX,IZ)**8*ASCAL(IX,IZ)**4
-!       IF((IZ .EQ. 10) .AND. (IX .EQ. 100))WRITE(6,*)'RPOT2',RHOTERM(IX,IZ),ESRC(IX,IZ)
-      VMETERM(IX,IZ)= ASCAL(IX,IZ)*PSL(IX,IZ)/PSI(IX,IZ)*VLOC(IX,IZ)**2./(OMGMET(IX,IZ)-OMG)
-    END DO
+     DO IZ=1,NR
+        OMGMET(IX,IZ)= -PSS(IX,IZ)
+        VLOC(IX,IZ)=MIN((OMG-OMGMET(IX,IZ))*R(IZ)*SIN(TH(IX))/PSL(IX,IZ)*PSI(IX,IZ)**3.,0.9999999)
+        GAMLOC(IX,IZ)=1./SQRT(1.-VLOC(IX,IZ)**2.)
+        METERM(IX,IZ) = LOG(PSL(IX,IZ)/PSI(IX,IZ)**3)
+        OMTERM(IX,IZ) = PSI(IX,IZ)**6.*SIN(TH(IX))**2.*R(IZ)**2/PSL(IX,IZ)**2.
+        !RHOTERM(IX,IZ) = (RHOSRC(IX,IZ)+GAMMA*PSRC(IX,IZ)/(GAMMA-1.))*PSI(IX,IZ)**8*ASCAL(IX,IZ)**4
+        RHOTERM(IX,IZ) = (ESRC(IX,IZ))*PSI(IX,IZ)**8*ASCAL(IX,IZ)**4
+        VMETERM(IX,IZ)= ASCAL(IX,IZ)*PSL(IX,IZ)/PSI(IX,IZ)*VLOC(IX,IZ)**2./(OMGMET(IX,IZ)-OMG)
+     END DO
   END DO
-
+  
   !..................
   ! Compute the metric source terms for the vector potential
   !..................
   ! Assume parity on axis
   DO IZ=1,NR
-    METERM(0,IZ)     =  METERM(1,IZ)
-    METERM(NTH+1,IZ) =  METERM(NTH,IZ)
-    GAMLOC(NTH+1,IZ) =  GAMLOC(NTH,IZ)
-    GAMLOC(0,IZ)     =  GAMLOC(1,IZ)
-    OMGMET(0,IZ)     =  OMGMET(1,IZ)
-    OMGMET(NTH+1,IZ) =  OMGMET(NTH,IZ)
+     METERM(0,IZ)     =  METERM(1,IZ)
+     METERM(NTH+1,IZ) =  METERM(NTH,IZ)
+     GAMLOC(NTH+1,IZ) =  GAMLOC(NTH,IZ)
+     GAMLOC(0,IZ)     =  GAMLOC(1,IZ)
+     OMGMET(0,IZ)     =  OMGMET(1,IZ)
+     OMGMET(NTH+1,IZ) =  OMGMET(NTH,IZ)
   END DO
-
+  
   ! Assume parity at center
   ! Assume that the metric source term is smooth at the outer boundary.
   DO IX=1,NTH
-    METERM(IX,0)    = METERM(NTH-IX+1,1)
-    METERM(IX,NR+1) = METERM(IX,NR) + DR(NR)/DR(NR-1)*(METERM(IX,NR)-METERM(IX,NR-1)) !
-    GAMLOC(IX,0)    = GAMLOC(NTH-IX+1,1)
-    GAMLOC(IX,NR+1) = GAMLOC(IX,NR) + DR(NR)/DR(NR-1)*(GAMLOC(IX,NR)-GAMLOC(IX,NR-1))
-    OMGMET(IX,0)    = OMGMET(NTH-IX+1,1)
-    OMGMET(IX,NR+1) = OMGMET(IX,NR) + DR(NR)/DR(NR-1)*(OMGMET(IX,NR)-OMGMET(IX,NR-1))
+     METERM(IX,0)    = METERM(NTH-IX+1,1)
+     METERM(IX,NR+1) = METERM(IX,NR) + DR(NR)/DR(NR-1)*(METERM(IX,NR)-METERM(IX,NR-1)) !
+     GAMLOC(IX,0)    = GAMLOC(NTH-IX+1,1)
+     GAMLOC(IX,NR+1) = GAMLOC(IX,NR) + DR(NR)/DR(NR-1)*(GAMLOC(IX,NR)-GAMLOC(IX,NR-1))
+     OMGMET(IX,0)    = OMGMET(NTH-IX+1,1)
+     OMGMET(IX,NR+1) = OMGMET(IX,NR) + DR(NR)/DR(NR-1)*(OMGMET(IX,NR)-OMGMET(IX,NR-1))
   END DO
-
+  
   LOGGAM=LOG(GAMLOC**2.)
-
+  
   DO IX=1,NTH
-    DO IZ=1,NR
-      A1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
-      A2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
-      A3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
-      B1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
-      B2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
-      B3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
-
-      DRMETTERM(IX,IZ) = A1*METERM(IX,IZ-1)+A3*METERM(IX,IZ+1)+A2*METERM(IX,IZ)
-      DTMETTERM(IX,IZ) = B1*METERM(IX-1,IZ)+B3*METERM(IX+1,IZ)+B2*METERM(IX,IZ)
-
-      DRGAML(IX,IZ)=A1*LOGGAM(IX,IZ-1)+A3*LOGGAM(IX,IZ+1)+A2*LOGGAM(IX,IZ)
-      DTGAML(IX,IZ)=B1*LOGGAM(IX-1,IZ)+B3*LOGGAM(IX+1,IZ)+B2*LOGGAM(IX,IZ)
-
-      DROMGM(IX,IZ)=A1*OMGMET(IX,IZ-1)+A3*OMGMET(IX,IZ+1)+A2*OMGMET(IX,IZ)
-      DTOMGM(IX,IZ)=B1*OMGMET(IX-1,IZ)+B3*OMGMET(IX+1,IZ)+B2*OMGMET(IX,IZ)
-
-    END DO
+     DO IZ=1,NR
+        A1=-DR(IZ+1)/DR(IZ)/(DR(IZ)+DR(IZ+1))
+        A2= (DR(IZ+1)-DR(IZ))/DR(IZ)/DR(IZ+1)
+        A3= DR(IZ)/DR(IZ+1)/(DR(IZ)+DR(IZ+1))
+        B1=-DTH(IX+1)/DTH(IX)/(DTH(IX)+DTH(IX+1))
+        B2= (DTH(IX+1)-DTH(IX))/DTH(IX)/DTH(IX+1)
+        B3= DTH(IX)/DTH(IX+1)/(DTH(IX)+DTH(IX+1))
+        
+        DRMETTERM(IX,IZ) = A1*METERM(IX,IZ-1)+A3*METERM(IX,IZ+1)+A2*METERM(IX,IZ)
+        DTMETTERM(IX,IZ) = B1*METERM(IX-1,IZ)+B3*METERM(IX+1,IZ)+B2*METERM(IX,IZ)
+        
+        DRGAML(IX,IZ)=A1*LOGGAM(IX,IZ-1)+A3*LOGGAM(IX,IZ+1)+A2*LOGGAM(IX,IZ)
+        DTGAML(IX,IZ)=B1*LOGGAM(IX-1,IZ)+B3*LOGGAM(IX+1,IZ)+B2*LOGGAM(IX,IZ)
+        
+        DROMGM(IX,IZ)=A1*OMGMET(IX,IZ-1)+A3*OMGMET(IX,IZ+1)+A2*OMGMET(IX,IZ)
+        DTOMGM(IX,IZ)=B1*OMGMET(IX-1,IZ)+B3*OMGMET(IX+1,IZ)+B2*OMGMET(IX,IZ)
+        
+     END DO
   END DO
-
-
+  
+  
 END SUBROUTINE SOURCEPOT
 
 ! **************************************************************
 ! **************************************************************
 
-SUBROUTINE VECPOTPHI !!! QUI
-
-!  ============================================================
-!  Purpose : this subroutine solve the Grad-Shafranov eq. for
-!    the phi-component of the vector potential in spherical
-!    coordinates using coordinate quantities. The procedure and
-!    notation are similar to , used to solve the phi-component
-!    of the vector poisson equation for the metric.
-!  ============================================================
-!
-!  APHI = azimuthal component of the vector potential
-!        (normalized with r*sin(th))
-!  RHO  = source term of the Grad-Shafranov Equation
-!  APM  = maximum value of APHI on the domain
-!  APHIMAX= maximum value of APHI at a distance R(CUT*WSURF)
-!  ============================================================
-
+SUBROUTINE VECPOTPHI 
+  
+  !  ============================================================
+  !  Purpose : this subroutine solve the Grad-Shafranov eq. for
+  !    the phi-component of the vector potential in spherical
+  !    coordinates using coordinate quantities. The procedure and
+  !    notation are similar to , used to solve the phi-component
+  !    of the vector poisson equation for the metric.
+  !  ============================================================
+  !
+  !  APHI = azimuthal component of the vector potential
+  !        (normalized with r*sin(th))
+  !  RHO  = source term of the Grad-Shafranov Equation
+  !  APM  = maximum value of APHI on the domain
+  !  APHIMAX = maximum value of APHI at a distance R(CUT*WSURF)
+  !  ============================================================
+  
   USE SYSTEMXNS
-! #ifdef _OPENMP
-!   use omp_lib
-! #endif
-
   IMPLICIT NONE
-
+  
   INTEGER,PARAMETER :: MAXIT = 1500
   INTEGER :: I,INFO,ITP,ITER
   REAL,DIMENSION(-1:NTH+2,0:NR+1):: RHO,DAPHIDT,DAPHIDR,APHIOLD,APHIOLD2
   REAL :: A1,A2,A3,B1,B2,B3, ERROR
   REAL :: TERM1, TERM2, TERM3, TERM4
-
+  
   real(kind(1.d0)) :: starttime,endtime
 
   IF(APM.EQ.0.) APM=1.
@@ -1560,32 +1604,32 @@ END SUBROUTINE VECPOTPHI
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE MXWLSOL(ILOOP) !!! QUI
-
-!  =============================================================
-!  Purpose: this subroutine solves the Maxwell-Ampere and the
-!    Maxwell-Gauss equations. It finally solves for the
-!    harmonic function required to impose MHD inside the star.
-!    The additional degree of fredoom related to the arbitrary
-!    harmonic function correspond to the global net charge of
-!    star. If QNULL is set to true, the code searches for
-!    globally neutral stars, otherwise it minimizes the electric
-!    field at the pole.
-!
-!  APHI    = azimuthal component of the vector potential
-!            (normalized with r*sin(th))
-!  ATIM    = global time component of the 4-potential
-!  ATIMIN  = time component of the 4-potential inside the star
-!  ATIMOUT = time component of the 4-potential outside the star
-!  JMXL    = current density
-!  RHOEMXL = charge denity
-!  RHO     = source term of Maxwell equations
-!  APM     = maximum value of APHI on the domain
-!  ATMM    = maximum value of ATIM in the domain
-!  CC1     = monopolar content of ATIM
-!  CONSTANT= arbitrary integral constant for the APHI potential
-!  =============================================================
-
+SUBROUTINE MXWLSOL(ILOOP)
+  
+  !  =============================================================
+  !  Purpose: this subroutine solves the Maxwell-Ampere and the
+  !    Maxwell-Gauss equations. It finally solves for the
+  !    harmonic function required to impose MHD inside the star.
+  !    The additional degree of fredoom related to the arbitrary
+  !    harmonic function correspond to the global net charge of
+  !    star. If QNULL is set to true, the code searches for
+  !    globally neutral stars, otherwise it minimizes the electric
+  !    field at the pole.
+  !
+  !  APHI    = azimuthal component of the vector potential
+  !            (normalized with r*sin(th))
+  !  ATIM    = global time component of the 4-potential
+  !  ATIMIN  = time component of the 4-potential inside the star
+  !  ATIMOUT = time component of the 4-potential outside the star
+  !  JMXL    = current density
+  !  RHOEMXL = charge denity
+  !  RHO     = source term of Maxwell equations
+  !  APM     = maximum value of APHI on the domain
+  !  ATMM    = maximum value of ATIM in the domain
+  !  CC1     = monopolar content of ATIM
+  !  CONSTANT= arbitrary integral constant for the APHI potential
+  !  =============================================================
+  
   USE SYSTEMXNS
   IMPLICIT NONE
 
@@ -1723,7 +1767,7 @@ SUBROUTINE MXWLSOL(ILOOP) !!! QUI
 
 
   !------------------------------------------------------------------------------
-  !Solve Maxwell-Gauss equation
+  ! Solve Maxwell-Gauss equation
   !------------------------------------------------------------------------------
 
     !Initialize the charge density
@@ -1835,7 +1879,7 @@ SUBROUTINE MXWLSOL(ILOOP) !!! QUI
     !Check for convergence
     ERROR=MAXVAL(ABS(APHIOLD(1:NTH,1:NR)-APHI(1:NTH,1:NR)))
     ERROR2=MAXVAL(ABS(ATIMOLD(1:NTH,1:NR)-ATIM(1:NTH,1:NR)))
-   ! IF(VERBOSE .AND. (.NOT. MPICODE)) WRITE(6,*) ITER,'MaxAphi,MaxAt & MaxErrAphi =', APM,ATMM,ERROR,ERROR2
+    IF(VERBOSE .AND. (.NOT. MPICODE)) WRITE(6,*) ITER,'MaxAphi,MaxAt & MaxErrAphi =', APM,ATMM,ERROR,ERROR2
     IF((ERROR .LT. TOLCONV*MAX(KBPOL,KBTT)).AND.(ERROR2 .LT. OMG*TOLCONV*MAX(KBPOL,KBTT))) EXIT
 
   END DO
@@ -1859,17 +1903,17 @@ END SUBROUTINE MXWLSOL
 ! EQUATION SOLVERS
 !*******************************************************************************
 
-SUBROUTINE SOLVEAPHI(RHO) !!! QUI
-!  ============================================================
-!  Purpose : this subroutine solves for the Grad-Shafranov
-!     equation or for the phi-component of the Maxwell-Ampere
-!     equation. The procedure and notation are similar to the
-!     ones in SHIFTPHI, used to solve the phi-component
-!     of the vector poisson equation for the metric.
-!
-!  RHO = source term
-!  ============================================================
-
+SUBROUTINE SOLVEAPHI(RHO) 
+  !  ============================================================
+  !  Purpose : this subroutine solves for the Grad-Shafranov
+  !     equation or for the phi-component of the Maxwell-Ampere
+  !     equation. The procedure and notation are similar to the
+  !     ones in SHIFTPHI, used to solve the phi-component
+  !     of the vector poisson equation for the metric.
+  !
+  !  RHO = source term
+  !  ============================================================
+  
   USE SYSTEMXNS
   USE FUNCTIONS
   IMPLICIT NONE
@@ -1999,7 +2043,7 @@ END SUBROUTINE SOLVEAPHI
 ! ********************************************************
 ! ********************************************************
 
-SUBROUTINE SOLVEATIME(RHO,CC1) !!! QUI
+SUBROUTINE SOLVEATIME(RHO,CC1)
   !  ============================================================
   !  Purpose : this subroutine solves for the Maxwell-Gauss
   !     equation. The procedure and notation are similar to the
@@ -2154,19 +2198,19 @@ END SUBROUTINE SOLVEATIME
 ! ********************************************************
 
 SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
-!  =============================================================
-!  Purpose: this subroutine solves for harmonic function PHIARM.
-!           It uses LUDCMP and LUBKSB from Numerical Recipes to
-!           perform LU decomposition and backward subtitution.
-!
-!  AELL, BELL = minor and major axis of the surface ellipsoid
-!  NSPE       = super-ellipsoid index
-!  ELSURF     = fit of the surface
-!  PHI(INPUT) = Armonic potential at the stellar surface
-!  PHI(OUTPUT)= Armonic potential on the grid
-!  PHIIN      = Armonic potential inside the star
-!  PHIOUT     = Armonic potential outside the star
-!  =============================================================
+  !  =============================================================
+  !  Purpose: this subroutine solves for harmonic function PHIARM.
+  !           It uses LUSOLVER adapted from LAPACK to
+  !           perform LU decomposition and backward subtitution.
+  !
+  !  AELL, BELL = minor and major axis of the surface ellipsoid
+  !  NSPE       = super-ellipsoid index
+  !  ELSURF     = fit of the surface
+  !  PHI(INPUT) = Armonic potential at the stellar surface
+  !  PHI(OUTPUT)= Armonic potential on the grid
+  !  PHIIN      = Armonic potential inside the star
+  !  PHIOUT     = Armonic potential outside the star
+  !  =============================================================
 
   USE SYSTEMXNS
   USE FUNCTIONS
@@ -2205,8 +2249,7 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
       RTMP=WSURF(IX)+1
       ELSURF(IX)=AELL*BELL/SQRT(AELL**2.*COS(TH(IX))**2.+BELL**2.*SIN(TH(IX))**2.)
       !2D interpolation of the potential on the analytical curve
-      CALL POLIN2(TH(IX-2:IX+2),R(RTMP-2:RTMP+2),PHI(IX-2:IX+2,RTMP-2:RTMP+2),&
-                  5,5,TH(IX),ELSURF(IX),YINTRP,DYINT,CHECK)
+      CALL LAGRANGEINT2D(5,5,TH(IX-2:IX+2),R(RTMP-2:RTMP+2),PHI(IX-2:IX+2,RTMP-2:RTMP+2),TH(IX),ELSURF(IX),YINTRP,DYINT)
       PHINTRP(IX)=YINTRP
     END DO
     NSPE=2.
@@ -2223,8 +2266,7 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
       BTMP=ABS(BELL*SIN(TH(IX)))
       ELSURF(IX)=AELL*BELL/(ATMP**NSPE+BTMP**NSPE)**(1./NSPE)
       !2D interpolation of the potential on the analytical curve
-      CALL POLIN2(TH(IX-2:IX+2),R(RTMP-2:RTMP+2),PHI(IX-2:IX+2,RTMP-2:RTMP+2),&
-                  5,5,TH(IX),ELSURF(IX),YINTRP,DYINT,CHECK)
+      CALL LAGRANGEINT2D(5,5,TH(IX-2:IX+2),R(RTMP-2:RTMP+2),PHI(IX-2:IX+2,RTMP-2:RTMP+2),TH(IX),ELSURF(IX),YINTRP,DYINT)
       PHINTRP(IX)=YINTRP
     ENDDO
   ENDIF
@@ -2316,8 +2358,7 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
 
   ! Find the interior harmonic function
   Y=YOIN
-  CALL LUDCMP(MATRIX1(0:MLSL/2,0:MLSL/2),MLSL/2+1,MLSL/2+1,indc,dsign,CHECK)
-  CALL LUBKSB(MATRIX1(0:MLSL/2,0:MLSL/2),MLSL/2+1,MLSL/2+1,indc,Y(0:MLSL/2))
+  CALL LUSOLVER(MLSL/2+1,MATRIX2(0:MLSL/2,0:MLSL/2),Y(0:MLSL/2),INDC,.FALSE.)
 
   IF(CHECK.EQ.-1) THEN
      WRITE(6,*)"ERROR: from HYDROEQ, LAPLACE failure in LUDCMP"
@@ -2340,8 +2381,7 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
 
   ! Find the interior exterior harmonic function
   Y=YOOUT
-  CALL LUDCMP(MATRIX2(0:MLSL/2,0:MLSL/2),MLSL/2+1,MLSL/2+1,INDC,DSIGN,CHECK)
-  CALL LUBKSB(MATRIX2(0:MLSL/2,0:MLSL/2),MLSL/2+1,MLSL/2+1,INDC,Y(0:MLSL/2))
+  CALL LUSOLVER(MLSL/2+1,MATRIX2(0:MLSL/2,0:MLSL/2),Y(0:MLSL/2),INDC,.FALSE.)
 
   IF(CHECK.EQ.-1) THEN
      WRITE(6,*)"ERROR: from HYDROEQ, LAPLACE failure in LUDCMP"
@@ -2389,7 +2429,7 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
   ENDIF
 
   Y(:)=1.
-  CALL LUBKSB(MATRIX2(0:MLSL/2,0:MLSL/2),MLSL/2+1,MLSL/2+1,INDC,Y(0:MLSL/2))
+  CALL LUSOLVER(MLSL/2+1,MATRIX2(0:MLSL/2,0:MLSL/2),Y(0:MLSL/2),INDC,.TRUE.)
 
   DO IZ=1,NR
      PHIOUTMP(IZ,0)=Y(0)/(R(IZ)/RMEAN)*SQRT(1./4./Pi)
@@ -2405,182 +2445,4 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
 
 END SUBROUTINE LAPLACE
 
-!*******************************************************************************
-!  NR ROUTINES
-!*******************************************************************************
 
-SUBROUTINE ludcmp(a,n,np,indx,d,check)
-
-  IMPLICIT NONE
-
-  INTEGER n,np,indx(n),NMAX
-  REAL d,a(np,np),TINY
-  PARAMETER (NMAX=50,TINY=1.0e-30) !Largest expected n, and a small number.
-  INTEGER i,imax,j,k,check
-  REAL aamax,dum,sum,vv(NMAX)
-
-  d=1.
-
-  DO i=1,n
-     aamax=0.
-     DO j=1,n
-        IF (ABS(a(i,j)).GT.aamax) aamax=ABS(a(i,j))
-     ENDDO
-     IF (aamax.EQ.0.) THEN
-        PRINT*, 'singular matrix in ludcmp'
-        check=-1
-        RETURN
-     ENDIF
-     vv(i)=1./aamax
-  ENDDO
-  DO j=1,n
-     DO i=1,j-1
-        sum=a(i,j)
-        DO k=1,i-1
-           sum=sum-a(i,k)*a(k,j)
-        ENDDO
-        a(i,j)=sum
-     ENDDO
-     aamax=0.
-     DO i=j,n
-        sum=a(i,j)
-        DO k=1,j-1
-           sum=sum-a(i,k)*a(k,j)
-        ENDDO
-        a(i,j)=sum
-        dum=vv(i)*ABS(sum)
-        IF (dum.GE.aamax) THEN
-           imax=i
-           aamax=dum
-        ENDIF
-     ENDDO
-     IF (j.NE.imax)THEN
-        DO k=1,n
-           dum=a(imax,k)
-           a(imax,k)=a(j,k)
-           a(j,k)=dum
-        ENDDO
-        d=-d
-        vv(imax)=vv(j)
-     ENDIF
-     indx(j)=imax
-     IF(a(j,j).EQ.0.) a(j,j)=TINY
-     IF(j.NE.n) THEN
-        dum=1./a(j,j)
-        DO i=j+1,n
-           a(i,j)=a(i,j)*dum
-        ENDDO
-     ENDIF
-  ENDDO
-
-  RETURN
-
-END SUBROUTINE ludcmp
-
-SUBROUTINE lubksb(a,n,np,indx,b)
-INTEGER n,np,indx(n)
-REAL a(np,np),b(n)
-INTEGER i,ii,j,ll
-REAL sum
-
-  ii=0
-
-  DO i=1,n
-    ll=indx(i)
-    sum=b(ll)
-    b(ll)=b(i)
-
-    IF (ii.NE.0)THEN
-      DO j=ii,i-1
-        sum=sum-a(i,j)*b(j)
-      END DO
-    ELSE IF (sum.NE.0.) THEN
-       ii=i
-    ENDIF
-    b(i)=sum
-  ENDDO
-
-  DO i=n,1,-1
-    sum=b(i)
-    DO j=i+1,n
-      sum=sum-a(i,j)*b(j)
-    ENDDO
-    b(i)=sum/a(i,i)
-  END DO
-
-  RETURN
-
-END SUBROUTINE lubksb
-
-
-SUBROUTINE polin2(x1a,x2a,ya,m,n,x1,x2,y,dy,check)
-
-  IMPLICIT NONE
-
-  INTEGER m,n,NMAX,MMAX
-  REAL dy,x1,x2,y,x1a(m),x2a(n),ya(m,n)
-  PARAMETER (NMAX=20,MMAX=20)
-  INTEGER j,k,check
-  REAL ymtmp(MMAX),yntmp(NMAX)
-  DO j=1,m
-    DO k=1,n
-      yntmp(k)=ya(j,k)
-    ENDDO
-    CALL polintNR(x2a,yntmp,n,x2,ymtmp(j),dy,check)
-  ENDDO
-
-  CALL polintNR(x1a,ymtmp,m,x1,y,dy,check)
-
-  RETURN
-
-END SUBROUTINE polin2
-
-
-SUBROUTINE polintNR(xa,ya,n,x,y,dy,check)
-
-  IMPLICIT NONE
-  INTEGER n,NMAX
-  REAL dy,x,y,xa(n),ya(n)
-  PARAMETER (NMAX=10)
-  INTEGER i,m,ns,check
-  REAL den,dif,dift,ho,hp,w,c(NMAX),d(NMAX)
-
-  ns=1
-  dif=ABS(x-xa(1))
-  DO i=1,n
-    dift=ABS(x-xa(i))
-    IF (dift.LT.dif) THEN
-      ns=i
-      dif=dift
-    ENDIF
-    c(i)=ya(i)
-    d(i)=ya(i)
-  ENDDO
-  y=ya(ns)
-  ns=ns-1
-  DO m=1,n-1
-    DO i=1,n-m
-      ho=xa(i)-x
-      hp=xa(i+m)-x
-      w=c(i+1)-d(i)
-      den=ho-hp
-      IF(den.EQ.0.) THEN
-         !pause ’failure in polint’
-         check=-1
-         RETURN
-      END IF
-      den=w/den
-      d(i)=hp*den
-      c(i)=ho*den
-    ENDDO
-    IF (2*ns.LT.n-m)THEN
-      dy=c(ns+1)
-    ELSE
-      dy=d(ns)
-      ns=ns-1
-    ENDIF
-    y=y+dy
-  ENDDO
-  RETURN
-
-END SUBROUTINE polintNR

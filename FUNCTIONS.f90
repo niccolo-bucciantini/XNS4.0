@@ -668,5 +668,39 @@ SUBROUTINE POLINT(XA,YA,N,X,Y,M)
   RETURN
 
 END SUBROUTINE POLINT
+
+! ***************************************************************************
+! ***************************************************************************
+
+SUBROUTINE XNS2ECHO_OUT()
+
+  !  ===============================================
+  !  Purpose:   Output file for X-ECHO
+  !  ===============================================
+  USE SYSTEMXNS
+  
+  open(10,file='XNS2ECHO_init.dat',form='unformatted')
+  print*, NTH,NR
+  write(10) NTH
+  write(10) NR
+  write(10) RMIN
+  write(10) RMAX
+  write(10) RHONEW/MBARYONFC
+  write(10) V3NEW
+  write(10) PNEW
+  write(10) EPOLR
+  write(10) EPOLT
+  write(10) BPOLR
+  write(10) BPOLT
+  write(10) B3NEW
+  write(10) PSI
+  write(10) PSL/PSI
+  write(10) PSS
+  close(10)
+
+END SUBROUTINE XNS2ECHO_OUT
+
+! ***************************************************************************
+! **************************************************************************
   
 END MODULE FUNCTIONS
