@@ -18,7 +18,7 @@ cosine of the angle.
 
 ## Metric
 
-- **PSI**,**PSL**,**PSS**,**PSSR**,**PSST** - 2D arrays of metric terms, respectively $\psi$, $\alpha \psi$, $X^{\phi}$, $X^{r}$, $X^{\theta}$. We have either $X^i=W^i$, or $X^i ≡ \beta ^i$, depending on the step of the metric solver.
+- **PSI**,**PSL**,**PSS**,**PSSR**,**PSST** - 2D arrays of metric terms, respectively $\psi$, $\alpha \psi$, $X^{\phi}$, $X^{r}$, $X^{\theta}$. We have either $X^i=W^i$, or $X^i = \beta ^i$, depending on the step of the metric solver.
 <br><br>
 - **CURVC**,**CURVR**,**CURVT**,**CURVP** - 2D arrays containing the source terms associated with the curvature
 of the metric, respectively for the two scalar Poisson equations (for $\psi$ and $\alpha$) and for the three
@@ -59,6 +59,6 @@ the source terms, respectively $\hat E$, $\hat D$ , $\hat S _\phi$ , $\hat S _r$
 <br><br>
 - **ECSRC**,**ELSRC**,**ES1RC**,**ES2RC**,**ES3RC** - 2D arrays containing the source terms (the right hand side of
 the equations) associated with the presence of matter in the elliptic PDEs. Respectively, the source
-for the equations for $\psi$, $\alpha \psi$, $X^{\phi}$, $X^{r}$, $X^{\theta}$, where $X^i=W^i$, or $X^i ≡ \beta ^i$.
+for the equations for $\psi$, $\alpha \psi$, $X^{\phi}$, $X^{r}$, $X^{\theta}$, where $X^i=W^i$, or $X^i = \beta ^i$.
 <br><br>
 - **TRACEM** - 2D array containing the trace of the energy-momentum tensor of matter, used for the source of the equation of the scalar field.

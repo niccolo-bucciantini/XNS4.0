@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Examples in GR &mdash; XNS 1.0.0 documentation</title>
+  <title>Examples in GR &mdash; XNS 4.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -48,8 +48,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples in GR</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field">Non-rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field">Non-rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rotating-unmagnetised-ns-in-gr-with-the-eos">Rotating, unmagnetised NS in GR with the ??? EoS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rotating-magnetised-ns-in-gr-with-the-eos">Rotating, magnetised NS in GR with the ??? EoS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere">Non-rotating NS in GR with the POL2 EoS and a twisted magnetosphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos">Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos">Differnetially Rotating, unmagnetised NS in GR with the APR EoS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos">Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos">Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples_stt.html">Examples in STTs</a></li>
@@ -247,16 +250,42 @@ cases have been run on a simple laptop</p>
 </tbody>
 </table>
 </section>
-<section id="rotating-unmagnetised-ns-in-gr-with-the-eos">
-<h2>Rotating, unmagnetised NS in GR with the ??? EoS<a class="headerlink" href="#rotating-unmagnetised-ns-in-gr-with-the-eos" title="Permalink to this headline"></a></h2>
+<section id="non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere">
+<h2>Non-rotating NS in GR with the POL2 EoS and a twisted magnetosphere<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere" title="Permalink to this headline"></a></h2>
+<p>This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density <span class="math notranslate nohighlight">\(\rho _\mathrm{c}=1.366\times 10^{-3}\)</span> in code units (corresponding to <span class="math notranslate nohighlight">\(8.473\times 10^{14}\)</span> gcm<span class="math notranslate nohighlight">\(^{-3}\)</span>) and a Komar mass of <span class="math notranslate nohighlight">\(1.597\)</span> M<span class="math notranslate nohighlight">\( _\odot\)</span>. The circumferential radius is <span class="math notranslate nohighlight">\(20.264\)</span> km.</p>
+<p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NR</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> <span class="n">NTH</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NRREG</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">MLS</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">NGQ</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">RREG</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">RMAXSTR</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="n">RMAX</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">REQMAX</span> <span class="o">=</span> <span class="mf">15.50</span><span class="p">,</span> <span class="n">RHOINI</span> <span class="o">=</span> <span class="mf">1.366E-3</span><span class="p">,</span> <span class="n">ALPHA0</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">BETA0</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">GR</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span>
+<span class="n">STRETCH</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">ANALYTIC</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">CONVHELP</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span> <span class="n">QFACTOR</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">QFACTORCHI</span> <span class="o">=</span> <span class="mf">0.45</span><span class="p">,</span>
+<span class="n">QFACTORMETRIC</span> <span class="o">=</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">QRELAX</span> <span class="o">=</span> <span class="mf">0.30</span><span class="p">,</span> <span class="n">QAPHI</span> <span class="o">=</span> <span class="mf">0.50</span><span class="p">,</span> <span class="n">EOSINT</span> <span class="o">=</span> <span class="o">.</span><span class="n">FALSE</span><span class="o">.</span><span class="p">,</span> <span class="n">K1</span> <span class="o">=</span> <span class="mf">110.0</span><span class="p">,</span> <span class="n">GAMMA</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="n">IMAG</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">ITOR</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">BCOEF</span> <span class="o">=</span> <span class="mf">3.746</span><span class="p">,</span> <span class="n">NPOL</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">CSI</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</section>
+<section id="uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos">
+<h2>Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this headline"></a></h2>
 <p>Description.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
 </pre></div>
 </div>
 </section>
-<section id="rotating-magnetised-ns-in-gr-with-the-eos">
-<h2>Rotating, magnetised NS in GR with the ??? EoS<a class="headerlink" href="#rotating-magnetised-ns-in-gr-with-the-eos" title="Permalink to this headline"></a></h2>
+<section id="differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos">
+<h2>Differnetially Rotating, unmagnetised NS in GR with the APR EoS<a class="headerlink" href="#differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos">
+<h2>Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this headline"></a></h2>
+<p>Description.</p>
+<p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos">
+<h2>Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this headline"></a></h2>
 <p>Description.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>

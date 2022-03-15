@@ -600,7 +600,7 @@ SUBROUTINE LPN(N,X,PN,PD)
   P0=1.0D0
   P1=X
   DO  K=2,N
-   PF=(2.0D0*K-1.0D0)/K*X*P1-(K-1.0D0)/K*P0					! Bonnet's recursion formula
+   PF=(2.0D0*K-1.0D0)/K*X*P1-(K-1.0D0)/K*P0	! Bonnet's recursion formula
    PN(K)=PF
    IF (ABS(X).EQ.1.0D0) THEN
      PD(K)=0.5D0*X**(K+1)*K*(K+1.0D0)

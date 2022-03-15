@@ -116,7 +116,7 @@ SUBROUTINE TOVINIMOD(RHOVAR)
 
      ! STEPLOOP: solves the STT TOV with a fixed CHITV (given by CHITVLOOP) until convergence of M ====
      FPREV = 0. ! Initialize to zero the function for the shooting
-     STEPLOOP: DO STEP=1,MAXSTEP
+     STEPLOOP: DO STEP=1,MAXSTEPTV
         ! Recompute central pressure and total energy for a given central density and scalar field
         ! In the Einstein Frame 
         IF(EOSINT)THEN
@@ -197,7 +197,7 @@ SUBROUTINE TOVINIMOD(RHOVAR)
            EXIT STEPLOOP
         END IF
         ! If too many step mass has not converged 
-        IF(STEP .EQ. MAXSTEP)THEN
+        IF(STEP .EQ. MAXSTEPTV)THEN
            IF(VERBOSE .AND. (.NOT. MPICODE))THEN
               WRITE(6,*)'EXITED STEPLOOP => MASSES HAVE NOT CONVERGED',M,MMID,DIFFM2,DIFFM1,DM
            END IF
@@ -316,7 +316,7 @@ SUBROUTINE TOVINIMOD(RHOVAR)
      ! This is done by solving the second order equation for CHI using tridiagonal-inversion
      ! Given that the Eq for CHI is non-linear we need to iterate
      
-     CHITVLOOP : DO J=1,RELIT
+     CHITVLOOP : DO J=1,MAXSTEPCH
         ! Set the BC
         CHITV(0)=CHITV(1)
         CHITV(NR+1) =CHITV(NR)*R(NR)/R(NR+1)
@@ -343,15 +343,15 @@ SUBROUTINE TOVINIMOD(RHOVAR)
         END DO
         ! Check for converence, starting only from second iteration.
         ! Convergence is checked on the central value of the Scalar Field
-        IF((J .NE. 1) .AND. (ABS((CHITV(2)*R(1)**2-CHITV(1)*R(2)**2)/(R(1)**2-R(2)**2)-CHITVTEMP1) .LT. CONV2))THEN
+        IF((J .NE. 1) .AND. (ABS((CHITV(2)*R(1)**2-CHITV(1)*R(2)**2)/(R(1)**2-R(2)**2)-CHITVTEMP1) .LT. CONVT))THEN
            IF(VERBOSE .AND. (.NOT. MPICODE))THEN
               WRITE(6,*)'EXITED CHITVLOOP => CHITV HAS CONVERGED'
            END IF
            EXIT CHITVLOOP
         END IF
         ! If not converged
-        IF(J==RELIT)THEN 
-           IF(VERBOSE .AND. J==RELIT .AND. (.NOT. MPICODE))THEN
+        IF(J==MAXSTEPCH)THEN 
+           IF(VERBOSE .AND. J==MAXSTEPCH .AND. (.NOT. MPICODE))THEN
               WRITE(6,*)'EXITED CHITVLOOP WITHOUT CONVERGENCE: CHITV0 CONVERGED TO A PRECISION OF ',&
                    &ABS((CHITV(2)*R(1)**2-CHITV(1)*R(2)**2)/(R(1)**2-R(2)**2)-CHITVTEMP1)
            END IF
@@ -387,7 +387,7 @@ SUBROUTINE TOVINIMOD(RHOVAR)
      ! Check the convergence on CHITV0 with respect to the previous one
      COEFFN=ABS(CHITV0-CHITVTEMP)
      ! If converged
-     IF((K .NE. 1) .AND. (ABS(CHITV0-CHITVTEMP) .LT. CONV2))THEN
+     IF((K .NE. 1) .AND. (ABS(CHITV0-CHITVTEMP) .LT. CONVT))THEN
         IF(VERBOSE .AND. (.NOT. MPICODE))THEN
            WRITE(6,*)'EXITED RELAXLOOP => RELAXATION HAS CONVERGED'
         END IF

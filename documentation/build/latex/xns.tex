@@ -60,9 +60,9 @@
 
 
 \title{XNS}
-\date{Oct 28, 2021}
-\release{1.0.0}
-\author{Jacopo Soldateschi}
+\date{Mar 15, 2022}
+\release{4.0.0}
+\author{N.Bucciantini \\J.Soldateschi\\ A.Pili\\ L.Del Zanna \\K.Franceschetti}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
 \makeindex
@@ -83,7 +83,7 @@ The XNS code solves for axisymmetric equilibria of polytropic magnetized and/or 
 The 4.0 version of XNS adds the possibility of solving for the structure of a magnetised, rotating NS in a class of theories of gravity alternative to general relativity (GR), that is massless scalar tensor theories (STTs). Moreover, support for the use of realistic, tabulated equations of state (EoS) has been added.
 
 \sphinxAtStartPar
-This guide is based on the following papers, where the equations describing the approach for magnetized models are fully presented:
+This guide is based on the following papers, where the equations describing the approach for magnetized and rotating models are fully presented:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -111,7 +111,11 @@ Soldateschi, J., Bucciantini, N., \& Del Zanna, L. 2021, A\&A, 645, A39 (link).
 
 \item {} 
 \sphinxAtStartPar
-Soldateschi, J., Bucciantini, N., \& Del Zanna, L. 2021, A\&A, arXiv:2106.00603v3 {[}astro\sphinxhyphen{}ph.HE{]} (link).
+Soldateschi, J., Bucciantini, N., \& Del Zanna, L. 2021, A\&A, 654, A162 (link).
+
+\item {} 
+\sphinxAtStartPar
+Franceschetti, K., Del Zanna, L., Soldateschi, J., \& Bucciantini, N., 2022, Universe, 8, 172 (link).
 
 \end{itemize}
 
@@ -171,7 +175,10 @@ The input parameters that the user might want to change are all set in the modul
 
 
 \section{Convergence}
-\label{\detokenize{user_params:convergence}}\begin{itemize}
+\label{\detokenize{user_params:convergence}}
+
+\subsection{Parameters for convergence of the Newton\sphinxhyphen{}Raphson scheme of XNS}
+\label{\detokenize{user_params:parameters-for-convergence-of-the-newton-raphson-scheme-of-xns}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{NVALUE} \sphinxhyphen{} the maximum number of loops employable by the Newton\sphinxhyphen{}Raphson scheme in the search
@@ -182,34 +189,82 @@ strongly distorted (fast rotation, and/or strong magnetic field). The default va
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{MAXLOOP} \sphinxhyphen{} the maximum number of loops employable in the search for a converged equilibrium
-solution by the subroutine XNSMAIN. Usually convergence is reached within the first 100 steps,
-unless the NS is strongly distorted (fast rotation, and/or strong magnetic field). The default value is
-set to 1000.
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{MAXSTEP} \sphinxhyphen{} the maximum number of loops in TOVINIMOD for the convergence of the TOV system to a solution with a fixed scalar field. Note that the full TOV solution is obtained when also the scalar field has reached convergence together with the rest of the quantities.
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{RELIT} \sphinxhyphen{} the maximum number of loops in TOVINIMOD for the convergence of the scalar field in the TOV system and for the convergence of the full TOV solution.
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{CONV} \sphinxhyphen{} a convergence parameter for the Newton\sphinxhyphen{}Raphson scheme in XNS. It is given in relative terms
+\sphinxstylestrong{CONVF} \sphinxhyphen{} a convergence parameter for the Newton\sphinxhyphen{}Raphson scheme in XNS. It is given in relative terms
 (beware that the code accuracy is \(\sim 10^{-3}\)).
 
 
+\end{itemize}
+
+
+\subsection{Parameters for convergence of XNSMAIN over a model}
+\label{\detokenize{user_params:parameters-for-convergence-of-xnsmain-over-a-model}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{EPS} \sphinxhyphen{} a tolerance value. It is used in several subroutines and must be a small value. This should not
-need to be changed.
+\sphinxstylestrong{MAXLOOP} \sphinxhyphen{} the maximum number of loops employable in the search for a converged equilibrium
+solution by the subroutine XNSMAIN. Usually convergence is reached within the first 100 steps,
+unless the NS is strongly distorted (fast rotation, and/or strong magnetic field). The default value is
+set to 100.
 
 
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CONVRHO} \sphinxhyphen{} sets if convergence by XNSMAIN should be checked on central density or on central lapse function. CONVRHO should be set to .FALSE. if the central density is held fixed, as in the case of Tabulated EoS
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{OSCCONV} \sphinxhyphen{} desired precision in case the solution is reached with oscillatory convergence in XNSMAIN. In this case the check on the convergence is done between a step and the previous few, in such a way to bound the oscillation range.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{MONCONV} \sphinxhyphen{} desired precision in case the solution is reached with monotonous convergence in XNSMAIN. In this case the check on the convergence is done between a step and the previous.
+
+
+\end{itemize}
+
+
+\subsection{Parameters for convergence of the initial TOV solution}
+\label{\detokenize{user_params:parameters-for-convergence-of-the-initial-tov-solution}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{RELIT} \sphinxhyphen{} the maximum number of loops in TOVINIMOD for the convergence of the full TOV solution, including the metric\sphinxhyphen{}matter distribution and, in case of STT, the scalar field.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CONVT} \sphinxhyphen{} desired precision for the convergence of the full TOV solution and also of the scalar field in TOVINIMOD, in STT.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CONV} \sphinxhyphen{} desired precision for the convergence of the GR TOV part (or in STT the matter\sphinxhyphen{}metric part at fixed scalar field) in TOVINIMOD.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{MAXSTEPTV} \sphinxhyphen{} the maximum number of loops in TOVINIMOD for the convergence of the TOV system to a solution with a fixed scalar field. Note that the full TOV solution is obtained when also the scalar field has reached convergence together with the rest of the quantities.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{MAXSTEPCH} \sphinxhyphen{} the maximum number of loops in TOVINIMOD for the convergence of the scalar field equation of the TOV system to a solution with a fixed metric and matter distribution. Note that the full TOV solution is obtained when also the scalar field has reached convergence together with the rest of the quantities.
+
+
+\end{itemize}
+
+
+\subsection{Parameters for convergence of the Bernoulli in HYDROEQ}
+\label{\detokenize{user_params:parameters-for-convergence-of-the-bernoulli-in-hydroeq}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CONVHELP} \sphinxhyphen{} a logical flag to activate an option in HYDROEQ to help achieve convergence. Warning: if set to .TRUE., the final central density will be slightly different from the chosen RHOINI.
+
+\end{itemize}
+
+
+\subsection{Parameters for the convergence of elliptic solvers}
+\label{\detokenize{user_params:parameters-for-the-convergence-of-elliptic-solvers}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{TOLCONV} \sphinxhyphen{} the convergence tolerance for the iterative solution of the PDEs for the conformal factor \(\psi\)
@@ -218,29 +273,14 @@ and the lapse \(\alpha\) in XNSMAIN and for the 4\sphinxhyphen{}potential in HYD
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{OSCCONV} \sphinxhyphen{} desired precision in case the solution is reached with oscillatory convergence in XNSMAIN. Currently it is not used.
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{MONCONV} \sphinxhyphen{} desired precision in case the solution is reached with monotonous convergence in XNSMAIN.
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{CONVF} \sphinxhyphen{} desired precision for the Newton\sphinxhyphen{}Raphson scheme in XNS.
-
-
-\item {} 
-\sphinxAtStartPar
 \sphinxstylestrong{TOLCHI} \sphinxhyphen{} desired precision for the scalar field iterative solver in XNSMAIN.
 
 
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{CONV2} \sphinxhyphen{} desired precision for the convergence of the scalar field in TOVINIMOD.
+\end{itemize}
 
 
+\subsection{Parameters to help or stabilize convergence}
+\label{\detokenize{user_params:parameters-to-help-or-stabilize-convergence}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{QFACTOR} \sphinxhyphen{} a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.
@@ -248,7 +288,7 @@ At the end of each sub\sphinxhyphen{}loop of the convergence scheme, a new set o
 computed. Setting QFACTOR=1 implies that these will be used, while setting QFACTOR=0 means that
 the old variables \(V_\mathrm{old}\) will be used (the code will never converge in this case!). A value \(0 < Q_\mathrm{f} < 1\)
 implies that at the beginning of each loop a combination of new and old variables will be used, in the
-form \(V = Q_\mathrm{f}V_\mathrm{new} + (1 − Q_\mathrm{f})V_\mathrm{old}\).
+form \(V = Q_\mathrm{f}V_\mathrm{new} + (1 - Q_\mathrm{f})V_\mathrm{old}\).
 Using a value less than 1 tends to give slower but more stable convergence. Values QFACTOR\( < 0.5\)
 are to be used only for pathological cases where the convergence is very slow or when the code fails
 to converge (i.e. rotating models on the unstable branch of NS mass\sphinxhyphen{}radius curve).
@@ -281,13 +321,22 @@ to converge (i.e. rotating models on the unstable branch of NS mass\sphinxhyphen
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{CONVHELP} \sphinxhyphen{} a logical flag to activate an option in HYDROEQ to help achieve convergence. Warning: if set to .TRUE., the final central density will be slightly different from the chosen RHOINI.
+\sphinxstylestrong{EPS} \sphinxhyphen{} a tolerance value. It is used in several subroutines and must be a small value. This should not
+need to be changed.
+
 
 \end{itemize}
 
 
 \section{Grid}
 \label{\detokenize{user_params:grid}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{STRETCH} \sphinxhyphen{} a logical flag that control whether the grid is stretched or not. If .TRUE. the radial grid
+is regular up to RREG with NRREG grid points and it is stretched from RREG to RMAXSTR with NR\sphinxhyphen{}NRREG
+points. The stretching factor STRR is determined by the code determined by the code consistently with
+the choices for NR, NRREG,RMAXSTR and RREG. See also Pili et al. (2015) for details.
+
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{NR} \sphinxhyphen{} the number of radial grid points. The radial grid is defined from \(r=\)RMIN and \(r=\)RMAX (\(r=\)RMAXSTR) is the grid is uniform (stretched).
@@ -301,11 +350,6 @@ to converge (i.e. rotating models on the unstable branch of NS mass\sphinxhyphen
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{NRREG} \sphinxhyphen{} number of grid points for the regular grid if STRETCH=.TRUE..
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{RINI} \sphinxhyphen{} a very small radius used for the expansion of the TOV equations.
 
 
 \item {} 
@@ -331,16 +375,6 @@ be outside the NS) coincide within a given tolerance. If not the code will halt 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{MINRESREG} \sphinxhyphen{} desired minimum resolution of the grid, if uniform. In case the resolution is too rough, it allows to issue a warning.
-
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{MINRESSTR} \sphinxhyphen{} desired minimum resolution of the regular part of the grid, if stretched. In case the resolution is too rough, it allows to issue a warning.
-
-
-\item {} 
-\sphinxAtStartPar
 \sphinxstylestrong{RREG} \sphinxhyphen{} maximum radius of the regular grid.
 
 
@@ -354,10 +388,18 @@ avoid this, setting a value for REQMAX will force the solution to be truncated.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{STRETCH} \sphinxhyphen{} a logical flag that control whether the grid is stretched or not. If .TRUE. the radial grid
-is regular up to RREG with NRREG grid points and it is stretched from RREG to RMAXSTR with NR\sphinxhyphen{}NRREG
-points. The stretching factor STRR is determined by the code determined by the code consistently with
-the choices for NR, NRREG,RMAXSTR and RREG. See also Pili et al. (2015) for details.
+\sphinxstylestrong{MINRESREG} \sphinxhyphen{} desired minimum resolution of the grid, if uniform. In case the resolution is too rough, it allows to issue a warning.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{MINRESSTR} \sphinxhyphen{} desired minimum resolution of the regular part of the grid, if stretched. In case the resolution is too rough, it allows to issue a warning.
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{RINI} \sphinxhyphen{} a very small radius used for the expansion of the TOV equations.
+
 
 \end{itemize}
 
@@ -436,42 +478,42 @@ In this case, a value of A2VALUE must be specified.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{OMGSPACE} \sphinxhyphen{}
+\sphinxstylestrong{OMGSPACE} \sphinxhyphen{} Logical variable to work in \(\Omega\) or \(J\) space. If .TRUE. the rotational law has form \(J(\Omega)\), else \(\Omega(J)\).
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{JCONSTLAW} \sphinxhyphen{}
+\sphinxstylestrong{JCONSTLAW} \sphinxhyphen{} Rotation law: \(J = A^2(\Omega_c-\Omega)\)
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{JCMODLAW} \sphinxhyphen{}
+\sphinxstylestrong{JCMODLAW} \sphinxhyphen{} Rotation law: \(J= A^2\Omega[(\Omega_c/\Omega)^p-1]\)
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{URYULAW3} \sphinxhyphen{}
+\sphinxstylestrong{URYULAW3} \sphinxhyphen{} Rotation law: Uryu  3, \(\Omega = \Omega_c \, [1+(\dfrac{j}{B^2 \, \Omega_c})^p](1-\dfrac{j}{A^2 \, \Omega_c})\)
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{URYULAW4} \sphinxhyphen{}
+\sphinxstylestrong{URYULAW4} \sphinxhyphen{} Rotation law: Uryu  4, \(\Omega = \Omega_c \, \dfrac{1+(j/B^2 \, \Omega_c)}{1+(j/A^2 \, \Omega_c)^{4}}\)
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{PROTDIFF} \sphinxhyphen{}
+\sphinxstylestrong{PROTDIFF} \sphinxhyphen{} The index \(p\) in either JCMODLAW or URYULAW3.
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{OMGMAX} \sphinxhyphen{}
+\sphinxstylestrong{OMGMAX} \sphinxhyphen{} The maximum value of the rotation rate for Uryu  3 and 4 (this is given instead of A and B)
 
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{RMVALUE} \sphinxhyphen{}
+\sphinxstylestrong{RMVALUE} \sphinxhyphen{} The radius at which the maximum value of the rotation rate for Uryu  3 and 4 is reached (this is given instead of A and B)
 
 \end{itemize}
 
@@ -578,7 +620,7 @@ a given gravitational mass, 2 for a given barionic mass{]}.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{QUCONV} \sphinxhyphen{} the value of the quantity of interest to which we want a model to converge. For example if one wants a model with central density 1.28\(\times 10^{−3}\) (in geometrized units) set: QUOC=0, QUCONV=1.28E\sphinxhyphen{}3.
+\sphinxstylestrong{QUCONV} \sphinxhyphen{} the value of the quantity of interest to which we want a model to converge. For example if one wants a model with central density 1.28\(\times 10^{-3}\) (in geometrized units) set: QUOC=0, QUCONV=1.28E\sphinxhyphen{}3.
 
 \end{itemize}
 
@@ -664,7 +706,7 @@ only with IPOL=.TRUE..
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{MLS} \sphinxhyphen{} number of spherical harmonics (Legendre polynomials) for spectral decomposition in θ (numbered from 0 to MLS). This should be \(< \)NTH. In 1D (NTH=1) it must be set to 0.
+\sphinxstylestrong{MLS} \sphinxhyphen{} number of spherical harmonics (Legendre polynomials) for spectral decomposition in \(\theta\) (numbered from 0 to MLS). This should be \(< \)NTH. In 1D (NTH=1) it must be set to 0.
 
 
 \item {} 
@@ -742,7 +784,7 @@ cosine of the angle.
 \label{\detokenize{arrays:metric}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{PSI},\sphinxstylestrong{PSL},\sphinxstylestrong{PSS},\sphinxstylestrong{PSSR},\sphinxstylestrong{PSST} \sphinxhyphen{} 2D arrays of metric terms, respectively \(\psi\), \(\alpha \psi\), \(X^{\phi}\), \(X^{r}\), \(X^{\theta}\). We have either \(X^i=W^i\), or \(X^i ≡ \beta ^i\), depending on the step of the metric solver.
+\sphinxstylestrong{PSI},\sphinxstylestrong{PSL},\sphinxstylestrong{PSS},\sphinxstylestrong{PSSR},\sphinxstylestrong{PSST} \sphinxhyphen{} 2D arrays of metric terms, respectively \(\psi\), \(\alpha \psi\), \(X^{\phi}\), \(X^{r}\), \(X^{\theta}\). We have either \(X^i=W^i\), or \(X^i = \beta ^i\), depending on the step of the metric solver.
 
 
 \item {} 
@@ -831,7 +873,7 @@ the source terms, respectively \(\hat E\), \(\hat D\) , \(\hat S _\phi\) , \(\ha
 \sphinxAtStartPar
 \sphinxstylestrong{ECSRC},\sphinxstylestrong{ELSRC},\sphinxstylestrong{ES1RC},\sphinxstylestrong{ES2RC},\sphinxstylestrong{ES3RC} \sphinxhyphen{} 2D arrays containing the source terms (the right hand side of
 the equations) associated with the presence of matter in the elliptic PDEs. Respectively, the source
-for the equations for \(\psi\), \(\alpha \psi\), \(X^{\phi}\), \(X^{r}\), \(X^{\theta}\), where \(X^i=W^i\), or \(X^i ≡ \beta ^i\).
+for the equations for \(\psi\), \(\alpha \psi\), \(X^{\phi}\), \(X^{r}\), \(X^{\theta}\), where \(X^i=W^i\), or \(X^i = \beta ^i\).
 
 
 \item {} 
@@ -1286,8 +1328,311 @@ Here we present a few examples to show how to work with the code and the related
 cases have been run on a simple laptop
 
 
-\section{Rotating, unmagnetised NS in GR with the ??? EoS}
-\label{\detokenize{examples_gr:rotating-unmagnetised-ns-in-gr-with-the-eos}}
+\section{Non\sphinxhyphen{}rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field}
+\label{\detokenize{examples_gr:non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field}}
+\sphinxAtStartPar
+This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely poloidal field. It has a J\sphinxhyphen{}frame central density \(\rho _\mathrm{c}=8.3\times 10^{-4}\) in code units (corresponding to \(5.15\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass in the E\sphinxhyphen{}frame of \(1.442\) M\( _\odot\). The circumferential radius is \(16.559\) km.
+
+\sphinxAtStartPar
+Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{900}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{13.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{8.30E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.0E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{CONVHELP} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{QFACTOR} \PYG{o}{=} \PYG{l+m+mf}{0.85}\PYG{p}{,} \PYG{n}{QFACTORCHI} \PYG{o}{=} \PYG{l+m+mf}{0.45}\PYG{p}{,}
+\PYG{n}{QFACTORMETRIC} \PYG{o}{=} \PYG{l+m+mf}{0.35}\PYG{p}{,} \PYG{n}{QRELAX} \PYG{o}{=} \PYG{l+m+mf}{0.30}\PYG{p}{,} \PYG{n}{QAPHI} \PYG{o}{=} \PYG{l+m+mf}{0.50}\PYG{p}{,} \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{110.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,}
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{IPOL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{KBPOL} \PYG{o}{=} \PYG{l+m+mf}{0.34135}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\end{sphinxVerbatim}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_rho_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_b_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal magnetic field strength and its field lines.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{rho_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{p_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{alpha_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{psi_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{bpol_gr_polo}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the poloidal magnetic field strength at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\section{Non\sphinxhyphen{}rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field}
+\label{\detokenize{examples_gr:non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field}}
+\sphinxAtStartPar
+This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density \(\rho _\mathrm{c}=1.366\times 10^{-3}\) in code units (corresponding to \(8.473\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass of \(1.597\) M\( _\odot\). The circumferential radius is \(20.264\) km.
+
+\sphinxAtStartPar
+Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{900}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{15.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.366E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{CONVHELP} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{QFACTOR} \PYG{o}{=} \PYG{l+m+mf}{0.85}\PYG{p}{,} \PYG{n}{QFACTORCHI} \PYG{o}{=} \PYG{l+m+mf}{0.45}\PYG{p}{,}
+\PYG{n}{QFACTORMETRIC} \PYG{o}{=} \PYG{l+m+mf}{0.35}\PYG{p}{,} \PYG{n}{QRELAX} \PYG{o}{=} \PYG{l+m+mf}{0.30}\PYG{p}{,} \PYG{n}{QAPHI} \PYG{o}{=} \PYG{l+m+mf}{0.50}\PYG{p}{,} \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{110.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,}
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{BCOEF} \PYG{o}{=} \PYG{l+m+mf}{3.746}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\end{sphinxVerbatim}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_rho_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_b_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal magnetic field strength.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{rho_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{p_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{alpha_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{psi_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|}
+\hline
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{btor_gr_toro}.png}
+\\
+\hline
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the toroidal magnetic field strength at the pole and at the equator.}
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\section{Non\sphinxhyphen{}rotating NS in GR with the POL2 EoS and a twisted magnetosphere}
+\label{\detokenize{examples_gr:non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere}}
+\sphinxAtStartPar
+This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density \(\rho _\mathrm{c}=1.366\times 10^{-3}\) in code units (corresponding to \(8.473\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass of \(1.597\) M\( _\odot\). The circumferential radius is \(20.264\) km.
+
+\sphinxAtStartPar
+Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{900}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{15.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.366E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{CONVHELP} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{QFACTOR} \PYG{o}{=} \PYG{l+m+mf}{0.85}\PYG{p}{,} \PYG{n}{QFACTORCHI} \PYG{o}{=} \PYG{l+m+mf}{0.45}\PYG{p}{,}
+\PYG{n}{QFACTORMETRIC} \PYG{o}{=} \PYG{l+m+mf}{0.35}\PYG{p}{,} \PYG{n}{QRELAX} \PYG{o}{=} \PYG{l+m+mf}{0.30}\PYG{p}{,} \PYG{n}{QAPHI} \PYG{o}{=} \PYG{l+m+mf}{0.50}\PYG{p}{,} \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{110.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,}
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{BCOEF} \PYG{o}{=} \PYG{l+m+mf}{3.746}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\end{sphinxVerbatim}
+
+
+\section{Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS}
+\label{\detokenize{examples_gr:uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos}}
 \sphinxAtStartPar
 Description.
 
@@ -1299,8 +1644,28 @@ Here are the main parameters used to compute this model. The detailed log with a
 \end{sphinxVerbatim}
 
 
-\section{Rotating, magnetised NS in GR with the ??? EoS}
-\label{\detokenize{examples_gr:rotating-magnetised-ns-in-gr-with-the-eos}}
+\section{Differnetially Rotating, unmagnetised NS in GR with the APR EoS}
+\label{\detokenize{examples_gr:differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\end{sphinxVerbatim}
+
+
+\section{Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS}
+\label{\detokenize{examples_gr:differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos}}
+\sphinxAtStartPar
+Description.
+
+\sphinxAtStartPar
+Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\end{sphinxVerbatim}
+
+
+\section{Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS}
+\label{\detokenize{examples_gr:uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos}}
 \sphinxAtStartPar
 Description.
 
@@ -1653,7 +2018,7 @@ Here are the main parameters used to compute this model. The detailed log with a
 \PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{11.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.40E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.0E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,}
 \PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{CONVHELP} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{QFACTOR} \PYG{o}{=} \PYG{l+m+mf}{0.85}\PYG{p}{,} \PYG{n}{QFACTORCHI} \PYG{o}{=} \PYG{l+m+mf}{0.45}\PYG{p}{,}
 \PYG{n}{QFACTORMETRIC} \PYG{o}{=} \PYG{l+m+mf}{0.35}\PYG{p}{,} \PYG{n}{QRELAX} \PYG{o}{=} \PYG{l+m+mf}{0.30}\PYG{p}{,} \PYG{n}{QAPHI} \PYG{o}{=} \PYG{l+m+mf}{0.50}\PYG{p}{,} \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{FILEEOS} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{APR\PYGZus{}resampled.dat}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{KBPOL} \PYG{o}{=} \PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{BCOEF} \PYG{o}{=} \PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
 \end{sphinxVerbatim}
 
 

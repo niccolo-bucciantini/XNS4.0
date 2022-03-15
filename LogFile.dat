@@ -1,0 +1,178 @@
+ Log file for the XNS.f90 program
+ Ran on date-time-zone: 20211112-154424.984-+0100
+  
+ UNSTRETCHED GRID
+ ROTATING STAR
+ UNIFORM ROTATION
+ MAGNETIZED STAR
+ PURELY POLOIDAL MAGNETIC FIELD
+ GENERAL RELATIVITY
+ =========================================INPUT========================================================
+  
+ >>>>>> Parameters for convergence of the Newton-Raphson scheme of XNS : 
+  
+  NVALUE  =                     100
+  CONVF   =      1.0000000000000000E-004
+  
+ >>>>>> Parameters for convergence of XNSMAIN over a model : 
+  
+  MAXLOOP =                   100
+  CONVRHO =  F
+  MONCONV =    1.0000000000000000E-008
+  OSCCONV =    1.0000000000000001E-009
+  
+ >>>>>> Grid parameters : 
+  
+  STRETCH =    F
+  NR    =                       600
+  NTH   =                       100
+  NRREG =                       600
+  RMIN  =        0.0000000000000000     
+  RMAX  =        30.000000000000000     
+  RMAXSTR =      30.000000000000000     
+  RREG   =       10.000000000000000     
+  REQMAX =       15.000000000000000     
+  MINRESREG =   0.12500000000000000     
+  MINRESSTR =    8.0000000000000002E-002
+  RINI  =        1.0000000000000001E-005
+  RHOSURF   =    1.0000000000000000E-008
+  STR =          0.0000000000000000     
+  DOM =          0.0000000000000000     
+  
+ >>>>>> Parameters for the Legendre expansion & elliptic solvers : 
+  
+  MLS =                        40
+  NGQ =                        80
+  MLSL =                       20
+  TOLCONV =    1.0000000000000000E-010
+  TOLCHI  =    1.0000000000000000E-010
+  
+ >>>>>> Gravitational Theory  parameters : 
+  
+  GR        =  T
+  ALPHA0    =    0.0000000000000000     
+  BETA0     =    0.0000000000000000     
+  CHIINF    =    0.0000000000000000     
+  
+ >>>>>>  EoS/fluid parameters : 
+  
+  RHOINI    =    7.4430999999999998E-004
+  MBARYONFC =    1.0000000000000000     
+  K1        =    110.00000000000000     
+  GAMMA     =    2.0000000000000000     
+  RHOINISEQ    =    7.4430999999999998E-004
+  RHOCENTSTART =    5.0000000000000001E-004
+  RHOCENTEND   =    8.0000000000000002E-003
+  CTP        =  F
+  EOSINT     =  F
+  FILEEOS     = XXX_resampled.dat             
+  NPTRHO      = XXX_resampled.dat             
+  EOSJOR      =  F
+  
+ >>>>>>  Physics parameters - Rotation : 
+  
+  DIFFERENTIAL =  F
+  OMGSPACE     =  T
+  JCONSTLAW    =  F
+  JCMODLAW     =  F
+  URYULAW3     =  F
+  URYULAW4     =  F
+  OMG      =    5.0000000000000001E-003
+  PROTDIFF =    1.5000000000000000     
+  A2VALUE  =    0.0000000000000000     
+  OMGMAX   =    1.0000000000000000E-002
+  RMVALUE  =    2.5000000000000000     
+  
+ >>>>>>  Physics - Magnetic Fields : 
+  
+  IMAG   =  T
+  ITOR   =  F
+  IPOL   =  T
+  ITWT   =  F
+  BCOEF  =    0.0000000000000000     
+  MAGIND =    1.0000000000000000     
+  KBPOL  =   0.39729999999999999     
+  NPOL   =    0.0000000000000000     
+  CSI    =    0.0000000000000000     
+  QNULL  =  T
+  CTP    =  F
+  KBTT   =    0.0000000000000000     
+  ATWT   =    1.4000000000000000E-003
+  ZETA   =    0.0000000000000000     
+  CUT    =    4.0000000000000000     
+  
+ >>>>>> For the initial TOV solution : 
+  
+  RELIT    =                   100
+  CONV2    =    9.9999999999999995E-007
+  MAXITM0  =                    30
+  MAXSTEP  =                    90
+  CONV     =    1.0000000000000001E-005
+  DELTMU0  =    1.0000000000000000E-004
+  MMID     =    1.2100424803594232     
+  M        =    1.2100424475106433     
+  MUIN     =    1.0000000000000000E-002
+  QRELAX   =   0.29999999999999999     
+  ANALYTIC =  T
+  
+ >>>>>> Logical variables & Others : 
+  
+  DEBUG      =  F
+  SINGLESURF =  T
+  COUNTDOWN  =  T
+  CONVHELP   =  F
+  MPICODE    =  F
+  
+ >>>>>> Parameters to help or stabilize convergence : 
+  
+  QFACTOR       =   0.50000000000000000     
+  QFACTORMETRIC =   0.34999999999999998     
+  QFACTORCONF   =   0.50000000000000000     
+  QFACTORCHI    =   0.45000000000000001     
+  QAPHI         =    1.0000000000000000     
+  EPS      =         9.9999999999999995E-008
+  
+ =========================================OUTPUT=======================================================
+  
+  KOMAR   MASS (E)      =    1.5605399660072969     
+  REST    MASS          =    1.6565064085718511     
+  PROPER  MASS (E)      =    1.7365007853354590     
+  PROPER  MASS (J)      =    1.7365007853354588     
+  SCALAR  CHARGE (E)    =    0.0000000000000000     
+  ROTAT.  ENERGY (E)    =    9.3397016164741247E-004
+  ANGUL.  MOMENT. (E)   =   0.37762156000779229     
+  MAGNET. ENERGY (J)    =    2.7528622636916650E-002
+  MAGNET. E-ENERGY (E)  =    2.7528622636916650E-002
+  MENERGY  RATIO (J/E)  =   0.13466472529013024     
+  MENERGY  RATIO (E)    =   0.13466472529013024     
+  KENERGY  RATIO (E)    =    4.5688023300796193E-003
+  
+  CENTRAL DENSITY (J)   =    7.4430912982733374E-004
+  EQUATORIAL RADIUS (E) =    10.125000000000000        14.951203701105872      KM
+  RADIUS RATIO (E)      =   0.64938271604938269     
+  NSPE (SUPERELL.) =    2.2246385711194669     
+  CIRC RADIUS (E)       =    11.826753005015192        17.464117856854138      KM
+  CIRC RADIUS (J)       =    11.826753005015192        17.464117856854138      KM
+  CENTRAL OMG          =    5.0000000000000001E-003
+  OMGEQ                =    5.0000000000000001E-003
+  MAG. FLUX            =   0.57126864848608450        1.0405008926420243E+022 Wb
+  MAG. DIPOLE DIPM (J) =   0.88103268401015644     
+  B@POLE BPOLO (J)     =    2.3546409448233344E-003   1.9664607506498365E+017 G
+  BMAX (J)             =    7.0237543905692151E-003   5.8658358768560000E+017 G
+  BMAX(POL) (J)        =    7.0237543905692151E-003   5.8658358768560000E+017 G
+  BMAX(TOR) (J)        =    0.0000000000000000        0.0000000000000000      G
+  BCENT (J)            =    7.0231326950408110E-003   5.8653166724914675E+017 G
+  E@POLE EPOLO (J)       =    4.2338572776218328E-005
+  ELEC. CHARGE ECHRG (J) =   -1.8675870699515017E-004 VS   0.0000000000000000     
+  FLUID QUADRUPOLE (E)      =      7.5011118621747777     
+  FLUID INTERTIA MOMENT (E) =      24.409348060845161     
+  TOTAL QUADRUPOLE (E)     =       7.5011118621747777     
+  FLUID DEF. RATE (E)	=      0.30730488350105717     
+  TOTAL DEF. RATE (E)      =      0.30730488350105717     
+  HHPOL (J) =    2.7528622636916650E-002
+  HHTOR (J) =    0.0000000000000000     
+  HHTOR/HH (J) =    0.0000000000000000     
+  
+ ======================================================================================================
+  
+ NUMBER OF LOOPS DONE =                   100 OUT OF                   100

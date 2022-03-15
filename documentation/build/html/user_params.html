@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User parameters &mdash; XNS 1.0.0 documentation</title>
+  <title>User parameters &mdash; XNS 4.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -43,7 +43,15 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Welcome to the XNS 4.0 documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="makefile.html">Compiling XNS</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User parameters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#convergence">Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#convergence">Convergence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-for-convergence-of-the-newton-raphson-scheme-of-xns">Parameters for convergence of the Newton-Raphson scheme of XNS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-for-convergence-of-xnsmain-over-a-model">Parameters for convergence of XNSMAIN over a model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-for-convergence-of-the-initial-tov-solution">Parameters for convergence of the initial TOV solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-for-convergence-of-the-bernoulli-in-hydroeq">Parameters for convergence of the Bernoulli in HYDROEQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-for-the-convergence-of-elliptic-solvers">Parameters for the convergence of elliptic solvers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-to-help-or-stabilize-convergence">Parameters to help or stabilize convergence</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#grid">Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#printing-outputs-and-files">Printing outputs and files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rotation">Rotation</a></li>
@@ -89,46 +97,75 @@
 <p>The input parameters that the user might want to change are all set in the module system inside the file <em>SYSTEM.f90</em>. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc …), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:</p>
 <section id="convergence">
 <h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline"></a></h2>
+<section id="parameters-for-convergence-of-the-newton-raphson-scheme-of-xns">
+<h3>Parameters for convergence of the Newton-Raphson scheme of XNS<a class="headerlink" href="#parameters-for-convergence-of-the-newton-raphson-scheme-of-xns" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p><strong>NVALUE</strong> - the maximum number of loops employable by the Newton-Raphson scheme in the search
 for a equilibrium solution, having a target value for a desired quantity (central density, total mass,
 etc..) by the program XNS. Usually convergence is reached within about 10 steps, unless the NS is
 strongly distorted (fast rotation, and/or strong magnetic field). The default value is set to 100.
 <br><br></p></li>
+<li><p><strong>CONVF</strong> - a convergence parameter for the Newton-Raphson scheme in XNS. It is given in relative terms
+(beware that the code accuracy is <span class="math notranslate nohighlight">\(\sim 10^{-3}\)</span>).
+<br><br></p></li>
+</ul>
+</section>
+<section id="parameters-for-convergence-of-xnsmain-over-a-model">
+<h3>Parameters for convergence of XNSMAIN over a model<a class="headerlink" href="#parameters-for-convergence-of-xnsmain-over-a-model" title="Permalink to this headline"></a></h3>
+<ul class="simple">
 <li><p><strong>MAXLOOP</strong> - the maximum number of loops employable in the search for a converged equilibrium
 solution by the subroutine XNSMAIN. Usually convergence is reached within the first 100 steps,
 unless the NS is strongly distorted (fast rotation, and/or strong magnetic field). The default value is
-set to 1000.
+set to 100.
 <br><br></p></li>
-<li><p><strong>MAXSTEP</strong> - the maximum number of loops in TOVINIMOD for the convergence of the TOV system to a solution with a fixed scalar field. Note that the full TOV solution is obtained when also the scalar field has reached convergence together with the rest of the quantities.
+<li><p><strong>CONVRHO</strong> - sets if convergence by XNSMAIN should be checked on central density or on central lapse function. CONVRHO should be set to .FALSE. if the central density is held fixed, as in the case of Tabulated EoS
 <br><br></p></li>
-<li><p><strong>RELIT</strong> - the maximum number of loops in TOVINIMOD for the convergence of the scalar field in the TOV system and for the convergence of the full TOV solution.
+<li><p><strong>OSCCONV</strong> - desired precision in case the solution is reached with oscillatory convergence in XNSMAIN. In this case the check on the convergence is done between a step and the previous few, in such a way to bound the oscillation range.
 <br><br></p></li>
-<li><p><strong>CONV</strong> - a convergence parameter for the Newton-Raphson scheme in XNS. It is given in relative terms
-(beware that the code accuracy is <span class="math notranslate nohighlight">\(\sim 10^{-3}\)</span>).
+<li><p><strong>MONCONV</strong> - desired precision in case the solution is reached with monotonous convergence in XNSMAIN. In this case the check on the convergence is done between a step and the previous.
 <br><br></p></li>
-<li><p><strong>EPS</strong> - a tolerance value. It is used in several subroutines and must be a small value. This should not
-need to be changed.
+</ul>
+</section>
+<section id="parameters-for-convergence-of-the-initial-tov-solution">
+<h3>Parameters for convergence of the initial TOV solution<a class="headerlink" href="#parameters-for-convergence-of-the-initial-tov-solution" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><strong>RELIT</strong> - the maximum number of loops in TOVINIMOD for the convergence of the full TOV solution, including the metric-matter distribution and, in case of STT, the scalar field.
 <br><br></p></li>
+<li><p><strong>CONVT</strong> - desired precision for the convergence of the full TOV solution and also of the scalar field in TOVINIMOD, in STT.
+<br><br></p></li>
+<li><p><strong>CONV</strong> - desired precision for the convergence of the GR TOV part (or in STT the matter-metric part at fixed scalar field) in TOVINIMOD.
+<br><br></p></li>
+<li><p><strong>MAXSTEPTV</strong> - the maximum number of loops in TOVINIMOD for the convergence of the TOV system to a solution with a fixed scalar field. Note that the full TOV solution is obtained when also the scalar field has reached convergence together with the rest of the quantities.
+<br><br></p></li>
+<li><p><strong>MAXSTEPCH</strong> - the maximum number of loops in TOVINIMOD for the convergence of the scalar field equation of the TOV system to a solution with a fixed metric and matter distribution. Note that the full TOV solution is obtained when also the scalar field has reached convergence together with the rest of the quantities.
+<br><br></p></li>
+</ul>
+</section>
+<section id="parameters-for-convergence-of-the-bernoulli-in-hydroeq">
+<h3>Parameters for convergence of the Bernoulli in HYDROEQ<a class="headerlink" href="#parameters-for-convergence-of-the-bernoulli-in-hydroeq" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><strong>CONVHELP</strong> - a logical flag to activate an option in HYDROEQ to help achieve convergence. Warning: if set to .TRUE., the final central density will be slightly different from the chosen RHOINI.</p></li>
+</ul>
+</section>
+<section id="parameters-for-the-convergence-of-elliptic-solvers">
+<h3>Parameters for the convergence of elliptic solvers<a class="headerlink" href="#parameters-for-the-convergence-of-elliptic-solvers" title="Permalink to this headline"></a></h3>
+<ul class="simple">
 <li><p><strong>TOLCONV</strong> - the convergence tolerance for the iterative solution of the PDEs for the conformal factor <span class="math notranslate nohighlight">\(\psi\)</span>
 and the lapse <span class="math notranslate nohighlight">\(\alpha\)</span> in XNSMAIN and for the 4-potential in HYDROEQ.
 <br><br></p></li>
-<li><p><strong>OSCCONV</strong> - desired precision in case the solution is reached with oscillatory convergence in XNSMAIN. Currently it is not used.
-<br><br></p></li>
-<li><p><strong>MONCONV</strong> - desired precision in case the solution is reached with monotonous convergence in XNSMAIN.
-<br><br></p></li>
-<li><p><strong>CONVF</strong> - desired precision for the Newton-Raphson scheme in XNS.
-<br><br></p></li>
 <li><p><strong>TOLCHI</strong> - desired precision for the scalar field iterative solver in XNSMAIN.
 <br><br></p></li>
-<li><p><strong>CONV2</strong> - desired precision for the convergence of the scalar field in TOVINIMOD.
-<br><br></p></li>
+</ul>
+</section>
+<section id="parameters-to-help-or-stabilize-convergence">
+<h3>Parameters to help or stabilize convergence<a class="headerlink" href="#parameters-to-help-or-stabilize-convergence" title="Permalink to this headline"></a></h3>
+<ul class="simple">
 <li><p><strong>QFACTOR</strong> - a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.
 At the end of each sub-loop of the convergence scheme, a new set of equilibrium fluid variables is
 computed. Setting QFACTOR=1 implies that these will be used, while setting QFACTOR=0 means that
 the old variables <span class="math notranslate nohighlight">\(V_\mathrm{old}\)</span> will be used (the code will never converge in this case!). A value <span class="math notranslate nohighlight">\(0 &lt; Q_\mathrm{f} &lt; 1\)</span>
 implies that at the beginning of each loop a combination of new and old variables will be used, in the
-form <span class="math notranslate nohighlight">\(V = Q_\mathrm{f}V_\mathrm{new} + (1 − Q_\mathrm{f})V_\mathrm{old}\)</span>.
+form <span class="math notranslate nohighlight">\(V = Q_\mathrm{f}V_\mathrm{new} + (1 - Q_\mathrm{f})V_\mathrm{old}\)</span>.
 Using a value less than 1 tends to give slower but more stable convergence. Values QFACTOR<span class="math notranslate nohighlight">\( &lt; 0.5\)</span>
 are to be used only for pathological cases where the convergence is very slow or when the code fails
 to converge (i.e. rotating models on the unstable branch of NS mass-radius curve).
@@ -143,19 +180,24 @@ to converge (i.e. rotating models on the unstable branch of NS mass-radius curve
 <br><br></p></li>
 <li><p><strong>QFACTORCHI</strong> - a damping factor for the internal convergence loop for solving the scalar field equation in XNSMAIN.
 <br><br></p></li>
-<li><p><strong>CONVHELP</strong> - a logical flag to activate an option in HYDROEQ to help achieve convergence. Warning: if set to .TRUE., the final central density will be slightly different from the chosen RHOINI.</p></li>
+<li><p><strong>EPS</strong> - a tolerance value. It is used in several subroutines and must be a small value. This should not
+need to be changed.
+<br><br></p></li>
 </ul>
+</section>
 </section>
 <section id="grid">
 <h2>Grid<a class="headerlink" href="#grid" title="Permalink to this headline"></a></h2>
 <ul class="simple">
+<li><p><strong>STRETCH</strong> - a logical flag that control whether the grid is stretched or not. If .TRUE. the radial grid
+is regular up to RREG with NRREG grid points and it is stretched from RREG to RMAXSTR with NR-NRREG
+points. The stretching factor STRR is determined by the code determined by the code consistently with
+the choices for NR, NRREG,RMAXSTR and RREG. See also Pili et al. (2015) for details.</p></li>
 <li><p><strong>NR</strong> - the number of radial grid points. The radial grid is defined from <span class="math notranslate nohighlight">\(r=\)</span>RMIN and <span class="math notranslate nohighlight">\(r=\)</span>RMAX (<span class="math notranslate nohighlight">\(r=\)</span>RMAXSTR) is the grid is uniform (stretched).
 <br><br></p></li>
 <li><p><strong>NTH</strong> - the number of angular grid points. The angular grid is always defined between <span class="math notranslate nohighlight">\(\theta = 0\)</span> and <span class="math notranslate nohighlight">\(\theta = \pi\)</span>.
 <br><br></p></li>
 <li><p><strong>NRREG</strong> - number of grid points for the regular grid if STRETCH=.TRUE..
-<br><br></p></li>
-<li><p><strong>RINI</strong> - a very small radius used for the expansion of the TOV equations.
 <br><br></p></li>
 <li><p><strong>RMIN</strong> - the lower boundary in the radial direction. It must be always set to 0, since the metric solver
 requires a compact domain and has been implemented with specific boundary conditions for RMIN = 0.
@@ -169,10 +211,6 @@ be outside the NS) coincide within a given tolerance. If not the code will halt 
 <br><br></p></li>
 <li><p><strong>RMAXSTR</strong> - the maximum radius of the computational domain if the grid is stretched.
 <br><br></p></li>
-<li><p><strong>MINRESREG</strong> - desired minimum resolution of the grid, if uniform. In case the resolution is too rough, it allows to issue a warning.
-<br><br></p></li>
-<li><p><strong>MINRESSTR</strong> - desired minimum resolution of the regular part of the grid, if stretched. In case the resolution is too rough, it allows to issue a warning.
-<br><br></p></li>
 <li><p><strong>RREG</strong> - maximum radius of the regular grid.
 <br><br></p></li>
 <li><p><strong>REQMAX</strong> - the maximum radius beyond which any NS model will be artificially truncated. This must
@@ -180,10 +218,12 @@ be set <span class="math notranslate nohighlight">\(\geq\)</span> of the sheddin
 shedding, during the convergence loop the code might get unbounded solutions or fail to converge. To
 avoid this, setting a value for REQMAX will force the solution to be truncated.
 <br><br></p></li>
-<li><p><strong>STRETCH</strong> - a logical flag that control whether the grid is stretched or not. If .TRUE. the radial grid
-is regular up to RREG with NRREG grid points and it is stretched from RREG to RMAXSTR with NR-NRREG
-points. The stretching factor STRR is determined by the code determined by the code consistently with
-the choices for NR, NRREG,RMAXSTR and RREG. See also Pili et al. (2015) for details.</p></li>
+<li><p><strong>MINRESREG</strong> - desired minimum resolution of the grid, if uniform. In case the resolution is too rough, it allows to issue a warning.
+<br><br></p></li>
+<li><p><strong>MINRESSTR</strong> - desired minimum resolution of the regular part of the grid, if stretched. In case the resolution is too rough, it allows to issue a warning.
+<br><br></p></li>
+<li><p><strong>RINI</strong> - a very small radius used for the expansion of the TOV equations.
+<br><br></p></li>
 </ul>
 </section>
 <section id="printing-outputs-and-files">
@@ -224,21 +264,21 @@ be set to 0.
 to .FALSE. implies uniform rotation, with <span class="math notranslate nohighlight">\(\Omega = \)</span>OMG. Setting it to .TRUE. implies differential rotation.
 In this case, a value of A2VALUE must be specified.
 <br><br></p></li>
-<li><p><strong>OMGSPACE</strong> -
+<li><p><strong>OMGSPACE</strong> - Logical variable to work in <span class="math notranslate nohighlight">\(\Omega\)</span> or <span class="math notranslate nohighlight">\(J\)</span> space. If .TRUE. the rotational law has form <span class="math notranslate nohighlight">\(J(\Omega)\)</span>, else <span class="math notranslate nohighlight">\(\Omega(J)\)</span>.
 <br><br></p></li>
-<li><p><strong>JCONSTLAW</strong> -
+<li><p><strong>JCONSTLAW</strong> - Rotation law: <span class="math notranslate nohighlight">\(J = A^2(\Omega_c-\Omega)\)</span>
 <br><br></p></li>
-<li><p><strong>JCMODLAW</strong> -
+<li><p><strong>JCMODLAW</strong> - Rotation law: <span class="math notranslate nohighlight">\(J= A^2\Omega[(\Omega_c/\Omega)^p-1]\)</span>
 <br><br></p></li>
-<li><p><strong>URYULAW3</strong> -
+<li><p><strong>URYULAW3</strong> - Rotation law: Uryu  3, <span class="math notranslate nohighlight">\(\Omega = \Omega_c \, [1+(\dfrac{j}{B^2 \, \Omega_c})^p](1-\dfrac{j}{A^2 \, \Omega_c})\)</span>
 <br><br></p></li>
-<li><p><strong>URYULAW4</strong> -
+<li><p><strong>URYULAW4</strong> - Rotation law: Uryu  4, <span class="math notranslate nohighlight">\(\Omega = \Omega_c \, \dfrac{1+(j/B^2 \, \Omega_c)}{1+(j/A^2 \, \Omega_c)^{4}}\)</span>
 <br><br></p></li>
-<li><p><strong>PROTDIFF</strong> -
+<li><p><strong>PROTDIFF</strong> - The index <span class="math notranslate nohighlight">\(p\)</span> in either JCMODLAW or URYULAW3.
 <br><br></p></li>
-<li><p><strong>OMGMAX</strong> -
+<li><p><strong>OMGMAX</strong> - The maximum value of the rotation rate for Uryu  3 and 4 (this is given instead of A and B)
 <br><br></p></li>
-<li><p><strong>RMVALUE</strong> -</p></li>
+<li><p><strong>RMVALUE</strong> - The radius at which the maximum value of the rotation rate for Uryu  3 and 4 is reached (this is given instead of A and B)</p></li>
 </ul>
 </section>
 <section id="magnetic-field">
@@ -292,7 +332,7 @@ of the twist. If <span class="math notranslate nohighlight">\(\lambda = 1\)</spa
 <li><p><strong>QUOC</strong> - the quantity of interest to which the model must converge [0 for a given central density, 1 for
 a given gravitational mass, 2 for a given barionic mass].
 <br><br></p></li>
-<li><p><strong>QUCONV</strong> - the value of the quantity of interest to which we want a model to converge. For example if one wants a model with central density 1.28<span class="math notranslate nohighlight">\(\times 10^{−3}\)</span> (in geometrized units) set: QUOC=0, QUCONV=1.28E-3.</p></li>
+<li><p><strong>QUCONV</strong> - the value of the quantity of interest to which we want a model to converge. For example if one wants a model with central density 1.28<span class="math notranslate nohighlight">\(\times 10^{-3}\)</span> (in geometrized units) set: QUOC=0, QUCONV=1.28E-3.</p></li>
 </ul>
 </section>
 <section id="equation-of-state">
@@ -337,7 +377,7 @@ only with IPOL=.TRUE..
 <ul class="simple">
 <li><p><strong>RHOSURF</strong> - value at which the surface of the NS is set.
 <br><br></p></li>
-<li><p><strong>MLS</strong> - number of spherical harmonics (Legendre polynomials) for spectral decomposition in θ (numbered from 0 to MLS). This should be <span class="math notranslate nohighlight">\(&lt; \)</span>NTH. In 1D (NTH=1) it must be set to 0.
+<li><p><strong>MLS</strong> - number of spherical harmonics (Legendre polynomials) for spectral decomposition in <span class="math notranslate nohighlight">\(\theta\)</span> (numbered from 0 to MLS). This should be <span class="math notranslate nohighlight">\(&lt; \)</span>NTH. In 1D (NTH=1) it must be set to 0.
 <br><br></p></li>
 <li><p><strong>NGQ</strong> - the number of interpolation points for the Gauss quadrature, needed to compute the integrals
 over the polar direction of the source terms in the spherical harmonics decomposition. Used by all the

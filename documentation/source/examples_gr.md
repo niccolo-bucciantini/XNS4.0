@@ -87,7 +87,22 @@ IMAG = .TRUE., ITOR = .TRUE., BCOEF = 3.746, NPOL = 0.0, CSI = 0.0
 |:--:|
 | *Radial profile of the toroidal magnetic field strength at the pole and at the equator.*
 
-## Rotating, unmagnetised NS in GR with the ??? EoS
+## Non-rotating NS in GR with the POL2 EoS and a twisted magnetosphere
+
+This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density $\rho _\mathrm{c}=1.366\times 10^{-3}$ in code units (corresponding to $8.473\times 10^{14}$ gcm$^{-3}$) and a Komar mass of $1.597$ M$ _\odot$. The circumferential radius is $20.264$ km.
+
+Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
+```
+NR = 900, NTH = 100, NRREG = 600, MLS = 20, NGQ = 50, RREG = 13, RMAXSTR = 100,
+RMAX = 100, REQMAX = 15.50, RHOINI = 1.366E-3, ALPHA0 = 0.0, BETA0 = 0.0, GR = .TRUE.,
+STRETCH = .TRUE., ANALYTIC = .TRUE., CONVHELP = .FALSE., QFACTOR = 0.85, QFACTORCHI = 0.45,
+QFACTORMETRIC = 0.35, QRELAX = 0.30, QAPHI = 0.50, EOSINT = .FALSE., K1 = 110.0, GAMMA = 2.0,
+IMAG = .TRUE., ITOR = .TRUE., BCOEF = 3.746, NPOL = 0.0, CSI = 0.0
+```
+
+
+## Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS
 
 Description.
 
@@ -97,7 +112,13 @@ Here are the main parameters used to compute this model. The detailed log with a
 PARAM1 = VALUE1, PARAM2 = VALUE2, PARAM3 = VALUE3, PARAM4 = VALUE4, ...
 ```
 
-## Rotating, magnetised NS in GR with the ??? EoS
+## Differnetially Rotating, unmagnetised NS in GR with the APR EoS
+
+```
+PARAM1 = VALUE1, PARAM2 = VALUE2, PARAM3 = VALUE3, PARAM4 = VALUE4, ...
+```
+
+## Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS
 
 Description.
 
@@ -106,3 +127,14 @@ Here are the main parameters used to compute this model. The detailed log with a
 ```
 PARAM1 = VALUE1, PARAM2 = VALUE2, PARAM3 = VALUE3, PARAM4 = VALUE4, ...
 ```
+
+## Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS
+
+Description.
+
+Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
+```
+PARAM1 = VALUE1, PARAM2 = VALUE2, PARAM3 = VALUE3, PARAM4 = VALUE4, ...
+```
+

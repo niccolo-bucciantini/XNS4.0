@@ -99,7 +99,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
      STOP
   END IF
   IF(CONVRHO .AND. (.NOT.CTP))THEN
-     WRITE(6,*)'ERROR: CONVRHO should not be used is central density is held fixed (CTP = .FALSE.)'
+     WRITE(6,*)'ERROR: CONVRHO should not be used if central density is held fixed (CTP = .FALSE.)'
      STOP
   END IF
   

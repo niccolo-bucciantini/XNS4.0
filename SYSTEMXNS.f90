@@ -151,11 +151,11 @@ MODULE SYSTEMXNS
   ! For the initial TOV solution
   ! ====================================================================================
 
-  INTEGER,PARAMETER :: RELIT = 100	! Number of iterations used in the RELAXLOOP and in the PHILOOP
-  REAL,PARAMETER :: CONV2 = 1.0D-6	! Convergence parameter for the relaxation loop
-  INTEGER,PARAMETER :: MAXITM0 = 30     ! Maximum number of iterations for the GR shooting
-  INTEGER,PARAMETER :: MAXSTEP = 90     ! Maximum number of iterations for the STT shooting
+  INTEGER,PARAMETER :: RELIT = 100	! Number of iterations used in the RELAXLOOP 
+  REAL,PARAMETER :: CONVT = 1.0D-6	! Convergence parameter for the relaxation loop (also on  CHITVLOOP)
   REAL,PARAMETER :: CONV = 1.0D-5	! Convergence parameter for the GR shooting
+  INTEGER,PARAMETER :: MAXSTEPTV = 100    ! Maximum number of iterations for the GR shooting at fixed scalalr field in STEPLOOP
+  INTEGER,PARAMETER :: MAXSTEPCH = 100    ! Maximum number of iterations for the STT shooting at fixed metric in CHITVLOOP
   REAL,PARAMETER :: DELTMU0 = 0.0001	! Delta mu0 used in the main shooting
   
   REAL :: MMID = 1.9			! Initial guess on the masses at MIDGRID and NR (will be overwritten)

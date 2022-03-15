@@ -19,10 +19,10 @@
 
 project = 'XNS'
 copyright = '2021, Jacopo Soldateschi'
-author = 'Jacopo Soldateschi'
+author = 'N.Bucciantini, J.Soldateschi, A.Pili, L.Del Zanna, K.Franceschetti'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '4.0.0'
 
 
 # -- General configuration ---------------------------------------------------
