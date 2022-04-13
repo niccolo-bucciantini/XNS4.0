@@ -39,9 +39,9 @@ MODULE SYSTEMXNS
   REAL,PARAMETER :: RMIN = 0.         ! Center
   REAL,PARAMETER :: RMAX = 100.       ! Outer radius for the regular grid if stretch=.FALSE.
   REAL,PARAMETER :: RMAXSTR = 100.0   ! Outer radius for the total grid if stretch=.TRUE.
-  REAL,PARAMETER :: RREG = 13.        ! Radius for the regular Grid if Stretch=.TRUE.
+  REAL,PARAMETER :: RREG = 20.        ! Radius for the regular Grid if Stretch=.TRUE.
   
-  REAL :: REQMAX = 15.50               ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL :: REQMAX = 25.0               ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
   REAL,PARAMETER :: MINRESSTR = 8.D-2 ! Minimum resolution of the grid (if stretched)
   REAL,PARAMETER :: RINI = 1.E-005    ! Radius used for the expansion of the TOV equations
@@ -64,19 +64,19 @@ MODULE SYSTEMXNS
   ! Gravitational Theory  parameters
   ! ====================================================================================
 
-  LOGICAL :: GR = .TRUE.	        ! False = scalar-tensor theory; true = general relativity. Must be false here
+  LOGICAL :: GR = .FALSE.	        ! False = scalar-tensor theory; true = general relativity. Must be false here
   
-  REAL :: ALPHA0 = -0.0E-004 	! Alpha0 parameter for the scalar field (def = -2.0E-004)
-  REAL :: BETA0  = -0.0   		! Beta0 parameter for the scalar field (def = -6.0)
+  REAL :: ALPHA0 = -2.0E-004 	! Alpha0 parameter for the scalar field (def = -2.0E-004)
+  REAL :: BETA0  = -6.0   		! Beta0 parameter for the scalar field (def = -6.0)
   REAL,PARAMETER :: CHIINF = 0.0        ! Cosmological value of the scalar field (beware not fully tested)
 
   ! ====================================================================================
   ! EoS/fluid parameters
   ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 1.366e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: RHOINI = 8.30e-4 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
-  LOGICAL,PARAMETER :: VACUUM = .TRUE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
+  LOGICAL,PARAMETER :: VACUUM = .FALSE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
   
   REAL,PARAMETER :: K1 = 110.0           ! Politropic coefficient
   REAL,PARAMETER :: GAMMA = 2.0          ! Politropic exponent
@@ -87,7 +87,7 @@ MODULE SYSTEMXNS
 
   LOGICAL,PARAMETER :: CTP = .FALSE.     ! Use cons to prim routines
   LOGICAL :: EOSINT = .FALSE. ! If true use an interpolated/tabulated EoS
-  CHARACTER(LEN=30) :: FILEEOS = 'XXX_resampled.dat'!'XXX_resampled.dat'
+  CHARACTER(LEN=30) :: FILEEOS = 'XXX_resampled.dat'!'PL2_resampled.dat'
   INTEGER,PARAMETER :: NPTRHO = 1000 ! Points of the tabulated EoS from resample.py
   LOGICAL :: EOSJOR = .FALSE.		! Used to change the frame (Jor. or Ein.) in which the EoS is computed (LEAVE FALSE HERE)
   
@@ -117,9 +117,9 @@ MODULE SYSTEMXNS
   ! Physics - Magnetic Fields
   ! ====================================================================================
   
-  LOGICAL :: IMAG = .FALSE.    ! Magnetized cases
+  LOGICAL :: IMAG = .TRUE.    ! Magnetized cases
   LOGICAL :: ITOR = .FALSE.   ! Purely toroidal B-field
-  LOGICAL :: IPOL = .FALSE.   ! Purely poloidal B-field
+  LOGICAL :: IPOL = .TRUE.   ! Purely poloidal B-field
   LOGICAL :: ITWT = .FALSE.    ! Mixed B-field
   
   ! ====================================================================================
@@ -133,7 +133,7 @@ MODULE SYSTEMXNS
   ! Physics - purely POLOIDAL B-field only!
   ! ====================================================================================
   
-  REAL :: KBPOL = 0.0                    ! Magnetic coefficient
+  REAL :: KBPOL = 0.44                    ! Magnetic coefficient
   REAL,PARAMETER :: NPOL  = 0.0          ! Magnetic powerlaw index
   REAL,PARAMETER :: CSI = 0.0            ! Current coefficient
   LOGICAL,PARAMETER :: QNULL = .TRUE.    ! Logical parameter for the star charge (IF OMG.NE.0)
@@ -220,7 +220,7 @@ MODULE SYSTEMXNS
   ! Parameters for the Legendre expansion & elliptic solvers
   ! ====================================================================================
   
-  INTEGER,PARAMETER :: MLS = 20 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
+  INTEGER,PARAMETER :: MLS = 30 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
   INTEGER,PARAMETER :: NGQ = 50 !50      ! Number of point in the Gauss quadrature (1 = 1D)
   INTEGER,PARAMETER :: MLSL = 20     ! Number of Legendre polinomia used to solve Laplace equation
   INTEGER,PARAMETER :: MLST = 20     ! Number of Legendre polinomia used to solve Maxwell-Gauss equation

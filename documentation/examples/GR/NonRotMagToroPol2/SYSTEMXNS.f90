@@ -117,8 +117,8 @@ MODULE SYSTEMXNS
   ! Physics - Magnetic Fields
   ! ====================================================================================
   
-  LOGICAL :: IMAG = .FALSE.    ! Magnetized cases
-  LOGICAL :: ITOR = .FALSE.   ! Purely toroidal B-field
+  LOGICAL :: IMAG = .TRUE.    ! Magnetized cases
+  LOGICAL :: ITOR = .TRUE.   ! Purely toroidal B-field
   LOGICAL :: IPOL = .FALSE.   ! Purely poloidal B-field
   LOGICAL :: ITWT = .FALSE.    ! Mixed B-field
   
@@ -126,7 +126,7 @@ MODULE SYSTEMXNS
   ! Physics - purely TOROIDAL B-field only!
   ! ====================================================================================
   
-  REAL :: BCOEF  = 0.0           !Toroidal magnetization constant
+  REAL :: BCOEF  = 3.746           !Toroidal magnetization constant
   REAL,PARAMETER :: MAGIND = 1.0   !Toroidal magnetization index (>=1)
   
   ! ====================================================================================

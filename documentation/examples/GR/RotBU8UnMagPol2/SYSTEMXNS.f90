@@ -15,7 +15,7 @@ MODULE SYSTEMXNS
   ! ====================================================================================
   
   INTEGER,PARAMETER :: NVALUE  = 100   ! Iteration for the Newton scheme in XNS
-  REAL,PARAMETER    :: CONVF =  1.d-4  ! Convergence of the newton scheme in XNS
+  REAL,PARAMETER    :: CONVF =  1.D-4  ! Convergence of the newton scheme in XNS
 
   ! ====================================================================================
   ! Parameters for convergence of XNSMAIN over a model
@@ -30,18 +30,18 @@ MODULE SYSTEMXNS
   ! Grid parameters
   ! ====================================================================================
 
-  LOGICAL,PARAMETER :: STRETCH = .TRUE. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
+  LOGICAL,PARAMETER :: STRETCH = .FALSE. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
   
-  INTEGER,PARAMETER :: NR    = 900 ! Radial mesh points
+  INTEGER,PARAMETER :: NR    = 250 ! Radial mesh points
   INTEGER,PARAMETER :: NTH   = 100 ! Angular mesh points (1 = 1D TOV solution)
-  INTEGER,PARAMETER :: NRREG = 600       ! Points for the regular grid if stretch=.TRUE.
+  INTEGER,PARAMETER :: NRREG = 250       ! Points for the regular grid if stretch=.TRUE.
 
   REAL,PARAMETER :: RMIN = 0.         ! Center
-  REAL,PARAMETER :: RMAX = 100.       ! Outer radius for the regular grid if stretch=.FALSE.
+  REAL,PARAMETER :: RMAX = 20.       ! Outer radius for the regular grid if stretch=.FALSE.
   REAL,PARAMETER :: RMAXSTR = 100.0   ! Outer radius for the total grid if stretch=.TRUE.
-  REAL,PARAMETER :: RREG = 13.        ! Radius for the regular Grid if Stretch=.TRUE.
+  REAL,PARAMETER :: RREG = 10.        ! Radius for the regular Grid if Stretch=.TRUE.
   
-  REAL :: REQMAX = 15.50               ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL :: REQMAX = 11.60               ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
   REAL,PARAMETER :: MINRESSTR = 8.D-2 ! Minimum resolution of the grid (if stretched)
   REAL,PARAMETER :: RINI = 1.E-005    ! Radius used for the expansion of the TOV equations
@@ -74,11 +74,11 @@ MODULE SYSTEMXNS
   ! EoS/fluid parameters
   ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 1.366e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: RHOINI = 1.28e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
   LOGICAL,PARAMETER :: VACUUM = .TRUE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
   
-  REAL,PARAMETER :: K1 = 110.0           ! Politropic coefficient
+  REAL,PARAMETER :: K1 = 100.0           ! Politropic coefficient
   REAL,PARAMETER :: GAMMA = 2.0          ! Politropic exponent
 
   REAL :: RHOINISEQ   ! Initial central density for sequences
@@ -102,12 +102,12 @@ MODULE SYSTEMXNS
   ! ====================================================================================
 
   LOGICAL        :: DIFFERENTIAL = .FALSE.   ! Differential rotation option
-  LOGICAL        :: OMGSPACE     = .TRUE.    ! If .true. j(Omega), else Omega(j)
+  LOGICAL        :: OMGSPACE     = .FALSE.    ! If .true. j(Omega), else Omega(j)
   LOGICAL        :: JCONSTLAW    = .FALSE.   ! Rotation law: j constant A^2*(omega_c-omega)
   LOGICAL        :: JCMODLAW     = .FALSE.   ! Rotation law: modified j constant A^2*omega*[(omega_c/omega)^p-1]
   LOGICAL        :: URYULAW3     = .FALSE.   ! Rotation law: Uryu with 3 Parameters
   LOGICAL        :: URYULAW4     = .FALSE.    ! Rotation law: Uryu with 4 Parameters
-  REAL,PARAMETER :: OMG = 0.00               ! Central Rotation rate
+  REAL,PARAMETER :: OMG = 2.633E-2               ! Central Rotation rate
   REAL,PARAMETER :: PROTDIFF = 3./2.         ! Rotation index if URYULAW3=.true.
   REAL,PARAMETER :: A2VALUE = 0.0            ! Differential rotation coeff
   REAL,PARAMETER :: OMGMAX = 2.*OMG          ! Omega_max/Omega_c
@@ -160,7 +160,7 @@ MODULE SYSTEMXNS
   
   REAL :: MMID = 1.3			! Initial guess on the masses at MIDGRID and NR (will be overwritten)
   REAL :: M = 1.3
-  REAL :: MUIN = 1.0e-2	                ! Initial guess on the central mu
+  REAL :: MUIN = 0.802	                ! Initial guess on the central mu
   
   REAL,PARAMETER :: QRELAX = 0.3    ! Used in the filter to force convergence of CHI
   LOGICAL :: ANALYTIC = .TRUE.      ! Set to true if you want to solve for phi using the analytic equation D(D(phi))=...
@@ -209,9 +209,9 @@ MODULE SYSTEMXNS
   ! Parameters to help or stabilize convergence
   ! ====================================================================================
   
-  REAL :: QFACTOR = 0.85       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL :: QFACTORMETRIC = 0.35          ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
-  REAL :: QFACTORCONF = 0.35             ! Damping factor for psi for the external convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
+  REAL :: QFACTOR = 0.7       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
+  REAL :: QFACTORMETRIC = 0.5          ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
+  REAL :: QFACTORCONF = 0.5             ! Damping factor for psi for the external convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
   REAL :: QFACTORCHI = 0.45             ! Damping factor for chi for the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
   REAL,PARAMETER    :: QAPHI = 0.5      ! Damping factor for the convergence of the vector potential
   REAL,PARAMETER    :: EPS = 1.E-007
@@ -220,8 +220,8 @@ MODULE SYSTEMXNS
   ! Parameters for the Legendre expansion & elliptic solvers
   ! ====================================================================================
   
-  INTEGER,PARAMETER :: MLS = 20 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
-  INTEGER,PARAMETER :: NGQ = 50 !50      ! Number of point in the Gauss quadrature (1 = 1D)
+  INTEGER,PARAMETER :: MLS = 40 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
+  INTEGER,PARAMETER :: NGQ = 80 !50      ! Number of point in the Gauss quadrature (1 = 1D)
   INTEGER,PARAMETER :: MLSL = 20     ! Number of Legendre polinomia used to solve Laplace equation
   INTEGER,PARAMETER :: MLST = 20     ! Number of Legendre polinomia used to solve Maxwell-Gauss equation
   REAL,PARAMETER    :: TOLCONV = 1.D-10 ! Convergence for the lapse and conformal factor iterative solvers

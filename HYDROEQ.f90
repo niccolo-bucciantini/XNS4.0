@@ -485,14 +485,21 @@ SUBROUTINE HYDROVAR_POL(BCENT,PCENT,ILOOP)
         !Evaluate the current density for non-rotating or rotating stars accordingly to
         !the prescribed current function
         IF(OMG .EQ. 0) THEN
-           JPHI(IX,IZ)= ATWT**2./(ZETA+1.)/(R(IZ)**2*PSL(IX,IZ)**2.*PSI(IX,IZ)**2.*SIN(TH(IX))**2.)*&
-                MAX(APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX,0.)*&
-                (APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX)**(2.*ZETA)/APM**(2.*ZETA+1.)/ASCAL(IX,IZ)**4+&
-                (ENEW(IX,IZ)+RHONEW(IX,IZ))*KBTT
-           JTH(IX,IZ) = PSI(IX,IZ)/PSL(IX,IZ)*ATWT*BPOLT(IX,IZ)*MAX(APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX,0.)*&
-                (APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX)**(ZETA-1.)/APM**(ZETA+0.5)/ASCAL(IX,IZ)
-           JRR(IX,IZ) = PSI(IX,IZ)/PSL(IX,IZ)*ATWT*BPOLR(IX,IZ)*MAX(APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX,0.)*&
-                (APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX)**(ZETA-1.)/APM**0.5/ASCAL(IX,IZ)
+           IF(ITWT) THEN
+              JPHI(IX,IZ)= ATWT**2./(ZETA+1.)/(R(IZ)**2*PSL(IX,IZ)**2.*PSI(IX,IZ)**2.*SIN(TH(IX))**2.)*&
+                   MAX(APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX,0.)*&
+                   (APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX)**(2.*ZETA)/APM**(2.*ZETA+1.)/ASCAL(IX,IZ)**4+&
+                   (ENEW(IX,IZ)+RHONEW(IX,IZ)+PNEW(IX,IZ))*KBTT
+              JTH(IX,IZ) = PSI(IX,IZ)/PSL(IX,IZ)*ATWT*BPOLT(IX,IZ)*MAX(APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX,0.)*&
+                   (APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX)**(ZETA-1.)/APM**(ZETA+0.5)/ASCAL(IX,IZ)
+              JRR(IX,IZ) = PSI(IX,IZ)/PSL(IX,IZ)*ATWT*BPOLR(IX,IZ)*MAX(APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX,0.)*&
+                   (APHI(IX,IZ)*R(IZ)*SIN(TH(IX))-APHIMAX)**(ZETA-1.)/APM**0.5/ASCAL(IX,IZ)
+           END IF
+           IF(IPOL) THEN
+              JPHI(IX,IZ)= (ENEW(IX,IZ)+RHONEW(IX,IZ)+PNEW(IX,IZ))*KBPOL*(1+CSI*APHI(IX,IZ)*R(IZ)*SIN(TH(IX)))
+              JTH(IX,IZ) = 0.0
+              JRR(IX,IZ) = 0.0
+           END IF
         ELSE
            JTH(IX,IZ)=0.
            JRR(IX,IZ)=0.
@@ -924,7 +931,7 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
           ! Fluid's inertia moment I_xx in the E frame
           IXXM=IXXM+PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX*(2.-SINIX**2.)*DR(IZ)*DTT
           ! Fluid's inertia moment I_zz in the E frame
-          IZZM=IZZM+2.*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX**3.*DR(IZ)*DTT 
+          IZZM=IZZM+2.*PI*ASCAL(IX,IZ)**4*(ENEW(IX,IZ)+RHONEW(IX,IZ))*R(IZ)**4.*SINIX**3.*DR(IZ)*DTT
           ! Scalar charge Q_chi in the E frame
           SCHARGE=SCHARGE+2.*PI*PSL(IX,IZ)/PSI(IX,IZ)*(ALPHA0+BETA0*(CHI(IX,IZ))-CHIINF)*ASCAL(IX,IZ)**4* &
                &(3.*PNEW(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)))*DET 
@@ -962,7 +969,6 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
     B2MAXTOR=B2MAx
     
  END IF
- 
  
  IF(IPOL.OR.ITWT)THEN
     
@@ -1082,7 +1088,7 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
           
           IF(IZ .GT. WSURF(IX)) THEN
              HHTOREXT= HHTOREXT + PI*BPHI(IX,IZ)**2*GCOVP*DET*ASCAL(IX,IZ)**5 + PI*EPHI(IX,IZ)**2/GCOVP*DET*ASCAL(IX,IZ)
-             JMPHIEXT=JMPHIEXT +2*PI*SQRT((JPHI(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ))*KBTT)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
+             JMPHIEXT=JMPHIEXT +2*PI*SQRT((JPHI(IX,IZ)-(ENEW(IX,IZ)+RHONEW(IX,IZ)+PNEW(IX,IZ))*KBTT)**2*GCOVP)*DET*ASCAL(IX,IZ)**4
           ENDIF
        END DO
     END DO
@@ -1230,6 +1236,7 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
   WRITE(12,*)' MLS =     ', MLS
   WRITE(12,*)' NGQ =     ', NGQ
   WRITE(12,*)' MLSL =    ', MLSL
+  WRITE(12,*)' MLST =    ', MLST
   WRITE(12,*)' TOLCONV = ', TOLCONV
   WRITE(12,*)' TOLCHI  = ', TOLCHI
   WRITE(12,*)' '
@@ -1287,7 +1294,6 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
   WRITE(12,*)' NPOL   = ', NPOL
   WRITE(12,*)' CSI    = ', CSI
   WRITE(12,*)' QNULL  = ', QNULL
-  WRITE(12,*)' CTP    = ', CTP
   WRITE(12,*)' KBTT   = ', KBTT
   WRITE(12,*)' ATWT   = ', ATWT
   WRITE(12,*)' ZETA   = ', ZETA
@@ -1296,10 +1302,10 @@ SUBROUTINE QUANTITIES(RHOCENT,RHOVAR,MM,M0,ILOOP)
   WRITE(12,*)'>>>>>> For the initial TOV solution : '
   WRITE(12,*)' '
   WRITE(12,*)' RELIT    = ', RELIT
-  WRITE(12,*)' CONV2    = ', CONV2
-  WRITE(12,*)' MAXITM0  = ', MAXITM0   
-  WRITE(12,*)' MAXSTEP  = ', MAXSTEP   
-  WRITE(12,*)' CONV     = ', CONV
+  WRITE(12,*)' CONVT    = ', CONVT
+  WRITE(12,*)' CONV    = ', CONV
+  WRITE(12,*)' MAXSTEPTV  = ', MAXSTEPTV 
+  WRITE(12,*)' MAXSTEPCH  = ', MAXSTEPCH   
   WRITE(12,*)' DELTMU0  = ', DELTMU0
   WRITE(12,*)' MMID     = ', MMID
   WRITE(12,*)' M        = ', M
@@ -2064,23 +2070,23 @@ SUBROUTINE SOLVEATIME(RHO,CC1)
   INTEGER :: I, INFO
   ! Array for the Legendre expansion
   REAL,DIMENSION(NGQ) :: XGQ,WGQ,Y
-  REAL,DIMENSION(0:MLS,NGQ) :: PN,PD
-  REAL,DIMENSION(0:MLS) :: COEF,PDX,PNX
-  REAL,DIMENSION(0:NR+1,0:MLS) :: TAB
+  REAL,DIMENSION(0:MLST,NGQ) :: PN,PD
+  REAL,DIMENSION(0:MLST) :: COEF,PDX,PNX
+  REAL,DIMENSION(0:NR+1,0:MLST) :: TAB
   ! Array for the radial solution
   INTEGER :: IL
   REAL :: A1,A2,A3,A4,A5,A6,DCI,DCF,TMP
   REAL,DIMENSION(NR) :: DC,DC1,DCP,SS1
   REAL,DIMENSION(NR-1) :: DL1,DU1,DLP,DUP
-  REAL,DIMENSION(1:NR,0:MLS) :: PHI
+  REAL,DIMENSION(1:NR,0:MLST) :: PHI
 
   ! Compute the Gauss-quadrature points XGQ and weights WGQ
   CALL LEGZO(NGQ,XGQ,WGQ)
 
   ! Compute the matrix of Weighted Legendre Polyn in the quadrature points
   DO I=1,NGQ
-    CALL LPN(MLS,XGQ(I),PN(0:MLS,I),PD(0:MLS,I))
-    PN(0:MLS,I)=PN(0:MLS,I)*WGQ(I)
+    CALL LPN(MLST,XGQ(I),PN(0:MLST,I),PD(0:MLST,I))
+    PN(0:MLST,I)=PN(0:MLST,I)*WGQ(I)
   END DO
 
   DO IZ=1,NR
@@ -2094,11 +2100,11 @@ SUBROUTINE SOLVEATIME(RHO,CC1)
     CALL POLINT(XX(-1:NTH+2),RHO(-1:NTH+2,IZ),NTH+4,XGQ,Y,NGQ)
 
     ! Evaluate the coefficient of the Legendre poly. expansion
-    DO I=0,MLS
+    DO I=0,MLST
       COEF(I)=(2.*I+1.)/2.*DOT_PRODUCT(PN(I,1:NGQ),Y(1:NGQ))
     END DO
     ! Compute the matrix of legendre coefficients
-    TAB(IZ,0:MLS)=COEF(0:MLS)
+    TAB(IZ,0:MLST)=COEF(0:MLST)
   END DO
 
   ! ...................
@@ -2142,7 +2148,7 @@ SUBROUTINE SOLVEATIME(RHO,CC1)
   DLP(I-1)= A1+2.*A4/R(I)
   DCF  = A3+2.*A6/R(I)
 
-  DO IL=0,MLS
+  DO IL=0,MLST
     ! BC at inner radius ( Origin )
     ! For L .ne. 0 the function goes to 0, parity depends on L
     ! We assume odd parity because for NS  L=odd term are 0.
@@ -2181,10 +2187,10 @@ SUBROUTINE SOLVEATIME(RHO,CC1)
 
   ! Compute the matrix of Legendre Polyn in the grid points
   DO IX=1,NTH
-    CALL LPN(MLS,XX(IX),PNX(0:MLS),PDX(0:MLS))
+    CALL LPN(MLST,XX(IX),PNX(0:MLST),PDX(0:MLST))
     ! Compute the potential on the grid
     DO IZ=1,NR
-      ATIM(IX,IZ)=DOT_PRODUCT(PNX(0:MLS),PHI(IZ,0:MLS))
+      ATIM(IX,IZ)=DOT_PRODUCT(PNX(0:MLST),PHI(IZ,0:MLST))
     END DO
   END DO
 
@@ -2226,14 +2232,14 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
   REAL,DIMENSION(0:MLSL) :: PNX,PDX
 
   !Parameters of LU decomposition and BKSB
-  REAL, DIMENSION(0:MLSL,0:MLSL) :: MATRIX1, MATRIX2
+  REAL, DIMENSION(0:MLSL,0:MLSL) :: MATRIX1, MATRIX2, MATRIX3
   REAL, DIMENSION(0:MLSL) :: Y,YOIN,YOOUT
   INTEGER, DIMENSION(0:MLSL/2) :: INDC
   REAL :: DSIGN,YINTRP,DYINT
 
   !Interpolation and surface
   REAL, DIMENSION(-1:NTH+2) :: PHINTRP
-  REAL, DIMENSION (0:NR,0:MLSL) :: PHIINTMP, PHIOUTMP
+  REAL, DIMENSION (0:NR,0:MLST) :: PHIINTMP, PHIOUTMP
   REAL :: AELL,BELL,THEL,ATMP,BTMP,RMEAN
   REAL :: NSPE1,NSPE2
   REAL :: CC2,CC3
@@ -2292,26 +2298,26 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
   ENDIF
 
   ! Compute the Gauss-quadrature points XGQ and weights WGQ
-  CALL LEGZO(MLSL+1,XGQ(0:MLSL),WGQ(0:MLSL))
+  CALL LEGZO(MLST+1,XGQ(0:MLST),WGQ(0:MLST))
 
 
-  ! Compute the collocation points and the associated Legendre polinomia.
+  ! Compute the collocation points and the associated Legendre polinomial.
   ! For strongly deformed stars the starting Gauss-quadrature points
   ! are remodulated in an unevenly distributed collection of new collocation
   ! points to avoid aliasing.
   IF(BELL/AELL .GT. 0.9) THEN
-     DO I=0,MLSL
+     DO I=0,MLST
         XGQIN(I)=XGQ(I)
         XGQOUT(I)=XGQ(I)
-        CALL LPN(MLSL,XGQOUT(I),PNOUT(0:MLSL,I),PDOUT(0:MLSL,I))
-        CALL LPN(MLSL,XGQIN(I),PNIN(0:MLSL,I),PDIN(0:MLSL,I))
+        CALL LPN(MLST,XGQOUT(I),PNOUT(0:MLST,I),PDOUT(0:MLST,I))
+        CALL LPN(MLST,XGQIN(I),PNIN(0:MLST,I),PDIN(0:MLST,I))
      ENDDO
   ELSE
-     DO I=0,MLSL
+     DO I=0,MLST
         XGQOUT(I)=XGQ(I)/(ABS(XGQ(I))+1.e-9)*SQRT(ABS(XGQ(I)))
         XGQIN(I)=(ABS(XGQ(I)))**1.3*XGQ(I)/ABS(XGQ(I)+1.e-9)
-        CALL LPN(MLSL,XGQOUT(I),PNOUT(0:MLSL,I),PDOUT(0:MLSL,I))
-        CALL LPN(MLSL,XGQIN(I),PNIN(0:MLSL,I),PDIN(0:MLSL,I))
+        CALL LPN(MLST,XGQOUT(I),PNOUT(0:MLST,I),PDOUT(0:MLST,I))
+        CALL LPN(MLST,XGQIN(I),PNIN(0:MLST,I),PDIN(0:MLST,I))
      END DO
   ENDIF
 
@@ -2323,17 +2329,17 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
   PHINTRP(NTH+1)= PHINTRP(NTH) ; PHINTRP(NTH+2)= PHINTRP(NTH-1)
 
   !Interpolate the potential on the new quadrature points
-  CALL POLINT(XX(-1:NTH+2),PHINTRP(-1:NTH+2),NTH+4,XGQOUT,YOOUT,MLSL+1)
-  CALL POLINT(XX(-1:NTH+2),ELSURF(-1:NTH+2),NTH+4,XGQOUT,RXGQOUT,MLSL+1)
+  CALL POLINT(XX(-1:NTH+2),PHINTRP(-1:NTH+2),NTH+4,XGQOUT,YOOUT,MLST+1)
+  CALL POLINT(XX(-1:NTH+2),ELSURF(-1:NTH+2),NTH+4,XGQOUT,RXGQOUT,MLST+1)
 
-  CALL POLINT(XX(-1:NTH+2),PHINTRP(-1:NTH+2),NTH+4,XGQIN,YOIN,MLSL+1)
-  CALL POLINT(XX(-1:NTH+2),ELSURF(-1:NTH+2),NTH+4,XGQIN,RXGQIN,MLSL+1)
+  CALL POLINT(XX(-1:NTH+2),PHINTRP(-1:NTH+2),NTH+4,XGQIN,YOIN,MLST+1)
+  CALL POLINT(XX(-1:NTH+2),ELSURF(-1:NTH+2),NTH+4,XGQIN,RXGQIN,MLST+1)
 
   ! Write interpolated values to check interpolation
   IF(CHUP.AND.(WRT.OR.WRTF)) THEN
      OPEN(12,FILE=trim(adjustl(subdirpath))//'CheckInterpl.dat')
-     WRITE(12,*)MLSL+1,NR
-     DO IX=0,MLSL
+     WRITE(12,*)MLST+1,NR
+     DO IX=0,MLST
         WRITE(12,*) XGQIN(IX),RXGQIN(IX),YOIN(IX),XGQOUT(IX),RXGQOUT(IX),YOOUT(IX)
      END DO
      CLOSE(12)
@@ -2343,22 +2349,23 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
   RMEAN=SUM(ELSURF(1:NTH))/NTH
 
   ! Compute the matrix coefficient for the interior solution
-  DO I=0,MLSL/2
-    DO J=0,MLSL/2
+  DO I=0,MLST/2
+    DO J=0,MLST/2
       MATRIX1(I,J)= (RXGQIN(I)/RMEAN)**(2*J)*SQRT((4*J+1.)/4./Pi)*PNIN(2*J,I)
     END DO
   END DO
 
   ! Compute the matrix coefficient for the exterior solution
-  DO I=0,MLSL/2
-    DO J=0,MLSL/2
-      MATRIX2(I,J)= (RMEAN/RXGQOUT(I))**(2*J+1)*SQRT((4*J+1.)/4./Pi)*PNOUT(2*J,I)
+  DO I=0,MLST/2
+    DO J=0,MLST/2
+       MATRIX2(I,J) = (RMEAN/RXGQOUT(I))**(2*J+1)*SQRT((4*J+1.)/4./Pi)*PNOUT(2*J,I)
+       MATRIX3(I,J) = MATRIX2(I,J)
     END DO
   END DO
 
   ! Find the interior harmonic function
   Y=YOIN
-  CALL LUSOLVER(MLSL/2+1,MATRIX2(0:MLSL/2,0:MLSL/2),Y(0:MLSL/2),INDC,.FALSE.)
+  CALL LUSOLVER(MLST/2+1,MATRIX1(0:MLST/2,0:MLST/2),Y(0:MLST/2),INDC,.FALSE.)
 
   IF(CHECK.EQ.-1) THEN
      WRITE(6,*)"ERROR: from HYDROEQ, LAPLACE failure in LUDCMP"
@@ -2367,21 +2374,21 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
 
   DO IZ=1,NR
      PHIINTMP(IZ,0)=Y(0)*SQRT(1./4./Pi)
-     DO J=1,MLSL/2
+     DO J=1,MLST/2
         PHIINTMP(IZ,2*J)=Y(J)*(R(IZ)/RMEAN)**(2*J)*SQRT((4*J+1.)/4./Pi)
         PHIINTMP(IZ,2*J-1)=0.
      END DO
   END DO
   DO IX=1,NTH
-     CALL LPN(MLSL,XX(IX),PNX(0:MLSL),PDX(0:MLSL))
+     CALL LPN(MLST,XX(IX),PNX(0:MLST),PDX(0:MLST))
      DO IZ=1,NR
-        PHIIN(IX,IZ)= DOT_PRODUCT(PNX(0:MLSL),PHIINTMP(IZ,0:MLSL))
+        PHIIN(IX,IZ)= DOT_PRODUCT(PNX(0:MLST),PHIINTMP(IZ,0:MLST))
      END DO
   END DO
 
-  ! Find the interior exterior harmonic function
+  ! Find the exterior harmonic function
   Y=YOOUT
-  CALL LUSOLVER(MLSL/2+1,MATRIX2(0:MLSL/2,0:MLSL/2),Y(0:MLSL/2),INDC,.FALSE.)
+  CALL LUSOLVER(MLST/2+1,MATRIX2(0:MLST/2,0:MLST/2),Y(0:MLST/2),INDC,.FALSE.)
 
   IF(CHECK.EQ.-1) THEN
      WRITE(6,*)"ERROR: from HYDROEQ, LAPLACE failure in LUDCMP"
@@ -2390,16 +2397,16 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
 
   DO  IZ=1,NR
     PHIOUTMP(IZ,0)=Y(0)/(R(IZ)/RMEAN)*SQRT(1./4./Pi)
-    DO J=1,MLSL/2
+    DO J=1,MLST/2
       PHIOUTMP(IZ,2*J)=Y(J)/(R(IZ)/RMEAN)**(2*J+1)*SQRT((4*J+1.)/4./Pi)
       PHIOUTMP(IZ,2*J-1)=0.
     END DO
   END DO
 
   DO IX=1,NTH
-    CALL LPN(MLSL,XX(IX),PNX(0:MLSL),PDX(0:MLSL))
+    CALL LPN(MLST,XX(IX),PNX(0:MLST),PDX(0:MLST))
     DO IZ=1,NR
-      PHIOUT(IX,IZ) = DOT_PRODUCT(PNX(0:MLSL),PHIOUTMP(IZ,0:MLSL) )
+      PHIOUT(IX,IZ) = DOT_PRODUCT(PNX(0:MLST),PHIOUTMP(IZ,0:MLST) )
     END DO
   END DO
 
@@ -2429,11 +2436,11 @@ SUBROUTINE LAPLACE(CC1,PHI,PHIIN,PHIOUT)
   ENDIF
 
   Y(:)=1.
-  CALL LUSOLVER(MLSL/2+1,MATRIX2(0:MLSL/2,0:MLSL/2),Y(0:MLSL/2),INDC,.TRUE.)
+  CALL LUSOLVER(MLST/2+1,MATRIX2(0:MLST/2,0:MLST/2),Y(0:MLST/2),INDC,.TRUE.)
 
   DO IZ=1,NR
      PHIOUTMP(IZ,0)=Y(0)/(R(IZ)/RMEAN)*SQRT(1./4./Pi)
-     DO J=1,MLSL/2
+     DO J=1,MLST/2
         PHIOUTMP(IZ,2*J)=Y(J)/(R(IZ)/RMEAN)**(2*J+1)*SQRT((4*J+1.)/4./Pi)
         PHIOUTMP(IZ,2*J-1)=0.
      END DO

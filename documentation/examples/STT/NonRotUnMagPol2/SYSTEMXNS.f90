@@ -39,9 +39,9 @@ MODULE SYSTEMXNS
   REAL,PARAMETER :: RMIN = 0.         ! Center
   REAL,PARAMETER :: RMAX = 100.       ! Outer radius for the regular grid if stretch=.FALSE.
   REAL,PARAMETER :: RMAXSTR = 100.0   ! Outer radius for the total grid if stretch=.TRUE.
-  REAL,PARAMETER :: RREG = 13.        ! Radius for the regular Grid if Stretch=.TRUE.
+  REAL,PARAMETER :: RREG = 10.        ! Radius for the regular Grid if Stretch=.TRUE.
   
-  REAL :: REQMAX = 15.50               ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL :: REQMAX = 15.0               ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
   REAL,PARAMETER :: MINRESSTR = 8.D-2 ! Minimum resolution of the grid (if stretched)
   REAL,PARAMETER :: RINI = 1.E-005    ! Radius used for the expansion of the TOV equations
@@ -64,17 +64,17 @@ MODULE SYSTEMXNS
   ! Gravitational Theory  parameters
   ! ====================================================================================
 
-  LOGICAL :: GR = .TRUE.	        ! False = scalar-tensor theory; true = general relativity. Must be false here
+  LOGICAL :: GR = .FALSE.	        ! False = scalar-tensor theory; true = general relativity. Must be false here
   
-  REAL :: ALPHA0 = -0.0E-004 	! Alpha0 parameter for the scalar field (def = -2.0E-004)
-  REAL :: BETA0  = -0.0   		! Beta0 parameter for the scalar field (def = -6.0)
+  REAL :: ALPHA0 = -2.0E-004 	! Alpha0 parameter for the scalar field (def = -2.0E-004)
+  REAL :: BETA0  = -6.0   		! Beta0 parameter for the scalar field (def = -6.0)
   REAL,PARAMETER :: CHIINF = 0.0        ! Cosmological value of the scalar field (beware not fully tested)
 
   ! ====================================================================================
   ! EoS/fluid parameters
   ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 1.366e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: RHOINI = 1.36e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
   LOGICAL,PARAMETER :: VACUUM = .TRUE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
   
@@ -87,7 +87,7 @@ MODULE SYSTEMXNS
 
   LOGICAL,PARAMETER :: CTP = .FALSE.     ! Use cons to prim routines
   LOGICAL :: EOSINT = .FALSE. ! If true use an interpolated/tabulated EoS
-  CHARACTER(LEN=30) :: FILEEOS = 'XXX_resampled.dat'!'XXX_resampled.dat'
+  CHARACTER(LEN=30) :: FILEEOS = 'XXX_resampled.dat'!'PL2_resampled.dat'
   INTEGER,PARAMETER :: NPTRHO = 1000 ! Points of the tabulated EoS from resample.py
   LOGICAL :: EOSJOR = .FALSE.		! Used to change the frame (Jor. or Ein.) in which the EoS is computed (LEAVE FALSE HERE)
   
@@ -209,18 +209,18 @@ MODULE SYSTEMXNS
   ! Parameters to help or stabilize convergence
   ! ====================================================================================
   
-  REAL :: QFACTOR = 0.85       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL :: QFACTORMETRIC = 0.35          ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
-  REAL :: QFACTORCONF = 0.35             ! Damping factor for psi for the external convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
+  REAL :: QFACTOR = 0.9       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
+  REAL :: QFACTORMETRIC = 0.9          ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
+  REAL :: QFACTORCONF = 0.9             ! Damping factor for psi for the external convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
   REAL :: QFACTORCHI = 0.45             ! Damping factor for chi for the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL,PARAMETER    :: QAPHI = 0.5      ! Damping factor for the convergence of the vector potential
+  REAL,PARAMETER    :: QAPHI = 1.0      ! Damping factor for the convergence of the vector potential
   REAL,PARAMETER    :: EPS = 1.E-007
   
   ! ====================================================================================
   ! Parameters for the Legendre expansion & elliptic solvers
   ! ====================================================================================
   
-  INTEGER,PARAMETER :: MLS = 20 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
+  INTEGER,PARAMETER :: MLS = 30 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
   INTEGER,PARAMETER :: NGQ = 50 !50      ! Number of point in the Gauss quadrature (1 = 1D)
   INTEGER,PARAMETER :: MLSL = 20     ! Number of Legendre polinomia used to solve Laplace equation
   INTEGER,PARAMETER :: MLST = 20     ! Number of Legendre polinomia used to solve Maxwell-Gauss equation

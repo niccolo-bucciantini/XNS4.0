@@ -32,16 +32,16 @@ MODULE SYSTEMXNS
 
   LOGICAL,PARAMETER :: STRETCH = .TRUE. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
   
-  INTEGER,PARAMETER :: NR    = 900 ! Radial mesh points
+  INTEGER,PARAMETER :: NR    = 600 ! Radial mesh points
   INTEGER,PARAMETER :: NTH   = 100 ! Angular mesh points (1 = 1D TOV solution)
-  INTEGER,PARAMETER :: NRREG = 600       ! Points for the regular grid if stretch=.TRUE.
+  INTEGER,PARAMETER :: NRREG = 300       ! Points for the regular grid if stretch=.TRUE.
 
   REAL,PARAMETER :: RMIN = 0.         ! Center
   REAL,PARAMETER :: RMAX = 100.       ! Outer radius for the regular grid if stretch=.FALSE.
   REAL,PARAMETER :: RMAXSTR = 100.0   ! Outer radius for the total grid if stretch=.TRUE.
-  REAL,PARAMETER :: RREG = 13.        ! Radius for the regular Grid if Stretch=.TRUE.
+  REAL,PARAMETER :: RREG = 20.        ! Radius for the regular Grid if Stretch=.TRUE.
   
-  REAL :: REQMAX = 15.50               ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL :: REQMAX = 15.00               ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
   REAL,PARAMETER :: MINRESSTR = 8.D-2 ! Minimum resolution of the grid (if stretched)
   REAL,PARAMETER :: RINI = 1.E-005    ! Radius used for the expansion of the TOV equations
@@ -74,9 +74,9 @@ MODULE SYSTEMXNS
   ! EoS/fluid parameters
   ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 1.366e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: RHOINI = 1.38e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
-  LOGICAL,PARAMETER :: VACUUM = .TRUE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
+  LOGICAL,PARAMETER :: VACUUM = .FALSE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
   
   REAL,PARAMETER :: K1 = 110.0           ! Politropic coefficient
   REAL,PARAMETER :: GAMMA = 2.0          ! Politropic exponent
@@ -117,15 +117,15 @@ MODULE SYSTEMXNS
   ! Physics - Magnetic Fields
   ! ====================================================================================
   
-  LOGICAL :: IMAG = .FALSE.    ! Magnetized cases
+  LOGICAL :: IMAG = .TRUE.    ! Magnetized cases
   LOGICAL :: ITOR = .FALSE.   ! Purely toroidal B-field
   LOGICAL :: IPOL = .FALSE.   ! Purely poloidal B-field
-  LOGICAL :: ITWT = .FALSE.    ! Mixed B-field
+  LOGICAL :: ITWT = .TRUE.    ! Mixed B-field
   
   ! ====================================================================================
   ! Physics - purely TOROIDAL B-field only!
   ! ====================================================================================
-  
+   
   REAL :: BCOEF  = 0.0           !Toroidal magnetization constant
   REAL,PARAMETER :: MAGIND = 1.0   !Toroidal magnetization index (>=1)
   
@@ -142,10 +142,10 @@ MODULE SYSTEMXNS
   ! Physics - TWISTED-TORUS magnetic field
   ! ====================================================================================
   
-  REAL :: KBTT = 0.0                  ! Magnetic coefficient
-  REAL,PARAMETER :: ATWT = 0.0     ! TT magnetic coefficient
+  REAL :: KBTT = 3.4E-4                  ! Magnetic coefficient
+  REAL,PARAMETER :: ATWT = 1.4E-3     ! TT magnetic coefficient
   REAL,PARAMETER :: ZETA = 0.0        ! TT magnetic index
-  REAL,PARAMETER :: CUT = 0.0         ! Maximum distance for twisted magnetosphere
+  REAL,PARAMETER :: CUT = 4.0         ! Maximum distance for twisted magnetosphere
   
   ! ====================================================================================
   ! For the initial TOV solution
@@ -220,8 +220,8 @@ MODULE SYSTEMXNS
   ! Parameters for the Legendre expansion & elliptic solvers
   ! ====================================================================================
   
-  INTEGER,PARAMETER :: MLS = 20 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
-  INTEGER,PARAMETER :: NGQ = 50 !50      ! Number of point in the Gauss quadrature (1 = 1D)
+  INTEGER,PARAMETER :: MLS = 40 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
+  INTEGER,PARAMETER :: NGQ = 80 !50      ! Number of point in the Gauss quadrature (1 = 1D)
   INTEGER,PARAMETER :: MLSL = 20     ! Number of Legendre polinomia used to solve Laplace equation
   INTEGER,PARAMETER :: MLST = 20     ! Number of Legendre polinomia used to solve Maxwell-Gauss equation
   REAL,PARAMETER    :: TOLCONV = 1.D-10 ! Convergence for the lapse and conformal factor iterative solvers

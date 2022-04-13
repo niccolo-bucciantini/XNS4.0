@@ -41,7 +41,7 @@ MODULE SYSTEMXNS
   REAL,PARAMETER :: RMAXSTR = 100.0   ! Outer radius for the total grid if stretch=.TRUE.
   REAL,PARAMETER :: RREG = 13.        ! Radius for the regular Grid if Stretch=.TRUE.
   
-  REAL :: REQMAX = 15.50               ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL :: REQMAX = 13.50               ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
   REAL,PARAMETER :: MINRESSTR = 8.D-2 ! Minimum resolution of the grid (if stretched)
   REAL,PARAMETER :: RINI = 1.E-005    ! Radius used for the expansion of the TOV equations
@@ -74,9 +74,9 @@ MODULE SYSTEMXNS
   ! EoS/fluid parameters
   ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 1.366e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: RHOINI = 8.3e-4 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
-  LOGICAL,PARAMETER :: VACUUM = .TRUE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
+  LOGICAL,PARAMETER :: VACUUM = .FALSE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
   
   REAL,PARAMETER :: K1 = 110.0           ! Politropic coefficient
   REAL,PARAMETER :: GAMMA = 2.0          ! Politropic exponent
@@ -117,9 +117,9 @@ MODULE SYSTEMXNS
   ! Physics - Magnetic Fields
   ! ====================================================================================
   
-  LOGICAL :: IMAG = .FALSE.    ! Magnetized cases
+  LOGICAL :: IMAG = .TRUE.    ! Magnetized cases
   LOGICAL :: ITOR = .FALSE.   ! Purely toroidal B-field
-  LOGICAL :: IPOL = .FALSE.   ! Purely poloidal B-field
+  LOGICAL :: IPOL = .TRUE.   ! Purely poloidal B-field
   LOGICAL :: ITWT = .FALSE.    ! Mixed B-field
   
   ! ====================================================================================
@@ -133,7 +133,7 @@ MODULE SYSTEMXNS
   ! Physics - purely POLOIDAL B-field only!
   ! ====================================================================================
   
-  REAL :: KBPOL = 0.0                    ! Magnetic coefficient
+  REAL :: KBPOL = 0.34135                    ! Magnetic coefficient
   REAL,PARAMETER :: NPOL  = 0.0          ! Magnetic powerlaw index
   REAL,PARAMETER :: CSI = 0.0            ! Current coefficient
   LOGICAL,PARAMETER :: QNULL = .TRUE.    ! Logical parameter for the star charge (IF OMG.NE.0)
