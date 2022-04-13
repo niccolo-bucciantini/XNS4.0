@@ -30,20 +30,20 @@ MODULE SYSTEMXNS
   ! Grid parameters
   ! ====================================================================================
 
-  LOGICAL,PARAMETER :: STRETCH = .FALSE. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
+  LOGICAL,PARAMETER :: STRETCH = .TRUE. ! If false the grid is uniform; if true it is uniform up to RREG and logarithmically stretched beyond
   
-  INTEGER,PARAMETER :: NR    = 600 ! Radial mesh points
+  INTEGER,PARAMETER :: NR    = 900 ! Radial mesh points
   INTEGER,PARAMETER :: NTH   = 100 ! Angular mesh points (1 = 1D TOV solution)
   INTEGER,PARAMETER :: NRREG = 600       ! Points for the regular grid if stretch=.TRUE.
 
   REAL,PARAMETER :: RMIN = 0.         ! Center
-  REAL,PARAMETER :: RMAX = 30.       ! Outer radius for the regular grid if stretch=.FALSE.
-  REAL,PARAMETER :: RMAXSTR = 30.0   ! Outer radius for the total grid if stretch=.TRUE.
-  REAL,PARAMETER :: RREG = 10.        ! Radius for the regular Grid if Stretch=.TRUE.
+  REAL,PARAMETER :: RMAX = 100.       ! Outer radius for the regular grid if stretch=.FALSE.
+  REAL,PARAMETER :: RMAXSTR = 100.0   ! Outer radius for the total grid if stretch=.TRUE.
+  REAL,PARAMETER :: RREG = 13.        ! Radius for the regular Grid if Stretch=.TRUE.
   
-  REAL :: REQMAX = 15.0               ! Truncation radius for equilibrium solution (to avoid explosion)
+  REAL :: REQMAX = 15.50               ! Truncation radius for equilibrium solution (to avoid explosion)
   REAL,PARAMETER :: MINRESREG = 0.125 ! Minimum resolution of the grid (if uniform)
-  REAL,PARAMETER :: MINRESSTR = 8.D-2	! Minimum resolution of the grid (if stretched)
+  REAL,PARAMETER :: MINRESSTR = 8.D-2 ! Minimum resolution of the grid (if stretched)
   REAL,PARAMETER :: RINI = 1.E-005    ! Radius used for the expansion of the TOV equations
   
   REAL :: RHOSURF = 1.0E-08             ! Density at which the surface is set
@@ -66,15 +66,15 @@ MODULE SYSTEMXNS
 
   LOGICAL :: GR = .TRUE.	        ! False = scalar-tensor theory; true = general relativity. Must be false here
   
-  REAL :: ALPHA0 = 0.0!-2.0E-004 	! Alpha0 parameter for the scalar field (def = -2.0E-004)
-  REAL :: BETA0  = 0.0!-6.0   		! Beta0 parameter for the scalar field (def = -6.0)
+  REAL :: ALPHA0 = -0.0E-004 	! Alpha0 parameter for the scalar field (def = -2.0E-004)
+  REAL :: BETA0  = -0.0   		! Beta0 parameter for the scalar field (def = -6.0)
   REAL,PARAMETER :: CHIINF = 0.0        ! Cosmological value of the scalar field (beware not fully tested)
 
   ! ====================================================================================
   ! EoS/fluid parameters
   ! ====================================================================================
 
-  REAL,PARAMETER :: RHOINI = 7.4431e-4 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
+  REAL,PARAMETER :: RHOINI = 1.366e-3 ! Central density in the Jordan frame (beware scheme converges to QUCONV)
   REAL,PARAMETER :: MBARYONFC = 1.0  ! Ratio between tabulated reduced baryon mass and true baryon mass
   LOGICAL,PARAMETER :: VACUUM = .TRUE. ! Set to zero the physical source terms in the conf-lapse solver outside the star 
   
@@ -87,7 +87,7 @@ MODULE SYSTEMXNS
 
   LOGICAL,PARAMETER :: CTP = .FALSE.     ! Use cons to prim routines
   LOGICAL :: EOSINT = .FALSE. ! If true use an interpolated/tabulated EoS
-  CHARACTER(LEN=30) :: FILEEOS = 'XXX_resampled.dat'!'PL2_resampled.dat'
+  CHARACTER(LEN=30) :: FILEEOS = 'XXX_resampled.dat'!'XXX_resampled.dat'
   INTEGER,PARAMETER :: NPTRHO = 1000 ! Points of the tabulated EoS from resample.py
   LOGICAL :: EOSJOR = .FALSE.		! Used to change the frame (Jor. or Ein.) in which the EoS is computed (LEAVE FALSE HERE)
   
@@ -107,7 +107,7 @@ MODULE SYSTEMXNS
   LOGICAL        :: JCMODLAW     = .FALSE.   ! Rotation law: modified j constant A^2*omega*[(omega_c/omega)^p-1]
   LOGICAL        :: URYULAW3     = .FALSE.   ! Rotation law: Uryu with 3 Parameters
   LOGICAL        :: URYULAW4     = .FALSE.    ! Rotation law: Uryu with 4 Parameters
-  REAL,PARAMETER :: OMG = 0.005               ! Central Rotation rate
+  REAL,PARAMETER :: OMG = 0.00               ! Central Rotation rate
   REAL,PARAMETER :: PROTDIFF = 3./2.         ! Rotation index if URYULAW3=.true.
   REAL,PARAMETER :: A2VALUE = 0.0            ! Differential rotation coeff
   REAL,PARAMETER :: OMGMAX = 2.*OMG          ! Omega_max/Omega_c
@@ -117,9 +117,9 @@ MODULE SYSTEMXNS
   ! Physics - Magnetic Fields
   ! ====================================================================================
   
-  LOGICAL :: IMAG = .TRUE.    ! Magnetized cases
+  LOGICAL :: IMAG = .FALSE.    ! Magnetized cases
   LOGICAL :: ITOR = .FALSE.   ! Purely toroidal B-field
-  LOGICAL :: IPOL = .TRUE.   ! Purely poloidal B-field
+  LOGICAL :: IPOL = .FALSE.   ! Purely poloidal B-field
   LOGICAL :: ITWT = .FALSE.    ! Mixed B-field
   
   ! ====================================================================================
@@ -133,7 +133,7 @@ MODULE SYSTEMXNS
   ! Physics - purely POLOIDAL B-field only!
   ! ====================================================================================
   
-  REAL :: KBPOL = 0.3973                    ! Magnetic coefficient
+  REAL :: KBPOL = 0.0                    ! Magnetic coefficient
   REAL,PARAMETER :: NPOL  = 0.0          ! Magnetic powerlaw index
   REAL,PARAMETER :: CSI = 0.0            ! Current coefficient
   LOGICAL,PARAMETER :: QNULL = .TRUE.    ! Logical parameter for the star charge (IF OMG.NE.0)
@@ -143,9 +143,9 @@ MODULE SYSTEMXNS
   ! ====================================================================================
   
   REAL :: KBTT = 0.0                  ! Magnetic coefficient
-  REAL,PARAMETER :: ATWT = 1.4E-3     ! TT magnetic coefficient
+  REAL,PARAMETER :: ATWT = 0.0     ! TT magnetic coefficient
   REAL,PARAMETER :: ZETA = 0.0        ! TT magnetic index
-  REAL,PARAMETER :: CUT = 4.0         ! Maximum distance for twisted magnetosphere
+  REAL,PARAMETER :: CUT = 0.0         ! Maximum distance for twisted magnetosphere
   
   ! ====================================================================================
   ! For the initial TOV solution
@@ -158,8 +158,8 @@ MODULE SYSTEMXNS
   INTEGER,PARAMETER :: MAXSTEPCH = 100    ! Maximum number of iterations for the STT shooting at fixed metric in CHITVLOOP
   REAL,PARAMETER :: DELTMU0 = 0.0001	! Delta mu0 used in the main shooting
   
-  REAL :: MMID = 1.9			! Initial guess on the masses at MIDGRID and NR (will be overwritten)
-  REAL :: M = 1.9
+  REAL :: MMID = 1.3			! Initial guess on the masses at MIDGRID and NR (will be overwritten)
+  REAL :: M = 1.3
   REAL :: MUIN = 1.0e-2	                ! Initial guess on the central mu
   
   REAL,PARAMETER :: QRELAX = 0.3    ! Used in the filter to force convergence of CHI
@@ -209,20 +209,21 @@ MODULE SYSTEMXNS
   ! Parameters to help or stabilize convergence
   ! ====================================================================================
   
-  REAL :: QFACTOR = 0.5!0.5!0.85       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL :: QFACTORMETRIC = 0.35!0.35     ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
-  REAL :: QFACTORCONF = 0.5             ! Damping factor for psi for the external convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
+  REAL :: QFACTOR = 0.85       ! Damping factor for press the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
+  REAL :: QFACTORMETRIC = 0.35          ! Damping factor for psi/psl for the internal convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
+  REAL :: QFACTORCONF = 0.35             ! Damping factor for psi for the external convergence loop  qnew = qfactor*qnew + (1-qfactor)*qold
   REAL :: QFACTORCHI = 0.45             ! Damping factor for chi for the convergence loop  qnew = qfactro*qnew + (1-qfactor)*qold
-  REAL,PARAMETER    :: QAPHI = 1.0      ! Damping factor for the convergence of the vector potential
+  REAL,PARAMETER    :: QAPHI = 0.5      ! Damping factor for the convergence of the vector potential
   REAL,PARAMETER    :: EPS = 1.E-007
   
   ! ====================================================================================
   ! Parameters for the Legendre expansion & elliptic solvers
   ! ====================================================================================
   
-  INTEGER,PARAMETER :: MLS = 40 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
-  INTEGER,PARAMETER :: NGQ = 80 !50      ! Number of point in the Gauss quadrature (1 = 1D)
+  INTEGER,PARAMETER :: MLS = 20 !20!8       ! Number of Legendre polinomia for expansion in theta (0 = 1D)
+  INTEGER,PARAMETER :: NGQ = 50 !50      ! Number of point in the Gauss quadrature (1 = 1D)
   INTEGER,PARAMETER :: MLSL = 20     ! Number of Legendre polinomia used to solve Laplace equation
+  INTEGER,PARAMETER :: MLST = 20     ! Number of Legendre polinomia used to solve Maxwell-Gauss equation
   REAL,PARAMETER    :: TOLCONV = 1.D-10 ! Convergence for the lapse and conformal factor iterative solvers
   REAL,PARAMETER    :: TOLCHI = 1.D-10 	! Convergence for the scalar field iterative solvers
   
