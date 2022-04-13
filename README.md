@@ -1,2 +1,2 @@
-Last version of XNS as of 21/10/2021.
-Last correction: corrected the DR of the grid at the boundaries. This allows to have correct boundary conditions at infinity.
+Last version of XNS as of 13/04/2022.
+Last correction: error ffor the electric filed
