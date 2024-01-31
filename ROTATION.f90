@@ -250,7 +250,7 @@ END SUBROUTINE A3L_OS
 
 SUBROUTINE PARS_VALUE_JS()
   !   ============================================================
-  !   Purpose : evaluate JMAX, XVAL and YVAL
+  !   Purpose : evaluate JMAX, XVAL and YVAL see  Franceschetti et al 2022
   !   ============================================================
   INTEGER :: IM,IT=NTH/2+1
   REAL    :: BETAMAX,RSMAX,MVAL
@@ -264,7 +264,7 @@ SUBROUTINE PARS_VALUE_JS()
   !Value of MVAL
   MVAL=OMGMAX/(OMG+1.D-10)
 
-  !Value of XVAL and YVAL
+  !Value of XVAL and YVAL (A8, A9, A18 in Franceschetti et al 2022)
   IF(URYULAW3) THEN
     !Uryu law with 3 parameters
     XVAL=(MVAL*(PROTDIFF+1.))**2-4.*PROTDIFF*MVAL !delta
@@ -285,7 +285,7 @@ END SUBROUTINE PARS_VALUE_JS
 
 SUBROUTINE FODFO_JS(BETALOC,RSTARLOC,OMEGALOC,FO,DFO)
   !   ============================================================
-  !   Purpose : evaluate FO and DFO in the J-space for a differential rotator
+  !   Purpose : evaluate FO and DFO in the J-space for a differential rotator see  Franceschetti et al 2022
   !   ============================================================
   REAL :: RSTARLOC,BETALOC,OMEGALOC
   REAL :: FO,DFO
@@ -299,7 +299,7 @@ SUBROUTINE FODFO_JS(BETALOC,RSTARLOC,OMEGALOC,FO,DFO)
   JLOC=CJ2/CJ3
   DJLOC=(RSTARLOC+CJ2**2)/CJ3**2
 
-  !Uryu law with 3 parameters
+  !Uryu law with 3 parameters (A2 in Franceschetti et al 2022)
   IF(URYULAW3) THEN
     C1=JLOC/JMAX
     C2=1.+YVAL*C1**PROTDIFF
@@ -310,7 +310,7 @@ SUBROUTINE FODFO_JS(BETALOC,RSTARLOC,OMEGALOC,FO,DFO)
     DFO=1.-(C4*C3-XVAL*C2)*OMG*DJLOC/JMAX
   ENDIF
 
-  !Uryu law with 4 parameters (p=1,q=3)
+  !Uryu law with 4 parameters (p=1,q=3) (A3 in Franceschetti et al 2022)
   IF(URYULAW4) THEN
     C1=JLOC/JMAX
     C2=1.+YVAL*C1
@@ -329,7 +329,7 @@ END SUBROUTINE FODFO_JS
 
 SUBROUTINE A3L_JS(BETALOC,RSTARLOC,OMEGALOC,A3L)
   !   ============================================================
-  !   Purpose : evaluate A3L in the Omega-space for a differential rotator
+  !   Purpose : evaluate A3L in the J-space for a differential rotator
   !   ============================================================
   REAL :: RSTARLOC,BETALOC,OMEGALOC,A3L
   REAL :: JLOC,CJ1,CJ2,CJ3
