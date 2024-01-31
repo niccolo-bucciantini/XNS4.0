@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Compiling XNS &mdash; XNS 4.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> XNS
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XNS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="user_params.html">User parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files_outputs.html">Files and outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Reformatting the Equation os State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_gr.html">Examples in GR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_stt.html">Examples in STTs</a></li>
 </ul>
@@ -62,8 +70,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Compiling XNS</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Compiling XNS</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/makefile.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -74,21 +82,21 @@
            <div itemprop="articleBody">
              
   <section class="tex2jax_ignore mathjax_ignore" id="compiling-xns">
-<h1>Compiling XNS<a class="headerlink" href="#compiling-xns" title="Permalink to this headline"></a></h1>
+<h1>Compiling XNS<a class="headerlink" href="#compiling-xns" title="Permalink to this heading"></a></h1>
 <p>XNS can be compiled using <code>gfortran</code> in several ways, as written in the file <em>makefile</em>:</p>
 <ul>
 <li><p><code>make serial</code> - the standard way to compile XNS. In this case a single solution is found with a central density specified by the parameter RHOINI. The generated executable is named <em>XNS-s</em>. To compile the code this way type:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>    make clean<span class="p">;</span> make serial<span class="p">;</span> ./XNS-s
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>make<span class="w"> </span>clean<span class="p">;</span><span class="w"> </span>make<span class="w"> </span>serial<span class="p">;</span><span class="w"> </span>./XNS-s
 </pre></div>
 </div>
 </li>
 <li><p><code>make nwtrps</code> - compiles XNS using the Newton-Raphson method to converge on the quantity specified by the parameters QUOC and QUCONV. The generated executable is named <em>XNS-nr</em>. To compile the code this way type:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>    make clean<span class="p">;</span> make nwtrps<span class="p">;</span> ./XNS-nr
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>make<span class="w"> </span>clean<span class="p">;</span><span class="w"> </span>make<span class="w"> </span>nwtrps<span class="p">;</span><span class="w"> </span>./XNS-nr
 </pre></div>
 </div>
 </li>
 <li><p><code>make parspace</code> - compiles XNS various times with different initial conditions, in order to sample the parameter space spanned by the magnetic, rotation and density parameters, set in <em>XNS.f90</em>. In particular, solutions are computed with: NKB different magnetic coefficients spanning from KBMIN to KBMAX; NRHO1 different central densities spanning from RHOMIN to RHOMAX; NOMG different central angular velocities spanning from OMGMIN to OMGMAX. The generated executable is named <em>XNS-mpi</em>. The computation of the various models is made in parallel (only on CPUs, no GPU support) using the MPI framework, and <code>mpif90</code> needs to be installed. To compile the code this way using NUMBER_OF_PROCESSES processes, type:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>    make clean<span class="p">;</span> make parspace<span class="p">;</span> mpirun -n NUMBER_OF_PROCESSES ./XNS-mpi
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>make<span class="w"> </span>clean<span class="p">;</span><span class="w"> </span>make<span class="w"> </span>parspace<span class="p">;</span><span class="w"> </span>mpirun<span class="w"> </span>-n<span class="w"> </span>NUMBER_OF_PROCESSES<span class="w"> </span>./XNS-mpi
 </pre></div>
 </div>
 <p>Note that it must be NUMBER_OF_PROCESSES<span class="math notranslate nohighlight">\(\geq\)</span>2, because one process is always only passing initial conditions to the other processes, and NUMBER_OF_PROCESSES-1<span class="math notranslate nohighlight">\(\leq\)</span>(NOMG+1)<span class="math notranslate nohighlight">\(\times\)</span>(NRHO1+1)<span class="math notranslate nohighlight">\(\times\)</span>(NKB+1), that is the number of computing processes must not be larger than the number of models to be computed.

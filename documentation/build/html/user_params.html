@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User parameters &mdash; XNS 4.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> XNS
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XNS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,6 +71,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files_outputs.html">Files and outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Reformatting the Equation os State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_gr.html">Examples in GR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_stt.html">Examples in STTs</a></li>
 </ul>
@@ -81,8 +89,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>User parameters</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User parameters</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/user_params.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,12 +101,12 @@
            <div itemprop="articleBody">
              
   <section class="tex2jax_ignore mathjax_ignore" id="user-parameters">
-<h1>User parameters<a class="headerlink" href="#user-parameters" title="Permalink to this headline"></a></h1>
+<h1>User parameters<a class="headerlink" href="#user-parameters" title="Permalink to this heading"></a></h1>
 <p>The input parameters that the user might want to change are all set in the module system inside the file <em>SYSTEM.f90</em>. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc …), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:</p>
 <section id="convergence">
-<h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline"></a></h2>
+<h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this heading"></a></h2>
 <section id="parameters-for-convergence-of-the-newton-raphson-scheme-of-xns">
-<h3>Parameters for convergence of the Newton-Raphson scheme of XNS<a class="headerlink" href="#parameters-for-convergence-of-the-newton-raphson-scheme-of-xns" title="Permalink to this headline"></a></h3>
+<h3>Parameters for convergence of the Newton-Raphson scheme of XNS<a class="headerlink" href="#parameters-for-convergence-of-the-newton-raphson-scheme-of-xns" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>NVALUE</strong> - the maximum number of loops employable by the Newton-Raphson scheme in the search
 for a equilibrium solution, having a target value for a desired quantity (central density, total mass,
@@ -111,7 +119,7 @@ strongly distorted (fast rotation, and/or strong magnetic field). The default va
 </ul>
 </section>
 <section id="parameters-for-convergence-of-xnsmain-over-a-model">
-<h3>Parameters for convergence of XNSMAIN over a model<a class="headerlink" href="#parameters-for-convergence-of-xnsmain-over-a-model" title="Permalink to this headline"></a></h3>
+<h3>Parameters for convergence of XNSMAIN over a model<a class="headerlink" href="#parameters-for-convergence-of-xnsmain-over-a-model" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>MAXLOOP</strong> - the maximum number of loops employable in the search for a converged equilibrium
 solution by the subroutine XNSMAIN. Usually convergence is reached within the first 100 steps,
@@ -127,7 +135,7 @@ set to 100.
 </ul>
 </section>
 <section id="parameters-for-convergence-of-the-initial-tov-solution">
-<h3>Parameters for convergence of the initial TOV solution<a class="headerlink" href="#parameters-for-convergence-of-the-initial-tov-solution" title="Permalink to this headline"></a></h3>
+<h3>Parameters for convergence of the initial TOV solution<a class="headerlink" href="#parameters-for-convergence-of-the-initial-tov-solution" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>RELIT</strong> - the maximum number of loops in TOVINIMOD for the convergence of the full TOV solution, including the metric-matter distribution and, in case of STT, the scalar field.
 <br><br></p></li>
@@ -142,13 +150,13 @@ set to 100.
 </ul>
 </section>
 <section id="parameters-for-convergence-of-the-bernoulli-in-hydroeq">
-<h3>Parameters for convergence of the Bernoulli in HYDROEQ<a class="headerlink" href="#parameters-for-convergence-of-the-bernoulli-in-hydroeq" title="Permalink to this headline"></a></h3>
+<h3>Parameters for convergence of the Bernoulli in HYDROEQ<a class="headerlink" href="#parameters-for-convergence-of-the-bernoulli-in-hydroeq" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>CONVHELP</strong> - a logical flag to activate an option in HYDROEQ to help achieve convergence. Warning: if set to .TRUE., the final central density will be slightly different from the chosen RHOINI.</p></li>
 </ul>
 </section>
 <section id="parameters-for-the-convergence-of-elliptic-solvers">
-<h3>Parameters for the convergence of elliptic solvers<a class="headerlink" href="#parameters-for-the-convergence-of-elliptic-solvers" title="Permalink to this headline"></a></h3>
+<h3>Parameters for the convergence of elliptic solvers<a class="headerlink" href="#parameters-for-the-convergence-of-elliptic-solvers" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>TOLCONV</strong> - the convergence tolerance for the iterative solution of the PDEs for the conformal factor <span class="math notranslate nohighlight">\(\psi\)</span>
 and the lapse <span class="math notranslate nohighlight">\(\alpha\)</span> in XNSMAIN and for the 4-potential in HYDROEQ.
@@ -158,7 +166,7 @@ and the lapse <span class="math notranslate nohighlight">\(\alpha\)</span> in XN
 </ul>
 </section>
 <section id="parameters-to-help-or-stabilize-convergence">
-<h3>Parameters to help or stabilize convergence<a class="headerlink" href="#parameters-to-help-or-stabilize-convergence" title="Permalink to this headline"></a></h3>
+<h3>Parameters to help or stabilize convergence<a class="headerlink" href="#parameters-to-help-or-stabilize-convergence" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>QFACTOR</strong> - a damping factor of the convergence loop both for solving the Bernoulli equation, used in HYDROEQ.
 At the end of each sub-loop of the convergence scheme, a new set of equilibrium fluid variables is
@@ -187,7 +195,7 @@ need to be changed.
 </section>
 </section>
 <section id="grid">
-<h2>Grid<a class="headerlink" href="#grid" title="Permalink to this headline"></a></h2>
+<h2>Grid<a class="headerlink" href="#grid" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>STRETCH</strong> - a logical flag that control whether the grid is stretched or not. If .TRUE. the radial grid
 is regular up to RREG with NRREG grid points and it is stretched from RREG to RMAXSTR with NR-NRREG
@@ -227,7 +235,7 @@ avoid this, setting a value for REQMAX will force the solution to be truncated.
 </ul>
 </section>
 <section id="printing-outputs-and-files">
-<h2>Printing outputs and files<a class="headerlink" href="#printing-outputs-and-files" title="Permalink to this headline"></a></h2>
+<h2>Printing outputs and files<a class="headerlink" href="#printing-outputs-and-files" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>VERBOSE</strong> - a logical flag. Setting VERBOSE=.TRUE. forces the code to output on screen all the INFOs
 related to the various steps done by each subroutine (to be used only for debugging or checks). Otherwise setting VERBOSE=.FALSE. the output on screen will be produced only at the end. The latter is
@@ -252,7 +260,7 @@ Primitive_mag.dat, Shiftphi.dat, Lapse.dat, Source.dat, Rhovec.dat, Chi.dat. Set
 </ul>
 </section>
 <section id="rotation">
-<h2>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline"></a></h2>
+<h2>Rotation<a class="headerlink" href="#rotation" title="Permalink to this heading"></a></h2>
 <p><strong>Warning: rotation in concurrency with the presence of a scalar field has not been tested!</strong></p>
 <ul class="simple">
 <li><p><strong>OMG</strong> - the value of the angular velocity at the center <span class="math notranslate nohighlight">\(\Omega _\mathrm{c}\)</span>.
@@ -282,7 +290,7 @@ In this case, a value of A2VALUE must be specified.
 </ul>
 </section>
 <section id="magnetic-field">
-<h2>Magnetic field<a class="headerlink" href="#magnetic-field" title="Permalink to this headline"></a></h2>
+<h2>Magnetic field<a class="headerlink" href="#magnetic-field" title="Permalink to this heading"></a></h2>
 <p><strong>Warning: a twisted torus configuration in concurrency with the presence of a scalar field has not been tested!</strong></p>
 <ul class="simple">
 <li><p><strong>IMAG</strong> - a logical flag that states whether the model is magnetized or not. Setting it to .FALSE. implies
@@ -325,7 +333,7 @@ of the twist. If <span class="math notranslate nohighlight">\(\lambda = 1\)</spa
 </ul>
 </section>
 <section id="initial-conditions">
-<h2>Initial conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline"></a></h2>
+<h2>Initial conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>RHOINI</strong> - the central density for the starting guess. If the serial flag is used to compile the code, this is also the central density of the final solution. WARNING: if the nwtrps flag is used to compile the code, this is not the central density of the converged model, but its value for the starting guess. By default XNS will search for a solution in the range 0.8-1.2 RHOINI. If the desired solution is outside this range, XNS will output a warning, and stop.
 <br><br></p></li>
@@ -336,7 +344,7 @@ a given gravitational mass, 2 for a given barionic mass].
 </ul>
 </section>
 <section id="equation-of-state">
-<h2>Equation of state<a class="headerlink" href="#equation-of-state" title="Permalink to this headline"></a></h2>
+<h2>Equation of state<a class="headerlink" href="#equation-of-state" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>K1</strong> - the polytropic coefficient K of the EoS. The code uses a polytropic EoS. The value K1=100 is
 for the standard case used for many tests of NS stability and evolution in the literature (see also the
@@ -361,7 +369,7 @@ only with IPOL=.TRUE..
 </ul>
 </section>
 <section id="scalar-field">
-<h2>Scalar field<a class="headerlink" href="#scalar-field" title="Permalink to this headline"></a></h2>
+<h2>Scalar field<a class="headerlink" href="#scalar-field" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>ALPHA0</strong> - value of the <span class="math notranslate nohighlight">\(\alpha _0\)</span> parameter of the scalar coupling function <span class="math notranslate nohighlight">\(\mathcal{A}(\chi)=\exp [ \alpha_0 (\chi - \chi _\mathrm{inf}) + \beta _0 (\chi - \chi _\mathrm{inf})^2 ]\)</span> by Damour, T., &amp; Esposito-Farèse, G. (1993). Note that, if set to zero, XNS converges to a GR solution.
 <br><br></p></li>
@@ -373,7 +381,7 @@ only with IPOL=.TRUE..
 </ul>
 </section>
 <section id="other">
-<h2>Other<a class="headerlink" href="#other" title="Permalink to this headline"></a></h2>
+<h2>Other<a class="headerlink" href="#other" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>RHOSURF</strong> - value at which the surface of the NS is set.
 <br><br></p></li>

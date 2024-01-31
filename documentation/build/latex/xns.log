@@ -1,35 +1,36 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/MacPorts 2018.47642_8) (preloaded format=pdflatex 2018.7.11)  15 MAR 2022 13:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/MacPorts 2021.58693_2) (preloaded format=pdflatex 2022.4.4)  31 JAN 2024 13:58
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**\input xns.tex
-(./xns.tex (./sphinxmanual.cls
+**xns.tex
+(./xns.tex
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-02-18> (./sphinxmanual.cls
 Document Class: sphinxmanual 2019/12/01 v2.3.0 Document class (Sphinx manual)
 (/opt/local/share/texmf-texlive/tex/latex/base/report.cls
-Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
+Document Class: report 2020/04/10 v1.4m Standard LaTeX document class
 (/opt/local/share/texmf-texlive/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
-\c@part=\count80
-\c@chapter=\count81
-\c@section=\count82
-\c@subsection=\count83
-\c@subsubsection=\count84
-\c@paragraph=\count85
-\c@subparagraph=\count86
-\c@figure=\count87
-\c@table=\count88
-\abovecaptionskip=\skip41
-\belowcaptionskip=\skip42
-\bibindent=\dimen102
+\c@part=\count179
+\c@chapter=\count180
+\c@section=\count181
+\c@subsection=\count182
+\c@subsubsection=\count183
+\c@paragraph=\count184
+\c@subparagraph=\count185
+\c@figure=\count186
+\c@table=\count187
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
 )
 LaTeX Info: Redefining \and on input line 35.
 )
 (/opt/local/share/texmf-texlive/tex/latex/base/inputenc.sty
-Package: inputenc 2018/04/06 v1.3b Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 )
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+2500 (decimal 9472)
@@ -39,18 +40,14 @@ Package: inputenc 2018/04/06 v1.3b Input encoding file
    defining Unicode char U+2572 (decimal 9586)
 
 (/opt/local/share/texmf-texlive/tex/latex/cmap/cmap.sty
-Package: cmap 2008/03/06 v1.0h CMap support: searchable PDF
+Package: cmap 2021/02/06 v1.0j CMap support: searchable PDF
 )
 (/opt/local/share/texmf-texlive/tex/latex/base/fontenc.sty
-Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
-
-(/opt/local/share/texmf-texlive/tex/latex/base/t1enc.def
-File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)<<t1.cmap>>)
+Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
+<<t1.cmap>>)
 (/opt/local/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2017/09/02 v2.17a AMS math features
-\@mathmargin=\skip43
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
 (/opt/local/share/texmf-texlive/tex/latex/amsmath/amstext.sty
@@ -58,53 +55,53 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/opt/local/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
-\ex@=\dimen103
+\@emptytoks=\toks17
+\ex@=\dimen139
 ))
 (/opt/local/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen104
+\pmbraise@=\dimen140
 )
 (/opt/local/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count89
-LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count90
-\leftroot@=\count91
-LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count92
-\DOTSCASE@=\count93
-LaTeX Info: Redefining \ldots on input line 472.
-LaTeX Info: Redefining \dots on input line 475.
-LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box26
-\strutbox@=\box27
-\big@size=\dimen105
-LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count94
-\c@MaxMatrixCols=\count95
-\dotsspace@=\muskip10
-\c@parentequation=\count96
-\dspbrk@lvl=\count97
-\tag@help=\toks17
-\row@=\count98
-\column@=\count99
-\maxfields@=\count100
-\andhelp@=\toks18
-\eqnshift@=\dimen106
-\alignsep@=\dimen107
-\tagshift@=\dimen108
-\tagwidth@=\dimen109
-\totwidth@=\dimen110
-\lineht@=\dimen111
-\@envbody=\toks19
-\multlinegap=\skip44
-\multlinetaggap=\skip45
-\mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2817.
-LaTeX Info: Redefining \] on input line 2818.
+\inf@bad=\count188
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count189
+\leftroot@=\count190
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count191
+\DOTSCASE@=\count192
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box47
+\strutbox@=\box48
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count193
+\c@MaxMatrixCols=\count194
+\dotsspace@=\muskip16
+\c@parentequation=\count195
+\dspbrk@lvl=\count196
+\tag@help=\toks18
+\row@=\count197
+\column@=\count198
+\maxfields@=\count199
+\andhelp@=\toks19
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
 )
 (/opt/local/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -113,77 +110,71 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
 (/opt/local/share/texmf-texlive/tex/generic/babel/babel.sty
-Package: babel 2018/02/14 3.18 The Babel package
-
-(/opt/local/share/texmf-texlive/tex/generic/babel/switch.def
-File: switch.def 2018/02/14 3.18 Babel switching mechanism
-)
-(/opt/local/share/texmf-texlive/tex/generic/babel-english/english.ldf
-Language: english 2017/06/06 v3.3r English support from the babel system
+Package: babel 2021/03/24 3.56 The Babel package
 
 (/opt/local/share/texmf-texlive/tex/generic/babel/babel.def
-File: babel.def 2018/02/14 3.18 Babel common definitions
-\babel@savecnt=\count101
-\U@D=\dimen112
+File: babel.def 2021/03/24 3.56 Babel common definitions
+\babel@savecnt=\count266
+\U@D=\dimen148
+\l@babelnohyphens=\language3
 
 (/opt/local/share/texmf-texlive/tex/generic/babel/txtbabel.def)
-\bbl@dirlevel=\count102
+\bbl@readstream=\read2
 )
-\l@canadian = a dialect from \language\l@american 
-\l@australian = a dialect from \language\l@british 
-\l@newzealand = a dialect from \language\l@british 
+\bbl@dirlevel=\count267
+
+(/opt/local/share/texmf-texlive/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: \l@british = using hyphenrules for english
+(babel)             (\language0) on input line 82.
+Package babel Info: \l@UKenglish = using hyphenrules for english
+(babel)             (\language0) on input line 83.
+Package babel Info: \l@canadian = using hyphenrules for english
+(babel)             (\language0) on input line 102.
+Package babel Info: \l@australian = using hyphenrules for english
+(babel)             (\language0) on input line 105.
+Package babel Info: \l@newzealand = using hyphenrules for english
+(babel)             (\language0) on input line 108.
 ))
 (/opt/local/share/texmf-texlive/tex/latex/tex-gyre/tgtermes.sty
 Package: tgtermes 2009/09/27 v1.2 TeX Gyre Termes as default roman family
 
-(/opt/local/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+(/opt/local/share/texmf-texlive/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 
 (/opt/local/share/texmf-texlive/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks21
+\KV@toks@=\toks22
 )
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+(/opt/local/share/texmf-texlive/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 )
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-))))
+(/opt/local/share/texmf-texlive/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)))
 (/opt/local/share/texmf-texlive/tex/latex/tex-gyre/tgheros.sty
 Package: tgheros 2009/09/27 v1.2 TeX Gyre Heros as default sans serif family
-) (./fncychap.sty
+)
+(/opt/local/share/texmf-texlive/tex/latex/fncychap/fncychap.sty
 Package: fncychap 2007/07/30 v1.34 LaTeX package (Revised chapters)
-\RW=\skip46
-\mylen=\skip47
-\myhi=\skip48
-\px=\skip49
-\py=\skip50
-\pyy=\skip51
-\pxx=\skip52
-\c@AlphaCnt=\count103
-\c@AlphaDecCnt=\count104
+\RW=\skip52
+\mylen=\skip53
+\myhi=\skip54
+\px=\skip55
+\py=\skip56
+\pyy=\skip57
+\pxx=\skip58
+\c@AlphaCnt=\count268
+\c@AlphaDecCnt=\count269
 ) (./sphinx.sty
-Package: sphinx 2021/01/27 v4.0.0 LaTeX package (Sphinx markup)
- (/opt/local/share/texmf-texlive/tex/latex/xcolor/xcolor.sty
+Package: sphinx 2023/03/19 v6.2.0 LaTeX package (Sphinx markup)
+
+(/opt/local/share/texmf-texlive/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
 (/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/color.cfg
@@ -192,7 +183,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 Package xcolor Info: Driver file: pdftex.def on input line 225.
 
 (/opt/local/share/texmf-texlive/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 )
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
@@ -204,246 +195,108 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-\sphinxverbatimsep=\dimen113
-\sphinxverbatimborder=\dimen114
-\sphinxshadowsep=\dimen115
-\sphinxshadowsize=\dimen116
-\sphinxshadowrule=\dimen117
-\spx@notice@border=\dimen118
-
 (./sphinxoptionshyperref.sty
 File: sphinxoptionshyperref.sty 2021/01/27 hyperref
 ) (./sphinxoptionsgeometry.sty
 File: sphinxoptionsgeometry.sty 2021/01/27 geometry
 )
 (/opt/local/share/texmf-texlive/tex/latex/base/textcomp.sty
-Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
-Package textcomp Info: Sub-encoding information:
-(textcomp)               5 = only ISO-Adobe without \textcurrency
-(textcomp)               4 = 5 + \texteuro
-(textcomp)               3 = 4 + \textohm
-(textcomp)               2 = 3 + \textestimated + \textcurrency
-(textcomp)               1 = TS1 - \textcircled - \t
-(textcomp)               0 = TS1 (full)
-(textcomp)             Font families with sub-encoding setting implement
-(textcomp)             only a restricted character set as indicated.
-(textcomp)             Family '?' is the default used for unknown fonts.
-(textcomp)             See the documentation for details.
-Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
-
-(/opt/local/share/texmf-texlive/tex/latex/base/ts1enc.def
-File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
-Now handling font encoding TS1 ...
-... processing UTF-8 mapping file for font encoding TS1
-
-(/opt/local/share/texmf-texlive/tex/latex/base/ts1enc.dfu
-File: ts1enc.dfu 2018/04/05 v1.2c UTF-8 support for inputenc
-   defining Unicode char U+00A2 (decimal 162)
-   defining Unicode char U+00A3 (decimal 163)
-   defining Unicode char U+00A4 (decimal 164)
-   defining Unicode char U+00A5 (decimal 165)
-   defining Unicode char U+00A6 (decimal 166)
-   defining Unicode char U+00A7 (decimal 167)
-   defining Unicode char U+00A8 (decimal 168)
-   defining Unicode char U+00A9 (decimal 169)
-   defining Unicode char U+00AA (decimal 170)
-   defining Unicode char U+00AC (decimal 172)
-   defining Unicode char U+00AE (decimal 174)
-   defining Unicode char U+00AF (decimal 175)
-   defining Unicode char U+00B0 (decimal 176)
-   defining Unicode char U+00B1 (decimal 177)
-   defining Unicode char U+00B2 (decimal 178)
-   defining Unicode char U+00B3 (decimal 179)
-   defining Unicode char U+00B4 (decimal 180)
-   defining Unicode char U+00B5 (decimal 181)
-   defining Unicode char U+00B6 (decimal 182)
-   defining Unicode char U+00B7 (decimal 183)
-   defining Unicode char U+00B9 (decimal 185)
-   defining Unicode char U+00BA (decimal 186)
-   defining Unicode char U+00BC (decimal 188)
-   defining Unicode char U+00BD (decimal 189)
-   defining Unicode char U+00BE (decimal 190)
-   defining Unicode char U+00D7 (decimal 215)
-   defining Unicode char U+00F7 (decimal 247)
-   defining Unicode char U+0192 (decimal 402)
-   defining Unicode char U+02C7 (decimal 711)
-   defining Unicode char U+02D8 (decimal 728)
-   defining Unicode char U+02DD (decimal 733)
-   defining Unicode char U+0E3F (decimal 3647)
-   defining Unicode char U+2016 (decimal 8214)
-   defining Unicode char U+2020 (decimal 8224)
-   defining Unicode char U+2021 (decimal 8225)
-   defining Unicode char U+2022 (decimal 8226)
-   defining Unicode char U+2030 (decimal 8240)
-   defining Unicode char U+2031 (decimal 8241)
-   defining Unicode char U+203B (decimal 8251)
-   defining Unicode char U+203D (decimal 8253)
-   defining Unicode char U+2044 (decimal 8260)
-   defining Unicode char U+204E (decimal 8270)
-   defining Unicode char U+2052 (decimal 8274)
-   defining Unicode char U+20A1 (decimal 8353)
-   defining Unicode char U+20A4 (decimal 8356)
-   defining Unicode char U+20A6 (decimal 8358)
-   defining Unicode char U+20A9 (decimal 8361)
-   defining Unicode char U+20AB (decimal 8363)
-   defining Unicode char U+20AC (decimal 8364)
-   defining Unicode char U+20B1 (decimal 8369)
-   defining Unicode char U+2103 (decimal 8451)
-   defining Unicode char U+2116 (decimal 8470)
-   defining Unicode char U+2117 (decimal 8471)
-   defining Unicode char U+211E (decimal 8478)
-   defining Unicode char U+2120 (decimal 8480)
-   defining Unicode char U+2122 (decimal 8482)
-   defining Unicode char U+2126 (decimal 8486)
-   defining Unicode char U+2127 (decimal 8487)
-   defining Unicode char U+212E (decimal 8494)
-   defining Unicode char U+2190 (decimal 8592)
-   defining Unicode char U+2191 (decimal 8593)
-   defining Unicode char U+2192 (decimal 8594)
-   defining Unicode char U+2193 (decimal 8595)
-   defining Unicode char U+2329 (decimal 9001)
-   defining Unicode char U+232A (decimal 9002)
-   defining Unicode char U+2422 (decimal 9250)
-   defining Unicode char U+25E6 (decimal 9702)
-   defining Unicode char U+25EF (decimal 9711)
-   defining Unicode char U+266A (decimal 9834)
-   defining Unicode char U+FEFF (decimal 65279)
-))
-LaTeX Info: Redefining \oldstylenums on input line 334.
-Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
-Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
-Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
-Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
-Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
-Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
-Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
-Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
-Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
-Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
-Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
-Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
-Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
-Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
-Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
-Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
-Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
-Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
-Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
-Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
-Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
-Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
-Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
-Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
-
-Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
-Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
-Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
-Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
-Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
-Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
-Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
-Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
-Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
-Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
-Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
-Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
-Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
-Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
-Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
-Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
-Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
-Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
-Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
-Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
-Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
-Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
-Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
-Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
-Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
-Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
-Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
-Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
-Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
-Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
-Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
-Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
-Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
-Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
-Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
-Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
-Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
 (/opt/local/share/texmf-texlive/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count105
-\float@exts=\toks22
-\float@box=\box28
-\@float@everytoks=\toks23
-\@floatcapt=\box29
-) (./wrapfig.sty
-\wrapoverhang=\dimen119
-\WF@size=\dimen120
-\c@WF@wrappedlines=\count106
-\WF@box=\box30
-\WF@everypar=\toks24
+\c@float@type=\count270
+\float@exts=\toks23
+\float@box=\box49
+\@float@everytoks=\toks24
+\@floatcapt=\box50
+)
+(/opt/local/share/texmf-texlive/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen149
+\WF@size=\dimen150
+\c@WF@wrappedlines=\count271
+\WF@box=\box51
+\WF@everypar=\toks25
 Package: wrapfig 2003/01/31  v 3.6
 )
-(./capt-of.sty
+(/opt/local/share/texmf-texlive/tex/latex/capt-of/capt-of.sty
 Package: capt-of 2009/12/29 v0.2 standard captions outside of floats
-) (/opt/local/share/texmf-texlive/tex/latex/tools/multicol.sty
-Package: multicol 2018/04/01 v1.8r multicolumn formatting (FMi)
-\c@tracingmulticols=\count107
-\mult@box=\box31
-\multicol@leftmargin=\dimen121
-\c@unbalance=\count108
-\c@collectmore=\count109
-\doublecol@number=\count110
-\multicoltolerance=\count111
-\multicolpretolerance=\count112
-\full@width=\dimen122
-\page@free=\dimen123
-\premulticols=\dimen124
-\postmulticols=\dimen125
-\multicolsep=\skip53
-\multicolbaselineskip=\skip54
-\partial@page=\box32
-\last@line=\box33
-\maxbalancingoverflow=\dimen126
-\mult@rightbox=\box34
-\mult@grightbox=\box35
-\mult@gfirstbox=\box36
-\mult@firstbox=\box37
-\@tempa=\box38
-\@tempa=\box39
-\@tempa=\box40
-\@tempa=\box41
-\@tempa=\box42
-\@tempa=\box43
-\@tempa=\box44
-\@tempa=\box45
-\@tempa=\box46
-\@tempa=\box47
-\@tempa=\box48
-\@tempa=\box49
-\@tempa=\box50
-\@tempa=\box51
-\@tempa=\box52
-\@tempa=\box53
-\@tempa=\box54
-\c@columnbadness=\count113
-\c@finalcolumnbadness=\count114
-\last@try=\dimen127
-\multicolovershoot=\dimen128
-\multicolundershoot=\dimen129
-\mult@nat@firstbox=\box55
-\colbreak@box=\box56
-\mc@col@check@num=\count115
+)
+(/opt/local/share/texmf-texlive/tex/latex/tools/multicol.sty
+Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
+\c@tracingmulticols=\count272
+\mult@box=\box52
+\multicol@leftmargin=\dimen151
+\c@unbalance=\count273
+\c@collectmore=\count274
+\doublecol@number=\count275
+\multicoltolerance=\count276
+\multicolpretolerance=\count277
+\full@width=\dimen152
+\page@free=\dimen153
+\premulticols=\dimen154
+\postmulticols=\dimen155
+\multicolsep=\skip59
+\multicolbaselineskip=\skip60
+\partial@page=\box53
+\last@line=\box54
+\maxbalancingoverflow=\dimen156
+\mult@rightbox=\box55
+\mult@grightbox=\box56
+\mult@gfirstbox=\box57
+\mult@firstbox=\box58
+\@tempa=\box59
+\@tempa=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\c@minrows=\count278
+\c@columnbadness=\count279
+\c@finalcolumnbadness=\count280
+\last@try=\dimen157
+\multicolovershoot=\dimen158
+\multicolundershoot=\dimen159
+\mult@nat@firstbox=\box96
+\colbreak@box=\box97
+\mc@col@check@num=\count281
 )
 (/opt/local/share/texmf-texlive/tex/latex/graphics/graphicx.sty
-Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/opt/local/share/texmf-texlive/tex/latex/graphics/graphics.sty
-Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
 
 (/opt/local/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -451,120 +304,203 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 (/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 99.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen130
-\Gin@req@width=\dimen131
+\Gin@req@height=\dimen160
+\Gin@req@width=\dimen161
 )
 (./sphinxlatexgraphics.sty
 File: sphinxlatexgraphics.sty 2021/01/27 graphics
-\spx@image@maxheight=\dimen132
-\spx@image@box=\box57
-) (./sphinxlatexadmonitions.sty
-File: sphinxlatexadmonitions.sty 2021/01/27 admonitions
- (./framed.sty
+\spx@image@maxheight=\dimen162
+\spx@image@box=\box98
+) (./sphinxpackageboxes.sty
+Package: sphinxpackageboxes 2023/03/19 v6.2.0 advanced colored boxes
+
+(/opt/local/share/texmf-texlive/tex/latex/pict2e/pict2e.sty
+Package: pict2e 2020/09/30 v0.4b Improved picture commands (HjG,RN,JT)
+
+(/opt/local/share/texmf-texlive/tex/latex/pict2e/pict2e.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: pdftex.def on input line 112.
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 114.
+
+(/opt/local/share/texmf-texlive/tex/latex/pict2e/p2e-pdftex.def
+File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+)
+\pIIe@GRAPH=\toks26
+\@arclen=\dimen163
+\@arcrad=\dimen164
+\pIIe@tempdima=\dimen165
+\pIIe@tempdimb=\dimen166
+\pIIe@tempdimc=\dimen167
+\pIIe@tempdimd=\dimen168
+\pIIe@tempdime=\dimen169
+\pIIe@tempdimf=\dimen170
+)
+(/opt/local/share/texmf-texlive/tex/latex/ellipse/ellipse.sty
+Package: ellipse 2004/11/05 v1.0 .dtx ellipse file
+)
+\@tempdimd=\dimen171
+\spx@tempboxa=\box99
+\spx@tempboxb=\box100
+\spx@boxes@border=\dimen172
+\spx@boxes@border@top=\dimen173
+\spx@boxes@border@right=\dimen174
+\spx@boxes@border@bottom=\dimen175
+\spx@boxes@border@left=\dimen176
+\spx@boxes@padding@top=\dimen177
+\spx@boxes@padding@right=\dimen178
+\spx@boxes@padding@bottom=\dimen179
+\spx@boxes@padding@left=\dimen180
+\spx@boxes@shadow@xoffset=\dimen181
+\spx@boxes@shadow@yoffset=\dimen182
+\spx@boxes@radius@topleft@x=\dimen183
+\spx@boxes@radius@topright@x=\dimen184
+\spx@boxes@radius@bottomright@x=\dimen185
+\spx@boxes@radius@bottomleft@x=\dimen186
+\spx@boxes@radius@topleft@y=\dimen187
+\spx@boxes@radius@topright@y=\dimen188
+\spx@boxes@radius@bottomright@y=\dimen189
+\spx@boxes@radius@bottomleft@y=\dimen190
+)
+(./sphinxlatexadmonitions.sty
+File: sphinxlatexadmonitions.sty 2023/03/19 admonitions
+
+(/opt/local/share/texmf-texlive/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip55
-\fb@frw=\dimen133
-\fb@frh=\dimen134
-\FrameRule=\dimen135
-\FrameSep=\dimen136
-))
+\OuterFrameSep=\skip61
+\fb@frw=\dimen191
+\fb@frh=\dimen192
+\FrameRule=\dimen193
+\FrameSep=\dimen194
+)
+\spx@notice@border=\dimen195
+)
 (./sphinxlatexliterals.sty
-File: sphinxlatexliterals.sty 2021/01/27 code-blocks and parsed literals
+File: sphinxlatexliterals.sty 2023/04/01 code-blocks and parsed literals
 
 (/opt/local/share/texmf-texlive/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2008/02/07
-
-Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
-<2008/02/07> (tvz)
-\FV@CodeLineNo=\count116
-\FV@InFile=\read1
-\FV@TabBox=\box58
-\c@FancyVerbLine=\count117
-\FV@StepNumber=\count118
+Package: fancyvrb 2021/01/20 v3.7 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count282
+\FV@InFile=\read3
+\FV@TabBox=\box101
+\c@FancyVerbLine=\count283
+\FV@StepNumber=\count284
 \FV@OutFile=\write3
-) (/opt/local/share/texmf-texlive/tex/latex/base/alltt.sty
+)
+(/opt/local/share/texmf-texlive/tex/latex/base/alltt.sty
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
-(./upquote.sty
+(/opt/local/share/texmf-texlive/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
-) (./needspace.sty
+)
+(/opt/local/share/texmf-texlive/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
-\sphinxcontinuationbox=\box59
-\sphinxvisiblespacebox=\box60
-\sphinxVerbatim@TitleBox=\box61
-\sphinxVerbatim@ContentsBox=\box62
-\spx@scratchbox=\box63
-) (./sphinxlatexshadowbox.sty
-File: sphinxlatexshadowbox.sty 2021/01/27 sphinxShadowBox
+\sphinxcontinuationbox=\box102
+\sphinxvisiblespacebox=\box103
+\sphinxVerbatim@TitleBox=\box104
+\sphinxVerbatim@ContentsBox=\box105
 )
-(./sphinxlatexcontainers.sty
+(./sphinxlatexshadowbox.sty
+File: sphinxlatexshadowbox.sty 2023/03/19 sphinxShadowBox
+) (./sphinxlatexcontainers.sty
 File: sphinxlatexcontainers.sty 2021/05/03 containers
-) (./sphinxhighlight.sty
-Package: sphinxhighlight 2016/05/29 stylesheet for highlighting with pygments
-) (./sphinxlatextables.sty
-File: sphinxlatextables.sty 2021/01/27 tables
-
-(./tabulary.sty
-Package: tabulary 2007/10/02 v0.9 tabulary package (DPC)
- (/opt/local/share/texmf-texlive/tex/latex/tools/array.sty
-Package: array 2018/04/07 v2.4g Tabular extension package (FMi)
-\col@sep=\dimen137
-\ar@mcellbox=\box64
-\extrarowheight=\dimen138
-\NC@list=\toks25
-\extratabsurround=\skip56
-\backup@length=\skip57
-\ar@cellbox=\box65
 )
-\TY@count=\count119
-\TY@linewidth=\dimen139
-\tymin=\dimen140
-\tymax=\dimen141
-\TY@tablewidth=\dimen142
+(./sphinxhighlight.sty
+Package: sphinxhighlight 2022/06/30 stylesheet for highlighting with pygments
+) (./sphinxlatextables.sty
+File: sphinxlatextables.sty 2022/08/15 tables
+
+(/opt/local/share/texmf-texlive/tex/latex/tabulary/tabulary.sty
+Package: tabulary 2014/06/11 v0.10 tabulary package (DPC)
+
+(/opt/local/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
+\col@sep=\dimen196
+\ar@mcellbox=\box106
+\extrarowheight=\dimen197
+\NC@list=\toks27
+\extratabsurround=\skip62
+\backup@length=\skip63
+\ar@cellbox=\box107
+)
+\TY@count=\count285
+\TY@linewidth=\dimen198
+\tymin=\dimen199
+\tymax=\dimen256
+\TY@tablewidth=\dimen257
 )
 (/opt/local/share/texmf-texlive/tex/latex/tools/longtable.sty
-Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip58
-\LTright=\skip59
-\LTpre=\skip60
-\LTpost=\skip61
-\LTchunksize=\count120
-\LTcapwidth=\dimen143
-\LT@head=\box66
-\LT@firsthead=\box67
-\LT@foot=\box68
-\LT@lastfoot=\box69
-\LT@cols=\count121
-\LT@rows=\count122
-\c@LT@tables=\count123
-\c@LT@chunks=\count124
-\LT@p@ftn=\toks26
-) (./varwidth.sty
-Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box70
-\sift@deathcycles=\count125
-\@vwid@loff=\dimen144
-\@vwid@roff=\dimen145
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip64
+\LTright=\skip65
+\LTpre=\skip66
+\LTpost=\skip67
+\LTchunksize=\count286
+\LTcapwidth=\dimen258
+\LT@head=\box108
+\LT@firsthead=\box109
+\LT@foot=\box110
+\LT@lastfoot=\box111
+\LT@cols=\count287
+\LT@rows=\count288
+\c@LT@tables=\count289
+\c@LT@chunks=\count290
+\LT@p@ftn=\toks28
 )
-\sphinx@TY@tablewidth=\dimen146
-) (./sphinxlatexnumfig.sty
+(/opt/local/share/texmf-texlive/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box112
+\sift@deathcycles=\count291
+\@vwid@loff=\dimen259
+\@vwid@roff=\dimen260
+)
+\sphinx@TY@tablewidth=\dimen261
+
+(/opt/local/share/texmf-texlive/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks29
+\minrowclearance=\skip68
+)
+\rownum=\count292
+
+(/opt/local/share/texmf-texlive/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen262
+\lightrulewidth=\dimen263
+\cmidrulewidth=\dimen264
+\belowrulesep=\dimen265
+\belowbottomsep=\dimen266
+\aboverulesep=\dimen267
+\abovetopsep=\dimen268
+\cmidrulesep=\dimen269
+\cmidrulekern=\dimen270
+\defaultaddspace=\dimen271
+\@cmidla=\count293
+\@cmidlb=\count294
+\@aboverulesep=\dimen272
+\@belowrulesep=\dimen273
+\@thisruleclass=\count295
+\@lastruleclass=\count296
+\@thisrulewidth=\dimen274
+))
+(./sphinxlatexnumfig.sty
 File: sphinxlatexnumfig.sty 2021/01/27 numbering
 ) (./sphinxlatexlists.sty
-File: sphinxlatexlists.sty 2021/01/27 lists
+File: sphinxlatexlists.sty 2021/12/20 lists
+\spx@lineitemlabel=\toks30
 )
-\c@sphinxscope=\count126
-\c@sphinxexplicit=\count127
-
-(./sphinxpackagefootnote.sty
-Package: sphinxpackagefootnote 2021/02/04 v1.1d footnotehyper adapted to sphinx
- (Sphinx team)
-\FNH@notes=\box71
-\FNH@toks=\toks27
-\FNH@width=\dimen147
+\c@sphinxscope=\count297
+ (./sphinxpackagefootnote.sty
+Package: sphinxpackagefootnote 2022/08/15 v5.3.0 Sphinx custom footnotehyper pa
+ckage (Sphinx team)
+\FNH@notes=\box113
+\FNH@toks=\toks31
+\FNH@width=\dimen275
+\c@sphinxfootnotemark=\count298
 ) (./sphinxlatexindbibtoc.sty
 File: sphinxlatexindbibtoc.sty 2021/01/27 index, bib., toc
 
@@ -575,180 +511,197 @@ Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 File: sphinxlatexstylepage.sty 2021/01/27 page styling
 
 (/opt/local/share/texmf-texlive/tex/latex/parskip/parskip.sty
+Rollback for package 'parskip' requested -> version 'v1'.
+         This corresponds to the release introduced on 2001-04-09.
+
+(/opt/local/share/texmf-texlive/tex/latex/parskip/parskip-2001-04-09.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
-)
+))
 (/opt/local/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2017/06/30 v3.9a Extensive control of page headers and footer
-s
-\f@nch@headwidth=\skip62
-\f@nch@O@elh=\skip63
-\f@nch@O@erh=\skip64
-\f@nch@O@olh=\skip65
-\f@nch@O@orh=\skip66
-\f@nch@O@elf=\skip67
-\f@nch@O@erf=\skip68
-\f@nch@O@olf=\skip69
-\f@nch@O@orf=\skip70
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip69
+\f@nch@O@elh=\skip70
+\f@nch@O@erh=\skip71
+\f@nch@O@olh=\skip72
+\f@nch@O@orh=\skip73
+\f@nch@O@elf=\skip74
+\f@nch@O@erf=\skip75
+\f@nch@O@olf=\skip76
+\f@nch@O@orf=\skip77
 ))
 (./sphinxlatexstyleheadings.sty
-File: sphinxlatexstyleheadings.sty 2021/01/27 headings
- (./titlesec.sty
-Package: titlesec 2021/07/05 v2.14 Sectioning titles
-\ttl@box=\box72
-\beforetitleunit=\skip71
-\aftertitleunit=\skip72
-\ttl@plus=\dimen148
-\ttl@minus=\dimen149
-\ttl@toksa=\toks28
-\titlewidth=\dimen150
-\titlewidthlast=\dimen151
-\titlewidthfirst=\dimen152
-)) (./sphinxlatexstyletext.sty
-File: sphinxlatexstyletext.sty 2021/01/27 text styling
-)
-(./sphinxlatexobjects.sty
-File: sphinxlatexobjects.sty 2021/01/27 documentation environments
-\py@argswidth=\skip73
-\lineblockindentation=\skip74
-\DUlineblockindent=\skip75
+File: sphinxlatexstyleheadings.sty 2023/02/11 headings
+
+(/opt/local/share/texmf-texlive/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2019/10/16 v2.13 Sectioning titles
+\ttl@box=\box114
+\beforetitleunit=\skip78
+\aftertitleunit=\skip79
+\ttl@plus=\dimen276
+\ttl@minus=\dimen277
+\ttl@toksa=\toks32
+\titlewidth=\dimen278
+\titlewidthlast=\dimen279
+\titlewidthfirst=\dimen280
+))
+(./sphinxlatexstyletext.sty
+File: sphinxlatexstyletext.sty 2023/03/26 text styling
+) (./sphinxlatexobjects.sty
+File: sphinxlatexobjects.sty 2022/01/13 documentation environments
+\sphinxsignaturesep=\skip80
+\py@argswidth=\skip81
+\lineblockindentation=\skip82
+\DUlineblockindent=\skip83
 ))
 (/opt/local/share/texmf-texlive/tex/latex/geometry/geometry.sty
-Package: geometry 2018/03/24 v5.7 Page Geometry
+Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
-)
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
-Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
-Package ifvtex Info: VTeX not detected.
-)
-(/opt/local/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
-)
-\Gm@cnth=\count128
-\Gm@cntv=\count129
-\c@Gm@tempcnt=\count130
-\Gm@bindingoffset=\dimen153
-\Gm@wd@mp=\dimen154
-\Gm@odd@mp=\dimen155
-\Gm@even@mp=\dimen156
-\Gm@layoutwidth=\dimen157
-\Gm@layoutheight=\dimen158
-\Gm@layouthoffset=\dimen159
-\Gm@layoutvoffset=\dimen160
-\Gm@dimlist=\toks29
+(/opt/local/share/texmf-texlive/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/opt/local/share/texmf-texlive/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+\Gm@cnth=\count299
+\Gm@cntv=\count300
+\c@Gm@tempcnt=\count301
+\Gm@bindingoffset=\dimen281
+\Gm@wd@mp=\dimen282
+\Gm@odd@mp=\dimen283
+\Gm@even@mp=\dimen284
+\Gm@layoutwidth=\dimen285
+\Gm@layoutheight=\dimen286
+\Gm@layouthoffset=\dimen287
+\Gm@layoutvoffset=\dimen288
+\Gm@dimlist=\toks33
 )
 (/opt/local/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
+Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
 
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/hobsub-hyperref.sty
-Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
-
-
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/hobsub-generic.sty
-Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
-Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
-Package hobsub Info: Skipping package `infwarerr' (already loaded).
-Package hobsub Info: Skipping package `ltxcmds' (already loaded).
-Package hobsub Info: Skipping package `ifluatex' (already loaded).
-Package hobsub Info: Skipping package `ifvtex' (already loaded).
-Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
-Package hobsub Info: Skipping package `ifpdf' (already loaded).
-Package hobsub Info: Skipping package `etexcmds' (already loaded).
-Package hobsub Info: Skipping package `kvsetkeys' (already loaded).
-Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+(/opt/local/share/texmf-texlive/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
-Package pdftexcmds Info: LuaTeX not detected.
+
+(/opt/local/share/texmf-texlive/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
-Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
 )
-Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
-Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+(/opt/local/share/texmf-texlive/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-Package hobsub Info: Skipping package `hobsub' (already loaded).
-Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
-Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
-Package: xcolor-patch 2016/05/16 xcolor patch
-Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
-Package atveryend Info: \enddocument detected (standard20110627).
-Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
-Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
-Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+(/opt/local/share/texmf-texlive/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 )
-(/opt/local/share/texmf-texlive/tex/latex/oberdiek/auxhook.sty
-Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+(/opt/local/share/texmf-texlive/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-\@linkdim=\dimen161
-\Hy@linkcounter=\count131
-\Hy@pagecounter=\count132
+(/opt/local/share/texmf-texlive/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(/opt/local/share/texmf-texlive/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+\@linkdim=\dimen289
+\Hy@linkcounter=\count302
+\Hy@pagecounter=\count303
 
 (/opt/local/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2021-02-27 v7.00k Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count133
-
-(/opt/local/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
-File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+(/opt/local/share/texmf-texlive/tex/latex/hyperref/hyperref-langpatches.def
+File: hyperref-langpatches.def 2021-02-27 v7.00k Hyperref: patches for babel la
+nguages
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4383.
+(/opt/local/share/texmf-texlive/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(/opt/local/share/texmf-texlive/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count304
 
 (/opt/local/share/texmf-texlive/tex/latex/hyperref/puenc.def
-File: puenc.def 2018/02/06 v6.86b Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 4383.
-Package hyperref Info: Option `breaklinks' set `true' on input line 4383.
-Package hyperref Info: Hyper figures OFF on input line 4509.
-Package hyperref Info: Link nesting OFF on input line 4514.
-Package hyperref Info: Hyper index ON on input line 4517.
-Package hyperref Info: Plain pages OFF on input line 4524.
-Package hyperref Info: Backreferencing OFF on input line 4529.
+Package hyperref Info: Option `unicode' set `true' on input line 4073.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4073.
+Package hyperref Info: Option `breaklinks' set `true' on input line 4073.
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4762.
-\c@Hy@tempcnt=\count134
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count305
 
 (/opt/local/share/texmf-texlive/tex/latex/url/url.sty
-\Urlmuskip=\muskip11
+\Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5115.
-\XeTeXLinkMargin=\dimen162
-\Fld@menulength=\count135
-\Field@Width=\dimen163
-\Fld@charsize=\dimen164
-Package hyperref Info: Hyper figures OFF on input line 6369.
-Package hyperref Info: Link nesting OFF on input line 6374.
-Package hyperref Info: Hyper index ON on input line 6377.
-Package hyperref Info: backreferencing OFF on input line 6384.
-Package hyperref Info: Link coloring ON on input line 6387.
-Package hyperref Info: Link coloring with OCG OFF on input line 6394.
-Package hyperref Info: PDF/A mode OFF on input line 6399.
-LaTeX Info: Redefining \ref on input line 6439.
-LaTeX Info: Redefining \pageref on input line 6443.
-\Hy@abspage=\count136
-\c@Item=\count137
-\c@Hfootnote=\count138
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen290
+
+(/opt/local/share/texmf-texlive/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/opt/local/share/texmf-texlive/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count306
+\Field@Width=\dimen291
+\Fld@charsize=\dimen292
+Package hyperref Info: Hyper figures OFF on input line 6075.
+Package hyperref Info: Link nesting OFF on input line 6080.
+Package hyperref Info: Hyper index ON on input line 6083.
+Package hyperref Info: backreferencing OFF on input line 6090.
+Package hyperref Info: Link coloring ON on input line 6093.
+Package hyperref Info: Link coloring with OCG OFF on input line 6100.
+Package hyperref Info: PDF/A mode OFF on input line 6105.
+LaTeX Info: Redefining \ref on input line 6145.
+LaTeX Info: Redefining \pageref on input line 6149.
+
+(/opt/local/share/texmf-texlive/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2020/08/17 v1.0a Emulation of the original atbegshi packa
+ge
+with kernel methods
+)
+\Hy@abspage=\count307
+\c@Item=\count308
+\c@Hfootnote=\count309
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (/opt/local/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
-\Fld@listcount=\count139
-\c@bookmark@seq@number=\count140
+File: hpdftex.def 2021-02-27 v7.00k Hyperref driver for pdfTeX
 
-(/opt/local/share/texmf-texlive/tex/latex/oberdiek/rerunfilecheck.sty
-Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
-82.
+(/opt/local/share/texmf-texlive/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
 )
-\Hy@SectionHShift=\skip76
+\Fld@listcount=\count310
+\c@bookmark@seq@number=\count311
+
+(/opt/local/share/texmf-texlive/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/opt/local/share/texmf-texlive/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip84
 )
 (/opt/local/share/texmf-texlive/tex/latex/oberdiek/hypcap.sty
 Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
@@ -761,67 +714,60 @@ Package: sphinxmessages 2019/01/04 v2.0 Localized LaTeX macros (Sphinx team)
 
 
 Writing index file xns.idx
-(./xns.aux)
-\openout1 = `xns.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 69.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 69.
- (/opt/local/share/texmf-texlive/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Try loading font information for T1+qtm on input line 69.
-
+LaTeX Font Info:    Trying to load font information for T1+qtm on input line 72
+.
 (/opt/local/share/texmf-texlive/tex/latex/tex-gyre/t1qtm.fd
 File: t1qtm.fd 2009/09/25 v1.2 font definition file for T1/qtm
 )
-(/opt/local/share/texmf-texlive/tex/context/base/mkii/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count141
-\scratchdimen=\dimen165
-\scratchbox=\box73
-\nofMPsegments=\count142
-\nofMParguments=\count143
-\everyMPshowfont=\toks30
-\MPscratchCnt=\count144
-\MPscratchDim=\dimen166
-\MPnumerator=\count145
-\makeMPintoPDFobject=\count146
-\everyMPtoPDFconversion=\toks31
-) (/opt/local/share/texmf-texlive/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-(/opt/local/share/texmf-texlive/tex/latex/oberdiek/grfext.sty
-Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+(/opt/local/share/texmf-texlive/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count312
+\l__pdf_internal_box=\box115
 )
+(./xns.aux)
+\openout1 = `xns.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+ (/opt/local/share/texmf-texlive/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count313
+\scratchdimen=\dimen293
+\scratchbox=\box116
+\nofMPsegments=\count314
+\nofMParguments=\count315
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count316
+\MPscratchDim=\dimen294
+\MPnumerator=\count317
+\makeMPintoPDFobject=\count318
+\everyMPtoPDFconversion=\toks35
+) (/opt/local/share/texmf-texlive/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-38.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 456.
+85.
 
 (/opt/local/share/texmf-texlive/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@literalblock=\count147
+\c@literalblock=\count319
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -857,70 +803,86 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box74
-Package hyperref Info: Link coloring ON on input line 69.
+Package hyperref Info: Link coloring ON on input line 72.
 (/opt/local/share/texmf-texlive/tex/latex/hyperref/nameref.sty
-Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
-(/opt/local/share/texmf-texlive/tex/generic/oberdiek/gettitlestring.sty
-Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+(/opt/local/share/texmf-texlive/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-\c@section@level=\count148
+(/opt/local/share/texmf-texlive/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-LaTeX Info: Redefining \ref on input line 69.
-LaTeX Info: Redefining \pageref on input line 69.
-LaTeX Info: Redefining \nameref on input line 69.
-
+\c@section@level=\count320
+)
+LaTeX Info: Redefining \ref on input line 72.
+LaTeX Info: Redefining \pageref on input line 72.
+LaTeX Info: Redefining \nameref on input line 72.
 (./xns.out) (./xns.out)
 \@outlinefile=\write5
 \openout5 = `xns.out'.
 
-Package hyperref Info: Option `pageanchor' set `false' on input line 72.
-LaTeX Font Info:    Try loading font information for T1+qhv on input line 72.
+Package hyperref Info: Option `pageanchor' set `false' on input line 80.
+LaTeX Font Info:    Trying to load font information for T1+qhv on input line 80
+.
 
 (/opt/local/share/texmf-texlive/tex/latex/tex-gyre/t1qhv.fd
 File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
-)<<ot1.cmap>>
-LaTeX Font Info:    Try loading font information for U+msa on input line 72.
+)<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
+LaTeX Font Info:    Trying to load font information for U+msa on input line 80.
+
 
 (/opt/local/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 80.
+
 
 (/opt/local/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+Overfull \hbox (67.37971pt too wide) in paragraph at lines 80--80
+ [][]
+ []
+
+[1
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 
-] (./xns.toc [1
+] (./xns.toc
+[1
 
 ])
 \tf@toc=\write6
 \openout6 = `xns.toc'.
 
  [2]
-LaTeX Font Info:    Try loading font information for TS1+qtm on input line 88.
-
-(/opt/local/share/texmf-texlive/tex/latex/tex-gyre/ts1qtm.fd
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
+01.
+ (/opt/local/share/texmf-texlive/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 ) [1
 
-] [2
+]
+[2
 
 ]
 Chapter 1.
-LaTeX Font Info:    Try loading font information for T1+txtt on input line 135.
-
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
+50.
 (/opt/local/share/texmf-texlive/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 ) [3] [4
 
 ]
 Chapter 2.
-[5] [6] [7] [8] [9] [10]
+[5] [6] [7] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 707--709
+
+ []
+
+[10]
 Chapter 3.
 [11
 
@@ -929,7 +891,13 @@ Chapter 4.
 [13
 
 ] [14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 1254--1256
+Underfull \hbox (badness 5578) in paragraph at lines 1205--1207
+[]\T1/qtm/m/n/10 sub-rou-tine \T1/qtm/b/n/10 LPN \T1/qtm/m/n/10 - com-putes the
+ Leg-en-dre poly-no-mi-als and their deriva-tives. From: SPE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1284--1286
 []\T1/qtm/b/n/10 Hy-droeq_mag.dat \T1/qtm/m/n/10 - con-tains the new equi-lib-r
 ium con-fig-u-ra-tion for mag-netic field
  []
@@ -938,681 +906,684 @@ ium con-fig-u-ra-tion for mag-netic field
 
 ]
 Chapter 5.
-<starplot_rho_gr_polo.png, id=324, 793.93758pt x 783.61328pt>
-File: starplot_rho_gr_polo.png Graphic file (type png)
-<use starplot_rho_gr_polo.png>
-Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1361.
-(pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
-File: starplot_rho_gr_polo.png Graphic file (type png)
-<use starplot_rho_gr_polo.png>
-Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1361.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
 [19]
-<starplot_b_gr_polo.png, id=332, 793.93758pt x 782.58086pt>
+Underfull \hbox (badness 6477) in paragraph at lines 1435--1437
+[]\T1/qtm/m/n/10 Block 3 (1000 lines - 3 columns) - First col-umn is $\OML/cmm/
+m/it/10 Log[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Ln\OT1/cmr/m/n/10 (\OML/cmm/m/it
+/10 h\OT1/cmr/m/n/10 ))$ \T1/qtm/m/n/10 uni-formly sam-pled be-tween
+ []
+
+[20]
+Chapter 6.
+<starplot_rho_gr_polo.png, id=345, 793.93758pt x 783.61328pt>
+File: starplot_rho_gr_polo.png Graphic file (type png)
+<use starplot_rho_gr_polo.png>
+Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1482.
+(pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
+File: starplot_rho_gr_polo.png Graphic file (type png)
+<use starplot_rho_gr_polo.png>
+Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1482.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+[21
+
+]
+<starplot_b_gr_polo.png, id=354, 793.93758pt x 782.58086pt>
 File: starplot_b_gr_polo.png Graphic file (type png)
 <use starplot_b_gr_polo.png>
-Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1379.
+Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1502.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_gr_polo.png Graphic file (type png)
 <use starplot_b_gr_polo.png>
-Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1379.
-(pdftex.def)             Requested size: 456.99515pt x 450.44621pt.
- [20 <./starplot_rho_gr_polo.png>]
-<rho_gr_polo.png, id=338, 346.1733pt x 328.8285pt>
+Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1502.
+(pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
+ [22 <./starplot_rho_gr_polo.png>]
+<rho_gr_polo.png, id=360, 346.1733pt x 328.8285pt>
 File: rho_gr_polo.png Graphic file (type png)
 <use rho_gr_polo.png>
-Package pdftex.def Info: rho_gr_polo.png  used on input line 1397.
+Package pdftex.def Info: rho_gr_polo.png  used on input line 1522.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: rho_gr_polo.png Graphic file (type png)
 <use rho_gr_polo.png>
-Package pdftex.def Info: rho_gr_polo.png  used on input line 1397.
+Package pdftex.def Info: rho_gr_polo.png  used on input line 1522.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
- [21 <./starplot_b_gr_polo.png>]
-<p_gr_polo.png, id=345, 346.1733pt x 328.8285pt>
+ [23 <./starplot_b_gr_polo.png>]
+<p_gr_polo.png, id=366, 346.1733pt x 328.8285pt>
 File: p_gr_polo.png Graphic file (type png)
 <use p_gr_polo.png>
-Package pdftex.def Info: p_gr_polo.png  used on input line 1415.
+Package pdftex.def Info: p_gr_polo.png  used on input line 1542.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: p_gr_polo.png Graphic file (type png)
 <use p_gr_polo.png>
-Package pdftex.def Info: p_gr_polo.png  used on input line 1415.
+Package pdftex.def Info: p_gr_polo.png  used on input line 1542.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
- [22 <./rho_gr_polo.png>]
-<alpha_gr_polo.png, id=351, 362.0727pt x 328.8285pt>
+ [24 <./rho_gr_polo.png>]
+<alpha_gr_polo.png, id=372, 362.0727pt x 328.8285pt>
 File: alpha_gr_polo.png Graphic file (type png)
 <use alpha_gr_polo.png>
-Package pdftex.def Info: alpha_gr_polo.png  used on input line 1433.
+Package pdftex.def Info: alpha_gr_polo.png  used on input line 1562.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_gr_polo.png Graphic file (type png)
 <use alpha_gr_polo.png>
-Package pdftex.def Info: alpha_gr_polo.png  used on input line 1433.
+Package pdftex.def Info: alpha_gr_polo.png  used on input line 1562.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [23 <./p_gr_polo.png>]
-<psi_gr_polo.png, id=357, 362.0727pt x 328.8285pt>
+ [25 <./p_gr_polo.png>]
+<psi_gr_polo.png, id=378, 362.0727pt x 328.8285pt>
 File: psi_gr_polo.png Graphic file (type png)
 <use psi_gr_polo.png>
-Package pdftex.def Info: psi_gr_polo.png  used on input line 1451.
+Package pdftex.def Info: psi_gr_polo.png  used on input line 1582.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_gr_polo.png Graphic file (type png)
 <use psi_gr_polo.png>
-Package pdftex.def Info: psi_gr_polo.png  used on input line 1451.
+Package pdftex.def Info: psi_gr_polo.png  used on input line 1582.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [24 <./alpha_gr_polo.png>]
-<bpol_gr_polo.png, id=363, 357.7365pt x 328.8285pt>
+ [26 <./alpha_gr_polo.png>]
+<bpol_gr_polo.png, id=384, 357.7365pt x 328.8285pt>
 File: bpol_gr_polo.png Graphic file (type png)
 <use bpol_gr_polo.png>
-Package pdftex.def Info: bpol_gr_polo.png  used on input line 1469.
+Package pdftex.def Info: bpol_gr_polo.png  used on input line 1602.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
 File: bpol_gr_polo.png Graphic file (type png)
 <use bpol_gr_polo.png>
-Package pdftex.def Info: bpol_gr_polo.png  used on input line 1469.
+Package pdftex.def Info: bpol_gr_polo.png  used on input line 1602.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
- [25 <./psi_gr_polo.png>]
-<starplot_rho_gr_toro.png, id=369, 793.93758pt x 783.61328pt>
+ [27 <./psi_gr_polo.png>]
+<starplot_rho_gr_toro.png, id=391, 793.93758pt x 783.61328pt>
 File: starplot_rho_gr_toro.png Graphic file (type png)
 <use starplot_rho_gr_toro.png>
-Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1504.
+Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1639.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_gr_toro.png Graphic file (type png)
 <use starplot_rho_gr_toro.png>
-Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1504.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [26 <./bpol_gr_polo.png>]
-<starplot_b_gr_toro.png, id=375, 793.93758pt x 782.58086pt>
+Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1639.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [28 <./bpol_gr_polo.png>]
+<starplot_b_gr_toro.png, id=397, 793.93758pt x 782.58086pt>
 File: starplot_b_gr_toro.png Graphic file (type png)
 <use starplot_b_gr_toro.png>
-Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1522.
+Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1659.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_gr_toro.png Graphic file (type png)
 <use starplot_b_gr_toro.png>
-Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1522.
-(pdftex.def)             Requested size: 456.99515pt x 450.44621pt.
- [27 <./starplot_rho_gr_toro.png>]
-<rho_gr_toro.png, id=382, 356.2911pt x 328.8285pt>
+Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1659.
+(pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
+ [29 <./starplot_rho_gr_toro.png>]
+<rho_gr_toro.png, id=403, 356.2911pt x 328.8285pt>
 File: rho_gr_toro.png Graphic file (type png)
 <use rho_gr_toro.png>
-Package pdftex.def Info: rho_gr_toro.png  used on input line 1540.
+Package pdftex.def Info: rho_gr_toro.png  used on input line 1679.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: rho_gr_toro.png Graphic file (type png)
 <use rho_gr_toro.png>
-Package pdftex.def Info: rho_gr_toro.png  used on input line 1540.
+Package pdftex.def Info: rho_gr_toro.png  used on input line 1679.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 
-[28 <./starplot_b_gr_toro.png>]
-<p_gr_toro.png, id=388, 356.2911pt x 328.8285pt>
+[30 <./starplot_b_gr_toro.png>]
+<p_gr_toro.png, id=409, 356.2911pt x 328.8285pt>
 File: p_gr_toro.png Graphic file (type png)
 <use p_gr_toro.png>
-Package pdftex.def Info: p_gr_toro.png  used on input line 1558.
+Package pdftex.def Info: p_gr_toro.png  used on input line 1699.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: p_gr_toro.png Graphic file (type png)
 <use p_gr_toro.png>
-Package pdftex.def Info: p_gr_toro.png  used on input line 1558.
+Package pdftex.def Info: p_gr_toro.png  used on input line 1699.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
- [29 <./rho_gr_toro.png>]
-<alpha_gr_toro.png, id=394, 362.0727pt x 328.8285pt>
+ [31 <./rho_gr_toro.png>]
+<alpha_gr_toro.png, id=415, 362.0727pt x 328.8285pt>
 File: alpha_gr_toro.png Graphic file (type png)
 <use alpha_gr_toro.png>
-Package pdftex.def Info: alpha_gr_toro.png  used on input line 1576.
+Package pdftex.def Info: alpha_gr_toro.png  used on input line 1719.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_gr_toro.png Graphic file (type png)
 <use alpha_gr_toro.png>
-Package pdftex.def Info: alpha_gr_toro.png  used on input line 1576.
+Package pdftex.def Info: alpha_gr_toro.png  used on input line 1719.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [30 <./p_gr_toro.png>]
-<psi_gr_toro.png, id=400, 362.0727pt x 328.8285pt>
+ [32 <./p_gr_toro.png>]
+<psi_gr_toro.png, id=421, 362.0727pt x 328.8285pt>
 File: psi_gr_toro.png Graphic file (type png)
 <use psi_gr_toro.png>
-Package pdftex.def Info: psi_gr_toro.png  used on input line 1594.
+Package pdftex.def Info: psi_gr_toro.png  used on input line 1739.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_gr_toro.png Graphic file (type png)
 <use psi_gr_toro.png>
-Package pdftex.def Info: psi_gr_toro.png  used on input line 1594.
+Package pdftex.def Info: psi_gr_toro.png  used on input line 1739.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
-[31 <./alpha_gr_toro.png>]
-<btor_gr_toro.png, id=406, 355.5684pt x 328.8285pt>
+[33 <./alpha_gr_toro.png>]
+<btor_gr_toro.png, id=428, 355.5684pt x 328.8285pt>
 File: btor_gr_toro.png Graphic file (type png)
 <use btor_gr_toro.png>
-Package pdftex.def Info: btor_gr_toro.png  used on input line 1612.
+Package pdftex.def Info: btor_gr_toro.png  used on input line 1759.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
 File: btor_gr_toro.png Graphic file (type png)
 <use btor_gr_toro.png>
-Package pdftex.def Info: btor_gr_toro.png  used on input line 1612.
+Package pdftex.def Info: btor_gr_toro.png  used on input line 1759.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
- [32 <./psi_gr_toro.png>] [33 <./btor_gr_toro.png>]
-[34]
-Chapter 6.
-LaTeX Font Info:    Try loading font information for TS1+txtt on input line 169
-9.
+ [34 <./psi_gr_toro.png>] [35 <./btor_gr_toro.png>]
+[36]
+Chapter 7.
+LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
+1848.
 (/opt/local/share/texmf-texlive/tex/latex/txfonts/ts1txtt.fd
 File: ts1txtt.fd 2000/12/15 v3.1
 )
-<starplot_rho_b-6_unmag.png, id=422, 793.93758pt x 783.61328pt>
+<starplot_rho_b-6_unmag.png, id=443, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_unmag.png Graphic file (type png)
 <use starplot_rho_b-6_unmag.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 1716.
+Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 1867.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_unmag.png Graphic file (type png)
 <use starplot_rho_b-6_unmag.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 1716.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [35
+Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 1867.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [37
 
 ]
-<starplot_chi_b-6_unmag.png, id=428, 793.93758pt x 775.35385pt>
+<starplot_chi_b-6_unmag.png, id=449, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_unmag.png Graphic file (type png)
 <use starplot_chi_b-6_unmag.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 1734.
+Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 1887.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_unmag.png Graphic file (type png)
 <use starplot_chi_b-6_unmag.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 1734.
-(pdftex.def)             Requested size: 456.99515pt x 446.2864pt.
- [36 <./starplot_rho_b-6_unmag.png>]
-<rho_b-6_unmag.png, id=434, 363.5181pt x 328.8285pt>
+Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 1887.
+(pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
+ [38 <./starplot_rho_b-6_unmag.png>]
+<rho_b-6_unmag.png, id=455, 363.5181pt x 328.8285pt>
 File: rho_b-6_unmag.png Graphic file (type png)
 <use rho_b-6_unmag.png>
-Package pdftex.def Info: rho_b-6_unmag.png  used on input line 1752.
+Package pdftex.def Info: rho_b-6_unmag.png  used on input line 1907.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_unmag.png Graphic file (type png)
 <use rho_b-6_unmag.png>
-Package pdftex.def Info: rho_b-6_unmag.png  used on input line 1752.
+Package pdftex.def Info: rho_b-6_unmag.png  used on input line 1907.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [37 <./starplot_chi_b-6_unmag.png>]
-<p_b-6_unmag.png, id=440, 363.5181pt x 328.8285pt>
+ [39 <./starplot_chi_b-6_unmag.png>]
+<p_b-6_unmag.png, id=462, 363.5181pt x 328.8285pt>
 File: p_b-6_unmag.png Graphic file (type png)
 <use p_b-6_unmag.png>
-Package pdftex.def Info: p_b-6_unmag.png  used on input line 1770.
+Package pdftex.def Info: p_b-6_unmag.png  used on input line 1927.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_unmag.png Graphic file (type png)
 <use p_b-6_unmag.png>
-Package pdftex.def Info: p_b-6_unmag.png  used on input line 1770.
+Package pdftex.def Info: p_b-6_unmag.png  used on input line 1927.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [38 <./rho_b-6_unmag.png>]
-<chi_b-6_unmag.png, id=446, 352.6776pt x 328.8285pt>
+ [40 <./rho_b-6_unmag.png>]
+<chi_b-6_unmag.png, id=469, 352.6776pt x 328.8285pt>
 File: chi_b-6_unmag.png Graphic file (type png)
 <use chi_b-6_unmag.png>
-Package pdftex.def Info: chi_b-6_unmag.png  used on input line 1788.
+Package pdftex.def Info: chi_b-6_unmag.png  used on input line 1947.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_unmag.png Graphic file (type png)
 <use chi_b-6_unmag.png>
-Package pdftex.def Info: chi_b-6_unmag.png  used on input line 1788.
+Package pdftex.def Info: chi_b-6_unmag.png  used on input line 1947.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [39 <./p_b-6_unmag.png>]
-<alpha_b-6_unmag.png, id=453, 362.0727pt x 328.8285pt>
+ [41 <./p_b-6_unmag.png>]
+<alpha_b-6_unmag.png, id=475, 362.0727pt x 328.8285pt>
 File: alpha_b-6_unmag.png Graphic file (type png)
 <use alpha_b-6_unmag.png>
-Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 1806.
+Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 1967.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_unmag.png Graphic file (type png)
 <use alpha_b-6_unmag.png>
-Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 1806.
+Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 1967.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [40 <./chi_b-6_unmag.png>]
-<psi_b-6_unmag.png, id=459, 362.0727pt x 328.8285pt>
+ [42 <./chi_b-6_unmag.png>]
+<psi_b-6_unmag.png, id=481, 362.0727pt x 328.8285pt>
 File: psi_b-6_unmag.png Graphic file (type png)
 <use psi_b-6_unmag.png>
-Package pdftex.def Info: psi_b-6_unmag.png  used on input line 1824.
+Package pdftex.def Info: psi_b-6_unmag.png  used on input line 1987.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_unmag.png Graphic file (type png)
 <use psi_b-6_unmag.png>
-Package pdftex.def Info: psi_b-6_unmag.png  used on input line 1824.
+Package pdftex.def Info: psi_b-6_unmag.png  used on input line 1987.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [41 <./alpha_b-6_unmag.png>]
-<starplot_rho_b-6_polo.png, id=465, 793.93758pt x 783.61328pt>
+ [43 <./alpha_b-6_unmag.png>]
+<starplot_rho_b-6_polo.png, id=487, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_polo.png Graphic file (type png)
 <use starplot_rho_b-6_polo.png>
-Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 1859.
+Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 2024.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_polo.png Graphic file (type png)
 <use starplot_rho_b-6_polo.png>
-Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 1859.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [42 <./psi_b-6_unmag.png>]
-<starplot_chi_b-6_polo.png, id=472, 793.93758pt x 775.35385pt>
+Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 2024.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [44 <./psi_b-6_unmag.png>]
+<starplot_chi_b-6_polo.png, id=493, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_polo.png Graphic file (type png)
 <use starplot_chi_b-6_polo.png>
-Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 1877.
+Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 2044.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_polo.png Graphic file (type png)
 <use starplot_chi_b-6_polo.png>
-Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 1877.
-(pdftex.def)             Requested size: 456.99515pt x 446.2864pt.
- [43 <./starplot_rho_b-6_polo.png>]
-<starplot_b_b-6_polo.png, id=478, 793.93758pt x 782.58086pt>
+Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 2044.
+(pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
+ [45 <./starplot_rho_b-6_polo.png>]
+<starplot_b_b-6_polo.png, id=500, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_polo.png Graphic file (type png)
 <use starplot_b_b-6_polo.png>
-Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 1895.
+Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 2064.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_polo.png Graphic file (type png)
 <use starplot_b_b-6_polo.png>
-Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 1895.
-(pdftex.def)             Requested size: 456.99515pt x 450.44621pt.
+Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 2064.
+(pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
 
-[44 <./starplot_chi_b-6_polo.png>]
-<rho_b-6_polo.png, id=484, 363.5181pt x 328.8285pt>
+[46 <./starplot_chi_b-6_polo.png>]
+<rho_b-6_polo.png, id=506, 363.5181pt x 328.8285pt>
 File: rho_b-6_polo.png Graphic file (type png)
 <use rho_b-6_polo.png>
-Package pdftex.def Info: rho_b-6_polo.png  used on input line 1913.
+Package pdftex.def Info: rho_b-6_polo.png  used on input line 2084.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_polo.png Graphic file (type png)
 <use rho_b-6_polo.png>
-Package pdftex.def Info: rho_b-6_polo.png  used on input line 1913.
+Package pdftex.def Info: rho_b-6_polo.png  used on input line 2084.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [45 <./starplot_b_b-6_polo.png>]
-<p_b-6_polo.png, id=491, 363.5181pt x 328.8285pt>
+ [47 <./starplot_b_b-6_polo.png>]
+<p_b-6_polo.png, id=512, 363.5181pt x 328.8285pt>
 File: p_b-6_polo.png Graphic file (type png)
 <use p_b-6_polo.png>
-Package pdftex.def Info: p_b-6_polo.png  used on input line 1931.
+Package pdftex.def Info: p_b-6_polo.png  used on input line 2104.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_polo.png Graphic file (type png)
 <use p_b-6_polo.png>
-Package pdftex.def Info: p_b-6_polo.png  used on input line 1931.
+Package pdftex.def Info: p_b-6_polo.png  used on input line 2104.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [46 <./rho_b-6_polo.png>]
-<chi_b-6_polo.png, id=497, 352.6776pt x 328.8285pt>
+ [48 <./rho_b-6_polo.png>]
+<chi_b-6_polo.png, id=518, 352.6776pt x 328.8285pt>
 File: chi_b-6_polo.png Graphic file (type png)
 <use chi_b-6_polo.png>
-Package pdftex.def Info: chi_b-6_polo.png  used on input line 1949.
+Package pdftex.def Info: chi_b-6_polo.png  used on input line 2124.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_polo.png Graphic file (type png)
 <use chi_b-6_polo.png>
-Package pdftex.def Info: chi_b-6_polo.png  used on input line 1949.
+Package pdftex.def Info: chi_b-6_polo.png  used on input line 2124.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [47 <./p_b-6_polo.png>]
-<alpha_b-6_polo.png, id=503, 362.0727pt x 328.8285pt>
+ [49 <./p_b-6_polo.png>]
+<alpha_b-6_polo.png, id=524, 362.0727pt x 328.8285pt>
 File: alpha_b-6_polo.png Graphic file (type png)
 <use alpha_b-6_polo.png>
-Package pdftex.def Info: alpha_b-6_polo.png  used on input line 1967.
+Package pdftex.def Info: alpha_b-6_polo.png  used on input line 2144.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_polo.png Graphic file (type png)
 <use alpha_b-6_polo.png>
-Package pdftex.def Info: alpha_b-6_polo.png  used on input line 1967.
+Package pdftex.def Info: alpha_b-6_polo.png  used on input line 2144.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [48 <./chi_b-6_polo.png>]
-<psi_b-6_polo.png, id=509, 362.0727pt x 328.8285pt>
+ [50 <./chi_b-6_polo.png>]
+<psi_b-6_polo.png, id=530, 362.0727pt x 328.8285pt>
 File: psi_b-6_polo.png Graphic file (type png)
 <use psi_b-6_polo.png>
-Package pdftex.def Info: psi_b-6_polo.png  used on input line 1985.
+Package pdftex.def Info: psi_b-6_polo.png  used on input line 2164.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_polo.png Graphic file (type png)
 <use psi_b-6_polo.png>
-Package pdftex.def Info: psi_b-6_polo.png  used on input line 1985.
+Package pdftex.def Info: psi_b-6_polo.png  used on input line 2164.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [49 <./alpha_b-6_polo.png>]
-<bpol_b-6_polo.png, id=515, 357.7365pt x 328.8285pt>
+ [51 <./alpha_b-6_polo.png>]
+<bpol_b-6_polo.png, id=537, 357.7365pt x 328.8285pt>
 File: bpol_b-6_polo.png Graphic file (type png)
 <use bpol_b-6_polo.png>
-Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2003.
+Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2184.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
 File: bpol_b-6_polo.png Graphic file (type png)
 <use bpol_b-6_polo.png>
-Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2003.
+Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2184.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
- [50 <./psi_b-6_polo.png>]
-<starplot_rho_b-6_toro.png, id=521, 793.93758pt x 783.61328pt>
+ [52 <./psi_b-6_polo.png>]
+<starplot_rho_b-6_toro.png, id=543, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_toro.png Graphic file (type png)
 <use starplot_rho_b-6_toro.png>
-Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2038.
+Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2221.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_toro.png Graphic file (type png)
 <use starplot_rho_b-6_toro.png>
-Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2038.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [51 <./bpol_b-6_polo.png>]
-<starplot_chi_b-6_toro.png, id=528, 793.93758pt x 775.35385pt>
+Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2221.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [53 <./bpol_b-6_polo.png>]
+<starplot_chi_b-6_toro.png, id=549, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_toro.png Graphic file (type png)
 <use starplot_chi_b-6_toro.png>
-Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2056.
+Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2241.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_toro.png Graphic file (type png)
 <use starplot_chi_b-6_toro.png>
-Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2056.
-(pdftex.def)             Requested size: 456.99515pt x 446.2864pt.
- [52 <./starplot_rho_b-6_toro.png>]
-<starplot_b_b-6_toro.png, id=534, 793.93758pt x 782.58086pt>
+Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2241.
+(pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
+ [54 <./starplot_rho_b-6_toro.png>]
+<starplot_b_b-6_toro.png, id=555, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_toro.png Graphic file (type png)
 <use starplot_b_b-6_toro.png>
-Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2074.
+Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2261.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_toro.png Graphic file (type png)
 <use starplot_b_b-6_toro.png>
-Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2074.
-(pdftex.def)             Requested size: 456.99515pt x 450.44621pt.
- [53 <./starplot_chi_b-6_toro.png>]
-<rho_b-6_toro.png, id=540, 363.5181pt x 328.8285pt>
+Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2261.
+(pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
+ [55 <./starplot_chi_b-6_toro.png>]
+<rho_b-6_toro.png, id=561, 363.5181pt x 328.8285pt>
 File: rho_b-6_toro.png Graphic file (type png)
 <use rho_b-6_toro.png>
-Package pdftex.def Info: rho_b-6_toro.png  used on input line 2092.
+Package pdftex.def Info: rho_b-6_toro.png  used on input line 2281.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_toro.png Graphic file (type png)
 <use rho_b-6_toro.png>
-Package pdftex.def Info: rho_b-6_toro.png  used on input line 2092.
+Package pdftex.def Info: rho_b-6_toro.png  used on input line 2281.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [54 <./starplot_b_b-6_toro.png>]
-<p_b-6_toro.png, id=546, 363.5181pt x 328.8285pt>
+ [56 <./starplot_b_b-6_toro.png>]
+<p_b-6_toro.png, id=567, 363.5181pt x 328.8285pt>
 File: p_b-6_toro.png Graphic file (type png)
 <use p_b-6_toro.png>
-Package pdftex.def Info: p_b-6_toro.png  used on input line 2110.
+Package pdftex.def Info: p_b-6_toro.png  used on input line 2301.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_toro.png Graphic file (type png)
 <use p_b-6_toro.png>
-Package pdftex.def Info: p_b-6_toro.png  used on input line 2110.
+Package pdftex.def Info: p_b-6_toro.png  used on input line 2301.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [55 <./rho_b-6_toro.png>]
-<chi_b-6_toro.png, id=552, 352.6776pt x 328.8285pt>
+ [57 <./rho_b-6_toro.png>]
+<chi_b-6_toro.png, id=574, 352.6776pt x 328.8285pt>
 File: chi_b-6_toro.png Graphic file (type png)
 <use chi_b-6_toro.png>
-Package pdftex.def Info: chi_b-6_toro.png  used on input line 2128.
+Package pdftex.def Info: chi_b-6_toro.png  used on input line 2321.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_toro.png Graphic file (type png)
 <use chi_b-6_toro.png>
-Package pdftex.def Info: chi_b-6_toro.png  used on input line 2128.
+Package pdftex.def Info: chi_b-6_toro.png  used on input line 2321.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [56 <./p_b-6_toro.png>]
-<alpha_b-6_toro.png, id=558, 362.0727pt x 328.8285pt>
+ [58 <./p_b-6_toro.png>]
+<alpha_b-6_toro.png, id=580, 362.0727pt x 328.8285pt>
 File: alpha_b-6_toro.png Graphic file (type png)
 <use alpha_b-6_toro.png>
-Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2146.
+Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2341.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_toro.png Graphic file (type png)
 <use alpha_b-6_toro.png>
-Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2146.
+Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2341.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [57 <./chi_b-6_toro.png>]
-<psi_b-6_toro.png, id=565, 362.0727pt x 328.8285pt>
+ [59 <./chi_b-6_toro.png>]
+<psi_b-6_toro.png, id=586, 362.0727pt x 328.8285pt>
 File: psi_b-6_toro.png Graphic file (type png)
 <use psi_b-6_toro.png>
-Package pdftex.def Info: psi_b-6_toro.png  used on input line 2164.
+Package pdftex.def Info: psi_b-6_toro.png  used on input line 2361.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_toro.png Graphic file (type png)
 <use psi_b-6_toro.png>
-Package pdftex.def Info: psi_b-6_toro.png  used on input line 2164.
+Package pdftex.def Info: psi_b-6_toro.png  used on input line 2361.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [58 <./alpha_b-6_toro.png>]
-<btor_b-6_toro.png, id=571, 355.5684pt x 328.8285pt>
+ [60 <./alpha_b-6_toro.png>]
+<btor_b-6_toro.png, id=592, 355.5684pt x 328.8285pt>
 File: btor_b-6_toro.png Graphic file (type png)
 <use btor_b-6_toro.png>
-Package pdftex.def Info: btor_b-6_toro.png  used on input line 2182.
+Package pdftex.def Info: btor_b-6_toro.png  used on input line 2381.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
 File: btor_b-6_toro.png Graphic file (type png)
 <use btor_b-6_toro.png>
-Package pdftex.def Info: btor_b-6_toro.png  used on input line 2182.
+Package pdftex.def Info: btor_b-6_toro.png  used on input line 2381.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
- [59 <./psi_b-6_toro.png>]
-<starplot_rho_b-6_unmag1.png, id=577, 793.93758pt x 783.61328pt>
+ [61 <./psi_b-6_toro.png>]
+<starplot_rho_b-6_unmag1.png, id=598, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_unmag1.png Graphic file (type png)
 <use starplot_rho_b-6_unmag1.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2216.
+Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2417.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_unmag1.png Graphic file (type png)
 <use starplot_rho_b-6_unmag1.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2216.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [60 <./btor_b-6_toro.png>]
-<starplot_chi_b-6_unmag1.png, id=583, 793.93758pt x 775.35385pt>
+Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2417.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [62 <./btor_b-6_toro.png>]
+<starplot_chi_b-6_unmag1.png, id=604, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_unmag1.png Graphic file (type png)
 <use starplot_chi_b-6_unmag1.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2234.
+Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2437.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_unmag1.png Graphic file (type png)
 <use starplot_chi_b-6_unmag1.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2234.
-(pdftex.def)             Requested size: 456.99515pt x 446.2864pt.
- [61 <./starplot_rho_b-6_unmag1.png>]
-<rho_b-6_unmag1.png, id=589, 363.5181pt x 328.8285pt>
+Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2437.
+(pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
+ [63 <./starplot_rho_b-6_unmag1.png>]
+<rho_b-6_unmag1.png, id=611, 363.5181pt x 328.8285pt>
 File: rho_b-6_unmag1.png Graphic file (type png)
 <use rho_b-6_unmag1.png>
-Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2252.
+Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2457.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_unmag1.png Graphic file (type png)
 <use rho_b-6_unmag1.png>
-Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2252.
+Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2457.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [62 <./starplot_chi_b-6_unmag1.png>]
-<p_b-6_unmag1.png, id=595, 363.5181pt x 328.8285pt>
+ [64 <./starplot_chi_b-6_unmag1.png>]
+<p_b-6_unmag1.png, id=617, 363.5181pt x 328.8285pt>
 File: p_b-6_unmag1.png Graphic file (type png)
 <use p_b-6_unmag1.png>
-Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2270.
+Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2477.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_unmag1.png Graphic file (type png)
 <use p_b-6_unmag1.png>
-Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2270.
+Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2477.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [63 <./rho_b-6_unmag1.png>]
-<chi_b-6_unmag1.png, id=602, 352.6776pt x 328.8285pt>
+ [65 <./rho_b-6_unmag1.png>]
+<chi_b-6_unmag1.png, id=623, 352.6776pt x 328.8285pt>
 File: chi_b-6_unmag1.png Graphic file (type png)
 <use chi_b-6_unmag1.png>
-Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2288.
+Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2497.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_unmag1.png Graphic file (type png)
 <use chi_b-6_unmag1.png>
-Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2288.
+Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2497.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [64 <./p_b-6_unmag1.png>]
-<alpha_b-6_unmag1.png, id=608, 362.0727pt x 328.8285pt>
+ [66 <./p_b-6_unmag1.png>]
+<alpha_b-6_unmag1.png, id=629, 362.0727pt x 328.8285pt>
 File: alpha_b-6_unmag1.png Graphic file (type png)
 <use alpha_b-6_unmag1.png>
-Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2306.
+Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2517.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_unmag1.png Graphic file (type png)
 <use alpha_b-6_unmag1.png>
-Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2306.
+Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2517.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [65 <./chi_b-6_unmag1.png>]
-<psi_b-6_unmag1.png, id=614, 362.0727pt x 328.8285pt>
+ [67 <./chi_b-6_unmag1.png>]
+<psi_b-6_unmag1.png, id=635, 362.0727pt x 328.8285pt>
 File: psi_b-6_unmag1.png Graphic file (type png)
 <use psi_b-6_unmag1.png>
-Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2324.
+Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2537.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_unmag1.png Graphic file (type png)
 <use psi_b-6_unmag1.png>
-Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2324.
+Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2537.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [66 <./alpha_b-6_unmag1.png>]
-<starplot_rho_b-6_polo1.png, id=620, 793.93758pt x 783.61328pt>
+ [68 <./alpha_b-6_unmag1.png>]
+<starplot_rho_b-6_polo1.png, id=641, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_polo1.png Graphic file (type png)
 <use starplot_rho_b-6_polo1.png>
-Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2359.
+Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2574.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_polo1.png Graphic file (type png)
 <use starplot_rho_b-6_polo1.png>
-Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2359.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [67 <./psi_b-6_unmag1.png>]
-<starplot_chi_b-6_polo1.png, id=626, 793.93758pt x 775.35385pt>
+Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2574.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [69 <./psi_b-6_unmag1.png>]
+<starplot_chi_b-6_polo1.png, id=648, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_polo1.png Graphic file (type png)
 <use starplot_chi_b-6_polo1.png>
-Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2377.
+Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2594.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_polo1.png Graphic file (type png)
 <use starplot_chi_b-6_polo1.png>
-Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2377.
-(pdftex.def)             Requested size: 456.99515pt x 446.2864pt.
- [68 <./starplot_rho_b-6_polo1.png>]
-<starplot_b_b-6_polo1.png, id=632, 793.93758pt x 782.58086pt>
+Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2594.
+(pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
+ [70 <./starplot_rho_b-6_polo1.png>]
+<starplot_b_b-6_polo1.png, id=654, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_polo1.png Graphic file (type png)
 <use starplot_b_b-6_polo1.png>
-Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2395.
+Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2614.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_polo1.png Graphic file (type png)
 <use starplot_b_b-6_polo1.png>
-Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2395.
-(pdftex.def)             Requested size: 456.99515pt x 450.44621pt.
- [69 <./starplot_chi_b-6_polo1.png>]
-<rho_b-6_polo1.png, id=639, 346.1733pt x 328.8285pt>
+Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2614.
+(pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
+ [71 <./starplot_chi_b-6_polo1.png>]
+<rho_b-6_polo1.png, id=660, 346.1733pt x 328.8285pt>
 File: rho_b-6_polo1.png Graphic file (type png)
 <use rho_b-6_polo1.png>
-Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2413.
+Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2634.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: rho_b-6_polo1.png Graphic file (type png)
 <use rho_b-6_polo1.png>
-Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2413.
+Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2634.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
- [70 <./starplot_b_b-6_polo1.png>]
-<p_b-6_polo1.png, id=645, 346.1733pt x 328.8285pt>
+ [72 <./starplot_b_b-6_polo1.png>]
+<p_b-6_polo1.png, id=667, 346.1733pt x 328.8285pt>
 File: p_b-6_polo1.png Graphic file (type png)
 <use p_b-6_polo1.png>
-Package pdftex.def Info: p_b-6_polo1.png  used on input line 2431.
+Package pdftex.def Info: p_b-6_polo1.png  used on input line 2654.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: p_b-6_polo1.png Graphic file (type png)
 <use p_b-6_polo1.png>
-Package pdftex.def Info: p_b-6_polo1.png  used on input line 2431.
+Package pdftex.def Info: p_b-6_polo1.png  used on input line 2654.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
- [71 <./rho_b-6_polo1.png>]
-<chi_b-6_polo1.png, id=651, 352.6776pt x 328.8285pt>
+ [73 <./rho_b-6_polo1.png>]
+<chi_b-6_polo1.png, id=673, 352.6776pt x 328.8285pt>
 File: chi_b-6_polo1.png Graphic file (type png)
 <use chi_b-6_polo1.png>
-Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2449.
+Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2674.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_polo1.png Graphic file (type png)
 <use chi_b-6_polo1.png>
-Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2449.
+Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2674.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [72 <./p_b-6_polo1.png>]
-<alpha_b-6_polo1.png, id=657, 362.0727pt x 328.8285pt>
+ [74 <./p_b-6_polo1.png>]
+<alpha_b-6_polo1.png, id=679, 362.0727pt x 328.8285pt>
 File: alpha_b-6_polo1.png Graphic file (type png)
 <use alpha_b-6_polo1.png>
-Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2467.
+Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2694.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_polo1.png Graphic file (type png)
 <use alpha_b-6_polo1.png>
-Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2467.
+Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2694.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [73 <./chi_b-6_polo1.png>]
-<psi_b-6_polo1.png, id=663, 362.0727pt x 328.8285pt>
+ [75 <./chi_b-6_polo1.png>]
+<psi_b-6_polo1.png, id=686, 362.0727pt x 328.8285pt>
 File: psi_b-6_polo1.png Graphic file (type png)
 <use psi_b-6_polo1.png>
-Package pdftex.def Info: psi_b-6_polo1.png  used on input line 2485.
+Package pdftex.def Info: psi_b-6_polo1.png  used on input line 2714.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_polo1.png Graphic file (type png)
 <use psi_b-6_polo1.png>
-Package pdftex.def Info: psi_b-6_polo1.png  used on input line 2485.
+Package pdftex.def Info: psi_b-6_polo1.png  used on input line 2714.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [74 <./alpha_b-6_polo1.png>]
-<bpol_b-6_polo1.png, id=670, 357.7365pt x 328.8285pt>
+ [76 <./alpha_b-6_polo1.png>]
+<bpol_b-6_polo1.png, id=692, 357.7365pt x 328.8285pt>
 File: bpol_b-6_polo1.png Graphic file (type png)
 <use bpol_b-6_polo1.png>
-Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 2503.
+Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 2734.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
 File: bpol_b-6_polo1.png Graphic file (type png)
 <use bpol_b-6_polo1.png>
-Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 2503.
+Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 2734.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
- [75 <./psi_b-6_polo1.png>]
-<starplot_rho_b-6_toro1.png, id=677, 793.93758pt x 783.61328pt>
+ [77 <./psi_b-6_polo1.png>]
+<starplot_rho_b-6_toro1.png, id=698, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_toro1.png Graphic file (type png)
 <use starplot_rho_b-6_toro1.png>
-Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 2538.
+Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 2771.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_toro1.png Graphic file (type png)
 <use starplot_rho_b-6_toro1.png>
-Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 2538.
-(pdftex.def)             Requested size: 456.99515pt x 451.04045pt.
- [76 <./bpol_b-6_polo1.png>]
-<starplot_chi_b-6_toro1.png, id=683, 793.93758pt x 775.35385pt>
+Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 2771.
+(pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
+ [78 <./bpol_b-6_polo1.png>]
+<starplot_chi_b-6_toro1.png, id=704, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_toro1.png Graphic file (type png)
 <use starplot_chi_b-6_toro1.png>
-Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 2556.
+Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 2791.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_toro1.png Graphic file (type png)
 <use starplot_chi_b-6_toro1.png>
-Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 2556.
-(pdftex.def)             Requested size: 456.99515pt x 446.2864pt.
- [77 <./starplot_rho_b-6_toro1.png>]
-<starplot_b_b-6_toro1.png, id=689, 793.93758pt x 782.58086pt>
+Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 2791.
+(pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
+ [79 <./starplot_rho_b-6_toro1.png>]
+<starplot_b_b-6_toro1.png, id=710, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_toro1.png Graphic file (type png)
 <use starplot_b_b-6_toro1.png>
-Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 2574.
+Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 2811.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_toro1.png Graphic file (type png)
 <use starplot_b_b-6_toro1.png>
-Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 2574.
-(pdftex.def)             Requested size: 456.99515pt x 450.44621pt.
- [78 <./starplot_chi_b-6_toro1.png>]
-<rho_b-6_toro1.png, id=695, 356.2911pt x 328.8285pt>
+Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 2811.
+(pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
+ [80 <./starplot_chi_b-6_toro1.png>]
+<rho_b-6_toro1.png, id=716, 356.2911pt x 328.8285pt>
 File: rho_b-6_toro1.png Graphic file (type png)
 <use rho_b-6_toro1.png>
-Package pdftex.def Info: rho_b-6_toro1.png  used on input line 2592.
+Package pdftex.def Info: rho_b-6_toro1.png  used on input line 2831.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: rho_b-6_toro1.png Graphic file (type png)
 <use rho_b-6_toro1.png>
-Package pdftex.def Info: rho_b-6_toro1.png  used on input line 2592.
+Package pdftex.def Info: rho_b-6_toro1.png  used on input line 2831.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
- [79 <./starplot_b_b-6_toro1.png>]
-<p_b-6_toro1.png, id=701, 356.2911pt x 328.8285pt>
+ [81 <./starplot_b_b-6_toro1.png>]
+<p_b-6_toro1.png, id=723, 356.2911pt x 328.8285pt>
 File: p_b-6_toro1.png Graphic file (type png)
 <use p_b-6_toro1.png>
-Package pdftex.def Info: p_b-6_toro1.png  used on input line 2610.
+Package pdftex.def Info: p_b-6_toro1.png  used on input line 2851.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: p_b-6_toro1.png Graphic file (type png)
 <use p_b-6_toro1.png>
-Package pdftex.def Info: p_b-6_toro1.png  used on input line 2610.
+Package pdftex.def Info: p_b-6_toro1.png  used on input line 2851.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
- [80 <./rho_b-6_toro1.png>]
-<chi_b-6_toro1.png, id=707, 352.6776pt x 328.8285pt>
+ [82 <./rho_b-6_toro1.png>]
+<chi_b-6_toro1.png, id=729, 352.6776pt x 328.8285pt>
 File: chi_b-6_toro1.png Graphic file (type png)
 <use chi_b-6_toro1.png>
-Package pdftex.def Info: chi_b-6_toro1.png  used on input line 2628.
+Package pdftex.def Info: chi_b-6_toro1.png  used on input line 2871.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_toro1.png Graphic file (type png)
 <use chi_b-6_toro1.png>
-Package pdftex.def Info: chi_b-6_toro1.png  used on input line 2628.
+Package pdftex.def Info: chi_b-6_toro1.png  used on input line 2871.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 
-[81 <./p_b-6_toro1.png>]
-<alpha_b-6_toro1.png, id=714, 362.0727pt x 328.8285pt>
+[83 <./p_b-6_toro1.png>]
+<alpha_b-6_toro1.png, id=735, 362.0727pt x 328.8285pt>
 File: alpha_b-6_toro1.png Graphic file (type png)
 <use alpha_b-6_toro1.png>
-Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 2646.
+Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 2891.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_toro1.png Graphic file (type png)
 <use alpha_b-6_toro1.png>
-Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 2646.
+Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 2891.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [82 <./chi_b-6_toro1.png>]
-<psi_b-6_toro1.png, id=720, 362.0727pt x 328.8285pt>
+ [84 <./chi_b-6_toro1.png>]
+<psi_b-6_toro1.png, id=741, 362.0727pt x 328.8285pt>
 File: psi_b-6_toro1.png Graphic file (type png)
 <use psi_b-6_toro1.png>
-Package pdftex.def Info: psi_b-6_toro1.png  used on input line 2664.
+Package pdftex.def Info: psi_b-6_toro1.png  used on input line 2911.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_toro1.png Graphic file (type png)
 <use psi_b-6_toro1.png>
-Package pdftex.def Info: psi_b-6_toro1.png  used on input line 2664.
+Package pdftex.def Info: psi_b-6_toro1.png  used on input line 2911.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [83 <./alpha_b-6_toro1.png>]
-<btor_b-6_toro1.png, id=726, 355.5684pt x 328.8285pt>
+ [85 <./alpha_b-6_toro1.png>]
+<btor_b-6_toro1.png, id=747, 355.5684pt x 328.8285pt>
 File: btor_b-6_toro1.png Graphic file (type png)
 <use btor_b-6_toro1.png>
-Package pdftex.def Info: btor_b-6_toro1.png  used on input line 2682.
+Package pdftex.def Info: btor_b-6_toro1.png  used on input line 2931.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
 File: btor_b-6_toro1.png Graphic file (type png)
 <use btor_b-6_toro1.png>
-Package pdftex.def Info: btor_b-6_toro1.png  used on input line 2682.
+Package pdftex.def Info: btor_b-6_toro1.png  used on input line 2931.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
- [84 <./psi_b-6_toro1.png>] [85 <./btor_b-6_toro1.png>] [86
+ [86 <./psi_b-6_toro1.png>] [87 <./btor_b-6_toro1.png>] [88
 
 ]
-Chapter 7.
-(./xns.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2707.
- [87]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2707.
- (./xns.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2707.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2707.
-
+Chapter 8.
+(./xns.ind) [89] (./xns.aux)
 Package rerunfilecheck Info: File `xns.out' has not changed.
-(rerunfilecheck)             Checksum: AB73BAE35DC3F60D40F6CDE15E01CAA7;10330.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2707.
+(rerunfilecheck)             Checksum: A76221E501EB98F3F2C4280FCBC42D9F;10793.
  ) 
 Here is how much of TeX's memory you used:
- 14141 strings out of 493762
- 201587 string characters out of 6152599
- 310833 words of memory out of 5000000
- 17346 multiletter control sequences out of 15000+600000
- 54496 words of font info for 54 fonts, out of 8000000 for 9000
- 431 hyphenation exceptions out of 8191
- 37i,13n,48p,829b,534s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 15441 strings out of 480954
+ 240492 string characters out of 5907460
+ 574450 words of memory out of 5000000
+ 32080 multiletter control sequences out of 15000+600000
+ 454286 words of font info for 67 fonts, out of 8000000 for 9000
+ 15 hyphenation exceptions out of 8191
+ 83i,14n,88p,1657b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/opt/local/share/texmf-texlive/fonts/enc/dvips/tex-gyre/q-ec.enc}{/opt/local
 /share/texmf-texlive/fonts/enc/dvips/tex-gyre/q-ts1.enc}</opt/local/share/texmf
 -texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/local/share/texmf-texl
@@ -1631,10 +1602,10 @@ fonts/type1/public/tex-gyre/qtmr.pfb></opt/local/share/texmf-texlive/fonts/type
 1/public/tex-gyre/qtmri.pfb></opt/local/share/texmf-texlive/fonts/type1/public/
 txfonts/t1xtt.pfb></opt/local/share/texmf-texlive/fonts/type1/public/txfonts/tc
 xtt.pfb>
-Output written on xns.pdf (91 pages, 3265352 bytes).
+Output written on xns.pdf (93 pages, 3286072 bytes).
 PDF statistics:
- 837 PDF objects out of 1000 (max. 8388607)
- 591 compressed objects within 6 object streams
- 135 named destinations out of 1000 (max. 500000)
- 673 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 860 PDF objects out of 1000 (max. 8388607)
+ 608 compressed objects within 7 object streams
+ 139 named destinations out of 1000 (max. 500000)
+ 701 words of extra memory for PDF output out of 10000 (max. 10000000)
 

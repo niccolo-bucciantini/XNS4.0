@@ -11,6 +11,7 @@
    user_params.md
    arrays.md
    files_outputs.md
+   eos.md
    examples_gr.md
    examples_stt.md
 

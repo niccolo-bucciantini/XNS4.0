@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Files and outputs &mdash; XNS 4.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Examples in GR" href="examples_gr.html" />
+    <link rel="next" title="Reformatting the Equation os State" href="eos.html" />
     <link rel="prev" title="Arrays" href="arrays.html" /> 
 </head>
 
@@ -29,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> XNS
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XNS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -48,8 +55,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#files">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#visualisation">Visualisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reformatting-the-equation-of-state">Reformatting the Equation of State</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Reformatting the Equation os State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_gr.html">Examples in GR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_stt.html">Examples in STTs</a></li>
 </ul>
@@ -67,8 +76,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Files and outputs</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Files and outputs</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/files_outputs.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,7 +88,7 @@
            <div itemprop="articleBody">
              
   <section class="tex2jax_ignore mathjax_ignore" id="files-and-outputs">
-<h1>Files and outputs<a class="headerlink" href="#files-and-outputs" title="Permalink to this headline"></a></h1>
+<h1>Files and outputs<a class="headerlink" href="#files-and-outputs" title="Permalink to this heading"></a></h1>
 <p>Here is a list of all the files and subroutines included int the XNS package, together with a brief
 description of what they do and how they operates. We start with the Fortran 90 files of the code (with
 extension <em>.f90</em>), then we describe the output files produced by a run (with extension <em>.dat</em>), and we conclude
@@ -87,7 +96,7 @@ with the Python 3 files needed for visualisation (with extension <em>.py</em> or
 must run in double precision for convergence. The <em>makefile</em> is provided for the gfortran (GNU) compiler. For more
 info on the compilation of XNS, see section “Compiling XNS”.</p>
 <section id="files">
-<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline"></a></h2>
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>XNS.f90</strong> - main program. Makes some consistency checks, and invokes XNSMAIN. Depending on
 the pre-compiling option it simply calls XNSMAIN (if make serial is used to compile the code), or it
@@ -152,14 +161,14 @@ of the super-ellipsoid that best fit the numerical surface.
 </li>
 <li><p><strong>ROTATION.f90</strong></p>
 <ul>
-<li><p>subroutine <strong>CHECKROTDIFF</strong> - ?</p></li>
+<li><p>subroutine <strong>CHECKROTDIFF</strong> - performs several checks for consistency in the choice of the options and parameters for differential rotation.</p></li>
 <li><p>subroutine <strong>OMEGAVALUE</strong> - derives the function <span class="math notranslate nohighlight">\(\Omega = \Omega (r,\theta)\)</span> for the differential rotation.</p></li>
-<li><p>subroutine <strong>OMEGA3LVALUE</strong> - ?</p></li>
-<li><p>subroutine <strong>FODFO_OS</strong> - ?</p></li>
-<li><p>subroutine <strong>A3L_OS</strong> - ?</p></li>
-<li><p>subroutine <strong>PARS_VALUE_JS</strong> - ?</p></li>
-<li><p>subroutine <strong>FODFO_JS</strong> - ?</p></li>
-<li><p>subroutine <strong>A3L_JS</strong> - ?
+<li><p>subroutine <strong>OMEGA3LVALUE</strong> - derives the function <span class="math notranslate nohighlight">\(\Omega = \Omega (r,\theta)\)</span> and A3L (<span class="math notranslate nohighlight">\(\int jd\Omega\)</span> or <span class="math notranslate nohighlight">\(\int \Omega dj\)</span>, depeding if omega or J-space, the parameter the enters the Bernoulli Equation for the differential rotation) for the differential rotation.</p></li>
+<li><p>subroutine <strong>FODFO_OS</strong> - evaluate FO and DFO required to compute the local rotation rate, in the Omega-space, for a differential rotator.</p></li>
+<li><p>subroutine <strong>A3L_OS</strong> - evaluate A3L <span class="math notranslate nohighlight">\(=\int jd\Omega\)</span>  in the Omega-space for a differential rotator. This is the parameter the enters the Bernoulli Equation for the differential rotation.</p></li>
+<li><p>subroutine <strong>PARS_VALUE_JS</strong> evaluate JMAX, XVAL and YVAL (only needed for Uryu Laws, see Franceschetti et al. 2022 A8, A9, A18).</p></li>
+<li><p>subroutine <strong>FODFO_JS</strong> - evaluate FO and DFO in the J-space for a differential rotator (only needed for Uryu Laws, see Franceschetti et al. 2022 A2, A3).</p></li>
+<li><p>subroutine <strong>A3L_JS</strong> evaluate A3L <span class="math notranslate nohighlight">\(=\int \Omega dj\)</span> in the J-space for a differential rotator. This is the parameter the enters the Bernoulli Equation for the differential rotation.
 <br><br></p></li>
 </ul>
 </li>
@@ -180,29 +189,31 @@ RK4 method.</p></li>
 <li><p>subroutine <strong>GRIDBUILD</strong> - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.</p></li>
 <li><p>subroutine <strong>FUNCD_STRETCH</strong> - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
 <br><br></p></li>
+</ul>
+</li>
 <li><p><strong>FUNCTIONS.f90</strong></p>
 <ul>
 <li><p>subroutine <strong>DGTSV</strong> - solves the linear system <span class="math notranslate nohighlight">\(AX = B\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is a tridiagonal matrix, by
 Gaussian elimination with partial pivoting (taken from the LAPACK routines).</p></li>
 <li><p>subroutine <strong>LUSOLVER</strong> - solves the linear system <span class="math notranslate nohighlight">\(AX = B\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(N \times N\)</span> matrix and <span class="math notranslate nohighlight">\(B\)</span> is a vector of length <span class="math notranslate nohighlight">\(N\)</span>, with an LU decomposition.</p></li>
-<li><p>subroutine <strong>MYSWAP</strong> - ?</p></li>
-<li><p>function <strong>MYISAMAX</strong> - ?</p></li>
-<li><p>subroutine <strong>SGER</strong> - ?</p></li>
-<li><p>subroutine <strong>SLASWP</strong> - ?</p></li>
-<li><p>subroutine <strong>LAGRANGEINT</strong> - ?</p></li>
-<li><p>subroutine <strong>LAGRANGEINT2D</strong> - ?</p></li>
+<li><p>subroutine <strong>MYSWAP</strong> - exchanges two arrays, adapted from LAPACK 3.2</p></li>
+<li><p>function <strong>MYISAMAX</strong> - returns the index of maximum value of an array, adapted from LAPACK 3.2</p></li>
+<li><p>subroutine <strong>SGER</strong> - performs the rank 1 operation A := <span class="math notranslate nohighlight">\(x \times y^T\)</span> + A, where  x is an nn element vector, y is an n element vector and A is an nn by n matrix. Adapted from LAPACK 3.2</p></li>
+<li><p>subroutine <strong>SLASWP</strong> - exchange elements of an array,  adapted from LAPACK 3.2</p></li>
+<li><p>subroutine <strong>STRSM</strong> solve A*X = B where A is a matrix in LU form, adapted from LAPACK 3.2</p></li>
+<li><p>subroutine <strong>LAGRANGEINT</strong> - interpolate YP(XP) in XINT using (N-1)th-Polinomial according to Lagrange Interpolation with Neville algorithm</p></li>
+<li><p>subroutine <strong>LAGRANGEINT2D</strong> - perform 2D interpolation using (N-1)th-Polinomial according to Lagrange Interpolation with Neville algorithm, on structured grid</p></li>
 <li><p>subroutine <strong>LEGZO</strong> - computes the zeros of Legendre polynomials and the corresponding
-weights for Gaussian quadrature integration.</p></li>
-<li><p>subroutine <strong>LPN</strong> - computes the Legendre polynomials and their derivatives.</p></li>
-<li><p>subroutine <strong>POLINT</strong> - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).</p></li>
-</ul>
-</li>
+weights for Gaussian quadrature integration. From: SPECIAL_FUNCTIONS by Shanjie Zhang, Jianming Jin.</p></li>
+<li><p>subroutine <strong>LPN</strong> - computes the Legendre polynomials and their derivatives. From: SPECIAL_FUNCTIONS by Shanjie Zhang, Jianming Jin.</p></li>
+<li><p>subroutine <strong>POLINT</strong> - a polynomial 2nd order interpolation routine (e.g. Numerical Recipes).</p></li>
+<li><p>subroutine <strong>XNS2ECHO_OUT</strong> - output file for X-ECHO</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="outputs">
-<h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline"></a></h2>
+<h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Grid.dat</strong> - contains the grid mesh points.
 <br><br></p></li>
@@ -249,7 +260,7 @@ equation.
 </ul>
 </section>
 <section id="visualisation">
-<h2>Visualisation<a class="headerlink" href="#visualisation" title="Permalink to this headline"></a></h2>
+<h2>Visualisation<a class="headerlink" href="#visualisation" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>starplot_polo.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the poloidal magnetic field (with or without the field lines), the scalar field or the density.</p></li>
 <li><p><strong>starplot_toro.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the toroidal magnetic field, the scalar field or the density.</p></li>
@@ -259,6 +270,12 @@ equation.
 <li><p><strong>profile_unmag.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>.</p></li>
 </ul>
 </section>
+<section id="reformatting-the-equation-of-state">
+<h2>Reformatting the Equation of State<a class="headerlink" href="#reformatting-the-equation-of-state" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>resample.py</strong> - PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuild a table in the XNS 4.0 format.</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -266,7 +283,7 @@ equation.
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="arrays.html" class="btn btn-neutral float-left" title="Arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="examples_gr.html" class="btn btn-neutral float-right" title="Examples in GR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="eos.html" class="btn btn-neutral float-right" title="Reformatting the Equation os State" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

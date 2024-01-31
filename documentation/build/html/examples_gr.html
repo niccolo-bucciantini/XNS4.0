@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Examples in GR &mdash; XNS 4.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples in STTs" href="examples_stt.html" />
-    <link rel="prev" title="Files and outputs" href="files_outputs.html" /> 
+    <link rel="prev" title="Reformatting the Equation os State" href="eos.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> XNS
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XNS
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,6 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="user_params.html">User parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="files_outputs.html">Files and outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Reformatting the Equation os State</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples in GR</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field">Non-rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field">Non-rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field</a></li>
@@ -71,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Examples in GR</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples in GR</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/examples_gr.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,11 +91,11 @@
            <div itemprop="articleBody">
              
   <section class="tex2jax_ignore mathjax_ignore" id="examples-in-gr">
-<h1>Examples in GR<a class="headerlink" href="#examples-in-gr" title="Permalink to this headline"></a></h1>
+<h1>Examples in GR<a class="headerlink" href="#examples-in-gr" title="Permalink to this heading"></a></h1>
 <p>Here we present a few examples to show how to work with the code and the related performances. All
 cases have been run on a simple laptop</p>
 <section id="non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field">
-<h2>Non-rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field" title="Permalink to this headline"></a></h2>
+<h2>Non-rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field" title="Permalink to this heading"></a></h2>
 <p>This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely poloidal field. It has a J-frame central density <span class="math notranslate nohighlight">\(\rho _\mathrm{c}=8.3\times 10^{-4}\)</span> in code units (corresponding to <span class="math notranslate nohighlight">\(5.15\times 10^{14}\)</span> gcm<span class="math notranslate nohighlight">\(^{-3}\)</span>) and a Komar mass in the E-frame of <span class="math notranslate nohighlight">\(1.442\)</span> M<span class="math notranslate nohighlight">\( _\odot\)</span>. The circumferential radius is <span class="math notranslate nohighlight">\(16.559\)</span> km.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NR</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> <span class="n">NTH</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NRREG</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">MLS</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">NGQ</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">RREG</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">RMAXSTR</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
@@ -97,79 +105,79 @@ cases have been run on a simple laptop</p>
 <span class="n">IMAG</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">IPOL</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">KBPOL</span> <span class="o">=</span> <span class="mf">0.34135</span><span class="p">,</span> <span class="n">NPOL</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">CSI</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_rho_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/starplot_rho_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the density.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the density.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_b_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/starplot_b_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the poloidal magnetic field strength and its field lines.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the poloidal magnetic field strength and its field lines.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/rho_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/rho_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS density at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the NS density at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/p_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/p_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS pressure at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the NS pressure at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/alpha_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/alpha_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the lapse function at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the lapse function at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/psi_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/psi_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the conformal factor at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the conformal factor at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/bpol_gr_polo.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/bpol_gr_polo.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the poloidal magnetic field strength at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the poloidal magnetic field strength at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field">
-<h2>Non-rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field" title="Permalink to this headline"></a></h2>
+<h2>Non-rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field" title="Permalink to this heading"></a></h2>
 <p>This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density <span class="math notranslate nohighlight">\(\rho _\mathrm{c}=1.366\times 10^{-3}\)</span> in code units (corresponding to <span class="math notranslate nohighlight">\(8.473\times 10^{14}\)</span> gcm<span class="math notranslate nohighlight">\(^{-3}\)</span>) and a Komar mass of <span class="math notranslate nohighlight">\(1.597\)</span> M<span class="math notranslate nohighlight">\( _\odot\)</span>. The circumferential radius is <span class="math notranslate nohighlight">\(20.264\)</span> km.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NR</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> <span class="n">NTH</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NRREG</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">MLS</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">NGQ</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">RREG</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">RMAXSTR</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
@@ -179,79 +187,79 @@ cases have been run on a simple laptop</p>
 <span class="n">IMAG</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">ITOR</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span> <span class="n">BCOEF</span> <span class="o">=</span> <span class="mf">3.746</span><span class="p">,</span> <span class="n">NPOL</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">CSI</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_rho_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/starplot_rho_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the density.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the density.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/starplot_b_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/starplot_b_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the toroidal magnetic field strength.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Section of the NS in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours the toroidal magnetic field strength.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/rho_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/rho_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS density at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the NS density at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/p_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/p_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the NS pressure at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the NS pressure at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/alpha_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/alpha_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the lapse function at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the lapse function at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/psi_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/psi_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the conformal factor at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the conformal factor at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto docutils align-default">
+<table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><img alt="alt-text-1" src="_images/btor_gr_toro.png" /></p></th>
+<tr class="row-odd"><th class="head text-center"><p><img alt="alt-text-1" src="_images/btor_gr_toro.png" /></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><em>Radial profile of the toroidal magnetic field strength at the pole and at the equator.</em></p></td>
+<tr class="row-even"><td class="text-center"><p><em>Radial profile of the toroidal magnetic field strength at the pole and at the equator.</em></p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere">
-<h2>Non-rotating NS in GR with the POL2 EoS and a twisted magnetosphere<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere" title="Permalink to this headline"></a></h2>
+<h2>Non-rotating NS in GR with the POL2 EoS and a twisted magnetosphere<a class="headerlink" href="#non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere" title="Permalink to this heading"></a></h2>
 <p>This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density <span class="math notranslate nohighlight">\(\rho _\mathrm{c}=1.366\times 10^{-3}\)</span> in code units (corresponding to <span class="math notranslate nohighlight">\(8.473\times 10^{14}\)</span> gcm<span class="math notranslate nohighlight">\(^{-3}\)</span>) and a Komar mass of <span class="math notranslate nohighlight">\(1.597\)</span> M<span class="math notranslate nohighlight">\( _\odot\)</span>. The circumferential radius is <span class="math notranslate nohighlight">\(20.264\)</span> km.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NR</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> <span class="n">NTH</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">NRREG</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">MLS</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">NGQ</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">RREG</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">RMAXSTR</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
@@ -263,7 +271,7 @@ cases have been run on a simple laptop</p>
 </div>
 </section>
 <section id="uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos">
-<h2>Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this headline"></a></h2>
+<h2>Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this heading"></a></h2>
 <p>Description.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
@@ -271,13 +279,13 @@ cases have been run on a simple laptop</p>
 </div>
 </section>
 <section id="differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos">
-<h2>Differnetially Rotating, unmagnetised NS in GR with the APR EoS<a class="headerlink" href="#differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos" title="Permalink to this headline"></a></h2>
+<h2>Differnetially Rotating, unmagnetised NS in GR with the APR EoS<a class="headerlink" href="#differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
 </pre></div>
 </div>
 </section>
 <section id="differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos">
-<h2>Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this headline"></a></h2>
+<h2>Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this heading"></a></h2>
 <p>Description.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
@@ -285,7 +293,7 @@ cases have been run on a simple laptop</p>
 </div>
 </section>
 <section id="uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos">
-<h2>Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this headline"></a></h2>
+<h2>Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS<a class="headerlink" href="#uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos" title="Permalink to this heading"></a></h2>
 <p>Description.</p>
 <p>Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PARAM1</span> <span class="o">=</span> <span class="n">VALUE1</span><span class="p">,</span> <span class="n">PARAM2</span> <span class="o">=</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">PARAM3</span> <span class="o">=</span> <span class="n">VALUE3</span><span class="p">,</span> <span class="n">PARAM4</span> <span class="o">=</span> <span class="n">VALUE4</span><span class="p">,</span> <span class="o">...</span>
@@ -298,7 +306,7 @@ cases have been run on a simple laptop</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="files_outputs.html" class="btn btn-neutral float-left" title="Files and outputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="eos.html" class="btn btn-neutral float-left" title="Reformatting the Equation os State" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="examples_stt.html" class="btn btn-neutral float-right" title="Examples in STTs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

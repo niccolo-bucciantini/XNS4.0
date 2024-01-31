@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reformatting the Equation os State &mdash; XNS 4.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples in GR" href="examples_gr.html" />
+    <link rel="prev" title="Files and outputs" href="files_outputs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XNS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Welcome to the XNS 4.0 documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makefile.html">Compiling XNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_params.html">User parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="files_outputs.html">Files and outputs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reformatting the Equation os State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_gr.html">Examples in GR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_stt.html">Examples in STTs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">XNS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reformatting the Equation os State</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/eos.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="reformatting-the-equation-os-state">
+<h1>Reformatting the Equation os State<a class="headerlink" href="#reformatting-the-equation-os-state" title="Permalink to this heading"></a></h1>
+<p>XNS 4.0 can now take tabulated realistic EoS and compute rotating-magnetized GR and STT NS-models. XNS 4.0 uses Geometrized Units with <span class="math notranslate nohighlight">\(G=c=M_\odot=1\)</span>. It uses a specific formatted tabulated EoS, that differs from most of available EoSs for various reasons:</p>
+<ul class="simple">
+<li><p>To speed up interpolation, the EoS has been resampled and re-tabulated using uniform spacing in log-space for the input variable. This means that we have a table for <span class="math notranslate nohighlight">\(p(\rho)\)</span>, <span class="math notranslate nohighlight">\(e(\rho)\)</span> etc…  and another table for <span class="math notranslate nohighlight">\(\rho(p)\)</span>, and another one for <span class="math notranslate nohighlight">\(\rho(h)\)</span> etc….</p></li>
+<li><p>XNS 4.0 uses the pseudo-hentalpy <span class="math notranslate nohighlight">\(h\)</span> which is almost never given in tabulated EoSs. So we need to compute it and add to our tabuled formatted EoS. More precisely we tabulate the natural logarithm <span class="math notranslate nohighlight">\(Ln(h)\)</span> defined, in terms of the rest mass energy density <span class="math notranslate nohighlight">\(\rho\)</span>, internal energy density <span class="math notranslate nohighlight">\(e\)</span> and pressure <span class="math notranslate nohighlight">\(p\)</span> as: <span class="math notranslate nohighlight">\({\rm d} Ln(h) = {\rm d}p/(\rho +e +p)\)</span></p></li>
+<li><p>XNS 4.0  is a spin-off of X-ECHO, and as such operates using rest mass (energy) density <span class="math notranslate nohighlight">\(\rho\)</span>, internal energy density <span class="math notranslate nohighlight">\(e\)</span> and pressure <span class="math notranslate nohighlight">\(p\)</span>. Normally EoSs are given in terms of the total energy density <span class="math notranslate nohighlight">\(e_{\rm tot}\)</span> and the baryon number density <span class="math notranslate nohighlight">\(n_{\rm b}\)</span>. As a consequence to use XNS 4.0, one needs to split the total energy density between rest mass and internal energy density. We do this setting <span class="math notranslate nohighlight">\(e_{\rm} = e_{\rm tot}- n_{\rm b} m_{\rm b} \)</span> where <span class="math notranslate nohighlight">\(m_{\rm b}\)</span> is the baryon mass, assumed to be constant. However it can happen that <span class="math notranslate nohighlight">\(n_{\rm b} m_{\rm b} &gt; e_{\rm tot}\)</span>, either at very low densities (when the two are almost equal) due to round-off and approximation errors, or at very high densities due to quark deconfinement (the rest mass of three deconfined quarks is less than the rest mass of a nucleon in which the same three quarks are confined, even if the baryon number is the same).  This means that in recomputing our formatted EoS we must ensure that <span class="math notranslate nohighlight">\(n_{\rm b} m_{\rm b} &lt; e_{\rm tot}\)</span> always. For this reason the value of <span class="math notranslate nohighlight">\(m_{\rm b}\)</span> can be tuned to avoid such problem. There is a parameter <strong>MBARYONFC</strong> to take care of it (you can find more on the guide). For nuclear EoSs, the problem arises only at low densities and usually a factor <span class="math notranslate nohighlight">\(\pm 1.0005\)</span> is sufficient. Being this within the accuracy of the code,  one needs only to check the EoS behave properly, without activating the relative option/parameter.  For deconfined systems one might need to change it more, and in this case also activate the relative option.</p></li>
+</ul>
+<p>In order to do all of this we have a PYTHON script that takes an EoS (typically in COMPSTAR format, but can easily be adapted to any other), and rebuild a table in the XNS 4.0 format. Beware that you need to check that everything works (the code has some check), in particular if you join different EoSs check that they behave properly (it can happen that EoSs computed by different groups, in different density ranges, and with different approaches cannot easily be joined together without introducing artefacts or jumps - these might create problems to XNS 4.0 if not properly treated). Sometimes, even if the input EoS behaves properly, our python script can produce a wrong interpolation. This typically happens when two different EoS are joined (like at the edge of the crust) if the joining is not smooth enough. XNS 4.0 can work even in the presence of phase-transitions and/or density jumps like for Strange-Stars, but in general the presence of strong discontinuities can create issues preventing a proper relaxation.</p>
+<p>Format of a typical XNS 4.0 Tabulated EoS.</p>
+<ul class="simple">
+<li><p>Line 1 - number of points used for the tabulated EoS (i.e. between the minimum density and the maximum density) = 1000.</p></li>
+<li><p>Line 2 Empty</p></li>
+<li><p>Line 3 minimum and maximum <span class="math notranslate nohighlight">\({\rm Log_{10}}(\rho)\)</span></p></li>
+<li><p>Line 4 minimum and maximum <span class="math notranslate nohighlight">\({\rm Log_{10}}(p)\)</span> and the effective adiabatic index <span class="math notranslate nohighlight">\(\Gamma_p = {\rm d} Log(p) / {\rm d} Log(\rho)\)</span> at minimum and maximum pressure.</p></li>
+<li><p>Line 5 minimum and maximum <span class="math notranslate nohighlight">\({\rm Log_{10}}(e)\)</span> and the effective adiabatic index <span class="math notranslate nohighlight">\(\Gamma_e = {\rm d} Log(e) / {\rm d} Log(\rho)\)</span> at minimum and maximum internal energy.</p></li>
+<li><p>Line 6 minimum and maximum <span class="math notranslate nohighlight">\({\rm Log_{10}}(Ln(h))\)</span> and the effective adiabatic index <span class="math notranslate nohighlight">\(\Gamma_h = {\rm d} Log(Ln(h)) / {\rm d} Log(\rho)\)</span> at minimum and maximum <span class="math notranslate nohighlight">\(Ln(h)\)</span>.</p></li>
+<li><p>Empty line</p></li>
+<li><p>Block 1 (1000 lines -  7 columns) - First column is <span class="math notranslate nohighlight">\(Log_{10}(\rho)\)</span> uniformly sampled (1000 points) between <span class="math notranslate nohighlight">\(Log_{10}(\rho_{min})\)</span> and <span class="math notranslate nohighlight">\(Log_{10}(\rho_{max})\)</span>. Second column is <span class="math notranslate nohighlight">\(Log_{10}(p)\)</span> at the same densities. Third column is <span class="math notranslate nohighlight">\(Log_{10}(e)\)</span>. Forth column is <span class="math notranslate nohighlight">\(Log_{10}(Ln(h))\)</span> at the same density. Fifth column is <span class="math notranslate nohighlight">\(\Gamma_p\)</span>, sixth column is <span class="math notranslate nohighlight">\(\Gamma_e\)</span>, seventh column is <span class="math notranslate nohighlight">\(\Gamma_h\)</span>.</p></li>
+<li><p>Empty line</p></li>
+<li><p>Block 2 (1000 lines -  3 columns) - First column is <span class="math notranslate nohighlight">\(Log_{10}(p)\)</span> uniformly sampled between <span class="math notranslate nohighlight">\(Log_{10}(p(\rho_{min}))\)</span> and <span class="math notranslate nohighlight">\(Log_{10}(p(\rho_{max}))\)</span>. Second column is <span class="math notranslate nohighlight">\(Log_{10}(\rho)\)</span> at the same pressure.Third column is <span class="math notranslate nohighlight">\(\Gamma_{\rho-p}={\rm d}Log_{10}(\rho)/{\rm d}Log_{10}(p)\)</span> at the same pressure.</p></li>
+<li><p>Empty line</p></li>
+<li><p>Block 3 (1000 lines -  3 columns) - First column is <span class="math notranslate nohighlight">\(Log_{10}(Ln(h))\)</span> uniformly sampled between <span class="math notranslate nohighlight">\(Log_{10}(Ln(h(\rho_{min})))\)</span> and <span class="math notranslate nohighlight">\(Log_{10}(Ln(h(\rho_{max})))\)</span>. Second column is <span class="math notranslate nohighlight">\(Log_{10}(\rho)\)</span> at the same hentalpy. Third column is <span class="math notranslate nohighlight">\(\Gamma_{\rho-h}={\rm d}Log_{10}(\rho)/{\rm d}Log_{10}(Ln(h))\)</span> at the same hentalpy.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="files_outputs.html" class="btn btn-neutral float-left" title="Files and outputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples_gr.html" class="btn btn-neutral float-right" title="Examples in GR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Jacopo Soldateschi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

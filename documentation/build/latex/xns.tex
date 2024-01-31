@@ -10,6 +10,9 @@
 %% let collapsible pdf bookmarks panel have high depth per default
 \PassOptionsToPackage{bookmarksdepth=5}{hyperref}
 
+\PassOptionsToPackage{booktabs}{sphinx}
+\PassOptionsToPackage{colorrows}{sphinx}
+
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
 \ifdefined\DeclareUnicodeCharacter
@@ -60,13 +63,18 @@
 
 
 \title{XNS}
-\date{Mar 15, 2022}
+\date{Jan 31, 2024}
 \release{4.0.0}
-\author{N.Bucciantini \\J.Soldateschi\\ A.Pili\\ L.Del Zanna \\K.Franceschetti}
+\author{N.Bucciantini, J.Soldateschi, A.Pili, L.Del Zanna, K.Franceschetti}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
 \makeindex
 \begin{document}
+
+\ifdefined\shorthandoff
+  \ifnum\catcode`\=\string=\active\shorthandoff{=}\fi
+  \ifnum\catcode`\"=\active\shorthandoff{"}\fi
+\fi
 
 \pagestyle{empty}
 \sphinxmaketitle
@@ -74,6 +82,8 @@
 \sphinxtableofcontents
 \pagestyle{normal}
 \phantomsection\label{\detokenize{index::doc}}
+\sphinxstepscope
+
 
 
 \sphinxAtStartPar
@@ -81,6 +91,9 @@ The XNS code solves for axisymmetric equilibria of polytropic magnetized and/or 
 
 \sphinxAtStartPar
 The 4.0 version of XNS adds the possibility of solving for the structure of a magnetised, rotating NS in a class of theories of gravity alternative to general relativity (GR), that is massless scalar tensor theories (STTs). Moreover, support for the use of realistic, tabulated equations of state (EoS) has been added.
+
+\sphinxAtStartPar
+You can download it via Github at (link)
 
 \sphinxAtStartPar
 This guide is based on the following papers, where the equations describing the approach for magnetized and rotating models are fully presented:
@@ -122,6 +135,8 @@ Franceschetti, K., Del Zanna, L., Soldateschi, J., \& Bucciantini, N., 2022, Uni
 \sphinxAtStartPar
 If you use this software please reference at least one of the previous papers.
 
+\sphinxstepscope
+
 
 \chapter{Compiling XNS}
 \label{\detokenize{makefile:compiling-xns}}\label{\detokenize{makefile::doc}}
@@ -133,7 +148,7 @@ XNS can be compiled using gfortran in several ways, as written in the file \sphi
 make serial \sphinxhyphen{} the standard way to compile XNS. In this case a single solution is found with a central density specified by the parameter RHOINI. The generated executable is named \sphinxstyleemphasis{XNS\sphinxhyphen{}s}. To compile the code this way type:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-    make clean\PYG{p}{;} make serial\PYG{p}{;} ./XNS\PYGZhy{}s
+\PYG{+w}{    }make\PYG{+w}{ }clean\PYG{p}{;}\PYG{+w}{ }make\PYG{+w}{ }serial\PYG{p}{;}\PYG{+w}{ }./XNS\PYGZhy{}s
 \end{sphinxVerbatim}
 
 \item {} 
@@ -141,7 +156,7 @@ make serial \sphinxhyphen{} the standard way to compile XNS. In this case a sing
 make nwtrps \sphinxhyphen{} compiles XNS using the Newton\sphinxhyphen{}Raphson method to converge on the quantity specified by the parameters QUOC and QUCONV. The generated executable is named \sphinxstyleemphasis{XNS\sphinxhyphen{}nr}. To compile the code this way type:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-    make clean\PYG{p}{;} make nwtrps\PYG{p}{;} ./XNS\PYGZhy{}nr
+\PYG{+w}{    }make\PYG{+w}{ }clean\PYG{p}{;}\PYG{+w}{ }make\PYG{+w}{ }nwtrps\PYG{p}{;}\PYG{+w}{ }./XNS\PYGZhy{}nr
 \end{sphinxVerbatim}
 
 \item {} 
@@ -149,7 +164,7 @@ make nwtrps \sphinxhyphen{} compiles XNS using the Newton\sphinxhyphen{}Raphson 
 make parspace \sphinxhyphen{} compiles XNS various times with different initial conditions, in order to sample the parameter space spanned by the magnetic, rotation and density parameters, set in \sphinxstyleemphasis{XNS.f90}. In particular, solutions are computed with: NKB different magnetic coefficients spanning from KBMIN to KBMAX; NRHO1 different central densities spanning from RHOMIN to RHOMAX; NOMG different central angular velocities spanning from OMGMIN to OMGMAX. The generated executable is named \sphinxstyleemphasis{XNS\sphinxhyphen{}mpi}. The computation of the various models is made in parallel (only on CPUs, no GPU support) using the MPI framework, and mpif90 needs to be installed. To compile the code this way using NUMBER\_OF\_PROCESSES processes, type:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-    make clean\PYG{p}{;} make parspace\PYG{p}{;} mpirun \PYGZhy{}n NUMBER\PYGZus{}OF\PYGZus{}PROCESSES ./XNS\PYGZhy{}mpi
+\PYG{+w}{    }make\PYG{+w}{ }clean\PYG{p}{;}\PYG{+w}{ }make\PYG{+w}{ }parspace\PYG{p}{;}\PYG{+w}{ }mpirun\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }NUMBER\PYGZus{}OF\PYGZus{}PROCESSES\PYG{+w}{ }./XNS\PYGZhy{}mpi
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -166,6 +181,8 @@ make clean \sphinxhyphen{} removes all \sphinxstyleemphasis{.o} and \sphinxstyle
 make cleanall \sphinxhyphen{} removes all \sphinxstyleemphasis{.o} and \sphinxstyleemphasis{.mod} files, all executables as well as all \sphinxstyleemphasis{.dat} files.
 
 \end{itemize}
+
+\sphinxstepscope
 
 
 \chapter{User parameters}
@@ -688,7 +705,8 @@ only with IPOL=.TRUE..
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{CHIINF} \sphinxhyphen{} value of the scalar field at infinity \(\chi _\mathrm{inf}\) in the scalar coupling function \(\mathcal{A}(\chi)\).
+\sphinxstylestrong{CHIINF} \sphinxhyphen{} value of the scalar field at infinity \(\chi _\mathrm{inf}\) in the scalar coupling function \(\mathcal{A}(\chi)\).\\
+
 
 \item {} 
 \sphinxAtStartPar
@@ -747,6 +765,8 @@ over the polar direction of the source terms in the spherical harmonics decompos
 \sphinxstylestrong{M} \sphinxhyphen{} initial guess on the ADM mass of the TOV solution computed at the outer edge of the grid. At convergence, it must be M\(\sim\)MMID.
 
 \end{itemize}
+
+\sphinxstepscope
 
 
 \chapter{Arrays}
@@ -881,6 +901,8 @@ for the equations for \(\psi\), \(\alpha \psi\), \(X^{\phi}\), \(X^{r}\), \(X^{\
 \sphinxstylestrong{TRACEM} \sphinxhyphen{} 2D array containing the trace of the energy\sphinxhyphen{}momentum tensor of matter, used for the source of the equation of the scalar field.
 
 \end{itemize}
+
+\sphinxstepscope
 
 
 \chapter{Files and outputs}
@@ -1056,7 +1078,7 @@ of the super\sphinxhyphen{}ellipsoid that best fit the numerical surface.
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{CHECKROTDIFF} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{CHECKROTDIFF} \sphinxhyphen{} performs several checks for consistency in the choice of the options and parameters for differential rotation.
 
 \item {} 
 \sphinxAtStartPar
@@ -1064,27 +1086,27 @@ subroutine \sphinxstylestrong{OMEGAVALUE} \sphinxhyphen{} derives the function \
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{OMEGA3LVALUE} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{OMEGA3LVALUE} \sphinxhyphen{} derives the function \(\Omega = \Omega (r,\theta)\) and A3L (\(\int jd\Omega\) or \(\int \Omega dj\), depeding if omega or J\sphinxhyphen{}space, the parameter the enters the Bernoulli Equation for the differential rotation) for the differential rotation.
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{FODFO\_OS} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{FODFO\_OS} \sphinxhyphen{} evaluate FO and DFO required to compute the local rotation rate, in the Omega\sphinxhyphen{}space, for a differential rotator.
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{A3L\_OS} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{A3L\_OS} \sphinxhyphen{} evaluate A3L \(=\int jd\Omega\)  in the Omega\sphinxhyphen{}space for a differential rotator. This is the parameter the enters the Bernoulli Equation for the differential rotation.
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{PARS\_VALUE\_JS} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{PARS\_VALUE\_JS} evaluate JMAX, XVAL and YVAL (only needed for Uryu Laws, see Franceschetti et al. 2022 A8, A9, A18).
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{FODFO\_JS} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{FODFO\_JS} \sphinxhyphen{} evaluate FO and DFO in the J\sphinxhyphen{}space for a differential rotator (only needed for Uryu Laws, see Franceschetti et al. 2022 A2, A3).
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{A3L\_JS} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{A3L\_JS} evaluate A3L \(=\int \Omega dj\) in the J\sphinxhyphen{}space for a differential rotator. This is the parameter the enters the Bernoulli Equation for the differential rotation.
 
 
 \end{itemize}
@@ -1131,6 +1153,8 @@ subroutine \sphinxstylestrong{GRIDBUILD} \sphinxhyphen{} computes the radial gri
 subroutine \sphinxstylestrong{FUNCD\_STRETCH} \sphinxhyphen{} used by the root\sphinxhyphen{}finding subroutine to derive the stretching factor for the grid, if it is stretched.
 
 
+\end{itemize}
+
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{FUNCTIONS.f90}
@@ -1146,42 +1170,48 @@ subroutine \sphinxstylestrong{LUSOLVER} \sphinxhyphen{} solves the linear system
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{MYSWAP} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{MYSWAP} \sphinxhyphen{} exchanges two arrays, adapted from LAPACK 3.2
 
 \item {} 
 \sphinxAtStartPar
-function \sphinxstylestrong{MYISAMAX} \sphinxhyphen{} ?
+function \sphinxstylestrong{MYISAMAX} \sphinxhyphen{} returns the index of maximum value of an array, adapted from LAPACK 3.2
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{SGER} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{SGER} \sphinxhyphen{} performs the rank 1 operation A := \(x \times y^T\) + A, where  x is an nn element vector, y is an n element vector and A is an nn by n matrix. Adapted from LAPACK 3.2
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{SLASWP} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{SLASWP} \sphinxhyphen{} exchange elements of an array,  adapted from LAPACK 3.2
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{LAGRANGEINT} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{STRSM} solve A*X = B where A is a matrix in LU form, adapted from LAPACK 3.2
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{LAGRANGEINT2D} \sphinxhyphen{} ?
+subroutine \sphinxstylestrong{LAGRANGEINT} \sphinxhyphen{} interpolate YP(XP) in XINT using (N\sphinxhyphen{}1)th\sphinxhyphen{}Polinomial according to Lagrange Interpolation with Neville algorithm
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{LAGRANGEINT2D} \sphinxhyphen{} perform 2D interpolation using (N\sphinxhyphen{}1)th\sphinxhyphen{}Polinomial according to Lagrange Interpolation with Neville algorithm, on structured grid
 
 \item {} 
 \sphinxAtStartPar
 subroutine \sphinxstylestrong{LEGZO} \sphinxhyphen{} computes the zeros of Legendre polynomials and the corresponding
-weights for Gaussian quadrature integration.
+weights for Gaussian quadrature integration. From: SPECIAL\_FUNCTIONS by Shanjie Zhang, Jianming Jin.
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{LPN} \sphinxhyphen{} computes the Legendre polynomials and their derivatives.
+subroutine \sphinxstylestrong{LPN} \sphinxhyphen{} computes the Legendre polynomials and their derivatives. From: SPECIAL\_FUNCTIONS by Shanjie Zhang, Jianming Jin.
 
 \item {} 
 \sphinxAtStartPar
-subroutine \sphinxstylestrong{POLINT} \sphinxhyphen{} a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
+subroutine \sphinxstylestrong{POLINT} \sphinxhyphen{} a polynomial 2nd order interpolation routine (e.g. Numerical Recipes).
 
-\end{itemize}
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{XNS2ECHO\_OUT} \sphinxhyphen{} output file for X\sphinxhyphen{}ECHO
 
 \end{itemize}
 
@@ -1321,6 +1351,95 @@ equation.
 \end{itemize}
 
 
+\section{Reformatting the Equation of State}
+\label{\detokenize{files_outputs:reformatting-the-equation-of-state}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{resample.py} \sphinxhyphen{} PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuild a table in the XNS 4.0 format.
+
+\end{itemize}
+
+\sphinxstepscope
+
+
+\chapter{Reformatting the Equation os State}
+\label{\detokenize{eos:reformatting-the-equation-os-state}}\label{\detokenize{eos::doc}}
+\sphinxAtStartPar
+XNS 4.0 can now take tabulated realistic EoS and compute rotating\sphinxhyphen{}magnetized GR and STT NS\sphinxhyphen{}models. XNS 4.0 uses Geometrized Units with \(G=c=M_\odot=1\). It uses a specific formatted tabulated EoS, that differs from most of available EoSs for various reasons:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+To speed up interpolation, the EoS has been resampled and re\sphinxhyphen{}tabulated using uniform spacing in log\sphinxhyphen{}space for the input variable. This means that we have a table for \(p(\rho)\), \(e(\rho)\) etc…  and another table for \(\rho(p)\), and another one for \(\rho(h)\) etc….
+
+\item {} 
+\sphinxAtStartPar
+XNS 4.0 uses the pseudo\sphinxhyphen{}hentalpy \(h\) which is almost never given in tabulated EoSs. So we need to compute it and add to our tabuled formatted EoS. More precisely we tabulate the natural logarithm \(Ln(h)\) defined, in terms of the rest mass energy density \(\rho\), internal energy density \(e\) and pressure \(p\) as: \({\rm d} Ln(h) = {\rm d}p/(\rho +e +p)\)
+
+\item {} 
+\sphinxAtStartPar
+XNS 4.0  is a spin\sphinxhyphen{}off of X\sphinxhyphen{}ECHO, and as such operates using rest mass (energy) density \(\rho\), internal energy density \(e\) and pressure \(p\). Normally EoSs are given in terms of the total energy density \(e_{\rm tot}\) and the baryon number density \(n_{\rm b}\). As a consequence to use XNS 4.0, one needs to split the total energy density between rest mass and internal energy density. We do this setting \(e_{\rm} = e_{\rm tot}- n_{\rm b} m_{\rm b} \) where \(m_{\rm b}\) is the baryon mass, assumed to be constant. However it can happen that \(n_{\rm b} m_{\rm b} > e_{\rm tot}\), either at very low densities (when the two are almost equal) due to round\sphinxhyphen{}off and approximation errors, or at very high densities due to quark deconfinement (the rest mass of three deconfined quarks is less than the rest mass of a nucleon in which the same three quarks are confined, even if the baryon number is the same).  This means that in recomputing our formatted EoS we must ensure that \(n_{\rm b} m_{\rm b} < e_{\rm tot}\) always. For this reason the value of \(m_{\rm b}\) can be tuned to avoid such problem. There is a parameter \sphinxstylestrong{MBARYONFC} to take care of it (you can find more on the guide). For nuclear EoSs, the problem arises only at low densities and usually a factor \(\pm 1.0005\) is sufficient. Being this within the accuracy of the code,  one needs only to check the EoS behave properly, without activating the relative option/parameter.  For deconfined systems one might need to change it more, and in this case also activate the relative option.
+
+\end{itemize}
+
+\sphinxAtStartPar
+In order to do all of this we have a PYTHON script that takes an EoS (typically in COMPSTAR format, but can easily be adapted to any other, the EoS for the default script are in the directory BL2), and rebuild a table in the XNS 4.0 format. Beware that you need to check that everything works (the code has some check), in particular if you join different EoSs check that they behave properly (it can happen that EoSs computed by different groups, in different density ranges, and with different approaches cannot easily be joined together without introducing artefacts or jumps \sphinxhyphen{} these might create problems to XNS 4.0 if not properly treated). Sometimes, even if the input EoS behaves properly, our python script can produce a wrong interpolation. This typically happens when two different EoS are joined (like at the edge of the crust) if the joining is not smooth enough. XNS 4.0 can work even in the presence of phase\sphinxhyphen{}transitions and/or density jumps like for Strange\sphinxhyphen{}Stars, but in general the presence of strong discontinuities can create issues preventing a proper relaxation.
+
+\sphinxAtStartPar
+Format of a typical XNS 4.0 Tabulated EoS.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Line 1 \sphinxhyphen{} number of points used for the tabulated EoS (i.e. between the minimum density and the maximum density) = 1000.
+
+\item {} 
+\sphinxAtStartPar
+Line 2 Empty
+
+\item {} 
+\sphinxAtStartPar
+Line 3 minimum and maximum \({\rm Log_{10}}(\rho)\)
+
+\item {} 
+\sphinxAtStartPar
+Line 4 minimum and maximum \({\rm Log_{10}}(p)\) and the effective adiabatic index \(\Gamma_p = {\rm d} Log(p) / {\rm d} Log(\rho)\) at minimum and maximum pressure.
+
+\item {} 
+\sphinxAtStartPar
+Line 5 minimum and maximum \({\rm Log_{10}}(e)\) and the effective adiabatic index \(\Gamma_e = {\rm d} Log(e) / {\rm d} Log(\rho)\) at minimum and maximum internal energy.
+
+\item {} 
+\sphinxAtStartPar
+Line 6 minimum and maximum \({\rm Log_{10}}(Ln(h))\) and the effective adiabatic index \(\Gamma_h = {\rm d} Log(Ln(h)) / {\rm d} Log(\rho)\) at minimum and maximum \(Ln(h)\).
+
+\item {} 
+\sphinxAtStartPar
+Empty line
+
+\item {} 
+\sphinxAtStartPar
+Block 1 (1000 lines \sphinxhyphen{}  7 columns) \sphinxhyphen{} First column is \(Log_{10}(\rho)\) uniformly sampled (1000 points) between \(Log_{10}(\rho_{min})\) and \(Log_{10}(\rho_{max})\). Second column is \(Log_{10}(p)\) at the same densities. Third column is \(Log_{10}(e)\). Forth column is \(Log_{10}(Ln(h))\) at the same density. Fifth column is \(\Gamma_p\), sixth column is \(\Gamma_e\), seventh column is \(\Gamma_h\).
+
+\item {} 
+\sphinxAtStartPar
+Empty line
+
+\item {} 
+\sphinxAtStartPar
+Block 2 (1000 lines \sphinxhyphen{}  3 columns) \sphinxhyphen{} First column is \(Log_{10}(p)\) uniformly sampled between \(Log_{10}(p(\rho_{min}))\) and \(Log_{10}(p(\rho_{max}))\). Second column is \(Log_{10}(\rho)\) at the same pressure.Third column is \(\Gamma_{\rho-p}={\rm d}Log_{10}(\rho)/{\rm d}Log_{10}(p)\) at the same pressure.
+
+\item {} 
+\sphinxAtStartPar
+Empty line
+
+\item {} 
+\sphinxAtStartPar
+Block 3 (1000 lines \sphinxhyphen{}  3 columns) \sphinxhyphen{} First column is \(Log_{10}(Ln(h))\) uniformly sampled between \(Log_{10}(Ln(h(\rho_{min})))\) and \(Log_{10}(Ln(h(\rho_{max})))\). Second column is \(Log_{10}(\rho)\) at the same hentalpy. Third column is \(\Gamma_{\rho-h}={\rm d}Log_{10}(\rho)/{\rm d}Log_{10}(Ln(h))\) at the same hentalpy.
+
+\end{itemize}
+
+\sphinxstepscope
+
+
 \chapter{Examples in GR}
 \label{\detokenize{examples_gr:examples-in-gr}}\label{\detokenize{examples_gr::doc}}
 \sphinxAtStartPar
@@ -1346,128 +1465,142 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_b_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal magnetic field strength and its field lines.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{bpol_gr_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the poloidal magnetic field strength at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -1489,128 +1622,142 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_b_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal magnetic field strength.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{btor_gr_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the toroidal magnetic field strength at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -1676,6 +1823,8 @@ Here are the main parameters used to compute this model. The detailed log with a
 \PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
 \end{sphinxVerbatim}
 
+\sphinxstepscope
+
 
 \chapter{Examples in STTs}
 \label{\detokenize{examples_stt:examples-in-stts}}\label{\detokenize{examples_stt::doc}}
@@ -1701,128 +1850,142 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_chi_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the scalar field.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{chi_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the scalar field at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_b-6_unmag}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -1844,164 +2007,182 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_chi_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the scalar field.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_b_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal magnetic field strength and its field lines.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{chi_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the scalar field at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{bpol_b-6_polo}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the poloidal magnetic field strength at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -2023,164 +2204,182 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_chi_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the scalar field.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_b_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal magnetic field strength.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{chi_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the scalar field at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{btor_b-6_toro}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the toroidal magnetic field strength at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -2201,128 +2400,142 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_chi_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the scalar field.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{chi_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the scalar field at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_b-6_unmag1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -2344,164 +2557,182 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_chi_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the scalar field.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_b_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal magnetic field strength and its field lines.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{chi_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the scalar field at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{bpol_b-6_polo1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the poloidal magnetic field strength at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
@@ -2523,164 +2754,182 @@ Here are the main parameters used to compute this model. The detailed log with a
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_rho_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_chi_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the scalar field.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{starplot_b_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal magnetic field strength.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{rho_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS density at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{p_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the NS pressure at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{chi_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the scalar field at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{alpha_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the lapse function at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{psi_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the conformal factor at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxincludegraphics{{btor_b-6_toro1}.png}
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Radial profile of the toroidal magnetic field strength at the pole and at the equator.}
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 

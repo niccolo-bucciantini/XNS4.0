@@ -62,14 +62,14 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     of the super-ellipsoid that best fit the numerical surface.
 <br><br>
 - **ROTATION.f90**
-    - subroutine **CHECKROTDIFF** - ?
+    - subroutine **CHECKROTDIFF** - performs several checks for consistency in the choice of the options and parameters for differential rotation. 
     - subroutine **OMEGAVALUE** - derives the function $\Omega = \Omega (r,\theta)$ for the differential rotation.
-    - subroutine **OMEGA3LVALUE** - ?
-    - subroutine **FODFO_OS** - ?
-    - subroutine **A3L_OS** - ?
-    - subroutine **PARS_VALUE_JS** - ?
-    - subroutine **FODFO_JS** - ?
-    - subroutine **A3L_JS** - ?
+    - subroutine **OMEGA3LVALUE** - derives the function $\Omega = \Omega (r,\theta)$ and A3L ($\int jd\Omega$ or $\int \Omega dj$, depeding if omega or J-space, the parameter the enters the Bernoulli Equation for the differential rotation) for the differential rotation.
+    - subroutine **FODFO_OS** - evaluate FO and DFO required to compute the local rotation rate, in the Omega-space, for a differential rotator.
+    - subroutine **A3L_OS** - evaluate A3L $=\int jd\Omega$  in the Omega-space for a differential rotator. This is the parameter the enters the Bernoulli Equation for the differential rotation.
+    - subroutine **PARS_VALUE_JS** evaluate JMAX, XVAL and YVAL (only needed for Uryu Laws, see Franceschetti et al. 2022 A8, A9, A18).
+    - subroutine **FODFO_JS** - evaluate FO and DFO in the J-space for a differential rotator (only needed for Uryu Laws, see Franceschetti et al. 2022 A2, A3).
+    - subroutine **A3L_JS** evaluate A3L $=\int \Omega dj$ in the J-space for a differential rotator. This is the parameter the enters the Bernoulli Equation for the differential rotation.
 <br><br>
 - **TOVINIMOD.f90**
     - subroutine **TOVINIMOD** - solves the 1D TOV (either in GR or in STTs) equations in isotropic coordinates to provide the initial guess. It uses a relaxation method to achieve convergence.
@@ -84,21 +84,22 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     - subroutine **GRIDBUILD** - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.
     - subroutine **FUNCD_STRETCH** - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
 <br><br>
-  - **FUNCTIONS.f90**
+- **FUNCTIONS.f90**
     - subroutine **DGTSV** - solves the linear system $AX = B$, where $A$ is a tridiagonal matrix, by
     Gaussian elimination with partial pivoting (taken from the LAPACK routines).
     - subroutine **LUSOLVER** - solves the linear system $AX = B$, where $A$ is an $N \times N$ matrix and $B$ is a vector of length $N$, with an LU decomposition.
-    - subroutine **MYSWAP** - ?
-    - function **MYISAMAX** - ?
-    - subroutine **SGER** - ?
-    - subroutine **SLASWP** - ?
-    - subroutine **LAGRANGEINT** - ?
-    - subroutine **LAGRANGEINT2D** - ?
+    - subroutine **MYSWAP** - exchanges two arrays, adapted from LAPACK 3.2
+    - function **MYISAMAX** - returns the index of maximum value of an array, adapted from LAPACK 3.2
+    - subroutine **SGER** - performs the rank 1 operation A := $x \times y^T$ + A, where  x is an nn element vector, y is an n element vector and A is an nn by n matrix. Adapted from LAPACK 3.2 
+    - subroutine **SLASWP** - exchange elements of an array,  adapted from LAPACK 3.2
+    - subroutine **STRSM** solve A*X = B where A is a matrix in LU form, adapted from LAPACK 3.2
+    - subroutine **LAGRANGEINT** - interpolate YP(XP) in XINT using (N-1)th-Polinomial according to Lagrange Interpolation with Neville algorithm
+    - subroutine **LAGRANGEINT2D** - perform 2D interpolation using (N-1)th-Polinomial according to Lagrange Interpolation with Neville algorithm, on structured grid
     - subroutine **LEGZO** - computes the zeros of Legendre polynomials and the corresponding
-    weights for Gaussian quadrature integration.
-    - subroutine **LPN** - computes the Legendre polynomials and their derivatives.
-    - subroutine **POLINT** - a polynomial 2nd order interpolation routine (modified from the Numerical Recipes).
-
+    weights for Gaussian quadrature integration. From: SPECIAL_FUNCTIONS by Shanjie Zhang, Jianming Jin.
+    - subroutine **LPN** - computes the Legendre polynomials and their derivatives. From: SPECIAL_FUNCTIONS by Shanjie Zhang, Jianming Jin.
+    - subroutine **POLINT** - a polynomial 2nd order interpolation routine (e.g. Numerical Recipes).
+    - subroutine **XNS2ECHO_OUT** - output file for X-ECHO
 ## Outputs
 
 - **Grid.dat** - contains the grid mesh points.
@@ -152,3 +153,8 @@ equation.
 - **profile_polo.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{pol}$.
 - **profile_toro.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{tor}$.
 - **profile_unmag.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$.
+
+## Reformatting the Equation of State
+
+- **resample.py** - PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuild a table in the XNS 4.0 format.
+

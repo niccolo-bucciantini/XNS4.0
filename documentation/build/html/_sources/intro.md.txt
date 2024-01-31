@@ -4,6 +4,8 @@ The XNS code solves for axisymmetric equilibria of polytropic magnetized and/or 
 
 The 4.0 version of XNS adds the possibility of solving for the structure of a magnetised, rotating NS in a class of theories of gravity alternative to general relativity (GR), that is massless scalar tensor theories (STTs). Moreover, support for the use of realistic, tabulated equations of state (EoS) has been added.
 
+You can download it via Github at (<a href="https://github.com/niccolo-bucciantini/XNS4.0">link</a>)
+
 This guide is based on the following papers, where the equations describing the approach for magnetized and rotating models are fully presented:
 
 - Bucciantini N., & Del Zanna L., 2011, A&A, 528, A101 (<a href="https://www.aanda.org/articles/aa/abs/2011/04/aa15945-10/aa15945-10.html">link</a>).

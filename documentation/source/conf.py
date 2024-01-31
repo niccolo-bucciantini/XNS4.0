@@ -33,6 +33,8 @@ release = '4.0.0'
 extensions = ['sphinx_rtd_theme','myst_parser','sphinx.ext.autosectionlabel']
 autosectionlabel_prefix_document = True
 
+myst_enable_extensions = ["dollarmath"]
+
 # Support for Markdown documents
 source_suffix = ['.rst', '.md']
 
