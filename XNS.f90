@@ -1,11 +1,11 @@
 PROGRAM XNS
   !   ============================================================
-  !   Purpose :  This progam compute a NS model for a given quatity od interest
-  !              (central density, barionic mass, gravit mass, etc...)
+  !   Purpose :  This progam computes a NS model for a given quantity of interest
+  !              (central density, baryonic mass, gravitational mass, etc...)
   !
-  !   It invokes XNSMAIN that computer a NS moddel for a given central density
+  !   It invokes XNSMAIN that computes a NS model for a given central density
   !   This is done repeatedly with Newton scheme where the solution having the
-  !   desired property is serched for.
+  !   desired property is searched for.
   !
   !  Defaults (can be changed by user) - see relevant line.
   !
@@ -17,9 +17,9 @@ PROGRAM XNS
   !         The values of KBMIN,KBMAX, OMGMIN, OMGMAX, RHOMIN, RHOMAX
   !         should be changed by the User - see the relevant lines
   !         Number of models: 
-  !         - Minumum number of magnetized sequences = 3 + 1
-  !         - Minumum number of density points = 99 + 1
-  !         - Minumum number of rotational sequences = 2 + 1
+  !         - Minimum number of magnetized sequences = 3 + 1
+  !         - Minimum number of density points = 99 + 1
+  !         - Minimum number of rotational sequences = 2 + 1
   !   ============================================================
   
   USE SYSTEMXNS
@@ -183,7 +183,7 @@ PROGRAM XNS
      F1 = QUCONV-QUA
      WRITE(6,*)'Iter = ',j,', Quantity =', QUA,QUCONV,F1
 
-     ! Cehc is conevergento to the desired accuracy
+     ! Check if conevergent to the desired accuracy
      IF(ABS(F1)/QUCONV .LT. CONVF)THEN
         IDAT=.TRUE.
         CALL XNSMAIN(RHOVAR,QUA)
@@ -195,7 +195,7 @@ PROGRAM XNS
         EXIT
      END IF
      
-     !Compute the numerical derivative 
+     ! Compute the numerical derivative 
      CALL XNSMAIN(RHOVAR*1.0001,QUB)
 
      F2 = QUCONV-QUB
@@ -220,7 +220,7 @@ PROGRAM XNS
   if (kind(1.0)==4) mpireal=mpi_real
   if (kind(1.0)==8) mpireal=mpi_double_precision
 
-  ! Change this values to change the range of sequances
+  ! Change this values to change the range of sequences
   ! Set the range of sequences for central initial density
   RHOMIN = 0.9E-3
   RHOMAX = 2.0E-3

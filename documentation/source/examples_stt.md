@@ -1,7 +1,7 @@
 # Examples in STTs
 
 Here we present a few examples to show how to work with the code and the related performances. All
-cases have been run on a laptop.
+cases have been run on a laptop.  If you wish to run one of them, just copy the **SYSTEMXNS.f90** file from the related subfolder, in the *documentantion/examples* directory.
 
 ## Non-rotating, unmagnetised NS in STT with the APR EoS
 

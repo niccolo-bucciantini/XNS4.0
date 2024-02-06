@@ -59,8 +59,8 @@ data1 =[]
 data2 =[]
 data3 =[]
 with open(dir+'eos.nb') as f:
-        dummy = np.int(f.readline())
-        npt = np.int(f.readline())
+        dummy = int(f.readline())
+        npt = int(f.readline())
         for line in f:
             data = line.split()
             data1.append(float(data[0]))
@@ -80,9 +80,9 @@ energy = ((1.+np.array(data3))*np.array(data1)*eint2ergcm3-np.array(data1)*nb2rh
 energyt = ((1.+np.array(data3))*np.array(data1)*eint2ergcm3)/punit
 
 mask_energy =  energy < 0
-if mask_energy.sum() >= 0:
+if mask_energy.sum() > 0:
     print('ATT!!!')
-    print('At nb = ',np.array(data1)[numpy.where(mask)[0][0]],' the internal energy is negative')
+    print('At nb = ',np.array(data1)[np.where(mask_energy)[0][0]],' the internal energy is negative')
     print('Try to change the parameter massfactor, or correct your EoS')
     
 
@@ -131,7 +131,7 @@ g1 = prsindex[0]
 g2 = einindex[0]
 
 # Backward integration to set the first point
-print(quad(integrand, rhoini, rhofin, args=(rhoini,pini,eini,g1,g2)))
+#print(quad(integrand, rhoini, rhofin, args=(rhoini,pini,eini,g1,g2)))
 LnHent[0] = -quad(integrand, rhoini, rhofin, args=(rhoini,pini,eini,g1,g2))[0]
 # Integration to set Ln(h)
 for i in range(0,999):
@@ -155,7 +155,7 @@ entindex[999]=entindex[998]
 plt.figure('Resampled EoS')
 plt.plot(rhopoints,prspoints,label='p')
 plt.plot(rhopoints,entpoints,label='Ln[h]')
-plt.plot(rhopoints,einpoints,lable='e')
+plt.plot(rhopoints,einpoints,label='e')
 plt.xlabel('Log10[density]')
 plt.xlabel('Log10[eint], Log10[p], Log10(Ln(h))')
 plt.legend()

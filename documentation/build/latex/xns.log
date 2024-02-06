@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/MacPorts 2021.58693_2) (preloaded format=pdflatex 2022.4.4)  31 JAN 2024 13:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/MacPorts 2021.58693_2) (preloaded format=pdflatex 2022.4.4)  6 FEB 2024 15:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -859,7 +859,7 @@ Overfull \hbox (67.37971pt too wide) in paragraph at lines 80--80
 
  [2]
 LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-01.
+04.
  (/opt/local/share/texmf-texlive/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 ) [1
@@ -870,7 +870,7 @@ File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 ]
 Chapter 1.
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
-50.
+53.
 (/opt/local/share/texmf-texlive/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 ) [3] [4
@@ -878,7 +878,7 @@ File: t1txtt.fd 2000/12/15 v3.1
 ]
 Chapter 2.
 [5] [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 707--709
+Underfull \hbox (badness 10000) in paragraph at lines 710--712
 
  []
 
@@ -891,13 +891,13 @@ Chapter 4.
 [13
 
 ] [14] [15]
-Underfull \hbox (badness 5578) in paragraph at lines 1205--1207
+Underfull \hbox (badness 5578) in paragraph at lines 1208--1210
 []\T1/qtm/m/n/10 sub-rou-tine \T1/qtm/b/n/10 LPN \T1/qtm/m/n/10 - com-putes the
  Leg-en-dre poly-no-mi-als and their deriva-tives. From: SPE-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1284--1286
+Underfull \hbox (badness 10000) in paragraph at lines 1287--1289
 []\T1/qtm/b/n/10 Hy-droeq_mag.dat \T1/qtm/m/n/10 - con-tains the new equi-lib-r
 ium con-fig-u-ra-tion for mag-netic field
  []
@@ -907,7 +907,7 @@ ium con-fig-u-ra-tion for mag-netic field
 ]
 Chapter 5.
 [19]
-Underfull \hbox (badness 6477) in paragraph at lines 1435--1437
+Underfull \hbox (badness 6477) in paragraph at lines 1426--1428
 []\T1/qtm/m/n/10 Block 3 (1000 lines - 3 columns) - First col-umn is $\OML/cmm/
 m/it/10 Log[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Ln\OT1/cmr/m/n/10 (\OML/cmm/m/it
 /10 h\OT1/cmr/m/n/10 ))$ \T1/qtm/m/n/10 uni-formly sam-pled be-tween
@@ -915,672 +915,810 @@ m/it/10 Log[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Ln\OT1/cmr/m/n/10 (\OML/cmm/m/it
 
 [20]
 Chapter 6.
-<starplot_rho_gr_polo.png, id=345, 793.93758pt x 783.61328pt>
+<starplot_rho_gr_polo.png, id=340, 793.93758pt x 783.61328pt>
 File: starplot_rho_gr_polo.png Graphic file (type png)
 <use starplot_rho_gr_polo.png>
-Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1482.
+Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1481.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_gr_polo.png Graphic file (type png)
 <use starplot_rho_gr_polo.png>
-Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1482.
+Package pdftex.def Info: starplot_rho_gr_polo.png  used on input line 1481.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
 [21
 
 ]
-<starplot_b_gr_polo.png, id=354, 793.93758pt x 782.58086pt>
+<starplot_b_gr_polo.png, id=349, 793.93758pt x 782.58086pt>
 File: starplot_b_gr_polo.png Graphic file (type png)
 <use starplot_b_gr_polo.png>
-Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1502.
+Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1501.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_gr_polo.png Graphic file (type png)
 <use starplot_b_gr_polo.png>
-Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1502.
+Package pdftex.def Info: starplot_b_gr_polo.png  used on input line 1501.
 (pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
  [22 <./starplot_rho_gr_polo.png>]
-<rho_gr_polo.png, id=360, 346.1733pt x 328.8285pt>
+<rho_gr_polo.png, id=355, 346.1733pt x 328.8285pt>
 File: rho_gr_polo.png Graphic file (type png)
 <use rho_gr_polo.png>
-Package pdftex.def Info: rho_gr_polo.png  used on input line 1522.
+Package pdftex.def Info: rho_gr_polo.png  used on input line 1521.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: rho_gr_polo.png Graphic file (type png)
 <use rho_gr_polo.png>
-Package pdftex.def Info: rho_gr_polo.png  used on input line 1522.
+Package pdftex.def Info: rho_gr_polo.png  used on input line 1521.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
  [23 <./starplot_b_gr_polo.png>]
-<p_gr_polo.png, id=366, 346.1733pt x 328.8285pt>
+<p_gr_polo.png, id=361, 346.1733pt x 328.8285pt>
 File: p_gr_polo.png Graphic file (type png)
 <use p_gr_polo.png>
-Package pdftex.def Info: p_gr_polo.png  used on input line 1542.
+Package pdftex.def Info: p_gr_polo.png  used on input line 1541.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: p_gr_polo.png Graphic file (type png)
 <use p_gr_polo.png>
-Package pdftex.def Info: p_gr_polo.png  used on input line 1542.
+Package pdftex.def Info: p_gr_polo.png  used on input line 1541.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
  [24 <./rho_gr_polo.png>]
-<alpha_gr_polo.png, id=372, 362.0727pt x 328.8285pt>
+<alpha_gr_polo.png, id=367, 362.0727pt x 328.8285pt>
 File: alpha_gr_polo.png Graphic file (type png)
 <use alpha_gr_polo.png>
-Package pdftex.def Info: alpha_gr_polo.png  used on input line 1562.
+Package pdftex.def Info: alpha_gr_polo.png  used on input line 1561.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_gr_polo.png Graphic file (type png)
 <use alpha_gr_polo.png>
-Package pdftex.def Info: alpha_gr_polo.png  used on input line 1562.
+Package pdftex.def Info: alpha_gr_polo.png  used on input line 1561.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
  [25 <./p_gr_polo.png>]
-<psi_gr_polo.png, id=378, 362.0727pt x 328.8285pt>
+<psi_gr_polo.png, id=373, 362.0727pt x 328.8285pt>
 File: psi_gr_polo.png Graphic file (type png)
 <use psi_gr_polo.png>
-Package pdftex.def Info: psi_gr_polo.png  used on input line 1582.
+Package pdftex.def Info: psi_gr_polo.png  used on input line 1581.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_gr_polo.png Graphic file (type png)
 <use psi_gr_polo.png>
-Package pdftex.def Info: psi_gr_polo.png  used on input line 1582.
+Package pdftex.def Info: psi_gr_polo.png  used on input line 1581.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
  [26 <./alpha_gr_polo.png>]
-<bpol_gr_polo.png, id=384, 357.7365pt x 328.8285pt>
+<bpol_gr_polo.png, id=379, 357.7365pt x 328.8285pt>
 File: bpol_gr_polo.png Graphic file (type png)
 <use bpol_gr_polo.png>
-Package pdftex.def Info: bpol_gr_polo.png  used on input line 1602.
+Package pdftex.def Info: bpol_gr_polo.png  used on input line 1601.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
 File: bpol_gr_polo.png Graphic file (type png)
 <use bpol_gr_polo.png>
-Package pdftex.def Info: bpol_gr_polo.png  used on input line 1602.
+Package pdftex.def Info: bpol_gr_polo.png  used on input line 1601.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
  [27 <./psi_gr_polo.png>]
-<starplot_rho_gr_toro.png, id=391, 793.93758pt x 783.61328pt>
+<starplot_rho_gr_toro.png, id=386, 793.93758pt x 783.61328pt>
 File: starplot_rho_gr_toro.png Graphic file (type png)
 <use starplot_rho_gr_toro.png>
-Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1639.
+Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1638.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_gr_toro.png Graphic file (type png)
 <use starplot_rho_gr_toro.png>
-Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1639.
+Package pdftex.def Info: starplot_rho_gr_toro.png  used on input line 1638.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
  [28 <./bpol_gr_polo.png>]
-<starplot_b_gr_toro.png, id=397, 793.93758pt x 782.58086pt>
+<starplot_b_gr_toro.png, id=392, 793.93758pt x 782.58086pt>
 File: starplot_b_gr_toro.png Graphic file (type png)
 <use starplot_b_gr_toro.png>
-Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1659.
+Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1658.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_gr_toro.png Graphic file (type png)
 <use starplot_b_gr_toro.png>
-Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1659.
+Package pdftex.def Info: starplot_b_gr_toro.png  used on input line 1658.
 (pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
  [29 <./starplot_rho_gr_toro.png>]
-<rho_gr_toro.png, id=403, 356.2911pt x 328.8285pt>
+<rho_gr_toro.png, id=398, 356.2911pt x 328.8285pt>
 File: rho_gr_toro.png Graphic file (type png)
 <use rho_gr_toro.png>
-Package pdftex.def Info: rho_gr_toro.png  used on input line 1679.
+Package pdftex.def Info: rho_gr_toro.png  used on input line 1678.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: rho_gr_toro.png Graphic file (type png)
 <use rho_gr_toro.png>
-Package pdftex.def Info: rho_gr_toro.png  used on input line 1679.
+Package pdftex.def Info: rho_gr_toro.png  used on input line 1678.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 
 [30 <./starplot_b_gr_toro.png>]
-<p_gr_toro.png, id=409, 356.2911pt x 328.8285pt>
+<p_gr_toro.png, id=404, 356.2911pt x 328.8285pt>
 File: p_gr_toro.png Graphic file (type png)
 <use p_gr_toro.png>
-Package pdftex.def Info: p_gr_toro.png  used on input line 1699.
+Package pdftex.def Info: p_gr_toro.png  used on input line 1698.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: p_gr_toro.png Graphic file (type png)
 <use p_gr_toro.png>
-Package pdftex.def Info: p_gr_toro.png  used on input line 1699.
+Package pdftex.def Info: p_gr_toro.png  used on input line 1698.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
  [31 <./rho_gr_toro.png>]
-<alpha_gr_toro.png, id=415, 362.0727pt x 328.8285pt>
+<alpha_gr_toro.png, id=410, 362.0727pt x 328.8285pt>
 File: alpha_gr_toro.png Graphic file (type png)
 <use alpha_gr_toro.png>
-Package pdftex.def Info: alpha_gr_toro.png  used on input line 1719.
+Package pdftex.def Info: alpha_gr_toro.png  used on input line 1718.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_gr_toro.png Graphic file (type png)
 <use alpha_gr_toro.png>
-Package pdftex.def Info: alpha_gr_toro.png  used on input line 1719.
+Package pdftex.def Info: alpha_gr_toro.png  used on input line 1718.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
  [32 <./p_gr_toro.png>]
-<psi_gr_toro.png, id=421, 362.0727pt x 328.8285pt>
+<psi_gr_toro.png, id=416, 362.0727pt x 328.8285pt>
 File: psi_gr_toro.png Graphic file (type png)
 <use psi_gr_toro.png>
-Package pdftex.def Info: psi_gr_toro.png  used on input line 1739.
+Package pdftex.def Info: psi_gr_toro.png  used on input line 1738.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_gr_toro.png Graphic file (type png)
 <use psi_gr_toro.png>
-Package pdftex.def Info: psi_gr_toro.png  used on input line 1739.
+Package pdftex.def Info: psi_gr_toro.png  used on input line 1738.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 [33 <./alpha_gr_toro.png>]
-<btor_gr_toro.png, id=428, 355.5684pt x 328.8285pt>
+<btor_gr_toro.png, id=423, 355.5684pt x 328.8285pt>
 File: btor_gr_toro.png Graphic file (type png)
 <use btor_gr_toro.png>
-Package pdftex.def Info: btor_gr_toro.png  used on input line 1759.
+Package pdftex.def Info: btor_gr_toro.png  used on input line 1758.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
 File: btor_gr_toro.png Graphic file (type png)
 <use btor_gr_toro.png>
-Package pdftex.def Info: btor_gr_toro.png  used on input line 1759.
+Package pdftex.def Info: btor_gr_toro.png  used on input line 1758.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
- [34 <./psi_gr_toro.png>] [35 <./btor_gr_toro.png>]
-[36]
+ [34 <./psi_gr_toro.png>]
+<starplot_bpol_gr_twist.png, id=429, 578.16pt x 578.16pt>
+File: starplot_bpol_gr_twist.png Graphic file (type png)
+<use starplot_bpol_gr_twist.png>
+Package pdftex.def Info: starplot_bpol_gr_twist.png  used on input line 1799.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: starplot_bpol_gr_twist.png Graphic file (type png)
+<use starplot_bpol_gr_twist.png>
+Package pdftex.def Info: starplot_bpol_gr_twist.png  used on input line 1799.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [35 <./btor_gr_toro.png>]
+<starplot_btor_gr_twist.png, id=435, 578.16pt x 578.16pt>
+File: starplot_btor_gr_twist.png Graphic file (type png)
+<use starplot_btor_gr_twist.png>
+Package pdftex.def Info: starplot_btor_gr_twist.png  used on input line 1819.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: starplot_btor_gr_twist.png Graphic file (type png)
+<use starplot_btor_gr_twist.png>
+Package pdftex.def Info: starplot_btor_gr_twist.png  used on input line 1819.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+
+[36 <./starplot_bpol_gr_twist.png>]
+<starplot_jtor_gr_twist.png, id=441, 578.16pt x 578.16pt>
+File: starplot_jtor_gr_twist.png Graphic file (type png)
+<use starplot_jtor_gr_twist.png>
+Package pdftex.def Info: starplot_jtor_gr_twist.png  used on input line 1839.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: starplot_jtor_gr_twist.png Graphic file (type png)
+<use starplot_jtor_gr_twist.png>
+Package pdftex.def Info: starplot_jtor_gr_twist.png  used on input line 1839.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [37 <./starplot_btor_gr_twist.png>]
+[38 <./starplot_jtor_gr_twist.png>]
+<starplot_rho_bu8.png, id=452, 578.16pt x 578.16pt>
+File: starplot_rho_bu8.png Graphic file (type png)
+<use starplot_rho_bu8.png>
+Package pdftex.def Info: starplot_rho_bu8.png  used on input line 1881.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: starplot_rho_bu8.png Graphic file (type png)
+<use starplot_rho_bu8.png>
+Package pdftex.def Info: starplot_rho_bu8.png  used on input line 1881.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+<starplot_beta_bu8.png, id=453, 578.16pt x 578.16pt>
+File: starplot_beta_bu8.png Graphic file (type png)
+<use starplot_beta_bu8.png>
+Package pdftex.def Info: starplot_beta_bu8.png  used on input line 1901.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: starplot_beta_bu8.png Graphic file (type png)
+<use starplot_beta_bu8.png>
+Package pdftex.def Info: starplot_beta_bu8.png  used on input line 1901.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [39 <./starplot_rho_bu8.png>]
+<starplot_vel_bu8.png, id=460, 578.16pt x 578.16pt>
+File: starplot_vel_bu8.png Graphic file (type png)
+<use starplot_vel_bu8.png>
+Package pdftex.def Info: starplot_vel_bu8.png  used on input line 1921.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: starplot_vel_bu8.png Graphic file (type png)
+<use starplot_vel_bu8.png>
+Package pdftex.def Info: starplot_vel_bu8.png  used on input line 1921.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [40 <./starplot_beta_bu8.png>] [41 <./starplot_vel_bu8.png>]
+<rho.png, id=471, 578.16pt x 578.16pt>
+File: rho.png Graphic file (type png)
+<use rho.png>
+Package pdftex.def Info: rho.png  used on input line 1963.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: rho.png Graphic file (type png)
+<use rho.png>
+Package pdftex.def Info: rho.png  used on input line 1963.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+<vel.png, id=472, 578.16pt x 578.16pt>
+File: vel.png Graphic file (type png)
+<use vel.png>
+Package pdftex.def Info: vel.png  used on input line 1983.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: vel.png Graphic file (type png)
+<use vel.png>
+Package pdftex.def Info: vel.png  used on input line 1983.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [42 <./rho.png>]
+<rho-cut.png, id=479, 578.16pt x 578.16pt>
+File: rho-cut.png Graphic file (type png)
+<use rho-cut.png>
+Package pdftex.def Info: rho-cut.png  used on input line 2003.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: rho-cut.png Graphic file (type png)
+<use rho-cut.png>
+Package pdftex.def Info: rho-cut.png  used on input line 2003.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [43 <./vel.png>]
+<p-cut.png, id=485, 578.16pt x 578.16pt>
+File: p-cut.png Graphic file (type png)
+<use p-cut.png>
+Package pdftex.def Info: p-cut.png  used on input line 2023.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: p-cut.png Graphic file (type png)
+<use p-cut.png>
+Package pdftex.def Info: p-cut.png  used on input line 2023.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [44 <./rho-cut.png>] [45 <./p-cut.png>]
+<rho_polunir.png, id=497, 578.16pt x 578.16pt>
+File: rho_polunir.png Graphic file (type png)
+<use rho_polunir.png>
+Package pdftex.def Info: rho_polunir.png  used on input line 2064.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: rho_polunir.png Graphic file (type png)
+<use rho_polunir.png>
+Package pdftex.def Info: rho_polunir.png  used on input line 2064.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+<vel_polunir.png, id=498, 578.16pt x 578.16pt>
+File: vel_polunir.png Graphic file (type png)
+<use vel_polunir.png>
+Package pdftex.def Info: vel_polunir.png  used on input line 2084.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: vel_polunir.png Graphic file (type png)
+<use vel_polunir.png>
+Package pdftex.def Info: vel_polunir.png  used on input line 2084.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [46 <./rho_polunir.png>]
+<B_pol_polunir.png, id=504, 578.16pt x 578.16pt>
+File: B_pol_polunir.png Graphic file (type png)
+<use B_pol_polunir.png>
+Package pdftex.def Info: B_pol_polunir.png  used on input line 2104.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: B_pol_polunir.png Graphic file (type png)
+<use B_pol_polunir.png>
+Package pdftex.def Info: B_pol_polunir.png  used on input line 2104.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [47 <./vel_polunir.png>]
+<E_pol_polunir.png, id=510, 578.16pt x 578.16pt>
+File: E_pol_polunir.png Graphic file (type png)
+<use E_pol_polunir.png>
+Package pdftex.def Info: E_pol_polunir.png  used on input line 2124.
+(pdftex.def)             Requested size: 469.75385pt x 469.75385pt.
+File: E_pol_polunir.png Graphic file (type png)
+<use E_pol_polunir.png>
+Package pdftex.def Info: E_pol_polunir.png  used on input line 2124.
+(pdftex.def)             Requested size: 457.75592pt x 457.75592pt.
+ [48 <./B_pol_polunir.png>] [49 <./E_pol_polunir.png>] [50
+
+]
 Chapter 7.
 LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
-1848.
+2150.
 (/opt/local/share/texmf-texlive/tex/latex/txfonts/ts1txtt.fd
 File: ts1txtt.fd 2000/12/15 v3.1
 )
-<starplot_rho_b-6_unmag.png, id=443, 793.93758pt x 783.61328pt>
+<starplot_rho_b-6_unmag.png, id=525, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_unmag.png Graphic file (type png)
 <use starplot_rho_b-6_unmag.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 1867.
+Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 2169.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_unmag.png Graphic file (type png)
 <use starplot_rho_b-6_unmag.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 1867.
+Package pdftex.def Info: starplot_rho_b-6_unmag.png  used on input line 2169.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
- [37
-
-]
-<starplot_chi_b-6_unmag.png, id=449, 793.93758pt x 775.35385pt>
+ [51]
+<starplot_chi_b-6_unmag.png, id=532, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_unmag.png Graphic file (type png)
 <use starplot_chi_b-6_unmag.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 1887.
+Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 2189.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_unmag.png Graphic file (type png)
 <use starplot_chi_b-6_unmag.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 1887.
+Package pdftex.def Info: starplot_chi_b-6_unmag.png  used on input line 2189.
 (pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
- [38 <./starplot_rho_b-6_unmag.png>]
-<rho_b-6_unmag.png, id=455, 363.5181pt x 328.8285pt>
+ [52 <./starplot_rho_b-6_unmag.png>]
+<rho_b-6_unmag.png, id=538, 363.5181pt x 328.8285pt>
 File: rho_b-6_unmag.png Graphic file (type png)
 <use rho_b-6_unmag.png>
-Package pdftex.def Info: rho_b-6_unmag.png  used on input line 1907.
+Package pdftex.def Info: rho_b-6_unmag.png  used on input line 2209.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_unmag.png Graphic file (type png)
 <use rho_b-6_unmag.png>
-Package pdftex.def Info: rho_b-6_unmag.png  used on input line 1907.
+Package pdftex.def Info: rho_b-6_unmag.png  used on input line 2209.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [39 <./starplot_chi_b-6_unmag.png>]
-<p_b-6_unmag.png, id=462, 363.5181pt x 328.8285pt>
+ [53 <./starplot_chi_b-6_unmag.png>]
+<p_b-6_unmag.png, id=544, 363.5181pt x 328.8285pt>
 File: p_b-6_unmag.png Graphic file (type png)
 <use p_b-6_unmag.png>
-Package pdftex.def Info: p_b-6_unmag.png  used on input line 1927.
+Package pdftex.def Info: p_b-6_unmag.png  used on input line 2229.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_unmag.png Graphic file (type png)
 <use p_b-6_unmag.png>
-Package pdftex.def Info: p_b-6_unmag.png  used on input line 1927.
+Package pdftex.def Info: p_b-6_unmag.png  used on input line 2229.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [40 <./rho_b-6_unmag.png>]
-<chi_b-6_unmag.png, id=469, 352.6776pt x 328.8285pt>
+ [54 <./rho_b-6_unmag.png>]
+<chi_b-6_unmag.png, id=550, 352.6776pt x 328.8285pt>
 File: chi_b-6_unmag.png Graphic file (type png)
 <use chi_b-6_unmag.png>
-Package pdftex.def Info: chi_b-6_unmag.png  used on input line 1947.
+Package pdftex.def Info: chi_b-6_unmag.png  used on input line 2249.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_unmag.png Graphic file (type png)
 <use chi_b-6_unmag.png>
-Package pdftex.def Info: chi_b-6_unmag.png  used on input line 1947.
+Package pdftex.def Info: chi_b-6_unmag.png  used on input line 2249.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [41 <./p_b-6_unmag.png>]
-<alpha_b-6_unmag.png, id=475, 362.0727pt x 328.8285pt>
+ [55 <./p_b-6_unmag.png>]
+<alpha_b-6_unmag.png, id=556, 362.0727pt x 328.8285pt>
 File: alpha_b-6_unmag.png Graphic file (type png)
 <use alpha_b-6_unmag.png>
-Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 1967.
+Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 2269.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_unmag.png Graphic file (type png)
 <use alpha_b-6_unmag.png>
-Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 1967.
+Package pdftex.def Info: alpha_b-6_unmag.png  used on input line 2269.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [42 <./chi_b-6_unmag.png>]
-<psi_b-6_unmag.png, id=481, 362.0727pt x 328.8285pt>
+ [56 <./chi_b-6_unmag.png>]
+<psi_b-6_unmag.png, id=562, 362.0727pt x 328.8285pt>
 File: psi_b-6_unmag.png Graphic file (type png)
 <use psi_b-6_unmag.png>
-Package pdftex.def Info: psi_b-6_unmag.png  used on input line 1987.
+Package pdftex.def Info: psi_b-6_unmag.png  used on input line 2289.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_unmag.png Graphic file (type png)
 <use psi_b-6_unmag.png>
-Package pdftex.def Info: psi_b-6_unmag.png  used on input line 1987.
+Package pdftex.def Info: psi_b-6_unmag.png  used on input line 2289.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [43 <./alpha_b-6_unmag.png>]
-<starplot_rho_b-6_polo.png, id=487, 793.93758pt x 783.61328pt>
+ [57 <./alpha_b-6_unmag.png>]
+<starplot_rho_b-6_polo.png, id=569, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_polo.png Graphic file (type png)
 <use starplot_rho_b-6_polo.png>
-Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 2024.
+Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 2326.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_polo.png Graphic file (type png)
 <use starplot_rho_b-6_polo.png>
-Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 2024.
+Package pdftex.def Info: starplot_rho_b-6_polo.png  used on input line 2326.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
- [44 <./psi_b-6_unmag.png>]
-<starplot_chi_b-6_polo.png, id=493, 793.93758pt x 775.35385pt>
+ [58 <./psi_b-6_unmag.png>]
+<starplot_chi_b-6_polo.png, id=575, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_polo.png Graphic file (type png)
 <use starplot_chi_b-6_polo.png>
-Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 2044.
+Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 2346.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_polo.png Graphic file (type png)
 <use starplot_chi_b-6_polo.png>
-Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 2044.
+Package pdftex.def Info: starplot_chi_b-6_polo.png  used on input line 2346.
 (pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
- [45 <./starplot_rho_b-6_polo.png>]
-<starplot_b_b-6_polo.png, id=500, 793.93758pt x 782.58086pt>
+ [59 <./starplot_rho_b-6_polo.png>]
+<starplot_b_b-6_polo.png, id=581, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_polo.png Graphic file (type png)
 <use starplot_b_b-6_polo.png>
-Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 2064.
+Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 2366.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_polo.png Graphic file (type png)
 <use starplot_b_b-6_polo.png>
-Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 2064.
+Package pdftex.def Info: starplot_b_b-6_polo.png  used on input line 2366.
 (pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
 
-[46 <./starplot_chi_b-6_polo.png>]
-<rho_b-6_polo.png, id=506, 363.5181pt x 328.8285pt>
+[60 <./starplot_chi_b-6_polo.png>]
+<rho_b-6_polo.png, id=587, 363.5181pt x 328.8285pt>
 File: rho_b-6_polo.png Graphic file (type png)
 <use rho_b-6_polo.png>
-Package pdftex.def Info: rho_b-6_polo.png  used on input line 2084.
+Package pdftex.def Info: rho_b-6_polo.png  used on input line 2386.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_polo.png Graphic file (type png)
 <use rho_b-6_polo.png>
-Package pdftex.def Info: rho_b-6_polo.png  used on input line 2084.
+Package pdftex.def Info: rho_b-6_polo.png  used on input line 2386.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [47 <./starplot_b_b-6_polo.png>]
-<p_b-6_polo.png, id=512, 363.5181pt x 328.8285pt>
+ [61 <./starplot_b_b-6_polo.png>]
+<p_b-6_polo.png, id=593, 363.5181pt x 328.8285pt>
 File: p_b-6_polo.png Graphic file (type png)
 <use p_b-6_polo.png>
-Package pdftex.def Info: p_b-6_polo.png  used on input line 2104.
+Package pdftex.def Info: p_b-6_polo.png  used on input line 2406.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_polo.png Graphic file (type png)
 <use p_b-6_polo.png>
-Package pdftex.def Info: p_b-6_polo.png  used on input line 2104.
+Package pdftex.def Info: p_b-6_polo.png  used on input line 2406.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [48 <./rho_b-6_polo.png>]
-<chi_b-6_polo.png, id=518, 352.6776pt x 328.8285pt>
+ [62 <./rho_b-6_polo.png>]
+<chi_b-6_polo.png, id=599, 352.6776pt x 328.8285pt>
 File: chi_b-6_polo.png Graphic file (type png)
 <use chi_b-6_polo.png>
-Package pdftex.def Info: chi_b-6_polo.png  used on input line 2124.
+Package pdftex.def Info: chi_b-6_polo.png  used on input line 2426.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_polo.png Graphic file (type png)
 <use chi_b-6_polo.png>
-Package pdftex.def Info: chi_b-6_polo.png  used on input line 2124.
+Package pdftex.def Info: chi_b-6_polo.png  used on input line 2426.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [49 <./p_b-6_polo.png>]
-<alpha_b-6_polo.png, id=524, 362.0727pt x 328.8285pt>
+ [63 <./p_b-6_polo.png>]
+<alpha_b-6_polo.png, id=606, 362.0727pt x 328.8285pt>
 File: alpha_b-6_polo.png Graphic file (type png)
 <use alpha_b-6_polo.png>
-Package pdftex.def Info: alpha_b-6_polo.png  used on input line 2144.
+Package pdftex.def Info: alpha_b-6_polo.png  used on input line 2446.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_polo.png Graphic file (type png)
 <use alpha_b-6_polo.png>
-Package pdftex.def Info: alpha_b-6_polo.png  used on input line 2144.
+Package pdftex.def Info: alpha_b-6_polo.png  used on input line 2446.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [50 <./chi_b-6_polo.png>]
-<psi_b-6_polo.png, id=530, 362.0727pt x 328.8285pt>
+ [64 <./chi_b-6_polo.png>]
+<psi_b-6_polo.png, id=612, 362.0727pt x 328.8285pt>
 File: psi_b-6_polo.png Graphic file (type png)
 <use psi_b-6_polo.png>
-Package pdftex.def Info: psi_b-6_polo.png  used on input line 2164.
+Package pdftex.def Info: psi_b-6_polo.png  used on input line 2466.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_polo.png Graphic file (type png)
 <use psi_b-6_polo.png>
-Package pdftex.def Info: psi_b-6_polo.png  used on input line 2164.
+Package pdftex.def Info: psi_b-6_polo.png  used on input line 2466.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [51 <./alpha_b-6_polo.png>]
-<bpol_b-6_polo.png, id=537, 357.7365pt x 328.8285pt>
+ [65 <./alpha_b-6_polo.png>]
+<bpol_b-6_polo.png, id=618, 357.7365pt x 328.8285pt>
 File: bpol_b-6_polo.png Graphic file (type png)
 <use bpol_b-6_polo.png>
-Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2184.
+Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2486.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
 File: bpol_b-6_polo.png Graphic file (type png)
 <use bpol_b-6_polo.png>
-Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2184.
+Package pdftex.def Info: bpol_b-6_polo.png  used on input line 2486.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
- [52 <./psi_b-6_polo.png>]
-<starplot_rho_b-6_toro.png, id=543, 793.93758pt x 783.61328pt>
+ [66 <./psi_b-6_polo.png>]
+<starplot_rho_b-6_toro.png, id=624, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_toro.png Graphic file (type png)
 <use starplot_rho_b-6_toro.png>
-Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2221.
+Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2523.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_toro.png Graphic file (type png)
 <use starplot_rho_b-6_toro.png>
-Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2221.
+Package pdftex.def Info: starplot_rho_b-6_toro.png  used on input line 2523.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
- [53 <./bpol_b-6_polo.png>]
-<starplot_chi_b-6_toro.png, id=549, 793.93758pt x 775.35385pt>
+ [67 <./bpol_b-6_polo.png>]
+<starplot_chi_b-6_toro.png, id=630, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_toro.png Graphic file (type png)
 <use starplot_chi_b-6_toro.png>
-Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2241.
+Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2543.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_toro.png Graphic file (type png)
 <use starplot_chi_b-6_toro.png>
-Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2241.
+Package pdftex.def Info: starplot_chi_b-6_toro.png  used on input line 2543.
 (pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
- [54 <./starplot_rho_b-6_toro.png>]
-<starplot_b_b-6_toro.png, id=555, 793.93758pt x 782.58086pt>
+ [68 <./starplot_rho_b-6_toro.png>]
+<starplot_b_b-6_toro.png, id=636, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_toro.png Graphic file (type png)
 <use starplot_b_b-6_toro.png>
-Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2261.
+Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2563.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_toro.png Graphic file (type png)
 <use starplot_b_b-6_toro.png>
-Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2261.
+Package pdftex.def Info: starplot_b_b-6_toro.png  used on input line 2563.
 (pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
- [55 <./starplot_chi_b-6_toro.png>]
-<rho_b-6_toro.png, id=561, 363.5181pt x 328.8285pt>
+ [69 <./starplot_chi_b-6_toro.png>]
+<rho_b-6_toro.png, id=643, 363.5181pt x 328.8285pt>
 File: rho_b-6_toro.png Graphic file (type png)
 <use rho_b-6_toro.png>
-Package pdftex.def Info: rho_b-6_toro.png  used on input line 2281.
+Package pdftex.def Info: rho_b-6_toro.png  used on input line 2583.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_toro.png Graphic file (type png)
 <use rho_b-6_toro.png>
-Package pdftex.def Info: rho_b-6_toro.png  used on input line 2281.
+Package pdftex.def Info: rho_b-6_toro.png  used on input line 2583.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [56 <./starplot_b_b-6_toro.png>]
-<p_b-6_toro.png, id=567, 363.5181pt x 328.8285pt>
+ [70 <./starplot_b_b-6_toro.png>]
+<p_b-6_toro.png, id=649, 363.5181pt x 328.8285pt>
 File: p_b-6_toro.png Graphic file (type png)
 <use p_b-6_toro.png>
-Package pdftex.def Info: p_b-6_toro.png  used on input line 2301.
+Package pdftex.def Info: p_b-6_toro.png  used on input line 2603.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_toro.png Graphic file (type png)
 <use p_b-6_toro.png>
-Package pdftex.def Info: p_b-6_toro.png  used on input line 2301.
+Package pdftex.def Info: p_b-6_toro.png  used on input line 2603.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [57 <./rho_b-6_toro.png>]
-<chi_b-6_toro.png, id=574, 352.6776pt x 328.8285pt>
+ [71 <./rho_b-6_toro.png>]
+<chi_b-6_toro.png, id=655, 352.6776pt x 328.8285pt>
 File: chi_b-6_toro.png Graphic file (type png)
 <use chi_b-6_toro.png>
-Package pdftex.def Info: chi_b-6_toro.png  used on input line 2321.
+Package pdftex.def Info: chi_b-6_toro.png  used on input line 2623.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_toro.png Graphic file (type png)
 <use chi_b-6_toro.png>
-Package pdftex.def Info: chi_b-6_toro.png  used on input line 2321.
+Package pdftex.def Info: chi_b-6_toro.png  used on input line 2623.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [58 <./p_b-6_toro.png>]
-<alpha_b-6_toro.png, id=580, 362.0727pt x 328.8285pt>
+ [72 <./p_b-6_toro.png>]
+<alpha_b-6_toro.png, id=661, 362.0727pt x 328.8285pt>
 File: alpha_b-6_toro.png Graphic file (type png)
 <use alpha_b-6_toro.png>
-Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2341.
+Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2643.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_toro.png Graphic file (type png)
 <use alpha_b-6_toro.png>
-Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2341.
+Package pdftex.def Info: alpha_b-6_toro.png  used on input line 2643.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [59 <./chi_b-6_toro.png>]
-<psi_b-6_toro.png, id=586, 362.0727pt x 328.8285pt>
+ [73 <./chi_b-6_toro.png>]
+<psi_b-6_toro.png, id=667, 362.0727pt x 328.8285pt>
 File: psi_b-6_toro.png Graphic file (type png)
 <use psi_b-6_toro.png>
-Package pdftex.def Info: psi_b-6_toro.png  used on input line 2361.
+Package pdftex.def Info: psi_b-6_toro.png  used on input line 2663.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_toro.png Graphic file (type png)
 <use psi_b-6_toro.png>
-Package pdftex.def Info: psi_b-6_toro.png  used on input line 2361.
+Package pdftex.def Info: psi_b-6_toro.png  used on input line 2663.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [60 <./alpha_b-6_toro.png>]
-<btor_b-6_toro.png, id=592, 355.5684pt x 328.8285pt>
+ [74 <./alpha_b-6_toro.png>]
+<btor_b-6_toro.png, id=674, 355.5684pt x 328.8285pt>
 File: btor_b-6_toro.png Graphic file (type png)
 <use btor_b-6_toro.png>
-Package pdftex.def Info: btor_b-6_toro.png  used on input line 2381.
+Package pdftex.def Info: btor_b-6_toro.png  used on input line 2683.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
 File: btor_b-6_toro.png Graphic file (type png)
 <use btor_b-6_toro.png>
-Package pdftex.def Info: btor_b-6_toro.png  used on input line 2381.
+Package pdftex.def Info: btor_b-6_toro.png  used on input line 2683.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
- [61 <./psi_b-6_toro.png>]
-<starplot_rho_b-6_unmag1.png, id=598, 793.93758pt x 783.61328pt>
+ [75 <./psi_b-6_toro.png>]
+<starplot_rho_b-6_unmag1.png, id=681, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_unmag1.png Graphic file (type png)
 <use starplot_rho_b-6_unmag1.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2417.
+Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2719.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_unmag1.png Graphic file (type png)
 <use starplot_rho_b-6_unmag1.png>
-Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2417.
+Package pdftex.def Info: starplot_rho_b-6_unmag1.png  used on input line 2719.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
- [62 <./btor_b-6_toro.png>]
-<starplot_chi_b-6_unmag1.png, id=604, 793.93758pt x 775.35385pt>
+ [76 <./btor_b-6_toro.png>]
+<starplot_chi_b-6_unmag1.png, id=687, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_unmag1.png Graphic file (type png)
 <use starplot_chi_b-6_unmag1.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2437.
+Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2739.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_unmag1.png Graphic file (type png)
 <use starplot_chi_b-6_unmag1.png>
-Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2437.
+Package pdftex.def Info: starplot_chi_b-6_unmag1.png  used on input line 2739.
 (pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
- [63 <./starplot_rho_b-6_unmag1.png>]
-<rho_b-6_unmag1.png, id=611, 363.5181pt x 328.8285pt>
+ [77 <./starplot_rho_b-6_unmag1.png>]
+<rho_b-6_unmag1.png, id=693, 363.5181pt x 328.8285pt>
 File: rho_b-6_unmag1.png Graphic file (type png)
 <use rho_b-6_unmag1.png>
-Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2457.
+Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2759.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: rho_b-6_unmag1.png Graphic file (type png)
 <use rho_b-6_unmag1.png>
-Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2457.
+Package pdftex.def Info: rho_b-6_unmag1.png  used on input line 2759.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [64 <./starplot_chi_b-6_unmag1.png>]
-<p_b-6_unmag1.png, id=617, 363.5181pt x 328.8285pt>
+ [78 <./starplot_chi_b-6_unmag1.png>]
+<p_b-6_unmag1.png, id=699, 363.5181pt x 328.8285pt>
 File: p_b-6_unmag1.png Graphic file (type png)
 <use p_b-6_unmag1.png>
-Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2477.
+Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2779.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
 File: p_b-6_unmag1.png Graphic file (type png)
 <use p_b-6_unmag1.png>
-Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2477.
+Package pdftex.def Info: p_b-6_unmag1.png  used on input line 2779.
 (pdftex.def)             Requested size: 363.51721pt x 328.8277pt.
- [65 <./rho_b-6_unmag1.png>]
-<chi_b-6_unmag1.png, id=623, 352.6776pt x 328.8285pt>
+ [79 <./rho_b-6_unmag1.png>]
+<chi_b-6_unmag1.png, id=705, 352.6776pt x 328.8285pt>
 File: chi_b-6_unmag1.png Graphic file (type png)
 <use chi_b-6_unmag1.png>
-Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2497.
+Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2799.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_unmag1.png Graphic file (type png)
 <use chi_b-6_unmag1.png>
-Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2497.
+Package pdftex.def Info: chi_b-6_unmag1.png  used on input line 2799.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [66 <./p_b-6_unmag1.png>]
-<alpha_b-6_unmag1.png, id=629, 362.0727pt x 328.8285pt>
+ [80 <./p_b-6_unmag1.png>]
+<alpha_b-6_unmag1.png, id=711, 362.0727pt x 328.8285pt>
 File: alpha_b-6_unmag1.png Graphic file (type png)
 <use alpha_b-6_unmag1.png>
-Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2517.
+Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2819.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_unmag1.png Graphic file (type png)
 <use alpha_b-6_unmag1.png>
-Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2517.
+Package pdftex.def Info: alpha_b-6_unmag1.png  used on input line 2819.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [67 <./chi_b-6_unmag1.png>]
-<psi_b-6_unmag1.png, id=635, 362.0727pt x 328.8285pt>
+ [81 <./chi_b-6_unmag1.png>]
+<psi_b-6_unmag1.png, id=718, 362.0727pt x 328.8285pt>
 File: psi_b-6_unmag1.png Graphic file (type png)
 <use psi_b-6_unmag1.png>
-Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2537.
+Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2839.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_unmag1.png Graphic file (type png)
 <use psi_b-6_unmag1.png>
-Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2537.
+Package pdftex.def Info: psi_b-6_unmag1.png  used on input line 2839.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [68 <./alpha_b-6_unmag1.png>]
-<starplot_rho_b-6_polo1.png, id=641, 793.93758pt x 783.61328pt>
+ [82 <./alpha_b-6_unmag1.png>]
+<starplot_rho_b-6_polo1.png, id=724, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_polo1.png Graphic file (type png)
 <use starplot_rho_b-6_polo1.png>
-Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2574.
+Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2876.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_polo1.png Graphic file (type png)
 <use starplot_rho_b-6_polo1.png>
-Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2574.
+Package pdftex.def Info: starplot_rho_b-6_polo1.png  used on input line 2876.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
- [69 <./psi_b-6_unmag1.png>]
-<starplot_chi_b-6_polo1.png, id=648, 793.93758pt x 775.35385pt>
+ [83 <./psi_b-6_unmag1.png>]
+<starplot_chi_b-6_polo1.png, id=730, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_polo1.png Graphic file (type png)
 <use starplot_chi_b-6_polo1.png>
-Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2594.
+Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2896.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_polo1.png Graphic file (type png)
 <use starplot_chi_b-6_polo1.png>
-Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2594.
+Package pdftex.def Info: starplot_chi_b-6_polo1.png  used on input line 2896.
 (pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
- [70 <./starplot_rho_b-6_polo1.png>]
-<starplot_b_b-6_polo1.png, id=654, 793.93758pt x 782.58086pt>
+ [84 <./starplot_rho_b-6_polo1.png>]
+<starplot_b_b-6_polo1.png, id=736, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_polo1.png Graphic file (type png)
 <use starplot_b_b-6_polo1.png>
-Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2614.
+Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2916.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_polo1.png Graphic file (type png)
 <use starplot_b_b-6_polo1.png>
-Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2614.
+Package pdftex.def Info: starplot_b_b-6_polo1.png  used on input line 2916.
 (pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
- [71 <./starplot_chi_b-6_polo1.png>]
-<rho_b-6_polo1.png, id=660, 346.1733pt x 328.8285pt>
+ [85 <./starplot_chi_b-6_polo1.png>]
+<rho_b-6_polo1.png, id=742, 346.1733pt x 328.8285pt>
 File: rho_b-6_polo1.png Graphic file (type png)
 <use rho_b-6_polo1.png>
-Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2634.
+Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2936.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: rho_b-6_polo1.png Graphic file (type png)
 <use rho_b-6_polo1.png>
-Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2634.
+Package pdftex.def Info: rho_b-6_polo1.png  used on input line 2936.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
- [72 <./starplot_b_b-6_polo1.png>]
-<p_b-6_polo1.png, id=667, 346.1733pt x 328.8285pt>
+ [86 <./starplot_b_b-6_polo1.png>]
+<p_b-6_polo1.png, id=748, 346.1733pt x 328.8285pt>
 File: p_b-6_polo1.png Graphic file (type png)
 <use p_b-6_polo1.png>
-Package pdftex.def Info: p_b-6_polo1.png  used on input line 2654.
+Package pdftex.def Info: p_b-6_polo1.png  used on input line 2956.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
 File: p_b-6_polo1.png Graphic file (type png)
 <use p_b-6_polo1.png>
-Package pdftex.def Info: p_b-6_polo1.png  used on input line 2654.
+Package pdftex.def Info: p_b-6_polo1.png  used on input line 2956.
 (pdftex.def)             Requested size: 346.17244pt x 328.8277pt.
- [73 <./rho_b-6_polo1.png>]
-<chi_b-6_polo1.png, id=673, 352.6776pt x 328.8285pt>
+ [87 <./rho_b-6_polo1.png>]
+<chi_b-6_polo1.png, id=755, 352.6776pt x 328.8285pt>
 File: chi_b-6_polo1.png Graphic file (type png)
 <use chi_b-6_polo1.png>
-Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2674.
+Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2976.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_polo1.png Graphic file (type png)
 <use chi_b-6_polo1.png>
-Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2674.
+Package pdftex.def Info: chi_b-6_polo1.png  used on input line 2976.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
- [74 <./p_b-6_polo1.png>]
-<alpha_b-6_polo1.png, id=679, 362.0727pt x 328.8285pt>
+ [88 <./p_b-6_polo1.png>]
+<alpha_b-6_polo1.png, id=761, 362.0727pt x 328.8285pt>
 File: alpha_b-6_polo1.png Graphic file (type png)
 <use alpha_b-6_polo1.png>
-Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2694.
+Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2996.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_polo1.png Graphic file (type png)
 <use alpha_b-6_polo1.png>
-Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2694.
+Package pdftex.def Info: alpha_b-6_polo1.png  used on input line 2996.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [75 <./chi_b-6_polo1.png>]
-<psi_b-6_polo1.png, id=686, 362.0727pt x 328.8285pt>
+ [89 <./chi_b-6_polo1.png>]
+<psi_b-6_polo1.png, id=767, 362.0727pt x 328.8285pt>
 File: psi_b-6_polo1.png Graphic file (type png)
 <use psi_b-6_polo1.png>
-Package pdftex.def Info: psi_b-6_polo1.png  used on input line 2714.
+Package pdftex.def Info: psi_b-6_polo1.png  used on input line 3016.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_polo1.png Graphic file (type png)
 <use psi_b-6_polo1.png>
-Package pdftex.def Info: psi_b-6_polo1.png  used on input line 2714.
+Package pdftex.def Info: psi_b-6_polo1.png  used on input line 3016.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [76 <./alpha_b-6_polo1.png>]
-<bpol_b-6_polo1.png, id=692, 357.7365pt x 328.8285pt>
+ [90 <./alpha_b-6_polo1.png>]
+<bpol_b-6_polo1.png, id=773, 357.7365pt x 328.8285pt>
 File: bpol_b-6_polo1.png Graphic file (type png)
 <use bpol_b-6_polo1.png>
-Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 2734.
+Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 3036.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
 File: bpol_b-6_polo1.png Graphic file (type png)
 <use bpol_b-6_polo1.png>
-Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 2734.
+Package pdftex.def Info: bpol_b-6_polo1.png  used on input line 3036.
 (pdftex.def)             Requested size: 357.73561pt x 328.8277pt.
- [77 <./psi_b-6_polo1.png>]
-<starplot_rho_b-6_toro1.png, id=698, 793.93758pt x 783.61328pt>
+ [91 <./psi_b-6_polo1.png>]
+<starplot_rho_b-6_toro1.png, id=779, 793.93758pt x 783.61328pt>
 File: starplot_rho_b-6_toro1.png Graphic file (type png)
 <use starplot_rho_b-6_toro1.png>
-Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 2771.
+Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 3073.
 (pdftex.def)             Requested size: 469.76382pt x 463.65504pt.
 File: starplot_rho_b-6_toro1.png Graphic file (type png)
 <use starplot_rho_b-6_toro1.png>
-Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 2771.
+Package pdftex.def Info: starplot_rho_b-6_toro1.png  used on input line 3073.
 (pdftex.def)             Requested size: 457.77046pt x 451.8057pt.
- [78 <./bpol_b-6_polo1.png>]
-<starplot_chi_b-6_toro1.png, id=704, 793.93758pt x 775.35385pt>
+ [92 <./bpol_b-6_polo1.png>]
+<starplot_chi_b-6_toro1.png, id=785, 793.93758pt x 775.35385pt>
 File: starplot_chi_b-6_toro1.png Graphic file (type png)
 <use starplot_chi_b-6_toro1.png>
-Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 2791.
+Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 3093.
 (pdftex.def)             Requested size: 469.76382pt x 458.75621pt.
 File: starplot_chi_b-6_toro1.png Graphic file (type png)
 <use starplot_chi_b-6_toro1.png>
-Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 2791.
+Package pdftex.def Info: starplot_chi_b-6_toro1.png  used on input line 3093.
 (pdftex.def)             Requested size: 457.77046pt x 447.0436pt.
- [79 <./starplot_rho_b-6_toro1.png>]
-<starplot_b_b-6_toro1.png, id=710, 793.93758pt x 782.58086pt>
+ [93 <./starplot_rho_b-6_toro1.png>]
+<starplot_b_b-6_toro1.png, id=792, 793.93758pt x 782.58086pt>
 File: starplot_b_b-6_toro1.png Graphic file (type png)
 <use starplot_b_b-6_toro1.png>
-Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 2811.
+Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 3113.
 (pdftex.def)             Requested size: 469.76382pt x 463.04417pt.
 File: starplot_b_b-6_toro1.png Graphic file (type png)
 <use starplot_b_b-6_toro1.png>
-Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 2811.
+Package pdftex.def Info: starplot_b_b-6_toro1.png  used on input line 3113.
 (pdftex.def)             Requested size: 457.77046pt x 451.21045pt.
- [80 <./starplot_chi_b-6_toro1.png>]
-<rho_b-6_toro1.png, id=716, 356.2911pt x 328.8285pt>
+ [94 <./starplot_chi_b-6_toro1.png>]
+<rho_b-6_toro1.png, id=798, 356.2911pt x 328.8285pt>
 File: rho_b-6_toro1.png Graphic file (type png)
 <use rho_b-6_toro1.png>
-Package pdftex.def Info: rho_b-6_toro1.png  used on input line 2831.
+Package pdftex.def Info: rho_b-6_toro1.png  used on input line 3133.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: rho_b-6_toro1.png Graphic file (type png)
 <use rho_b-6_toro1.png>
-Package pdftex.def Info: rho_b-6_toro1.png  used on input line 2831.
+Package pdftex.def Info: rho_b-6_toro1.png  used on input line 3133.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
- [81 <./starplot_b_b-6_toro1.png>]
-<p_b-6_toro1.png, id=723, 356.2911pt x 328.8285pt>
+ [95 <./starplot_b_b-6_toro1.png>]
+<p_b-6_toro1.png, id=804, 356.2911pt x 328.8285pt>
 File: p_b-6_toro1.png Graphic file (type png)
 <use p_b-6_toro1.png>
-Package pdftex.def Info: p_b-6_toro1.png  used on input line 2851.
+Package pdftex.def Info: p_b-6_toro1.png  used on input line 3153.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
 File: p_b-6_toro1.png Graphic file (type png)
 <use p_b-6_toro1.png>
-Package pdftex.def Info: p_b-6_toro1.png  used on input line 2851.
+Package pdftex.def Info: p_b-6_toro1.png  used on input line 3153.
 (pdftex.def)             Requested size: 356.29022pt x 328.8277pt.
- [82 <./rho_b-6_toro1.png>]
-<chi_b-6_toro1.png, id=729, 352.6776pt x 328.8285pt>
+ [96 <./rho_b-6_toro1.png>]
+<chi_b-6_toro1.png, id=810, 352.6776pt x 328.8285pt>
 File: chi_b-6_toro1.png Graphic file (type png)
 <use chi_b-6_toro1.png>
-Package pdftex.def Info: chi_b-6_toro1.png  used on input line 2871.
+Package pdftex.def Info: chi_b-6_toro1.png  used on input line 3173.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 File: chi_b-6_toro1.png Graphic file (type png)
 <use chi_b-6_toro1.png>
-Package pdftex.def Info: chi_b-6_toro1.png  used on input line 2871.
+Package pdftex.def Info: chi_b-6_toro1.png  used on input line 3173.
 (pdftex.def)             Requested size: 352.67673pt x 328.8277pt.
 
-[83 <./p_b-6_toro1.png>]
-<alpha_b-6_toro1.png, id=735, 362.0727pt x 328.8285pt>
+[97 <./p_b-6_toro1.png>]
+<alpha_b-6_toro1.png, id=816, 362.0727pt x 328.8285pt>
 File: alpha_b-6_toro1.png Graphic file (type png)
 <use alpha_b-6_toro1.png>
-Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 2891.
+Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 3193.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: alpha_b-6_toro1.png Graphic file (type png)
 <use alpha_b-6_toro1.png>
-Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 2891.
+Package pdftex.def Info: alpha_b-6_toro1.png  used on input line 3193.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [84 <./chi_b-6_toro1.png>]
-<psi_b-6_toro1.png, id=741, 362.0727pt x 328.8285pt>
+ [98 <./chi_b-6_toro1.png>]
+<psi_b-6_toro1.png, id=822, 362.0727pt x 328.8285pt>
 File: psi_b-6_toro1.png Graphic file (type png)
 <use psi_b-6_toro1.png>
-Package pdftex.def Info: psi_b-6_toro1.png  used on input line 2911.
+Package pdftex.def Info: psi_b-6_toro1.png  used on input line 3213.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
 File: psi_b-6_toro1.png Graphic file (type png)
 <use psi_b-6_toro1.png>
-Package pdftex.def Info: psi_b-6_toro1.png  used on input line 2911.
+Package pdftex.def Info: psi_b-6_toro1.png  used on input line 3213.
 (pdftex.def)             Requested size: 362.07181pt x 328.8277pt.
- [85 <./alpha_b-6_toro1.png>]
-<btor_b-6_toro1.png, id=747, 355.5684pt x 328.8285pt>
+ [99 <./alpha_b-6_toro1.png>]
+<btor_b-6_toro1.png, id=829, 355.5684pt x 328.8285pt>
 File: btor_b-6_toro1.png Graphic file (type png)
 <use btor_b-6_toro1.png>
-Package pdftex.def Info: btor_b-6_toro1.png  used on input line 2931.
+Package pdftex.def Info: btor_b-6_toro1.png  used on input line 3233.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
 File: btor_b-6_toro1.png Graphic file (type png)
 <use btor_b-6_toro1.png>
-Package pdftex.def Info: btor_b-6_toro1.png  used on input line 2931.
+Package pdftex.def Info: btor_b-6_toro1.png  used on input line 3233.
 (pdftex.def)             Requested size: 355.56752pt x 328.8277pt.
- [86 <./psi_b-6_toro1.png>] [87 <./btor_b-6_toro1.png>] [88
+ [100 <./psi_b-6_toro1.png>] [101 <./btor_b-6_toro1.png>] [102
 
 ]
 Chapter 8.
-(./xns.ind) [89] (./xns.aux)
+(./xns.ind) [103] (./xns.aux)
 Package rerunfilecheck Info: File `xns.out' has not changed.
-(rerunfilecheck)             Checksum: A76221E501EB98F3F2C4280FCBC42D9F;10793.
+(rerunfilecheck)             Checksum: 77B0100A4FEE00F95A6CCFAF0F38DEAE;10353.
  ) 
 Here is how much of TeX's memory you used:
- 15441 strings out of 480954
- 240492 string characters out of 5907460
- 574450 words of memory out of 5000000
- 32080 multiletter control sequences out of 15000+600000
+ 15535 strings out of 480954
+ 242171 string characters out of 5907460
+ 574354 words of memory out of 5000000
+ 32148 multiletter control sequences out of 15000+600000
  454286 words of font info for 67 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  83i,14n,88p,1657b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1602,10 +1740,10 @@ fonts/type1/public/tex-gyre/qtmr.pfb></opt/local/share/texmf-texlive/fonts/type
 1/public/tex-gyre/qtmri.pfb></opt/local/share/texmf-texlive/fonts/type1/public/
 txfonts/t1xtt.pfb></opt/local/share/texmf-texlive/fonts/type1/public/txfonts/tc
 xtt.pfb>
-Output written on xns.pdf (93 pages, 3286072 bytes).
+Output written on xns.pdf (107 pages, 5733961 bytes).
 PDF statistics:
- 860 PDF objects out of 1000 (max. 8388607)
- 608 compressed objects within 7 object streams
- 139 named destinations out of 1000 (max. 500000)
- 701 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 944 PDF objects out of 1000 (max. 8388607)
+ 650 compressed objects within 7 object streams
+ 152 named destinations out of 1000 (max. 500000)
+ 763 words of extra memory for PDF output out of 10000 (max. 10000000)
 

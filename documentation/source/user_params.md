@@ -1,6 +1,6 @@
 # User parameters
 
-The input parameters that the user might want to change are all set in the module system inside the file *SYSTEM.f90*. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc ...), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:
+The input parameters that the user might want to change are all set in the module systemxns inside the file *SYSTEMXNS.f90*. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc ...), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:
 
 ## Convergence
 

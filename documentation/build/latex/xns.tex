@@ -63,7 +63,7 @@
 
 
 \title{XNS}
-\date{Jan 31, 2024}
+\date{Feb 06, 2024}
 \release{4.0.0}
 \author{N.Bucciantini, J.Soldateschi, A.Pili, L.Del Zanna, K.Franceschetti}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -94,6 +94,9 @@ The 4.0 version of XNS adds the possibility of solving for the structure of a ma
 
 \sphinxAtStartPar
 You can download it via Github at (link)
+
+\sphinxAtStartPar
+You can download the pdf of the guide from Github at (link)
 
 \sphinxAtStartPar
 This guide is based on the following papers, where the equations describing the approach for magnetized and rotating models are fully presented:
@@ -188,7 +191,7 @@ make cleanall \sphinxhyphen{} removes all \sphinxstyleemphasis{.o} and \sphinxst
 \chapter{User parameters}
 \label{\detokenize{user_params:user-parameters}}\label{\detokenize{user_params::doc}}
 \sphinxAtStartPar
-The input parameters that the user might want to change are all set in the module system inside the file \sphinxstyleemphasis{SYSTEM.f90}. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc …), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:
+The input parameters that the user might want to change are all set in the module systemxns inside the file \sphinxstyleemphasis{SYSTEMXNS.f90}. There are other parameters in other parts of the code that deal with specific routines (root finding, convergence etc …), but those should not need to be changed. Here is a list of the parameters of the model as they appear in the module system:
 
 
 \section{Convergence}
@@ -975,36 +978,11 @@ subroutine \sphinxstylestrong{CHIDERIVS} \sphinxhyphen{} computes the derivative
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{SYSTEM.f90}
+\sphinxstylestrong{SYSTEMXNS.f90}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-module \sphinxstylestrong{SYSTEM} \sphinxhyphen{} contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section “User parameters”).
-
-\item {} 
-\sphinxAtStartPar
-subroutine \sphinxstylestrong{EOSTABLEREAD} \sphinxhyphen{} reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.
-
-\item {} 
-\sphinxAtStartPar
-subroutine \sphinxstylestrong{RHO2EOS} \sphinxhyphen{} given \(\rho\), it computes the pressure \(p\), the internal energy \(\varepsilon\) and the enthalpy \(h\) according to the tabulated EoS.
-
-\item {} 
-\sphinxAtStartPar
-subroutine \sphinxstylestrong{PRS2EOS} \sphinxhyphen{} given \(p\), it computes the \(\rho\) according to the tabulated EoS.
-
-\item {} 
-\sphinxAtStartPar
-subroutine \sphinxstylestrong{ENT2EOS} \sphinxhyphen{} given \(h\), it computes the \(\rho\) according to the tabulated EoS.
-
-\item {} 
-\sphinxAtStartPar
-subroutine \sphinxstylestrong{EOS} \sphinxhyphen{} computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.
-
-\item {} 
-\sphinxAtStartPar
-subroutine \sphinxstylestrong{FUNCD\_EOS} \sphinxhyphen{} used by the root\sphinxhyphen{}finding subroutine to derive the central pressure given
-the central density.
+module \sphinxstylestrong{SYSTEMXNS} \sphinxhyphen{} contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section “User parameters”).
 
 
 \end{itemize}
@@ -1151,6 +1129,31 @@ subroutine \sphinxstylestrong{GRIDBUILD} \sphinxhyphen{} computes the radial gri
 \item {} 
 \sphinxAtStartPar
 subroutine \sphinxstylestrong{FUNCD\_STRETCH} \sphinxhyphen{} used by the root\sphinxhyphen{}finding subroutine to derive the stretching factor for the grid, if it is stretched.
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{EOSTABLEREAD} \sphinxhyphen{} reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{RHO2EOS} \sphinxhyphen{} given \(\rho\), it computes the pressure \(p\), the internal energy \(\varepsilon\) and the enthalpy \(h\) according to the tabulated EoS.
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{PRS2EOS} \sphinxhyphen{} given \(p\), it computes the \(\rho\) according to the tabulated EoS.
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{ENT2EOS} \sphinxhyphen{} given \(h\), it computes the \(\rho\) according to the tabulated EoS.
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{EOS} \sphinxhyphen{} computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.
+
+\item {} 
+\sphinxAtStartPar
+subroutine \sphinxstylestrong{FUNCD\_EOS} \sphinxhyphen{} used by the root\sphinxhyphen{}finding subroutine to derive the central pressure given
+the central density.
 
 
 \end{itemize}
@@ -1326,27 +1329,15 @@ equation.
 \label{\detokenize{files_outputs:visualisation}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{starplot\_polo.py} \sphinxhyphen{} plots a section of the star in the \(x-z\) plane along with the contours of either the poloidal magnetic field (with or without the field lines), the scalar field or the density.
+\sphinxstylestrong{starplot.py} \sphinxhyphen{} plots fluid, magnetic or metric quantities in a section of the star in the \(x-z\) plane (i.e. contours of either the poloidal magnetic field, with or without the field lines, toroidal magnetic field, the scalar field, the density, etc…).
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{starplot\_toro.py} \sphinxhyphen{} plots a section of the star in the \(x-z\) plane along with the contours of either the toroidal magnetic field, the scalar field or the density.
+\sphinxstylestrong{starcut.py} \sphinxhyphen{} plots the radial profiles, both at the pole and at the equator, of several quantities: \(\rho\), \(p\), \(\psi\), \(\alpha\), \(\chi\), \(B_\mathrm{pol}\), etc….
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{starplot\_unmag.py} \sphinxhyphen{} plots a section of the star in the \(x-z\) plane along with the contours of either the scalar field or the density.
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{profile\_polo.py} \sphinxhyphen{} plots the radial profiles, both at the pole and at the equator, of several quantities: \(\rho\), \(p\), \(\psi\), \(\alpha\), \(\chi\), \(B_\mathrm{pol}\).
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{profile\_toro.py} \sphinxhyphen{} plots the radial profiles, both at the pole and at the equator, of several quantities: \(\rho\), \(p\), \(\psi\), \(\alpha\), \(\chi\), \(B_\mathrm{tor}\).
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{profile\_unmag.py} \sphinxhyphen{} plots the radial profiles, both at the pole and at the equator, of several quantities: \(\rho\), \(p\), \(\psi\), \(\alpha\), \(\chi\).
+\sphinxstylestrong{startov.py} \sphinxhyphen{} plots the radial profiles, of several quantities: \(\rho\), \(p\), \(\psi\), \(\alpha\), \(\chi\), for the TOV initial solution.
 
 \end{itemize}
 
@@ -1355,7 +1346,7 @@ equation.
 \label{\detokenize{files_outputs:reformatting-the-equation-of-state}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{resample.py} \sphinxhyphen{} PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuild a table in the XNS 4.0 format.
+\sphinxstylestrong{resample.py} \sphinxhyphen{} PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuilds a table in the XNS 4.0 format.
 
 \end{itemize}
 
@@ -1443,21 +1434,29 @@ Block 3 (1000 lines \sphinxhyphen{}  3 columns) \sphinxhyphen{} First column is 
 \chapter{Examples in GR}
 \label{\detokenize{examples_gr:examples-in-gr}}\label{\detokenize{examples_gr::doc}}
 \sphinxAtStartPar
-Here we present a few examples to show how to work with the code and the related performances. All
-cases have been run on a simple laptop
+Here we present a few examples in standard GR to show how to work with
+the code, with a few related plots. All cases have been run on a
+simple laptop.
+
+\sphinxAtStartPar
+In order to run a test, please copy the corresponding SYSTEMXNS.f90
+file from the selected test directory
+(e.g. documentation/examples/GR/NonRotMagPoloPol2/) in the main code’s
+directory, and check the final results against the LogFile.dat file,
+provided for that example in the same directory.
 
 
 \section{Non\sphinxhyphen{}rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field}
 \label{\detokenize{examples_gr:non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-poloidal-magnetic-field}}
 \sphinxAtStartPar
-This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely poloidal field. It has a J\sphinxhyphen{}frame central density \(\rho _\mathrm{c}=8.3\times 10^{-4}\) in code units (corresponding to \(5.15\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass in the E\sphinxhyphen{}frame of \(1.442\) M\( _\odot\). The circumferential radius is \(16.559\) km.
+This is a static model of an NS in GR described by the analytic POL2 EoS, endowed with a purely poloidal field. It has a central density \(\rho _\mathrm{c}=8.3\times 10^{-4}\) in code units (corresponding to \(5.15\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass of \(1.442\) M\( _\odot\). The circumferential radius is \(16.559\) km.
 
 \sphinxAtStartPar
-Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+Here are some of the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{900}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
-\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{13.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{8.30E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.0E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{13.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{8.30E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
 \PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{CONVHELP} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{QFACTOR} \PYG{o}{=} \PYG{l+m+mf}{0.85}\PYG{p}{,} \PYG{n}{QFACTORCHI} \PYG{o}{=} \PYG{l+m+mf}{0.45}\PYG{p}{,}
 \PYG{n}{QFACTORMETRIC} \PYG{o}{=} \PYG{l+m+mf}{0.35}\PYG{p}{,} \PYG{n}{QRELAX} \PYG{o}{=} \PYG{l+m+mf}{0.30}\PYG{p}{,} \PYG{n}{QAPHI} \PYG{o}{=} \PYG{l+m+mf}{0.50}\PYG{p}{,} \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{110.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,}
 \PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{IPOL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{KBPOL} \PYG{o}{=} \PYG{l+m+mf}{0.34135}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
@@ -1607,10 +1606,10 @@ Here are the main parameters used to compute this model. The detailed log with a
 \section{Non\sphinxhyphen{}rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field}
 \label{\detokenize{examples_gr:non-rotating-ns-in-gr-with-the-pol2-eos-and-a-purely-toroidal-magnetic-field}}
 \sphinxAtStartPar
-This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density \(\rho _\mathrm{c}=1.366\times 10^{-3}\) in code units (corresponding to \(8.473\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass of \(1.597\) M\( _\odot\). The circumferential radius is \(20.264\) km.
+This is a static model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density \(\rho _\mathrm{c}=1.366\times 10^{-3}\) in code units (corresponding to \(8.473\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass of \(1.597\) M\( _\odot\). The circumferential radius is \(20.264\) km.
 
 \sphinxAtStartPar
-Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+Here are some of the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{900}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
@@ -1764,64 +1763,367 @@ Here are the main parameters used to compute this model. The detailed log with a
 \section{Non\sphinxhyphen{}rotating NS in GR with the POL2 EoS and a twisted magnetosphere}
 \label{\detokenize{examples_gr:non-rotating-ns-in-gr-with-the-pol2-eos-and-a-twisted-magnetosphere}}
 \sphinxAtStartPar
-This is a model of an NS in GR described by the analytic POL2 EoS, endowed with a purely toroidal field. It has a central density \(\rho _\mathrm{c}=1.366\times 10^{-3}\) in code units (corresponding to \(8.473\times 10^{14}\) gcm\(^{-3}\)) and a Komar mass of \(1.597\) M\( _\odot\). The circumferential radius is \(20.264\) km.
+This is a static model of an NS in GR described by the analytic POL2 EoS,
+endowed with a twited\sphinxhyphen{}torus magnetosphere. It has a central density \(\rho
+_\mathrm{c}=1.380\times 10^{-3}\) in code units and a Komar mass of
+\(1.5498\) M\( _\odot\). The circumferential radius is \(14.261\) km and the
+star is spherical, given a magnetic energy ratio as low as \(\sim 10^{-7}\).
 
 \sphinxAtStartPar
-Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+Here are some of the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{900}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
-\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{15.50}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.366E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{ALPHA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{BETA0} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{300}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{40}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{80}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{15.0}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.366E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
 \PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{CONVHELP} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{QFACTOR} \PYG{o}{=} \PYG{l+m+mf}{0.85}\PYG{p}{,} \PYG{n}{QFACTORCHI} \PYG{o}{=} \PYG{l+m+mf}{0.45}\PYG{p}{,}
 \PYG{n}{QFACTORMETRIC} \PYG{o}{=} \PYG{l+m+mf}{0.35}\PYG{p}{,} \PYG{n}{QRELAX} \PYG{o}{=} \PYG{l+m+mf}{0.30}\PYG{p}{,} \PYG{n}{QAPHI} \PYG{o}{=} \PYG{l+m+mf}{0.50}\PYG{p}{,} \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{110.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,}
-\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{BCOEF} \PYG{o}{=} \PYG{l+m+mf}{3.746}\PYG{p}{,} \PYG{n}{NPOL} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CSI} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{IPOL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ITWT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{KPTT} \PYG{o}{=} \PYG{l+m+mf}{3.4E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{ZETA} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{CUT} \PYG{o}{=} \PYG{l+m+mf}{4.0}
 \end{sphinxVerbatim}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_bpol_gr_twist}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with tthe contours the poloidal magnetic field strength.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_btor_gr_twist}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal magnetic field strength.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_jtor_gr_twist}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal current density.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
 
 
 \section{Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS}
 \label{\detokenize{examples_gr:uniformly-rotating-unmagnetised-ns-in-gr-with-the-pol2-eos}}
 \sphinxAtStartPar
-Description.
+This is a model of a uniformly rotating NS in GR described by the analytic POL2 EoS,
+with no magnetic fields. It has a central density \(\rho
+_\mathrm{c}=1.280\times 10^{-3}\) in code units and a Komar mass of
+\(1.6912\) M\( _\odot\). The circumferential radius is \(19.2496\) km and the
+ratio of polar to equatorial radii is 0.5943. This is basically the
+BU8 case of Stergioulas et al. (2004) with rotation rate \(\Omega=0.002633\).
 
 \sphinxAtStartPar
-Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+Here are some of the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{250}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{250}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{40}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{80}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{11.60}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.28E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}  \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{110.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,} \PYG{n}{OMG} \PYG{o}{=} \PYG{l+m+mf}{2.633E\PYGZhy{}2}\PYG{p}{,} \PYG{n}{DIFFERENTIAL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}
 \end{sphinxVerbatim}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_rho_bu8}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal magnetic field strength.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_beta_bu8}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal magnetic field strength.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{starplot_vel_bu8}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the toroidal current density.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
 
 
 \section{Differnetially Rotating, unmagnetised NS in GR with the APR EoS}
 \label{\detokenize{examples_gr:differnetially-rotating-unmagnetised-ns-in-gr-with-the-apr-eos}}
+\sphinxAtStartPar
+This is a model of a differentially rotating NS in GR described by the tabulated APR EoS,
+with no magnetic fields. It has a central density \(\rho
+_\mathrm{c}=1.280\times 10^{-3}\) in code units and a Komar mass of
+\(1.3505\) M\( _\odot\). The circumferential radius is \(12.519\) km and the
+ratio of polar to equatorial radii is 0.7493. Rotation follows the Uryu 3 law, done in J\sphinxhyphen{}space.
+
+\sphinxAtStartPar
+Here are some of the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{200}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{500}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{40}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{80}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{15.00}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{1.28E\PYGZhy{}3}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,}  \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{100.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,} \PYG{n}{OMG} \PYG{o}{=} \PYG{l+m+mf}{2.22E\PYGZhy{}2}\PYG{p}{,} \PYG{n}{DIFFERENTIAL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} 
+\PYG{n}{URYULAW3} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{OMGSPACE} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{PROTDIFF} \PYG{o}{=} \PYG{l+m+mf}{1.5}\PYG{p}{,} \PYG{n}{OMGMAX}  \PYG{o}{=}  \PYG{l+m+mf}{4.44E\PYGZhy{}22}\PYG{p}{,} 
+\PYG{n}{RMVALUE} \PYG{o}{=} \PYG{l+m+mf}{2.50}\PYG{p}{,} \PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}
 \end{sphinxVerbatim}
 
 
-\section{Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS}
-\label{\detokenize{examples_gr:differentially-rotating-toroidal-magnetised-ns-in-gr-with-the-pol2-eos}}
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
 \sphinxAtStartPar
-Description.
-
+\sphinxincludegraphics{{rho}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
-Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
-\end{sphinxVerbatim}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{vel}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the velocity.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{rho-cut}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the density at the pole and at the equator.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{p-cut}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Radial profile of the pressure at the pole and at the equator.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
 
 
 \section{Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS}
 \label{\detokenize{examples_gr:uniformly-rotating-poloidal-magnetised-ns-in-gr-with-the-pol2-eos}}
 \sphinxAtStartPar
-Description.
+This is a model of a uniformly rotating NS in GR described by the analytical Pol2 EoS,
+with poloidal magnetic field. It has a central density \(\rho
+_\mathrm{c}=6.94\times 10^{-4}\) in code units and a Komar mass of
+\(1.55\) M\( _\odot\). The circumferential radius is \(17.74\) km and the
+ratio of polar to equatorial radii is 0.6368.
 
 \sphinxAtStartPar
-Here are the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
+Here are some of the main parameters used to compute this model. The detailed log with all the parameters can be found in the corresponding LogFile.dat.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{PARAM1} \PYG{o}{=} \PYG{n}{VALUE1}\PYG{p}{,} \PYG{n}{PARAM2} \PYG{o}{=} \PYG{n}{VALUE2}\PYG{p}{,} \PYG{n}{PARAM3} \PYG{o}{=} \PYG{n}{VALUE3}\PYG{p}{,} \PYG{n}{PARAM4} \PYG{o}{=} \PYG{n}{VALUE4}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{n}{NR} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{NTH} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{NRREG} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{,} \PYG{n}{MLS} \PYG{o}{=} \PYG{l+m+mi}{40}\PYG{p}{,} \PYG{n}{NGQ} \PYG{o}{=} \PYG{l+m+mi}{80}\PYG{p}{,} \PYG{n}{RREG} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{RMAXSTR} \PYG{o}{=} \PYG{l+m+mi}{30}\PYG{p}{,}
+\PYG{n}{RMAX} \PYG{o}{=} \PYG{l+m+mi}{30}\PYG{p}{,} \PYG{n}{REQMAX} \PYG{o}{=} \PYG{l+m+mf}{15.00}\PYG{p}{,} \PYG{n}{RHOINI} \PYG{o}{=} \PYG{l+m+mf}{6.945E\PYGZhy{}4}\PYG{p}{,} \PYG{n}{GR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{STRETCH} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{ANALYTIC} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,}  \PYG{n}{EOSINT} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,}
+\PYG{n}{K1} \PYG{o}{=} \PYG{l+m+mf}{100.0}\PYG{p}{,} \PYG{n}{GAMMA} \PYG{o}{=} \PYG{l+m+mf}{2.0}\PYG{p}{,} \PYG{n}{OMG} \PYG{o}{=} \PYG{l+m+mf}{0.5E\PYGZhy{}2}\PYG{p}{,} \PYG{n}{DIFFERENTIAL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} 
+\PYG{n}{IMAG} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.} \PYG{n}{ITOR} \PYG{o}{=} \PYG{o}{.}\PYG{n}{FALSE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{IPOL} \PYG{o}{=} \PYG{o}{.}\PYG{n}{TRUE}\PYG{o}{.}\PYG{p}{,} \PYG{n}{KBPOL} \PYG{o}{=} \PYG{l+m+mf}{0.3973}
 \end{sphinxVerbatim}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{rho_polunir}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the density.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{vel_polunir}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the velocity.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{B_pol_polunir}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal magnetic field strength.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{T}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+\sphinxincludegraphics{{E_pol_polunir}.png}
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstyleemphasis{Section of the NS in the \(x-z\) plane along with the contours the poloidal electric field strength.}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
 
 \sphinxstepscope
 
@@ -1830,7 +2132,7 @@ Here are the main parameters used to compute this model. The detailed log with a
 \label{\detokenize{examples_stt:examples-in-stts}}\label{\detokenize{examples_stt::doc}}
 \sphinxAtStartPar
 Here we present a few examples to show how to work with the code and the related performances. All
-cases have been run on a laptop.
+cases have been run on a laptop.  If you wish to run one of them, just copy the \sphinxstylestrong{SYSTEMXNS.f90} file from the related subfolder, in the \sphinxstyleemphasis{documentantion/examples} directory.
 
 
 \section{Non\sphinxhyphen{}rotating, unmagnetised NS in STT with the APR EoS}

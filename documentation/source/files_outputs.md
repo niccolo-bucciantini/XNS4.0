@@ -26,15 +26,8 @@ of interest, i.e. a certain value of the central density or gravitational mass (
     - subroutine **CHISOL** - wrapper that calls SOURCECHI and CHISOL in a relaxation loop, until it converges to the true solution.
     - subroutine **CHIDERIVS** - computes the derivatives of the scalar field ($Q^\mu$) and the scalar coupling function $\mathcal{A}(\chi)$.
 <br><br>
-- **SYSTEM.f90**
-    - module **SYSTEM** - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section "User parameters").
-    - subroutine **EOSTABLEREAD** - reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.
-    - subroutine **RHO2EOS** - given $\rho$, it computes the pressure $p$, the internal energy $\varepsilon$ and the enthalpy $h$ according to the tabulated EoS.
-    - subroutine **PRS2EOS** - given $p$, it computes the $\rho$ according to the tabulated EoS.
-    - subroutine **ENT2EOS** - given $h$, it computes the $\rho$ according to the tabulated EoS.
-    - subroutine **EOS** - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.
-    - subroutine **FUNCD_EOS** - used by the root-finding subroutine to derive the central pressure given
-    the central density.
+- **SYSTEMXNS.f90**
+    - module **SYSTEMXNS** - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section "User parameters").
 <br><br>
 - **HYDROEQ.f90**
     - subroutine **HYDROEQ** - given the CFC metric and a value of $\rho _\mathrm{c}$ it computes the equilibrium
@@ -83,6 +76,13 @@ of interest, i.e. a certain value of the central density or gravitational mass (
 - **PHYSICS.f90**
     - subroutine **GRIDBUILD** - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.
     - subroutine **FUNCD_STRETCH** - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
+    - subroutine **EOSTABLEREAD** - reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.
+    - subroutine **RHO2EOS** - given $\rho$, it computes the pressure $p$, the internal energy $\varepsilon$ and the enthalpy $h$ according to the tabulated EoS.
+    - subroutine **PRS2EOS** - given $p$, it computes the $\rho$ according to the tabulated EoS.
+    - subroutine **ENT2EOS** - given $h$, it computes the $\rho$ according to the tabulated EoS.
+    - subroutine **EOS** - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.
+    - subroutine **FUNCD_EOS** - used by the root-finding subroutine to derive the central pressure given
+    the central density.
 <br><br>
 - **FUNCTIONS.f90**
     - subroutine **DGTSV** - solves the linear system $AX = B$, where $A$ is a tridiagonal matrix, by
@@ -147,14 +147,11 @@ equation.
 
 ## Visualisation
 
-- **starplot_polo.py** - plots a section of the star in the $x-z$ plane along with the contours of either the poloidal magnetic field (with or without the field lines), the scalar field or the density.
-- **starplot_toro.py** - plots a section of the star in the $x-z$ plane along with the contours of either the toroidal magnetic field, the scalar field or the density.
-- **starplot_unmag.py** - plots a section of the star in the $x-z$ plane along with the contours of either the scalar field or the density.
-- **profile_polo.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{pol}$.
-- **profile_toro.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{tor}$.
-- **profile_unmag.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$.
+- **starplot.py** - plots fluid, magnetic or metric quantities in a section of the star in the $x-z$ plane (i.e. contours of either the poloidal magnetic field, with or without the field lines, toroidal magnetic field, the scalar field, the density, etc...).
+- **starcut.py** - plots the radial profiles, both at the pole and at the equator, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, $B_\mathrm{pol}$, etc....
+- **startov.py** - plots the radial profiles, of several quantities: $\rho$, $p$, $\psi$, $\alpha$, $\chi$, for the TOV initial solution.
 
 ## Reformatting the Equation of State
 
-- **resample.py** - PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuild a table in the XNS 4.0 format.
+- **resample.py** - PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuilds a table in the XNS 4.0 format.
 

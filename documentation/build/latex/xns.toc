@@ -32,15 +32,14 @@
 \contentsline {section}{\numberline {6.1}Non\sphinxhyphen {}rotating NS in GR with the POL2 EoS and a purely poloidal magnetic field}{21}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Non\sphinxhyphen {}rotating NS in GR with the POL2 EoS and a purely toroidal magnetic field}{28}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Non\sphinxhyphen {}rotating NS in GR with the POL2 EoS and a twisted magnetosphere}{35}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS}{36}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Differnetially Rotating, unmagnetised NS in GR with the APR EoS}{36}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Differentially Rotating, toroidal magnetised NS in GR with the Pol2 EoS}{36}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS}{36}{section.6.7}%
-\contentsline {chapter}{\numberline {7}Examples in STTs}{37}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Non\sphinxhyphen {}rotating, unmagnetised NS in STT with the APR EoS}{37}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Non\sphinxhyphen {}rotating NS in STT with the APR EoS and a purely poloidal magnetic field}{44}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Non\sphinxhyphen {}rotating NS in STT with the APR EoS and a purely toroidal magnetic field}{53}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Non\sphinxhyphen {}rotating, unmagnetised NS in STT with the POL2 EoS}{62}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Non\sphinxhyphen {}rotating NS in STT with the POL2 EoS and a purely poloidal magnetic field}{69}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Non\sphinxhyphen {}rotating NS in STT with the POL2 EoS and a purely toroidal magnetic field}{78}{section.7.6}%
-\contentsline {chapter}{\numberline {8}Indices and tables}{89}{chapter.8}%
+\contentsline {section}{\numberline {6.4}Uniformly Rotating, unmagnetised NS in GR with the Pol2 EoS}{38}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Differnetially Rotating, unmagnetised NS in GR with the APR EoS}{41}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Uniformly Rotating, poloidal magnetised NS in GR with the Pol2 EoS}{45}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Examples in STTs}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Non\sphinxhyphen {}rotating, unmagnetised NS in STT with the APR EoS}{51}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Non\sphinxhyphen {}rotating NS in STT with the APR EoS and a purely poloidal magnetic field}{58}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Non\sphinxhyphen {}rotating NS in STT with the APR EoS and a purely toroidal magnetic field}{67}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Non\sphinxhyphen {}rotating, unmagnetised NS in STT with the POL2 EoS}{76}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Non\sphinxhyphen {}rotating NS in STT with the POL2 EoS and a purely poloidal magnetic field}{83}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Non\sphinxhyphen {}rotating NS in STT with the POL2 EoS and a purely toroidal magnetic field}{92}{section.7.6}%
+\contentsline {chapter}{\numberline {8}Indices and tables}{103}{chapter.8}%

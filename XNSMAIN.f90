@@ -1,9 +1,9 @@
 SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
   !   ============================================================
-  !   Purpose : This program solve the axisymmetric eq. for XCFC
+  !   Purpose : This program solves the axisymmetric eq. for XCFC
   !             in spherical coordinates, by Legendre Poly in Theta
   !             direct solution in R. Uses XCFC.
-  !             This programs compute the stable equlibrium for
+  !             This program computes the stable equilibrium for
   !             rotating and non-rotating NS, in XCFC.
   !   ============================================================
   !
@@ -24,7 +24,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
   !
   ! RHOSRC,PSRC,ESRC = density, pressure and energy density of TOV on the 2D grid
   ! 				NB: during the initialization, ESRC does not contain the pressure, while it does contain the pressure
-  ! 				    during the iterative process (ie, it beacomes the total energy rho*h)
+  ! 				    during the iterative process (ie, it becomes the total energy rho*h)
   ! VPHI,VR,VTH      = azimuthal, radial, and theta component of the velocity (contrav)
   ! USRC,DSRC        = matter/em fields conserved variables (energy and density) corresponding to the initial condition
   ! USRCX            = scalar field conserved variable (energy) corresponding to the initial condition
@@ -111,7 +111,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
   CALL GRIDBUILD(R,DR)
   ! Set the angular theta grid (uniform for simplicity) and the cos grid
   ! and the boundary values for the cos grid out of [-1,1]
-  ! Beware the Cos boundary are not trigonometrically coreect, but defined to ensure correct interpolation
+  ! Beware the Cos boundary are not trigonometrically correct, but defined to ensure correct interpolation
   DO I=1,NTH
      TH(I)=PI*(I-0.5)/NTH
      XX(I)=COS(TH(I))
@@ -857,8 +857,8 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
 
  SUBROUTINE CONFORMAL(RHOS,RHOC)
 !   ============================================================
-!   Purpose : This subroutine solve the axisymmetric eq. for Conformal
-!             factor in spherical coorinates, by Legendre Poly in Theta
+!   Purpose : This subroutine solves the axisymmetric eq. for Conformal
+!             factor in spherical coordinates, by Legendre Poly in Theta
 !             direct solution in R (solve for conf-fact -1.)
 !   ============================================================
 !
@@ -866,7 +866,7 @@ SUBROUTINE XNSMAIN(RHOVAR,QUCNV)
 !
 ! R = radial grid points (+ boundaries); DR = increments
 ! TH = angular grid points (+ boundaries)
-! XX = agular cos(th) points (+ boundaries)
+! XX = angular cos(th) points (+ boundaries)
 !
 ! Source - in input
 ! RHOS = source (total energy in conservative form)
@@ -1078,8 +1078,8 @@ END SUBROUTINE  CONFORMAL
 SUBROUTINE LAPSE(RHOS,RHOC)
 
 !   ============================================================
-!   Purpose : This subroutine solve the axisymmetric eq. for Lapse
-!             factor in spherical coorinates, by Legendre Poly in Theta
+!   Purpose : This subroutine solves the axisymmetric eq. for Lapse
+!             factor in spherical coordinates, by Legendre Poly in Theta
 !             direct solution in R (solve for lapse -1.)
 !   ============================================================
 !
@@ -1087,7 +1087,7 @@ SUBROUTINE LAPSE(RHOS,RHOC)
 !
 ! R = radial grid points (+ boundaries); DR = increments
 ! TH = angular grid points (+ boundaries)
-! XX = agular cos(th) points (+ boundaries)
+! XX = angular cos(th) points (+ boundaries)
 !
 ! Source - in input
 ! RHOS = source (total energy in conservative form)
@@ -1297,7 +1297,7 @@ END SUBROUTINE LAPSE
 SUBROUTINE SHIFTPHI(RHOS)
 
 !   ============================================================
-!   Purpose : This subroutine solve the axisymmetric eq. for the
+!   Purpose : This subroutine solves the axisymmetric eq. for the
 !    phi- component of the vector poisson equation, in spherical
 !    coordinates using coordinate quantities
 !   ============================================================
@@ -1306,7 +1306,7 @@ SUBROUTINE SHIFTPHI(RHOS)
 !
 ! R = radial grid points (+ boundaries); DR = increments
 ! TH = angular grid points (+ boundaries)
-! XX = agular cos(th) points (+ boundaries)
+! XX = angular cos(th) points (+ boundaries)
 !
 ! Source - in input
 ! RHOS = source (total energy in conservative form)
@@ -1508,7 +1508,7 @@ SUBROUTINE CURV1
 !
 ! R = radial grid points (+ boundaries); DR = increments
 ! TH = angular grid points (+ boundaries)
-! XX = agular cos(th) points (+ boundaries)
+! XX = angular cos(th) points (+ boundaries)
 !
 ! Output
 ! CURVC = curvature term corresponding to  A^ij * A_ij
@@ -1606,7 +1606,7 @@ SUBROUTINE CURV2
 !
 ! R = radial grid points (+ boundaries); DR = increments
 ! TH = angular grid points (+ boundaries)
-! XX = agular cos(th) points (+ boundaries)
+! XX = angular cos(th) points (+ boundaries)
 !
 ! Output
 ! CURV1 = curvature term corresponding to  A^ij * A_ij

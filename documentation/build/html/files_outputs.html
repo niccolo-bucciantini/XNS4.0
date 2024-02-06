@@ -118,16 +118,9 @@ of interest, i.e. a certain value of the central density or gravitational mass (
 <br><br></p></li>
 </ul>
 </li>
-<li><p><strong>SYSTEM.f90</strong></p>
+<li><p><strong>SYSTEMXNS.f90</strong></p>
 <ul>
-<li><p>module <strong>SYSTEM</strong> - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section “User parameters”).</p></li>
-<li><p>subroutine <strong>EOSTABLEREAD</strong> - reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.</p></li>
-<li><p>subroutine <strong>RHO2EOS</strong> - given <span class="math notranslate nohighlight">\(\rho\)</span>, it computes the pressure <span class="math notranslate nohighlight">\(p\)</span>, the internal energy <span class="math notranslate nohighlight">\(\varepsilon\)</span> and the enthalpy <span class="math notranslate nohighlight">\(h\)</span> according to the tabulated EoS.</p></li>
-<li><p>subroutine <strong>PRS2EOS</strong> - given <span class="math notranslate nohighlight">\(p\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
-<li><p>subroutine <strong>ENT2EOS</strong> - given <span class="math notranslate nohighlight">\(h\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
-<li><p>subroutine <strong>EOS</strong> - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.</p></li>
-<li><p>subroutine <strong>FUNCD_EOS</strong> - used by the root-finding subroutine to derive the central pressure given
-the central density.
+<li><p>module <strong>SYSTEMXNS</strong> - contains various parameters of the run, to be specified by the user, and definitions of common arrays (see section “User parameters”).
 <br><br></p></li>
 </ul>
 </li>
@@ -187,7 +180,14 @@ RK4 method.</p></li>
 <li><p><strong>PHYSICS.f90</strong></p>
 <ul>
 <li><p>subroutine <strong>GRIDBUILD</strong> - computes the radial grid (either uniform or stretched) and derivative terms used in the DGTSV subroutine.</p></li>
-<li><p>subroutine <strong>FUNCD_STRETCH</strong> - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.
+<li><p>subroutine <strong>FUNCD_STRETCH</strong> - used by the root-finding subroutine to derive the stretching factor for the grid, if it is stretched.</p></li>
+<li><p>subroutine <strong>EOSTABLEREAD</strong> - reads the EoS file specified by the FILEEOS parameter. Note that the first line in the file must be the number of points present in the file, and this must be equal to the parameter NPTRHO. The subsequent lines must contain the minimum and maximum density and their indexes (second line), the minimum and maximum pressure and their indexes (third line), the minimum and maximum internal energy and their indexes (fourth line), the minimum and maximum enthalpy and their indexes (fifth line). Then, the table is read. Please, refer to the routine code to see the specific structure that the EoS file must have.</p></li>
+<li><p>subroutine <strong>RHO2EOS</strong> - given <span class="math notranslate nohighlight">\(\rho\)</span>, it computes the pressure <span class="math notranslate nohighlight">\(p\)</span>, the internal energy <span class="math notranslate nohighlight">\(\varepsilon\)</span> and the enthalpy <span class="math notranslate nohighlight">\(h\)</span> according to the tabulated EoS.</p></li>
+<li><p>subroutine <strong>PRS2EOS</strong> - given <span class="math notranslate nohighlight">\(p\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
+<li><p>subroutine <strong>ENT2EOS</strong> - given <span class="math notranslate nohighlight">\(h\)</span>, it computes the <span class="math notranslate nohighlight">\(\rho\)</span> according to the tabulated EoS.</p></li>
+<li><p>subroutine <strong>EOS</strong> - computes the density and the internal energy given the pressure, both in case the EoS is tabulated or an analytical polytropic.</p></li>
+<li><p>subroutine <strong>FUNCD_EOS</strong> - used by the root-finding subroutine to derive the central pressure given
+the central density.
 <br><br></p></li>
 </ul>
 </li>
@@ -262,18 +262,15 @@ equation.
 <section id="visualisation">
 <h2>Visualisation<a class="headerlink" href="#visualisation" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>starplot_polo.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the poloidal magnetic field (with or without the field lines), the scalar field or the density.</p></li>
-<li><p><strong>starplot_toro.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the toroidal magnetic field, the scalar field or the density.</p></li>
-<li><p><strong>starplot_unmag.py</strong> - plots a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane along with the contours of either the scalar field or the density.</p></li>
-<li><p><strong>profile_polo.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>, <span class="math notranslate nohighlight">\(B_\mathrm{pol}\)</span>.</p></li>
-<li><p><strong>profile_toro.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>, <span class="math notranslate nohighlight">\(B_\mathrm{tor}\)</span>.</p></li>
-<li><p><strong>profile_unmag.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>.</p></li>
+<li><p><strong>starplot.py</strong> - plots fluid, magnetic or metric quantities in a section of the star in the <span class="math notranslate nohighlight">\(x-z\)</span> plane (i.e. contours of either the poloidal magnetic field, with or without the field lines, toroidal magnetic field, the scalar field, the density, etc…).</p></li>
+<li><p><strong>starcut.py</strong> - plots the radial profiles, both at the pole and at the equator, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>, <span class="math notranslate nohighlight">\(B_\mathrm{pol}\)</span>, etc….</p></li>
+<li><p><strong>startov.py</strong> - plots the radial profiles, of several quantities: <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\psi\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\chi\)</span>, for the TOV initial solution.</p></li>
 </ul>
 </section>
 <section id="reformatting-the-equation-of-state">
 <h2>Reformatting the Equation of State<a class="headerlink" href="#reformatting-the-equation-of-state" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>resample.py</strong> - PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuild a table in the XNS 4.0 format.</p></li>
+<li><p><strong>resample.py</strong> - PYTHON script that takes an EoS (typically in COMPSTAR format, but can be any other), and rebuilds a table in the XNS 4.0 format.</p></li>
 </ul>
 </section>
 </section>
