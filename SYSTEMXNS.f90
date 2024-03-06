@@ -107,7 +107,7 @@ MODULE SYSTEMXNS
   LOGICAL        :: JCMODLAW     = .FALSE.   ! Rotation law: modified j constant A^2*omega*[(omega_c/omega)^p-1]
   LOGICAL        :: URYULAW3     = .FALSE.   ! Rotation law: Uryu with 3 Parameters
   LOGICAL        :: URYULAW4     = .FALSE.    ! Rotation law: Uryu with 4 Parameters
-  REAL,PARAMETER :: OMG = 0.00               ! Central Rotation rate
+  REAL           :: OMG = 0.00               ! Central Rotation rate
   REAL,PARAMETER :: PROTDIFF = 3./2.         ! Rotation index if URYULAW3=.true.
   REAL,PARAMETER :: A2VALUE = 0.0            ! Differential rotation coeff
   REAL,PARAMETER :: OMGMAX = 2.*OMG          ! Omega_max/Omega_c

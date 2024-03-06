@@ -41,7 +41,7 @@ PROGRAM XNS
   INTEGER :: status(MPI_STATUS_SIZE)
   
   REAL, DIMENSION(3) :: wsend, wrecv
-  REAL :: omgmax, omgmin, domg, nomg      ! Range of Omega for sequences
+  REAL :: omgmaxseq, omgmin, domg, nomg      ! Range of Omega for sequences
   REAL :: kbmax, kbmin, dkb, nkb          ! Range of magnetizations for sequences
   REAL :: nrho1, nrho2               
   REAL :: rhosend, kbpsend, omgsend            
@@ -226,7 +226,7 @@ PROGRAM XNS
   RHOMAX = 2.0E-3
   ! Set the range of sequences for uniform rotation rate
   OMGMIN = 0.
-  OMGMAX = 0.
+  OMGMAXSEQ = 0.
   ! Set the range of sequences for magnetization parameter
   IF(IPOL)THEN ! Poloidal
      KBMIN = 0.0
@@ -264,7 +264,7 @@ PROGRAM XNS
   ENDIF
   
   ! Check the number of rotation rates
-  IF(OMGMIN .EQ. OMGMAX)THEN
+  IF(OMGMIN .EQ. OMGMAXSEQ)THEN
      NOMG = 1.
   ELSE ! Minumum number of rotation rates = 2 + 1
      NOMG = 2.
@@ -280,7 +280,7 @@ PROGRAM XNS
   ! Set the magnetic increment
   DKB =(KBMAX-KBMIN)/NKB
   ! Set the rotation increment
-  DOMG=(OMGMAX-OMGMIN)/NOMG
+  DOMG=(OMGMAXSEQ-OMGMIN)/NOMG
   
   ! Set initial density, magnetization and rotation rate of models to send
   RHOSEND=RHOMIN-DRHO
@@ -314,7 +314,7 @@ PROGRAM XNS
               ! Set rotation to send
               OMGSEND=OMGSEND+DOMG
               ! If all range has been sent
-              IF(OMGSEND.gt.OMGMAX .OR. (DOMG .EQ. 0.0))THEN 
+              IF(OMGSEND.gt.OMGMAXSEQ .OR. (DOMG .EQ. 0.0))THEN 
                  WRITE(6,*)'All models sent.'
                  RHOSEND=-1.
                  ENDING=0  ! Set parameter for and of run
@@ -349,7 +349,7 @@ PROGRAM XNS
                  ! Set rotation to send
                  OMGSEND=OMGSEND+DOMG
                  ! If all range has been sent
-                 IF((OMGSEND.gt.OMGMAX .OR. (DOMG .EQ. 0.0)))then
+                 IF((OMGSEND.gt.OMGMAXSEQ .OR. (DOMG .EQ. 0.0)))then
                     print*,'All models sent.'
                     RHOSEND=-1.
                     ENDING=0  ! Set parameter for and of run
