@@ -110,7 +110,7 @@ MODULE SYSTEMXNS
   REAL           :: OMG = 0.00               ! Central Rotation rate
   REAL,PARAMETER :: PROTDIFF = 3./2.         ! Rotation index if URYULAW3=.true.
   REAL,PARAMETER :: A2VALUE = 0.0            ! Differential rotation coeff
-  REAL,PARAMETER :: OMGMAX = 2.*OMG          ! Omega_max/Omega_c
+  REAL,PARAMETER :: OMGMAX = 0.0             ! Omega_max/Omega_c
   REAL,PARAMETER :: RMVALUE = 2.5!6.54       ! R_max (Omega=Omega_max)
 
   ! ====================================================================================
